@@ -11,16 +11,19 @@ public class BattleHUD : MonoBehaviour
     public Slider hpSlider; // 체력을 표시하는 슬라이더
 
     // HUD를 설정하는 메서드
-    public void SetHUD(Unit unit)
+    public void SetHUD(UnitEntity unit)
     {
         // 유닛의 이름을 텍스트로 설정
-        nameText.text = unit.unitName;
+        nameText.text = unit.m_sUnitName;
         // 유닛의 레벨을 텍스트로 설정
-        levelText.text = "Lvl " + unit.unitLevel;
+        levelText.text = "Lvl " + unit.m_iUnitLevel;
         // 슬라이더의 최대값을 유닛의 최대 체력으로 설정
-        hpSlider.maxValue = unit.maxHP;
+        hpSlider.maxValue = unit.m_iHealthPoint;
         // 슬라이더의 값(체력)을 유닛의 현재 체력으로 설정
-        hpSlider.value = unit.currentHP;
+        hpSlider.value = unit.m_iCurrentHP;
+
+        Debug.Log(unit.m_iHealthPoint);
+        Debug.Log(unit.m_iCurrentHP);
     }
 
     // 체력을 업데이트하는 메서드
