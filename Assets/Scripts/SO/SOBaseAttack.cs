@@ -9,12 +9,17 @@ public class SOBaseAttack : SOAttackBase
 
     //이 부분에서 해당 공격의 구현 방식을 설정할 수 있습니다.
     float CriticalChance = 10.0f;
-    int AttackMag = 1;
+    float AttackMag = 1.2f;
     
     public override int ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
     {
-        int finalAttackDamage = Atker.m_iUnitAtk * AttackMag;
+        
+        int AttackDamage =(int)(Atker.m_iUnitAtk * AttackMag);
+        int finalAttackDamage = AttackDamage - Defender.m_iUnitDef;
+        
         Debug.Log("BaseAttack!" + finalAttackDamage);
+
+        Defender.m_iCurrentHP -= finalAttackDamage;
         return finalAttackDamage;
     }
 }

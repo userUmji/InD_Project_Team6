@@ -21,9 +21,6 @@ public class BattleHUD : MonoBehaviour
         hpSlider.maxValue = unit.m_iUnitHP;
         // 슬라이더의 값(체력)을 유닛의 현재 체력으로 설정
         hpSlider.value = unit.m_iCurrentHP;
-
-        Debug.Log(unit.m_iUnitHP);
-        Debug.Log(unit.m_iCurrentHP);
     }
 
     // 체력을 업데이트하는 메서드

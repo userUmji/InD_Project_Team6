@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 192650749}
   - component: {fileID: 192650751}
   m_Layer: 5
-  m_Name: EnemyBattleHub
+  m_Name: EnemyBattleHud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -930,7 +930,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1557130305}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
         m_MethodName: OnChangePlayerButton
         m_Mode: 1
         m_Arguments:
@@ -1063,7 +1063,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1557130305}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
         m_MethodName: OnAttackButton
         m_Mode: 1
         m_Arguments:
@@ -1502,7 +1502,7 @@ GameObject:
   - component: {fileID: 1186916800}
   - component: {fileID: 1186916802}
   m_Layer: 5
-  m_Name: PlayerBattleHub
+  m_Name: PlayerBattleHud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2019,7 +2019,7 @@ GameObject:
   - component: {fileID: 1557130306}
   - component: {fileID: 1557130305}
   m_Layer: 0
-  m_Name: BattleSystem
+  m_Name: BattleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2038,9 +2038,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefabs:
-  - {fileID: 143389713841253033, guid: d718c902017cb7f408007dca1b8ff171, type: 3}
-  - {fileID: 6651399812985380102, guid: 48f44dc60589cb34eb3c0810f51d4221, type: 3}
-  enemyPrefab: {fileID: 1092245892121197961, guid: 38999ad57b04adf41b7589c145832593, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemyPrefab: {fileID: 0}
   playerBattleStation: {fileID: 1968327387}
   enemyBattleStation: {fileID: 1033783805}
   waitStation: {fileID: 1248129633}

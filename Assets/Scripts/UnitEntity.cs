@@ -10,6 +10,7 @@ public class UnitEntity : MonoBehaviour
     public int m_iUnitHP;
     public int m_iUnitAtk;
     public int m_iUnitDef;
+    public int m_iUnitSpeed;
     public int m_iCurrentHP;
     public int m_iUnitLevel;
 
@@ -33,7 +34,6 @@ public class UnitEntity : MonoBehaviour
     //GameManager에 있는 UnitTable SO에 있는 정보를 기반으로 해당 게임오브젝트 초기화
     public void SetUnit(string className)
     {
-        
         var UnitData = GameManager.Instance.GetUnitData(className);
 
         m_sUnitName = UnitData.m_sUnitName;
@@ -43,6 +43,7 @@ public class UnitEntity : MonoBehaviour
         m_iUnitAtk = UnitData.m_iUnitAtk;
         m_iUnitDef = UnitData.m_iUnitDef;
         m_iUnitLevel = UnitData.m_iUnitLevel;
+        m_iUnitSpeed = UnitData.m_iUnitSpeed;
         m_iCurrentHP = m_iUnitHP;
 
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
@@ -71,20 +72,6 @@ public class UnitEntity : MonoBehaviour
         return m_AttackBehaviors[index].ExecuteAttack(Atker, Defender);
     }
 
-    // 대미지를 입는 메서드
-    public bool TakeDamage(int dmg)
-    {
-        // 현재 체력에서 대미지를 감소시킴
-        m_iCurrentHP -= dmg;
-
-        // 만약 현재 체력이 0 이하라면
-        if (m_iCurrentHP <= 0)
-            // 유닛이 죽었음을 나타내는 true 반환
-            return true;
-        else
-            // 아니면 살아있음을 나타내는 false 반환
-            return false;
-    }
 
     // 체력을 회복하는 메서드
     public void Heal(int amount)
