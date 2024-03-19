@@ -18,11 +18,11 @@ public class BattleHUD : MonoBehaviour
         // 유닛의 레벨을 텍스트로 설정
         levelText.text = "Lvl " + unit.m_iUnitLevel;
         // 슬라이더의 최대값을 유닛의 최대 체력으로 설정
-        hpSlider.maxValue = unit.m_iHealthPoint;
+        hpSlider.maxValue = unit.m_iUnitHP;
         // 슬라이더의 값(체력)을 유닛의 현재 체력으로 설정
         hpSlider.value = unit.m_iCurrentHP;
 
-        Debug.Log(unit.m_iHealthPoint);
+        Debug.Log(unit.m_iUnitHP);
         Debug.Log(unit.m_iCurrentHP);
     }
 

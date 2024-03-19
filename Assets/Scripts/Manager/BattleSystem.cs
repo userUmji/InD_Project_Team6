@@ -34,26 +34,31 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BattleInit();
+        state = BattleState.START;
         // 전투 시작 상태로 초기화하고, 전투를 설정하는 코루틴 실행
+        StartCoroutine(SetupBattle());
+    }
+
+
+    #region 전투 관련 메서드
+    void BattleInit()
+    {
+        //Instantiate를 해서 저장하는 이유는 prefab을 1개만 사용하다보니 prefab을 수정하면 마지막걸로 다 instantiate 되기 때문입니다.
         enemyPrefab = Resources.Load<GameObject>("Prefabs/UnitEntity");
         enemyPrefab.GetComponent<UnitEntity>().m_sUnitName = "개굴닌자";
         enemyPrefab = Instantiate(enemyPrefab, enemyBattleStation);
 
         playerPrefabs[0] = Resources.Load<GameObject>("Prefabs/UnitEntity");
         playerPrefabs[0].GetComponent<UnitEntity>().m_sUnitName = "개굴닌자";
-        playerPrefabs[0] = Instantiate(playerPrefabs[0],waitStation);
+        playerPrefabs[0] = Instantiate(playerPrefabs[0], waitStation);
 
         playerPrefabs[1] = Resources.Load<GameObject>("Prefabs/UnitEntity");
         playerPrefabs[1].GetComponent<UnitEntity>().m_sUnitName = "개구마루";
-        playerPrefabs[1] = Instantiate(playerPrefabs[1],waitStation);
+        playerPrefabs[1] = Instantiate(playerPrefabs[1], waitStation);
 
-
-        state = BattleState.START;
-        StartCoroutine(SetupBattle());
     }
 
-
-    #region 전투 관련 메서드
     // 전투 종료 처리
     void EndBattle()
     {
@@ -154,7 +159,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerAttack()
     {
         // 적에게 데미지를 입히고 결과 받아옴
-        bool isDead = enemyUnit.TakeDamage(playerUnit.Attack());
+        bool isDead = enemyUnit.TakeDamage(playerUnit.Attack(playerUnit,enemyUnit));
 
         // 적의 체력을 HUD에 업데이트
         enemyHUD.SetHP(enemyUnit.m_iCurrentHP);
@@ -185,7 +190,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // 플레이어가 데미지를 받고 체력 업데이트
-        bool isDead = playerUnit.TakeDamage(enemyUnit.GetComponent<UnitEntity>().Attack());
+        bool isDead = playerUnit.TakeDamage(enemyUnit.Attack(enemyUnit,playerUnit));
         playerHUD.SetHP(playerUnit.m_iCurrentHP);
 
         yield return new WaitForSeconds(1f);

@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     //싱글턴 인스턴스 존재를 확인하는 용도
     private static GameManager _instance;
     public UnitTable m_AssetUnitTable;
-
     DataAssetManager m_DataManager;
 
 
@@ -52,6 +51,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
+        //데이터메니저 Init을 실행시킴
         m_DataManager = new DataAssetManager();
         m_DataManager.Init(m_AssetUnitTable);
 
@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         BattleStart();
     }
 
+    //유닛 데이터를 가져오는 기능
     public UnitTable.UnitStats GetUnitData(string className)
     {
         return m_DataManager.GetUnitData(className);
