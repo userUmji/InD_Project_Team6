@@ -6,6 +6,7 @@ using UnityEngine.UI;
 // 전투 상태를 정의하는 열거형
 public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, ENEMYTURN, RESULT, END }
 
+
 public class BattleManager : MonoBehaviour
 {
     // 플레이어와 적의 프리팹
@@ -19,6 +20,8 @@ public class BattleManager : MonoBehaviour
 
     private Coroutine BattleCoroutine;
     private bool isPlayed = false;
+    private GameManager.Action m_ePlayerAction;
+    private int m_iPlayerActionIndex;
 
     // 현재 플레이어와 적의 유닛의 스크립트
     UnitEntity playerUnit;
@@ -36,8 +39,7 @@ public class BattleManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-       
+    { 
         BattleInit();
         state = BattleState.START;
         // 전투 시작 상태로 초기화하고, 전투를 설정하는 코루틴 실행
@@ -46,7 +48,7 @@ public class BattleManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(state);
+        //Debug.Log(state);
     }
 
 
@@ -60,7 +62,7 @@ public class BattleManager : MonoBehaviour
         enemyPrefab = Instantiate(enemyPrefab, enemyBattleStation);
 
         playerPrefabs[0] = Resources.Load<GameObject>("Prefabs/UnitEntity");
-        playerPrefabs[0].GetComponent<UnitEntity>().m_sUnitName = "개굴닌자";
+        playerPrefabs[0].GetComponent<UnitEntity>().m_sUnitName = "개구마루";
         playerPrefabs[0] = Instantiate(playerPrefabs[0], waitStation);
 
         playerPrefabs[1] = Resources.Load<GameObject>("Prefabs/UnitEntity");
@@ -82,6 +84,19 @@ public class BattleManager : MonoBehaviour
 
     private void Process()
     {
+        if (m_ePlayerAction == GameManager.Action.ATTACK)
+            AttackProcess();
+        else if (m_ePlayerAction == GameManager.Action.ITEM)
+            ItemProcess();
+        else if (m_ePlayerAction == GameManager.Action.CHANGE)
+            ChangeProcess();
+        else if (m_ePlayerAction == GameManager.Action.RUN)
+            RunProcess();
+    }
+    
+
+    private void AttackProcess()
+    {
         if (state != BattleState.ENEMYTURN && state != BattleState.PLAYERTURN)
         {
             if (playerUnit.m_iUnitSpeed > enemyUnit.m_iUnitSpeed)
@@ -101,6 +116,21 @@ public class BattleManager : MonoBehaviour
         else if (state == BattleState.PLAYERTURN)
             StartCoroutine(EnemyTurn());
     }
+    private void ItemProcess()
+    {
+        Debug.Log("아이템 사용");
+    }
+    private void ChangeProcess()
+    {
+        Debug.Log("도깨비 변경");
+    }
+    private void RunProcess()
+    {
+        Debug.Log("도망");
+    }
+
+
+
     // 전투 종료 처리
     void AfterWin()
     {
@@ -147,13 +177,9 @@ public class BattleManager : MonoBehaviour
         dialogueText.text = "턴 실행 완료..";
         yield return new WaitForSeconds(1f);
         if (playerUnit.m_iCurrentHP <= 0)
-        {
             AfterLost();
-        }
         else if (enemyUnit.m_iCurrentHP <= 0)
-        {
             AfterWin();
-        }
         else
         {
             state = BattleState.ACTION;
@@ -167,26 +193,22 @@ public class BattleManager : MonoBehaviour
     // 플레이어 공격을 처리하는 코루틴  --------------------------------------------------------------------------------------------------------
     IEnumerator PlayerTurn()
     {
-        state = BattleState.PLAYERTURN;
-        //공격 실행
-        playerUnit.Attack(playerUnit, enemyUnit);
-        enemyHUD.SetHP(enemyUnit.m_iCurrentHP);
-        dialogueText.text = playerUnit.m_sUnitName + "의 공격!!";
-
-
-
-        
-
-        
-
-        yield return new WaitForSeconds(1f);
-        if (enemyUnit.m_iCurrentHP <= 0)
-            BattleCoroutine = StartCoroutine(Result());
-        else if (!isPlayed)
-            Process();
-        else
-            BattleCoroutine = StartCoroutine(Result());
-        isPlayed = true;
+        if (m_ePlayerAction == GameManager.Action.ATTACK)
+        {
+            state = BattleState.PLAYERTURN;
+            //공격 실행
+            playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
+            enemyHUD.SetHP(enemyUnit.m_iCurrentHP);
+            dialogueText.text = playerUnit.m_sUnitName + "의 공격!!";
+            yield return new WaitForSeconds(1f);
+            if (enemyUnit.m_iCurrentHP <= 0)
+                BattleCoroutine = StartCoroutine(Result());
+            else if (!isPlayed)
+                Process();
+            else
+                BattleCoroutine = StartCoroutine(Result());
+            isPlayed = true;
+        }
     }
 
     // 적의 턴을 처리하는 코루틴
@@ -208,7 +230,6 @@ public class BattleManager : MonoBehaviour
             Process();
         else
             BattleCoroutine = StartCoroutine(Result());
-        //BattleCoroutine = StartCoroutine(Result());
         isPlayed = true;
 
     }
@@ -233,11 +254,14 @@ public class BattleManager : MonoBehaviour
 
     #region 버튼 클릭 이벤트
     // 공격 버튼 클릭 시 호출되는 메서드
-    public void OnAttackButton()
+    public void OnButton(GameManager.Action action, int index)
     {
         // 플레이어 턴이 아닌 경우에는 아무 작업도 수행하지 않음
         if (state != BattleState.ACTION)
             return;
+        m_ePlayerAction = action;
+        m_iPlayerActionIndex = index;
+
 
         state = BattleState.PROCESS;
 

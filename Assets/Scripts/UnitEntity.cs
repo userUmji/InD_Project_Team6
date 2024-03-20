@@ -13,8 +13,7 @@ public class UnitEntity : MonoBehaviour
     public int m_iUnitSpeed;
     public int m_iCurrentHP;
     public int m_iUnitLevel;
-
-
+    public GameManager.Type UnitType;
     //공격 3가지
     IAttackBehavior m_AttackBehavior;
     IAttackBehavior m_AttackBehavior2;
@@ -36,16 +35,23 @@ public class UnitEntity : MonoBehaviour
     {
         var UnitData = GameManager.Instance.GetUnitData(className);
 
+        //이름을 key값으로 받아온 value인 unitdata로 unitentity 초기화
+
         m_sUnitName = UnitData.m_sUnitName;
         gameObject.name += "-" + m_sUnitName;
 
-        m_iUnitHP = UnitData.m_iUnitHP;
-        m_iUnitAtk = UnitData.m_iUnitAtk;
-        m_iUnitDef = UnitData.m_iUnitDef;
         m_iUnitLevel = UnitData.m_iUnitLevel;
-        m_iUnitSpeed = UnitData.m_iUnitSpeed;
+
+        //유닛의 최종 체력/공격력/방어력은 기본 + (레벨당능력치 * 레벨)입니다.
+        m_iUnitHP = UnitData.m_iUnitHP + (UnitData.m_iLvlModHP * m_iUnitLevel);
+        m_iUnitAtk = UnitData.m_iUnitAtk + (UnitData.m_iLvlModAtk * m_iUnitLevel);
+        m_iUnitDef = UnitData.m_iUnitDef + (UnitData.m_iLvlModDef * m_iUnitLevel);
+        m_iUnitSpeed = UnitData.m_iUnitSpeed + (UnitData.m_iLvlModSpeed * m_iUnitLevel);
+        UnitType = UnitData.UnitType;
         m_iCurrentHP = m_iUnitHP;
 
+
+        //스프라이트 설정
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_SpriteRenderer.sprite = UnitData.m_UnitSprite;
         m_AttackBehaviors = new IAttackBehavior[3];
@@ -54,6 +60,8 @@ public class UnitEntity : MonoBehaviour
         m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
         m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
         m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
+
+
 
         m_AttackBehavior = Instantiate(UnitData.m_AttackBehav_1);
         m_AttackBehavior2 = Instantiate(UnitData.m_AttackBehav_2);
