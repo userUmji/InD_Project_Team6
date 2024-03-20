@@ -52,4 +52,28 @@ public class GameManager : MonoBehaviour
     {
         return m_DataManager.GetUnitData(className);
     }
+    #region 타입 관련
+    public enum Type
+    {
+        GODBEAST,
+        FIRE,
+        ICE,
+        MONSTER,
+        GHOST
+    }
+    public enum Action { NULL, ATTACK, ITEM, CHANGE, RUN }
+    public int CompareType(Type SkillType, Type UnitType)
+    {
+        int isDouble = 0;
+        if (UnitType == Type.GODBEAST)
+            isDouble = 0;
+        else if (SkillType - UnitType == 1 || SkillType - UnitType == 3)
+            isDouble = 1;
+        else if (SkillType - UnitType == -1 || SkillType - UnitType == -3)
+            isDouble = 2;
+        else
+            isDouble = 0;
+        return isDouble;
+    }
+    #endregion
 }
