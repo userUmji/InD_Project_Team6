@@ -11,7 +11,7 @@ public class SOBaseAttack : SOAttackBase
     //이 부분에서 해당 공격의 구현 방식을 설정할 수 있습니다.
 
     
-    public override int ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
+    public override string ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
     {
         // 계산식 -> ((공격력*스킬배율) - 적방어력)*속성배율
         int AttackDamage =(int)(Atker.m_iUnitAtk * m_fAttackMag);
@@ -26,8 +26,8 @@ public class SOBaseAttack : SOAttackBase
 
         Defender.m_iCurrentHP -= finalAttackDamage;
 
-        Debug.Log(isDouble);
-        Debug.Log(finalAttackDamage);
-        return finalAttackDamage;
+        //Debug.Log(isDouble);
+        //Debug.Log(finalAttackDamage);
+        return m_sAttackName;
     }
 }

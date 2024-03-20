@@ -14,20 +14,16 @@ public class UnitEntity : MonoBehaviour
     public int m_iCurrentHP;
     public int m_iUnitLevel;
     public GameManager.Type UnitType;
-    //공격 3가지
-    IAttackBehavior m_AttackBehavior;
-    IAttackBehavior m_AttackBehavior2;
-    IAttackBehavior m_AttackBehavior3;
+    
 
     //인덱스로 실행하는게 편할거같아서 만들었습니다
-    IAttackBehavior[] m_AttackBehaviors;
+    public IAttackBehavior[] m_AttackBehaviors;
 
     public void Awake()
     {
         if (m_sUnitName != null)
         {
             SetUnit(m_sUnitName);
-            //Attack();
         }
     }
     //GameManager에 있는 UnitTable SO에 있는 정보를 기반으로 해당 게임오브젝트 초기화
@@ -60,22 +56,10 @@ public class UnitEntity : MonoBehaviour
         m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
         m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
         m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
-
-
-
-        m_AttackBehavior = Instantiate(UnitData.m_AttackBehav_1);
-        m_AttackBehavior2 = Instantiate(UnitData.m_AttackBehav_2);
-        m_AttackBehavior3 = Instantiate(UnitData.m_AttackBehav_3);
-    }
-
-
-    public int Attack(UnitEntity Atker, UnitEntity Defender)
-    {
-        return m_AttackBehavior.ExecuteAttack(Atker,Defender);
     }
 
     //인덱스로 실행하는게 편할거같아서 만들었습니다
-    public int AttackByIndex(UnitEntity Atker, UnitEntity Defender,int index)
+    public string AttackByIndex(UnitEntity Atker, UnitEntity Defender,int index)
     {
         return m_AttackBehaviors[index].ExecuteAttack(Atker, Defender);
     }

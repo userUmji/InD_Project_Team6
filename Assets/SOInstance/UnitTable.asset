@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Units:
   - m_sUnitName: "\uAC1C\uAD74\uB2CC\uC790"
-    UnitType: 1
+    UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: cd8d8d16d9e81294b831a01a5d4ebff4, type: 3}
     m_iUnitHP: 20
     m_iUnitAtk: 10
@@ -33,7 +33,7 @@ MonoBehaviour:
     m_UnitSprite: {fileID: 21300000, guid: 797a10a35dfa8724d8d1f3ba14abc4ae, type: 3}
     m_iUnitHP: 20
     m_iUnitAtk: 10
-    m_iUnitSpeed: 5
+    m_iUnitSpeed: 10
     m_iUnitDef: 0
     m_iUnitLevel: 10
     m_iLvlModHP: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
   - m_sUnitName: "\uAC1C\uAD74\uBC18\uC7A5"
-    UnitType: 4
+    UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: 22ff9dc9c65c9074ab9b276ea54c4560, type: 3}
     m_iUnitHP: 20
     m_iUnitAtk: 5

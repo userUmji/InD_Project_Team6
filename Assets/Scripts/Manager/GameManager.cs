@@ -67,9 +67,9 @@ public class GameManager : MonoBehaviour
         int isDouble = 0;
         if (UnitType == Type.GODBEAST)
             isDouble = 0;
-        else if (SkillType - UnitType == 1 || SkillType - UnitType == 3)
+        else if (SkillType - UnitType == -1 || SkillType - UnitType == 3)
             isDouble = 1;
-        else if (SkillType - UnitType == -1 || SkillType - UnitType == -3)
+        else if (SkillType - UnitType == 1 || SkillType - UnitType == -3)
             isDouble = 2;
         else
             isDouble = 0;
