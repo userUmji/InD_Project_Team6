@@ -9,14 +9,20 @@ public class UnitTable : ScriptableObject {
     public struct UnitStats
     {
         public string m_sUnitName;
-        public string m_sUnitType;
+        public GameManager.Type UnitType;
         public Sprite m_UnitSprite;
         public int m_iUnitHP;
         public int m_iUnitAtk;
         public int m_iUnitSpeed;
         public int m_iUnitDef;
         public int m_iUnitLevel;
-        
+
+        public int m_iLvlModHP;
+        public int m_iLvlModAtk;
+        public int m_iLvlModSpeed;
+        public int m_iLvlModDef;
+
+
 
         public SOAttackBase m_AttackBehav_1;
         public SOAttackBase m_AttackBehav_2;
