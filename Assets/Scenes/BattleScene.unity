@@ -821,6 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetUnitTable: {fileID: 11400000, guid: 4c38281b1b7b02043af9e5e9d5c1c78a, type: 2}
+  m_AssetItemTable: {fileID: 11400000, guid: 8eb3cce7129dd584fa43a4fb508b2744, type: 2}
 --- !u!4 &381918731
 Transform:
   m_ObjectHideFlags: 0

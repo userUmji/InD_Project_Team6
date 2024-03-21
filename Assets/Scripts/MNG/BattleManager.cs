@@ -31,8 +31,8 @@ public class BattleManager : MonoBehaviour
     public Text dialogueText;
 
     // 플레이어와 적의 HUD(Head-Up Display)를 관리하는 객체
-    public BattleHUD playerHUD;
-    public BattleHUD enemyHUD;
+    public BattleHUDCTR playerHUD;
+    public BattleHUDCTR enemyHUD;
 
     // 전투 상태
     public BattleState state;
