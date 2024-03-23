@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleHUD : MonoBehaviour
+public class BattleHUDCTR : MonoBehaviour
 {
     // UI 요소들
     public Text nameText;   // 이름을 표시하는 텍스트

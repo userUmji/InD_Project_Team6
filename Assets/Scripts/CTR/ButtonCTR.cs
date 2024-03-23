@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonController : MonoBehaviour
+public class ButtonCTR : MonoBehaviour
 {
     public BattleManager g_BattleManager;
     public GameManager.Action g_eAction;

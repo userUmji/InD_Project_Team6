@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     //싱글턴 인스턴스 존재를 확인하는 용도
     private static GameManager _instance;
     public UnitTable m_AssetUnitTable;
+    public ItemTable m_AssetItemTable;
     DataAssetManager m_DataManager;
 
 
@@ -43,7 +44,8 @@ public class GameManager : MonoBehaviour
 
         //데이터메니저 Init을 실행시킴
         m_DataManager = new DataAssetManager();
-        m_DataManager.Init(m_AssetUnitTable);
+        m_DataManager.Init(m_AssetUnitTable,m_AssetItemTable);
+
 
     }
 
@@ -52,6 +54,11 @@ public class GameManager : MonoBehaviour
     {
         return m_DataManager.GetUnitData(className);
     }
+    public ItemTable.ItemStats GetItemData(string className)
+    {
+        return m_DataManager.GetItemData(className);
+    }
+
     #region 타입 관련
     public enum Type
     {
@@ -67,9 +74,9 @@ public class GameManager : MonoBehaviour
         int isDouble = 0;
         if (UnitType == Type.GODBEAST)
             isDouble = 0;
-        else if (SkillType - UnitType == 1 || SkillType - UnitType == 3)
+        else if (SkillType - UnitType == -1 || SkillType - UnitType == 3)
             isDouble = 1;
-        else if (SkillType - UnitType == -1 || SkillType - UnitType == -3)
+        else if (SkillType - UnitType == 1 || SkillType - UnitType == -3)
             isDouble = 2;
         else
             isDouble = 0;
