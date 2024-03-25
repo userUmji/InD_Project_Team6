@@ -89,7 +89,7 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
 
     public void Off_Inven()
     {
-        if (g_ishow_Item_Image.transform.gameObject.activeSelf == true)
+        if (m_ISr_S != null)
         {
             m_Sslot.item_Number = m_inum;
             m_Sslot.g_Ihave_item = m_ISr_S;

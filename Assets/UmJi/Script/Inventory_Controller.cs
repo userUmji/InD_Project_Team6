@@ -113,8 +113,6 @@ public class Inventory_Controller : MonoBehaviour
                 {
                     g_Sslot[i].GetComponent<Slot_Button>().Off_Inven();
                 }
-                //Slot_Button.
-                //g_gin_V.gameObject.SetActive(false); // ≤®¡‹
                 g_gin_V.transform.localScale = new Vector3(0, 0, 1); // ≤®¡‹
             }
         }
