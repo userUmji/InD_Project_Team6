@@ -10,8 +10,8 @@ public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, ENEMYTURN, RESULT,
 public class BattleManager : MonoBehaviour
 {
     // 플레이어와 적의 프리팹
-    public GameObject[] playerPrefabs;
-    public GameObject enemyPrefab;
+    public GameObject[] g_PlayerUnits;
+    public GameObject g_EnemyUnit;
 
     // 플레이어와 적이 전투하는 위치
     public Transform playerBattleStation;
@@ -39,11 +39,8 @@ public class BattleManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         BattleInit();
-        state = BattleState.START;
-        // 전투 시작 상태로 초기화하고, 전투를 설정하는 코루틴 실행
-        BattleCoroutine = StartCoroutine(SetupBattle());
     }
 
     private void Update()
@@ -55,20 +52,15 @@ public class BattleManager : MonoBehaviour
     #region 전투 관련 메서드
     void BattleInit()
     {
-        //Instantiate를 해서 저장하는 이유는 prefab을 1개만 사용하다보니 prefab을 수정하면 마지막걸로 다 instantiate 되기 때문입니다.
-        playerPrefabs = new GameObject[2];
-        enemyPrefab = Resources.Load<GameObject>("Prefabs/UnitEntity");
-        enemyPrefab.GetComponent<UnitEntity>().m_sUnitName = "개굴닌자";
-        enemyPrefab = Instantiate(enemyPrefab, enemyBattleStation);
+        //플레이어 유닛 초기화
+        //g_PlayerUnits = GameManager.Instance.m_UnitManager.g_PlayerUnits;
+        //적 유닛 초기화
+        g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName("개굴닌자");
 
-        playerPrefabs[0] = Resources.Load<GameObject>("Prefabs/UnitEntity");
-        playerPrefabs[0].GetComponent<UnitEntity>().m_sUnitName = "개구마루";
-        playerPrefabs[0] = Instantiate(playerPrefabs[0], waitStation);
-
-        playerPrefabs[1] = Resources.Load<GameObject>("Prefabs/UnitEntity");
-        playerPrefabs[1].GetComponent<UnitEntity>().m_sUnitName = "개굴반장";
-        playerPrefabs[1] = Instantiate(playerPrefabs[1], waitStation);
-
+        
+        state = BattleState.START;
+        // 전투 시작 상태로 초기화하고, 전투를 설정하는 코루틴 실행
+        BattleCoroutine = StartCoroutine(SetupBattle());
     }
 
 
@@ -159,11 +151,13 @@ public class BattleManager : MonoBehaviour
     IEnumerator SetupBattle()
     {
         // 플레이어와 적의 유닛을 생성하고 배치
-        int randomPlayerIndex = Random.Range(0, playerPrefabs.Length);
-        playerUnit = playerPrefabs[randomPlayerIndex].GetComponent<UnitEntity>();
+        playerUnit = GameManager.Instance.m_UnitManager.g_PlayerUnits[0].transform.GetComponent<UnitEntity>();
+        for(int i = 1; i< GameManager.Instance.m_UnitManager.g_PlayerUnits.Length;i++)
+            GameManager.Instance.m_UnitManager.g_PlayerUnits[i].transform.position = waitStation.position;
+        
 
-        enemyUnit = enemyPrefab.GetComponent<UnitEntity>();
-
+        enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
+        enemyUnit.transform.position = enemyBattleStation.position;
         playerUnit.transform.position = playerBattleStation.position;
 
         // 대화 텍스트에 적의 이름을 표시
@@ -216,7 +210,7 @@ public class BattleManager : MonoBehaviour
         state = BattleState.PLAYERTURN;
 
         // 플레이어 교체
-        GameObject newPlayerGO = playerPrefabs[m_iPlayerActionIndex];
+        GameObject newPlayerGO = GameManager.Instance.m_UnitManager.g_PlayerUnits[m_iPlayerActionIndex];
         playerUnit.transform.position = waitStation.position; // 이전 플레이어 이동
         newPlayerGO.transform.position = playerBattleStation.position;
         playerUnit = newPlayerGO.GetComponent<UnitEntity>();

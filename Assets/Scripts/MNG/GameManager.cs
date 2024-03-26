@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
     public UnitTable m_AssetUnitTable;
     public ItemTable m_AssetItemTable;
     DataAssetManager m_DataManager;
+    public UnitManager m_UnitManager;
 
+    
 
     //싱글턴 구현
     public static GameManager Instance
@@ -43,12 +45,23 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         //데이터메니저 Init을 실행시킴
-        m_DataManager = new DataAssetManager();
-        m_DataManager.Init(m_AssetUnitTable,m_AssetItemTable);
 
+        Init();
 
     }
+    private void Init()
+    {
+        m_DataManager = new DataAssetManager();
+        m_DataManager.Init(m_AssetUnitTable, m_AssetItemTable);
+        m_UnitManager = new UnitManager();
+        m_UnitManager.SetPlayerUnitEntityByName("개굴닌자", 0);
+        m_UnitManager.SetPlayerUnitEntityByName("개구마루", 1);
+        m_UnitManager.SetPlayerUnitEntityByName("개굴반장", 2);
 
+        Debug.Log(m_UnitManager.GetUnitEntity(0).transform.GetComponent<UnitEntity>().m_sUnitName);
+        Debug.Log(m_UnitManager.GetUnitEntity(1).transform.GetComponent<UnitEntity>().m_sUnitName);
+        Debug.Log(m_UnitManager.GetUnitEntity(2).transform.GetComponent<UnitEntity>().m_sUnitName);
+    }
     //유닛 데이터를 가져오는 기능
     public UnitTable.UnitStats GetUnitData(string className)
     {
