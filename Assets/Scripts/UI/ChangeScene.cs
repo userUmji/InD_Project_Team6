@@ -12,7 +12,12 @@ public class ChangeScene : MonoBehaviour
 
     public void SceneChange1()
     {
-        SceneManager.LoadScene("DialogScene");
+        SceneManager.LoadScene("UmJi");
+    }
+
+    public void SceneChange2()
+    {
+        SceneManager.LoadScene("BattleScene");
     }
 
     public void GameExit()

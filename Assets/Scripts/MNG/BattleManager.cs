@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 전투 상태를 정의하는 열거형
-public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, ENEMYTURN, RESULT, END }
-
 
 public class BattleManager : MonoBehaviour
 {
     // 플레이어와 적의 프리팹
-    public GameObject[] playerPrefabs;
-    public GameObject enemyPrefab;
+    public GameObject[] g_PlayerUnits;
+    public GameObject g_EnemyUnit;
+    public GameObject g_BattleButtons;
+    // 전투 상태를 정의하는 열거형
+    public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, ENEMYTURN, RESULT, END }
 
     // 플레이어와 적이 전투하는 위치
     public Transform playerBattleStation;
@@ -24,7 +24,7 @@ public class BattleManager : MonoBehaviour
     private int m_iPlayerActionIndex;
 
     // 현재 플레이어와 적의 유닛의 스크립트
-    UnitEntity playerUnit;
+    public UnitEntity playerUnit;
     UnitEntity enemyUnit;
 
     // 전투 중 발생하는 대화를 표시하는 UI 텍스트
@@ -39,11 +39,8 @@ public class BattleManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         BattleInit();
-        state = BattleState.START;
-        // 전투 시작 상태로 초기화하고, 전투를 설정하는 코루틴 실행
-        BattleCoroutine = StartCoroutine(SetupBattle());
     }
 
     private void Update()
@@ -55,20 +52,15 @@ public class BattleManager : MonoBehaviour
     #region 전투 관련 메서드
     void BattleInit()
     {
-        //Instantiate를 해서 저장하는 이유는 prefab을 1개만 사용하다보니 prefab을 수정하면 마지막걸로 다 instantiate 되기 때문입니다.
-        playerPrefabs = new GameObject[2];
-        enemyPrefab = Resources.Load<GameObject>("Prefabs/UnitEntity");
-        enemyPrefab.GetComponent<UnitEntity>().m_sUnitName = "개굴닌자";
-        enemyPrefab = Instantiate(enemyPrefab, enemyBattleStation);
+        //플레이어 유닛 초기화
+        //g_PlayerUnits = GameManager.Instance.m_UnitManager.g_PlayerUnits;
+        //적 유닛 초기화
+        g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName("개굴닌자");
 
-        playerPrefabs[0] = Resources.Load<GameObject>("Prefabs/UnitEntity");
-        playerPrefabs[0].GetComponent<UnitEntity>().m_sUnitName = "개구마루";
-        playerPrefabs[0] = Instantiate(playerPrefabs[0], waitStation);
-
-        playerPrefabs[1] = Resources.Load<GameObject>("Prefabs/UnitEntity");
-        playerPrefabs[1].GetComponent<UnitEntity>().m_sUnitName = "개굴반장";
-        playerPrefabs[1] = Instantiate(playerPrefabs[1], waitStation);
-
+        
+        state = BattleState.START;
+        // 전투 시작 상태로 초기화하고, 전투를 설정하는 코루틴 실행
+        BattleCoroutine = StartCoroutine(SetupBattle());
     }
 
 
@@ -159,12 +151,16 @@ public class BattleManager : MonoBehaviour
     IEnumerator SetupBattle()
     {
         // 플레이어와 적의 유닛을 생성하고 배치
-        int randomPlayerIndex = Random.Range(0, playerPrefabs.Length);
-        playerUnit = playerPrefabs[randomPlayerIndex].GetComponent<UnitEntity>();
+        playerUnit = GameManager.Instance.m_UnitManager.g_PlayerUnits[0].transform.GetComponent<UnitEntity>();
+        //UI의 이미지로 스프라이트를 지정하기 때문에 Station들을 삭제했습니다.
+        //for(int i = 1; i< GameManager.Instance.m_UnitManager.g_PlayerUnits.Length;i++)
+            //GameManager.Instance.m_UnitManager.g_PlayerUnits[i].transform.position = waitStation.position;
+        playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
 
-        enemyUnit = enemyPrefab.GetComponent<UnitEntity>();
-
-        playerUnit.transform.position = playerBattleStation.position;
+        enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
+        //enemyUnit.transform.position = enemyBattleStation.position;
+        //playerUnit.transform.position = playerBattleStation.position];
+        enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
 
         // 대화 텍스트에 적의 이름을 표시
         dialogueText.text = "야생의 " + enemyUnit.m_sUnitName + " 이(가) 나타났다...";
@@ -186,7 +182,7 @@ public class BattleManager : MonoBehaviour
         //공격 실행
         playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
         enemyHUD.SetHP(enemyUnit.m_iCurrentHP);
-        dialogueText.text = playerUnit.m_sUnitName + "의 공격!!";
+        dialogueText.text = playerUnit.m_sUnitName + "의 " + playerUnit.GetSkillname(playerUnit,m_iPlayerActionIndex)+" 공격!!";
         yield return new WaitForSeconds(1f);
         if (enemyUnit.m_iCurrentHP <= 0 || playerUnit.m_iCurrentHP <= 0)
             BattleCoroutine = StartCoroutine(Result());
@@ -216,10 +212,11 @@ public class BattleManager : MonoBehaviour
         state = BattleState.PLAYERTURN;
 
         // 플레이어 교체
-        GameObject newPlayerGO = playerPrefabs[m_iPlayerActionIndex];
-        playerUnit.transform.position = waitStation.position; // 이전 플레이어 이동
-        newPlayerGO.transform.position = playerBattleStation.position;
+        GameObject newPlayerGO = GameManager.Instance.m_UnitManager.g_PlayerUnits[m_iPlayerActionIndex];
+        //playerUnit.transform.position = waitStation.position; // 이전 플레이어 이동
+        //newPlayerGO.transform.position = playerBattleStation.position;
         playerUnit = newPlayerGO.GetComponent<UnitEntity>();
+        playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
 
 
         // 플레이어의 체력을 HUD에 업데이트
@@ -237,7 +234,8 @@ public class BattleManager : MonoBehaviour
         state = BattleState.ENEMYTURN;
         // 적이 공격하고 대화 텍스트 업데이트
         int randomAttackIndex = Random.Range(0, 2);
-        string AttackName = enemyUnit.AttackByIndex(enemyUnit, playerUnit,randomAttackIndex);
+        enemyUnit.AttackByIndex(enemyUnit, playerUnit, randomAttackIndex);
+        string AttackName = enemyUnit.GetSkillname(enemyUnit,randomAttackIndex);
         playerHUD.SetHP(playerUnit.m_iCurrentHP);
         dialogueText.text = enemyUnit.m_sUnitName + " 의 " + AttackName + "공격!";
 
@@ -285,7 +283,15 @@ public class BattleManager : MonoBehaviour
             return;
         m_ePlayerAction = action;
         m_iPlayerActionIndex = index;
+        g_BattleButtons.SetActive(true);
 
+        GameObject[] destroy = GameObject.FindGameObjectsWithTag("CreatedButtons");
+        for (int i = 0; i< destroy.Length;i++)
+        {
+            Destroy(destroy[i]);
+        }
+        
+        
 
         state = BattleState.PROCESS;
         Process();
