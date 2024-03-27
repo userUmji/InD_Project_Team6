@@ -7,6 +7,7 @@ public class ButtonCTR : MonoBehaviour
 {
     public BattleManager g_BattleManager;
     public GameManager.Action g_eAction;
+    
     public int g_iIndex;
 
     // 델리게이트 선언
@@ -14,6 +15,8 @@ public class ButtonCTR : MonoBehaviour
 
     private void Start()
     {
+        //BattleManager 할당
+        g_BattleManager = GameObject.Find("BattleManager").transform.GetComponent<BattleManager>();
         // 델리게이트를 생성하고 할당
         OnButton buttonDelegate = new OnButton(g_BattleManager.OnButton);
 
