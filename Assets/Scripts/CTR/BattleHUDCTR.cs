@@ -10,6 +10,8 @@ public class BattleHUDCTR : MonoBehaviour
     public Text levelText;  // 레벨을 표시하는 텍스트
     public Slider hpSlider; // 체력을 표시하는 슬라이더
 
+    public Image g_imagePortrait; // 초상화 이미지
+
     // HUD를 설정하는 메서드
     public void SetHUD(UnitEntity unit)
     {
