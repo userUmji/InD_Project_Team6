@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitEntity : MonoBehaviour
 {
-    SpriteRenderer m_SpriteRenderer { get; set; }
+    //SpriteRenderer m_SpriteRenderer { get; set; }
 
     public string m_sUnitName;
     public int m_iUnitHP;
@@ -25,12 +25,13 @@ public class UnitEntity : MonoBehaviour
     {
         if (m_sUnitName != null)
         {
-            SetUnit(m_sUnitName);
+            //SetUnit(m_sUnitName);
         }
     }
     //GameManager에 있는 UnitTable SO에 있는 정보를 기반으로 해당 게임오브젝트 초기화
     public void SetUnit(string className)
     {
+        Debug.Log(className);
         var UnitData = GameManager.Instance.GetUnitData(className);
 
         //이름을 key값으로 받아온 value인 unitdata로 unitentity 초기화

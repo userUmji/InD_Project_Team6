@@ -12,7 +12,16 @@ public class ChangeScene : MonoBehaviour
 
     public void SceneChange1()
     {
+<<<<<<< Updated upstream
         SceneManager.LoadScene("DialogScene");
+=======
+        SceneManager.LoadScene("WorldScene");
+    }
+
+    public void SceneChange2()
+    {
+        SceneManager.LoadScene("BattleScene");
+>>>>>>> Stashed changes
     }
 
     public void GameExit()
