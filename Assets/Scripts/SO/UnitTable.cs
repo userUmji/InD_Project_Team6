@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 [CreateAssetMenu(fileName = "NewUnitTable", menuName = "Tables/UnitTable")]
 public class UnitTable : ScriptableObject {
     //Unit의 정보들을 담은 SO, 여기에 파라미터를 추가하면 SOInstance에서 수정하고 저장할수 있습니다. 

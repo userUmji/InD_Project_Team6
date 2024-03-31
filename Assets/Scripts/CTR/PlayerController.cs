@@ -23,8 +23,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        Drop_Item();
+        if(GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
+        {
+            Movement();
+            Drop_Item();
+        }
     }
 
     private void Drop_Item()

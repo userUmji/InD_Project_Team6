@@ -10,11 +10,11 @@ public class SOBaseAttack : SOAttackBase
     //SkillType -> 스킬 타입
     //이 부분에서 해당 공격의 구현 방식을 설정할 수 있습니다.
 
-    
-    public override string ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
+
+    public override void ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
     {
         // 계산식 -> ((공격력*스킬배율) - 적방어력)*속성배율
-        int AttackDamage =(int)(Atker.m_iUnitAtk * m_fAttackMag);
+        int AttackDamage = (int)(Atker.m_iUnitAtk * m_fAttackMag);
         int finalAttackDamage = AttackDamage - Defender.m_iUnitDef;
 
         int isDouble = GameManager.Instance.CompareType(SkillType, Defender.UnitType);
@@ -28,6 +28,10 @@ public class SOBaseAttack : SOAttackBase
 
         //Debug.Log(isDouble);
         //Debug.Log(finalAttackDamage);
+    }
+
+    public override string GetSkillName()
+    {
         return m_sAttackName;
     }
 }

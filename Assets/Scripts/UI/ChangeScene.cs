@@ -12,7 +12,13 @@ public class ChangeScene : MonoBehaviour
 
     public void SceneChange1()
     {
-        SceneManager.LoadScene("DialogScene");
+        SceneManager.LoadScene("WorldScene");
+    }
+
+    public void SceneChange2()
+    {
+        SceneManager.LoadScene("BattleScene");
+
     }
 
     public void GameExit()
