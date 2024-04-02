@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d9ea43e3ba01e4196b54814160c8b0, type: 3}
+  m_Name: UnitTable
+  m_EditorClassIdentifier: 
+  m_Units:
+  - m_sUnitName: "\uD574\uD0DC"
+    UnitType: 0
+    m_UnitSprite: {fileID: 21300000, guid: 0797f6e2008a18d40a80e810938495f7, type: 3}
+    m_iUnitHP: 50
+    m_iUnitAtk: 10
+    m_iUnitSpeed: 5
+    m_iUnitDef: 0
+    m_iUnitLevel: 10
+    m_iLvlModHP: 0
+    m_iLvlModAtk: 0
+    m_iLvlModSpeed: 0
+    m_iLvlModDef: 0
+    m_AttackBehav_1: {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_sUnitName: "\uBC31\uC694\uD638"
+    UnitType: 3
+    m_UnitSprite: {fileID: 21300000, guid: 453d4435967626746b1076fcb56f55ec, type: 3}
+    m_iUnitHP: 50
+    m_iUnitAtk: 10
+    m_iUnitSpeed: 10
+    m_iUnitDef: 0
+    m_iUnitLevel: 10
+    m_iLvlModHP: 0
+    m_iLvlModAtk: 0
+    m_iLvlModSpeed: 0
+    m_iLvlModDef: 0
+    m_AttackBehav_1: {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
+  - m_sUnitName: "\uBC31\uD638"
+    UnitType: 0
+    m_UnitSprite: {fileID: 21300000, guid: 5f7b76d3e2a681d4ea9857b1eea5ce0a, type: 3}
+    m_iUnitHP: 50
+    m_iUnitAtk: 5
+    m_iUnitSpeed: 5
+    m_iUnitDef: 0
+    m_iUnitLevel: 10
+    m_iLvlModHP: 0
+    m_iLvlModAtk: 0
+    m_iLvlModSpeed: 0
+    m_iLvlModDef: 0
+    m_AttackBehav_1: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
+  - m_sUnitName: "\uB354\uBBF8"
+    UnitType: 0
+    m_UnitSprite: {fileID: 21300000, guid: e915deab87ce5154daf469ca7e916540, type: 3}
+    m_iUnitHP: 1
+    m_iUnitAtk: 1
+    m_iUnitSpeed: 1
+    m_iUnitDef: 1
+    m_iUnitLevel: 1
+    m_iLvlModHP: 0
+    m_iLvlModAtk: 0
+    m_iLvlModSpeed: 0
+    m_iLvlModDef: 0
+    m_AttackBehav_1: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
