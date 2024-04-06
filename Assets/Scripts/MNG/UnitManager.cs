@@ -7,9 +7,9 @@ public class UnitManager
     public GameObject[] g_PlayerUnits = new GameObject[3];
     private GameObject UnitPrefab = Resources.Load<GameObject>("Prefabs/UnitEntity");
 
-    public GameObject GetUnitEntity(int index)
+    public UnitEntity GetUnitEntity(int index)
     {
-        return g_PlayerUnits[index];
+        return g_PlayerUnits[index].transform.GetComponent<UnitEntity>();
     }
     public void SetPlayerUnitEntityByName(string unitName, int index)
     {
