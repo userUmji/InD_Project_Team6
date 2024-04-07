@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Enemy_Conroller.cs.meta
-guid: 5575cbf3d53be3b4787140a45f6de607
-========
-guid: 8577951657eb10d4d8c9c1891ccf259d
->>>>>>>> 04_02:Assets/Scripts/CTR/Enemy_Conroller.cs.meta
+guid: 676a68b41b17a894ca405353a4160957
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -17,16 +17,16 @@ public class BattleButtonCTR : MonoBehaviour
     }
     public void OnClick_Skill()
     {
-        if(g_BattleManager.state == BattleManager.BattleState.ACTION)
+        if (g_BattleManager.state == BattleManager.BattleState.ACTION)
         {
             Debug.Log("스킬버튼 눌림");
             SkillButtonPrefab = Resources.Load<GameObject>("Prefabs/SkillButtons");
             GameObject SkillButton_Temp = Instantiate(SkillButtonPrefab, g_Canvas.transform);
-            for(int i = 0; i<SkillButton_Temp.transform.childCount;i++)
+            for (int i = 0; i < SkillButton_Temp.transform.childCount - 1; i++)
             {
                 SkillButton_Temp.transform.GetChild(i).GetChild(0).transform.GetComponent<Text>().text = g_BattleManager.playerUnit.m_AttackBehaviors[i].GetSkillName();
             }
-            
+
             BattleButtons.SetActive(false);
         }
     }
@@ -53,5 +53,4 @@ public class BattleButtonCTR : MonoBehaviour
     {
         Debug.Log("도망 눌림");
     }
-
 }

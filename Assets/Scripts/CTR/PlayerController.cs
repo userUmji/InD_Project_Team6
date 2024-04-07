@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public float g_fspeed;
     public float g_frun_Speed;
     public LayerMask g_llayer;
-    public GameManager _instance;
+    public TextManager _instance;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +28,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        Object_Interaction();
+        if (GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
+        {
+            Movement();
+            Object_Interaction();
+        }
     }
 
     private void Object_Interaction()

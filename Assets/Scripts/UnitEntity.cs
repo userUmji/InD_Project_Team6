@@ -20,14 +20,7 @@ public class UnitEntity : MonoBehaviour
     //인덱스로 실행하는게 편할거같아서 만들었습니다
     public IAttackBehavior[] m_AttackBehaviors;
 
-
-    public void Awake()
-    {
-        if (m_sUnitName != null)
-        {
-            SetUnit(m_sUnitName);
-        }
-    }
+   
     //GameManager에 있는 UnitTable SO에 있는 정보를 기반으로 해당 게임오브젝트 초기화
     public void SetUnit(string className)
     {
