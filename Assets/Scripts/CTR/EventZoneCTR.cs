@@ -9,17 +9,6 @@ public class EventZoneCTR: MonoBehaviour
     public float g_fpercent; // 몬스터 등장 확률
     public Coroutine FindCoroutine;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {

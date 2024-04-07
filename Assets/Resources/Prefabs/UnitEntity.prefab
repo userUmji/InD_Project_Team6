@@ -95,12 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a27388ea7b5504984db21db8ac7091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sUnitName: 
-  m_iUnitHP: 0
-  m_iUnitAtk: 0
-  m_iUnitDef: 0
-  m_iUnitSpeed: 0
+  m_sUnitName: "\uAC1C\uAD74\uB2CC\uC790"
+  m_iHealthPoint: 0
+  m_fAttackDamage: 0
+  m_iAttackDamage: 0
   m_iCurrentHP: 0
   m_iUnitLevel: 0
-  m_spriteUnitImage: {fileID: 0}
-  UnitType: 0

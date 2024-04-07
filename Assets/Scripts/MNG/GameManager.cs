@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
         Canvas_WorldScene.SetActive(false);
         SceneOper.allowSceneActivation = true;
     }
-    
+
 
 
     #region 타입 관련
@@ -95,7 +96,7 @@ public class GameManager : MonoBehaviour
         MONSTER,
         GHOST
     }
-    public enum Action { NULL, ATTACK, ITEM, CHANGE, RUN }
+    public enum Action { CANCLE, ATTACK, ITEM, CHANGE, RUN }
     public int CompareType(Type SkillType, Type UnitType)
     {
         int isDouble = 0;
