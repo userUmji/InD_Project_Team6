@@ -15,3 +15,4 @@ MonoBehaviour:
   SkillType: 3
   m_fAttackMag: 1
   m_sAttackName: "\uAD34\uC218\uC18D\uC131 \uAE30\uBCF8"
+  m_iUseAmount: 5

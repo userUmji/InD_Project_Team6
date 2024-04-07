@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillType: 0
   m_fAttackMag: 1.2
+  m_sAttackName: "\uAE30\uBCF8"
+  m_iUseAmount: 20
