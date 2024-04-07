@@ -29,6 +29,12 @@ public class UnitTable : ScriptableObject {
         public SOAttackBase m_AttackBehav_2;
         public SOAttackBase m_AttackBehav_3;
     }
+    public struct UnitStats_Save
+    {
+        public bool m_isCaptured;
+        public int m_iModAtk;
+        public int m_iModDef;
+    }
 
 
     public UnitStats[] m_Units;

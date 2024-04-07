@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class UnitEntity : MonoBehaviour
 {
-    SpriteRenderer m_SpriteRenderer { get; set; }
 
+    #region 유닛 정보
     public string m_sUnitName;
     public int m_iUnitHP;
     public int m_iUnitAtk;
     public int m_iUnitDef;
     public int m_iUnitSpeed;
     public int m_iCurrentHP;
-    public int m_iUnitLevel;
-    public int m_iUnitEXP;
+    public int m_iUnitAtkMod_Temp;
+    public int m_iUnitDefMod_Temp;
     public int[] m_iSkillAmounts;
     public Sprite m_spriteUnitImage;
     public GameManager.Type UnitType;
-    
+    #endregion
+    #region 저장해야 할 정보들
+    public int m_iUnitLevel;
+    public int m_iUnitEXP;
+    public int m_iPermanentAttackMod;
+    public int m_iPermanentDefMod;
+    #endregion
+
 
     //인덱스로 실행하는게 편할거같아서 만들었습니다
     public SOAttackBase[] m_AttackBehaviors;
 
-   
     //GameManager에 있는 UnitTable SO에 있는 정보를 기반으로 해당 게임오브젝트 초기화
     public void SetUnit(string className)
     {
@@ -54,6 +60,11 @@ public class UnitEntity : MonoBehaviour
         m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
         for (int i = 0; i < 3; i++)
             m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;
+
+        m_iPermanentDefMod = 0;
+        m_iPermanentAttackMod = 0;
+        m_iUnitDefMod_Temp = 0;
+        m_iUnitAtkMod_Temp = 0;
     }
 
     //인덱스로 실행하는게 편할거같아서 만들었습니다

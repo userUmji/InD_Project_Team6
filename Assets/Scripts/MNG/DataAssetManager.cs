@@ -1,6 +1,13 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class DataAssetManager
 {
@@ -9,6 +16,7 @@ public class DataAssetManager
     ItemTable m_AssetItemTable;
     //유닛의 이름을 Key값으로 묶어 저장하는 Dictionary
     Dictionary<string, UnitTable.UnitStats> m_UnitDic;
+    Dictionary<string, UnitTable.UnitStats_Save> m_UnitSaveDic;
     Dictionary<string, ItemTable.ItemStats> m_ItemDic;
 
     //Init 기능
@@ -16,7 +24,7 @@ public class DataAssetManager
     {
         m_AssetUnitTable = tableFromManager_Unit;
         m_AssetItemTable = tableFromManager_Item;
-       m_UnitDic = new Dictionary<string, UnitTable.UnitStats>();
+        m_UnitDic = new Dictionary<string, UnitTable.UnitStats>();
         m_ItemDic = new Dictionary<string, ItemTable.ItemStats>();
         if (m_AssetUnitTable == null)
         {
@@ -62,5 +70,32 @@ public class DataAssetManager
     public ItemTable.ItemStats GetItemData(string className)
     {
         return m_ItemDic[className];
+    }
+
+    public void SaveFunc()
+    {
+        string path = Application.persistentDataPath + "Save.json";
+        string SaveData = JsonConvert.SerializeObject(m_UnitSaveDic);
+        File.WriteAllText(path, SaveData);
+        Debug.Log("Save Complete");
+    }
+    public void LoadFunc()
+    {
+        string path = Application.persistentDataPath + "Save.json";
+        if (File.Exists(path))
+        {
+            System.IO.File.Delete(path);
+            SaveFunc();
+            string JsonDataTemp = File.ReadAllText(path);
+            m_UnitSaveDic = JsonConvert.DeserializeObject<Dictionary<string, UnitTable.UnitStats_Save>>(JsonDataTemp);
+            Debug.Log(path);
+
+        }
+        else
+        {
+            SaveFunc();
+            LoadFunc();
+            Debug.Log("Savefile missed. created new Savefile");
+        }
     }
 }

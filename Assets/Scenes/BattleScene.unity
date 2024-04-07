@@ -1198,7 +1198,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 671947254}
         m_TargetAssemblyTypeName: BattleButtonCTR, Assembly-CSharp
-        m_MethodName: OnClick_Run
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1254,6 +1254,8 @@ MonoBehaviour:
   SkillButtonPrefab: {fileID: 0}
   g_Canvas: {fileID: 0}
   g_BattleManager: {fileID: 0}
+  g_eAction: 4
+  g_iIndex: 0
 --- !u!222 &671947255
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1374,6 +1376,8 @@ MonoBehaviour:
   SkillButtonPrefab: {fileID: 0}
   g_Canvas: {fileID: 0}
   g_BattleManager: {fileID: 0}
+  g_eAction: 0
+  g_iIndex: 0
 --- !u!114 &684320969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2010,6 +2014,8 @@ MonoBehaviour:
   SkillButtonPrefab: {fileID: 0}
   g_Canvas: {fileID: 0}
   g_BattleManager: {fileID: 0}
+  g_eAction: 0
+  g_iIndex: 0
 --- !u!114 &1284438766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2190,6 +2196,8 @@ MonoBehaviour:
   SkillButtonPrefab: {fileID: 0}
   g_Canvas: {fileID: 0}
   g_BattleManager: {fileID: 0}
+  g_eAction: 0
+  g_iIndex: 0
 --- !u!222 &1304838212
 CanvasRenderer:
   m_ObjectHideFlags: 0

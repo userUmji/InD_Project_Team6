@@ -108,7 +108,7 @@ public class BattleManager : MonoBehaviour
     private void RunProcess()
     {
         if (state != BattleState.PLAYERTURN)
-            StartCoroutine(PlayerTurn_Item());
+            StartCoroutine(PlayerTurn_Run());
         else
             StartCoroutine(EnemyTurn());
     }
@@ -205,6 +205,32 @@ public class BattleManager : MonoBehaviour
         playerHUD.SetHUD(playerUnit);
         yield return new WaitForSeconds(2f);
 
+        Process();
+        isPlayed = true;
+    }
+    IEnumerator PlayerTurn_Run()
+    {
+        state = BattleState.PLAYERTURN;
+        int runChance;
+        if (playerUnit.m_iUnitLevel >= enemyUnit.m_iUnitLevel)
+            runChance = 70;
+        else
+            runChance = 30;
+
+        int randomChance = Random.Range(1, 101);
+        Debug.Log(randomChance);
+        if (runChance < randomChance)
+        {
+            dialogueText.text = "¹«»çÈ÷ µµ¸ÁÃÆ´Ù";
+            yield return new WaitForSeconds(2f);
+            SceneManager.UnloadSceneAsync("BattleScene");
+            GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
+        }
+        else
+        {
+            dialogueText.text = "µµ¸ÁÄ¡Áö ¸øÇß´Ù!";
+            yield return new WaitForSeconds(2f);
+        }
         Process();
         isPlayed = true;
     }

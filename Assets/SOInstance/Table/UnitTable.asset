@@ -61,11 +61,11 @@ MonoBehaviour:
   - m_sUnitName: "\uB354\uBBF8"
     UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: e9d118d0d9570104eb8d1d37e25c52c5, type: 3}
-    m_iUnitHP: 10000
+    m_iUnitHP: 1
     m_iUnitAtk: 1
     m_iUnitSpeed: 1
     m_iUnitDef: 1
-    m_iUnitLevel: 10
+    m_iUnitLevel: 100
     m_iLvlModHP: 0
     m_iLvlModAtk: 0
     m_iLvlModSpeed: 0
