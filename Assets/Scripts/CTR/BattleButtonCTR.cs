@@ -3,30 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class BattleButtonCTR : MonoBehaviour
 {
     public GameObject BattleButtons;
     public GameObject SkillButtonPrefab;
     public GameObject g_Canvas;
     public BattleManager g_BattleManager;
-    public GameManager.Action g_eAction;
-    public int g_iIndex;
-    delegate void OnButton(GameManager.Action action, int index);
-
     private void Start()
     {
         BattleButtons = gameObject.transform.parent.gameObject;
         g_Canvas = GameObject.Find("Canvas");
         g_BattleManager = GameObject.Find("BattleManager").transform.GetComponent<BattleManager>();
-        if(g_eAction == GameManager.Action.RUN)
-        {
-            Debug.Log("Afds");
-            OnButton buttonDelegate = new OnButton(g_BattleManager.OnButton);
-
-            // Button 컴포넌트의 onClick 이벤트에 델리게이트 등록
-            gameObject.GetComponent<Button>().onClick.AddListener(() => buttonDelegate(g_eAction, g_iIndex));
-        }
     }
     public void OnClick_Skill()
     {
@@ -38,13 +25,6 @@ public class BattleButtonCTR : MonoBehaviour
             for (int i = 0; i < SkillButton_Temp.transform.childCount - 1; i++)
             {
                 SkillButton_Temp.transform.GetChild(i).GetChild(0).transform.GetComponent<Text>().text = g_BattleManager.playerUnit.m_AttackBehaviors[i].GetSkillName();
-                SkillButton_Temp.transform.GetChild(i).GetChild(1).transform.GetComponent<Text>().text = g_BattleManager.playerUnit.m_iSkillAmounts[i] + "/" + g_BattleManager.playerUnit.m_AttackBehaviors[i].m_iUseAmount;
-                if (g_BattleManager.playerUnit.m_iSkillAmounts[i] == 0)
-                {
-                    SkillButton_Temp.transform.GetChild(i).transform.GetComponent<Button>().enabled = false;
-                    SkillButton_Temp.transform.GetChild(i).GetChild(0).transform.GetComponent<Text>().color = new Color(255,0,0);
-                }
-                    
             }
 
             BattleButtons.SetActive(false);
@@ -68,5 +48,9 @@ public class BattleButtonCTR : MonoBehaviour
     public void OnClick_Inventory()
     {
         Debug.Log("인벤토리 버튼 눌림");
+    }
+    public void OnClick_Run()
+    {
+        Debug.Log("도망 눌림");
     }
 }
