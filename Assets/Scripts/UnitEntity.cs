@@ -42,7 +42,7 @@ public class UnitEntity : MonoBehaviour
         var UnitData = GameManager.Instance.GetUnitData(className);
 
         //�̸��� key������ �޾ƿ� value�� unitdata�� unitentity �ʱ�ȭ
-
+        m_iSkillAmounts = new int[3];
         m_sUnitName = UnitData.m_sUnitName;
         gameObject.name += "-" + m_sUnitName;
 
@@ -58,7 +58,7 @@ public class UnitEntity : MonoBehaviour
         m_iCurrentHP = m_iUnitHP;
         // ��������Ʈ �ʱ�ȭ
         m_spriteUnitImage = UnitData.m_UnitSprite;
-        m_AttackBehaviors = new IAttackBehavior[3];
+        m_AttackBehaviors = new SOAttackBase[3];
 
         //�ε����� �����ϴ°� ���ҰŰ��Ƽ� ��������ϴ�
         m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);

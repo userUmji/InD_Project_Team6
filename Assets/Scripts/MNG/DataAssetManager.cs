@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using Newtonsoft;
+using Newtonsoft.Json;
 
 public class DataAssetManager
 {
@@ -10,6 +13,7 @@ public class DataAssetManager
     //������ �̸��� Key������ ���� �����ϴ� Dictionary
     Dictionary<string, UnitTable.UnitStats> m_UnitDic;
     Dictionary<string, ItemTable.ItemStats> m_ItemDic;
+    Dictionary<string, UnitTable.UnitStats_Save> m_UnitSaveDic;
 
     //Init ���
     public void Init(UnitTable tableFromManager_Unit,ItemTable tableFromManager_Item)
@@ -18,6 +22,7 @@ public class DataAssetManager
         m_AssetItemTable = tableFromManager_Item;
        m_UnitDic = new Dictionary<string, UnitTable.UnitStats>();
         m_ItemDic = new Dictionary<string, ItemTable.ItemStats>();
+        m_UnitSaveDic = new Dictionary<string, UnitTable.UnitStats_Save>();
         if (m_AssetUnitTable == null)
         {
             Debug.LogError("You Missed DataTable in GameManager");

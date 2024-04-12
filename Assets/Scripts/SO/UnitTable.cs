@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 [CreateAssetMenu(fileName = "NewUnitTable", menuName = "Tables/UnitTable")]
 public class UnitTable : ScriptableObject {
-    //Unit�� �������� ���� SO, ���⿡ �Ķ���͸� �߰��ϸ� SOInstance���� �����ϰ� �����Ҽ� �ֽ��ϴ�. 
+    //UnitTable에서 작성할 항목
 
     [System.Serializable]
     public struct UnitStats
