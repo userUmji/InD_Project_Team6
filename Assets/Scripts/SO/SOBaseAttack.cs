@@ -14,8 +14,8 @@ public class SOBaseAttack : SOAttackBase
     public override void ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
     {
         // 계산식 -> ((공격력*스킬배율) - 적방어력)*속성배율
-        int AttackDamage = (int)((Atker.m_iUnitAtk + Atker.m_iUnitAtkMod_Temp + Atker.m_iPermanentAttackMod)  * m_fAttackMag);
-        int finalAttackDamage = AttackDamage - (Defender.m_iUnitDef + Defender.m_iPermanentDefMod + Defender.m_iUnitDefMod_Temp);
+        int AttackDamage = (int)(Atker.m_iUnitAtk * m_fAttackMag);
+        int finalAttackDamage = AttackDamage - Defender.m_iUnitDef;
 
         int isDouble = GameManager.Instance.CompareType(SkillType, Defender.UnitType);
 

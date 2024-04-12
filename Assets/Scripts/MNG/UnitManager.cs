@@ -6,12 +6,10 @@ public class UnitManager
 {
     public GameObject[] g_PlayerUnits = new GameObject[3];
     private GameObject UnitPrefab = Resources.Load<GameObject>("Prefabs/UnitEntity");
-    public Dictionary<string, bool> CapturedUnitDic;
-    public Dictionary<string, int> UnitModDic;
 
-    public UnitEntity GetUnitEntity(int index)
+    public GameObject GetUnitEntity(int index)
     {
-        return g_PlayerUnits[index].transform.GetComponent<UnitEntity>();
+        return g_PlayerUnits[index];
     }
     public void SetPlayerUnitEntityByName(string unitName, int index)
     {
