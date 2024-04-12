@@ -18,10 +18,14 @@ public class GameManager : MonoBehaviour
     public UnitManager m_UnitManager;
     //월드씬의 캔버스
     public GameObject Canvas_WorldScene;
+    //게임의 진행 상황 (초기화, 진행중, 대화중, 전투중, 일지정지)
+    public enum GameState { INIT, INPROGRESS, DIALOG, BATTLE, PAUSE };
     public GameState g_GameState;
+
     public string g_sEnemyBattleUnit;
 
-    public enum GameState { INIT, INPROGRESS, DIALOG, BATTLE, PAUSE };
+    //버튼 액션(추후 이동시킬 예정입니다.
+    public enum Action { CANCLE, ATTACK, ITEM, CHANGE, RUN }
     //싱글턴 구현
     public static GameManager Instance
     {
@@ -66,6 +70,8 @@ public class GameManager : MonoBehaviour
         m_UnitManager.SetPlayerUnitEntityByName("백호", 2);
         g_GameState = GameState.INPROGRESS;
 
+        m_DataManager.SaveFunc_ALL();
+
     }
     //유닛 데이터를 가져오는 기능
     public UnitTable.UnitStats GetUnitData(string className)
@@ -96,7 +102,7 @@ public class GameManager : MonoBehaviour
         MONSTER,
         GHOST
     }
-    public enum Action { CANCLE, ATTACK, ITEM, CHANGE, RUN }
+    
     public int CompareType(Type SkillType, Type UnitType)
     {
         int isDouble = 0;

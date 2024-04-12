@@ -8,17 +8,18 @@ TagManager:
   - Area
   - SkillButtons
   - CreatedButtons
+  - Area
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Cylinder
   - Water
   - UI
   - Player
   - Item
   - object
-  - 
+  - icon
   - 
   - 
   - 

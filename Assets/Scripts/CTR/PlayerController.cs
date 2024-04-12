@@ -54,21 +54,24 @@ public class PlayerController : MonoBehaviour
         // 레이가 어떤 오브젝트와 충돌했는지 확인
         if (hit.collider != null) 
         {
-            m_scanObject = hit.collider.gameObject; // 충돌한 객체를 스캔된 객체로 설정
+            if (hit.collider.tag == "Item")
+            {
+                m_scanObject = hit.collider.gameObject; // 충돌한 객체를 스캔된 객체로 설정
 
-            if (Input.GetKeyDown(KeyCode.F)) // F 키가 눌렸는지 확인
-            {
-                // 충돌한 객체로부터 아이템을 가져와 인벤토리 컨트롤러의 현재 아이템으로 설정
-                Inventory_Controller.g_ICinstance.g_Iget_Item = hit.transform.GetComponent<Drop_Item>().g_Iitem;
-                // 인벤토리 슬롯을 확인
-                Inventory_Controller.g_ICinstance.Check_Slot();
-                // 충돌한 객체를 파괴
-                Destroy(hit.transform.gameObject);
-            }
-            else if (Input.GetButtonDown("Jump") && m_scanObject != null) // 점프(스페이스바) 버튼이 눌렸고 스캔된 객체가 있는지 확인
-            {
-                // _instance 객체의 Act 메서드를 호출하고 스캔된 객체를 전달
-                _instance.Act(m_scanObject);
+                if (Input.GetKeyDown(KeyCode.F)) // F 키가 눌렸는지 확인
+                {
+                    // 충돌한 객체로부터 아이템을 가져와 인벤토리 컨트롤러의 현재 아이템으로 설정
+                    Inventory_Controller.g_ICinstance.Set_GetItem(hit.transform.gameObject);
+                    // 인벤토리 슬롯을 확인
+                    Inventory_Controller.g_ICinstance.Check_Slot();
+                    // 충돌한 객체를 파괴
+                    Destroy(hit.transform.gameObject);
+                }
+                else if (Input.GetButtonDown("Jump") && m_scanObject != null) // 점프(스페이스바) 버튼이 눌렸고 스캔된 객체가 있는지 확인
+                {
+                    // _instance 객체의 Act 메서드를 호출하고 스캔된 객체를 전달
+                    _instance.Act(m_scanObject);
+                }
             }
         }
         else // 충돌체가 없는 경우

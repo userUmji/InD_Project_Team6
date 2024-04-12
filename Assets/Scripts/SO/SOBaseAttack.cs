@@ -4,18 +4,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewBaseAttack", menuName = "AttackBehavior/Base")]
 public class SOBaseAttack : SOAttackBase
 {
-    //À¯´ÖµéÀÇ °øÅëÀûÀÌ°Å³ª °³º°ÀûÀÎ °ø°ÝÀÔ´Ï´Ù.
-    //SO¸¦ »ç¿ëÇØ SOInstance¸¦ »ý¼ºÇÏ°í »ç¿ëÇÕ´Ï´Ù.
-    //m_fAttackMag -> ½ºÅ³ ¹èÀ²
-    //SkillType -> ½ºÅ³ Å¸ÀÔ
-    //ÀÌ ºÎºÐ¿¡¼­ ÇØ´ç °ø°ÝÀÇ ±¸Çö ¹æ½ÄÀ» ¼³Á¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+    //ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+    //SOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ SOInstanceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    //m_fAttackMag -> ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½
+    //SkillType -> ï¿½ï¿½Å³ Å¸ï¿½ï¿½
+    //ï¿½ï¿½ ï¿½ÎºÐ¿ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.
 
 
     public override void ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
     {
-        // °è»ê½Ä -> ((°ø°Ý·Â*½ºÅ³¹èÀ²) - Àû¹æ¾î·Â)*¼Ó¼º¹èÀ²
-        int AttackDamage = (int)(Atker.m_iUnitAtk * m_fAttackMag);
-        int finalAttackDamage = AttackDamage - Defender.m_iUnitDef;
+        // ï¿½ï¿½ï¿½ï¿½ -> ((ï¿½ï¿½ï¿½Ý·ï¿½*ï¿½ï¿½Å³ï¿½ï¿½ï¿½ï¿½) - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)*ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        int AttackDamage = (int)((Atker.m_iUnitAtk + Atker.m_iTempAtkMod + Atker.m_iPermanentAtkMod)  * m_fAttackMag);
+        int finalAttackDamage = AttackDamage - (Defender.m_iUnitDef + Defender.m_iPermanentDefMod + Defender.m_iTempDefMod);
 
         int isDouble = GameManager.Instance.CompareType(SkillType, Defender.UnitType);
 

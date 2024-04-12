@@ -4,82 +4,101 @@ using UnityEngine;
 
 public class UnitEntity : MonoBehaviour
 {
-    SpriteRenderer m_SpriteRenderer { get; set; }
-
+    public enum UnitState { NULL, ICE, FIRE, BERSERK, PARALYSIS};
+    #region ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public string m_sUnitName;
     public int m_iUnitHP;
     public int m_iUnitAtk;
     public int m_iUnitDef;
     public int m_iUnitSpeed;
     public int m_iCurrentHP;
-    public int m_iUnitLevel;
-    public int m_iUnitEXP;
+    public int m_iTempAtkMod;
+    public int m_iTempDefMod;
+    public int m_iTempSpeedMod;
     public int[] m_iSkillAmounts;
+    public UnitState g_UnitState;
+
     public Sprite m_spriteUnitImage;
     public GameManager.Type UnitType;
-    
+    #endregion
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int m_iUnitLevel;
+    public int m_iUnitEXP;
+    public int m_iPermanentAtkMod;
+    public int m_iPermanentDefMod;
+    public int m_iPermanentSpeedMod;
+    public int m_iIntimacy;
+    #endregion
 
-    //ÀÎµ¦½º·Î ½ÇÇàÇÏ´Â°Ô ÆíÇÒ°Å°°¾Æ¼­ ¸¸µé¾ú½À´Ï´Ù
-    public SOAttackBase[] m_AttackBehaviors;
+
+    //ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½Ò°Å°ï¿½ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
+    public SOAttackBase[] m_AttackBehaviors = new SOAttackBase[3];
+
 
    
-    //GameManager¿¡ ÀÖ´Â UnitTable SO¿¡ ÀÖ´Â Á¤º¸¸¦ ±â¹ÝÀ¸·Î ÇØ´ç °ÔÀÓ¿ÀºêÁ§Æ® ÃÊ±âÈ­
+    //GameManagerï¿½ï¿½ ï¿½Ö´ï¿½ UnitTable SOï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­
     public void SetUnit(string className)
     {
         var UnitData = GameManager.Instance.GetUnitData(className);
 
-        //ÀÌ¸§À» key°ªÀ¸·Î ¹Þ¾Æ¿Â valueÀÎ unitdata·Î unitentity ÃÊ±âÈ­
-
+        //ï¿½Ì¸ï¿½ï¿½ï¿½ keyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ valueï¿½ï¿½ unitdataï¿½ï¿½ unitentity ï¿½Ê±ï¿½È­
+        m_iSkillAmounts = new int[3];
         m_sUnitName = UnitData.m_sUnitName;
         gameObject.name += "-" + m_sUnitName;
 
         m_iUnitLevel = UnitData.m_iUnitLevel;
 
-        //À¯´ÖÀÇ ÃÖÁ¾ Ã¼·Â/°ø°Ý·Â/¹æ¾î·ÂÀº ±âº» + (·¹º§´ç´É·ÂÄ¡ * ·¹º§)ÀÔ´Ï´Ù.
-        //UnitDataTableÀÇ Á¤º¸¸¦ Åä´ë·Î °ø°Ý·Â/¹æ¾î·Â ¼³Á¤
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½/ï¿½ï¿½ï¿½Ý·ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» + (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É·ï¿½Ä¡ * ï¿½ï¿½ï¿½ï¿½)ï¿½Ô´Ï´ï¿½.
+        //UnitDataTableï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         m_iUnitHP = UnitData.m_iUnitHP + (UnitData.m_iLvlModHP * m_iUnitLevel);
         m_iUnitAtk = UnitData.m_iUnitAtk + (UnitData.m_iLvlModAtk * m_iUnitLevel);
         m_iUnitDef = UnitData.m_iUnitDef + (UnitData.m_iLvlModDef * m_iUnitLevel);
         m_iUnitSpeed = UnitData.m_iUnitSpeed + (UnitData.m_iLvlModSpeed * m_iUnitLevel);
         UnitType = UnitData.UnitType;
         m_iCurrentHP = m_iUnitHP;
-        // ½ºÇÁ¶óÀÌÆ® ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­
         m_spriteUnitImage = UnitData.m_UnitSprite;
         m_AttackBehaviors = new SOAttackBase[3];
-        m_iSkillAmounts = new int[3];
 
-        //ÀÎµ¦½º·Î ½ÇÇàÇÏ´Â°Ô ÆíÇÒ°Å°°¾Æ¼­ ¸¸µé¾ú½À´Ï´Ù
+        //ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½Ò°Å°ï¿½ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
         m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
         m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
         m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
         for (int i = 0; i < 3; i++)
             m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;
+
+        m_iPermanentDefMod = 0;
+        m_iPermanentAtkMod = 0;
+        m_iPermanentSpeedMod = 0;
+        m_iTempAtkMod = 0;
+        m_iTempDefMod = 0;
+        m_iTempSpeedMod = 0;
+        g_UnitState = UnitState.NULL;
     }
 
-    //ÀÎµ¦½º·Î ½ÇÇàÇÏ´Â°Ô ÆíÇÒ°Å°°¾Æ¼­ ¸¸µé¾ú½À´Ï´Ù
+    //ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½Ò°Å°ï¿½ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
     public void AttackByIndex(UnitEntity Atker, UnitEntity Defender,int index)
     {
         m_AttackBehaviors[index].ExecuteAttack(Atker, Defender);
-        m_iSkillAmounts[index] -= 1;
+                m_iSkillAmounts[index] -= 1;
     }
     public string GetSkillname(UnitEntity UnitEntity,int index)
     {
         return UnitEntity.m_AttackBehaviors[index].GetSkillName();
     }
 
-    // Ã¼·ÂÀ» È¸º¹ÇÏ´Â ¸Þ¼­µå
+    // Ã¼ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void Heal(int amount)
     {
-        // È¸º¹·®À» ÇöÀç Ã¼·Â¿¡ ´õÇÔ
+        // È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         m_iCurrentHP += amount;
 
-        // ¸¸¾à ÇöÀç Ã¼·ÂÀÌ ÃÖ´ë Ã¼·ÂÀ» ÃÊ°úÇÏ¸é
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ï¿½Ï¸ï¿½
         if (m_iCurrentHP > m_iUnitHP)
-            // ÇöÀç Ã¼·ÂÀ» ÃÖ´ë Ã¼·ÂÀ¸·Î ¼³Á¤
+            // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             m_iCurrentHP = m_iUnitHP;
     }
-
-    public void LevelUp()
+        public void LevelUp()
     {
         var UnitData = GameManager.Instance.GetUnitData(m_sUnitName);
         m_iUnitHP += (UnitData.m_iLvlModHP);
@@ -90,5 +109,6 @@ public class UnitEntity : MonoBehaviour
         m_iUnitEXP -= m_iUnitLevel * 10;
         m_iUnitLevel += 1;
     }
+
 
 }

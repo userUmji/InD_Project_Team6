@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 [CreateAssetMenu(fileName = "NewUnitTable", menuName = "Tables/UnitTable")]
 public class UnitTable : ScriptableObject {
-    //UnitÀÇ Á¤º¸µéÀ» ´ãÀº SO, ¿©±â¿¡ ÆÄ¶ó¹ÌÅÍ¸¦ Ãß°¡ÇÏ¸é SOInstance¿¡¼­ ¼öÁ¤ÇÏ°í ÀúÀåÇÒ¼ö ÀÖ½À´Ï´Ù. 
+    //UnitTableì—ì„œ ì‘ì„±í•  í•­ëª©
 
     [System.Serializable]
     public struct UnitStats
@@ -28,6 +28,15 @@ public class UnitTable : ScriptableObject {
         public SOAttackBase m_AttackBehav_1;
         public SOAttackBase m_AttackBehav_2;
         public SOAttackBase m_AttackBehav_3;
+    }
+    public struct UnitStats_Save
+    {
+        public int m_iUnitLevel;
+        public int m_iUnitEXP;
+        public int m_iPermanentAtkMod;
+        public int m_iPermanentDefMod;
+        public int m_iPermanentSpeedMod;
+        public int m_iIntimacy;
     }
 
 
