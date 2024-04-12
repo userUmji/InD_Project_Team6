@@ -70,6 +70,6 @@ MonoBehaviour:
     m_iLvlModAtk: 0
     m_iLvlModSpeed: 0
     m_iLvlModDef: 0
-    m_AttackBehav_1: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-    m_AttackBehav_2: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-    m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}

@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
-    // ÇÃ·¹ÀÌ¾î¿Í ÀûÀÇ ÇÁ¸®ÆÕ
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public GameObject[] g_PlayerUnits;
     public GameObject g_EnemyUnit;
     public GameObject g_BattleButtons;
-    // ÀüÅõ »óÅÂ¸¦ Á¤ÀÇÇÏ´Â ¿­°ÅÇü
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, ENEMYTURN, RESULT, END }
 
     private Coroutine BattleCoroutine;
@@ -19,48 +19,47 @@ public class BattleManager : MonoBehaviour
     private GameManager.Action m_ePlayerAction;
     private int m_iPlayerActionIndex;
 
-    // ÇöÀç ÇÃ·¹ÀÌ¾î¿Í ÀûÀÇ À¯´ÖÀÇ ½ºÅ©¸³Æ®
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®
     public UnitEntity playerUnit;
     UnitEntity enemyUnit;
 
-    // ÀüÅõ Áß ¹ß»ýÇÏ´Â ´ëÈ­¸¦ Ç¥½ÃÇÏ´Â UI ÅØ½ºÆ®
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½È­ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½Ï´ï¿½ UI ï¿½Ø½ï¿½Æ®
     public Text dialogueText;
 
-    // ÇÃ·¹ÀÌ¾î¿Í ÀûÀÇ HUD(Head-Up Display)¸¦ °ü¸®ÇÏ´Â °´Ã¼
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ HUD(Head-Up Display)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ã¼
     public BattleHUDCTR playerHUD;
     public BattleHUDCTR enemyHUD;
 
-    // ÀüÅõ »óÅÂ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     public BattleState state;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.g_sEnemyBattleUnit = "´õ¹Ì";
+        GameManager.Instance.g_sEnemyBattleUnit = "ï¿½ï¿½ï¿½ï¿½";
         BattleInit();
     }
-    #region ÀüÅõ °ü·Ã ¸Þ¼­µå
+    #region ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     void BattleInit()
     {
-        //Àû À¯´Ö ÃÊ±âÈ­
-        Debug.Log(GameManager.Instance.g_sEnemyBattleUnit);
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit);
         state = BattleState.START;
         BattleCoroutine = StartCoroutine(SetupBattle());
     }
-    // ÇÃ·¹ÀÌ¾î ÅÏ ½ÃÀÛ Ã³¸®   ----------------------------------------------------------------------------------------------------------------------
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½   ----------------------------------------------------------------------------------------------------------------------
     private void PlayerAction()
     {
-        //state º¯°æ
+        //state ï¿½ï¿½ï¿½ï¿½
         state = BattleState.ACTION;
-        dialogueText.text = playerUnit.m_sUnitName + "´Â ¾î¶»°Ô ÇÒ °Í ÀÎ°¡..";
+        dialogueText.text = playerUnit.m_sUnitName + "ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Î°ï¿½..";
     }
-    #region ÇÃ·¹ÀÌ¾î Action Ã³¸®
+    #region ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Action Ã³ï¿½ï¿½
 
     private void Process()
     {
-        // ¹öÆ°¿¡¼­ ¼³Á¤ÇÑ ÇÃ·¹ÀÌ¾î ¿¢¼Ç¿¡ µû¶ó ÇÁ·Î¼¼½º¸¦ ÁøÇà
+        // ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (m_ePlayerAction == GameManager.Action.ATTACK)
             AttackProcess();
         else if (m_ePlayerAction == GameManager.Action.ITEM)
@@ -74,9 +73,9 @@ public class BattleManager : MonoBehaviour
     {
         if (state != BattleState.ENEMYTURN && state != BattleState.PLAYERTURN)
         {
-            if (playerUnit.m_iUnitSpeed > enemyUnit.m_iUnitSpeed)
+            if (playerUnit.m_iUnitSpeed + playerUnit.m_iTempSpeedMod + playerUnit.m_iPermanentSpeedMod > enemyUnit.m_iUnitSpeed)
                 BattleCoroutine = StartCoroutine(PlayerTurn_Attack());
-            else if (playerUnit.m_iUnitSpeed < enemyUnit.m_iUnitSpeed)
+            else if (playerUnit.m_iUnitSpeed + playerUnit.m_iTempSpeedMod + playerUnit.m_iPermanentSpeedMod < enemyUnit.m_iUnitSpeed)
                 BattleCoroutine = StartCoroutine(EnemyTurn());
             else
             {
@@ -114,58 +113,69 @@ public class BattleManager : MonoBehaviour
     }
 
     #endregion
-    // ÀüÅõ ½Â¸® Ã³¸®
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Â¸ï¿½ Ã³ï¿½ï¿½
 
     void AfterWin()
     {
         BattleCoroutine = StartCoroutine(PlayerWin());
     }
-    //ÀüÅõ ÆÐ¹è Ã³¸®
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¹ï¿½ Ã³ï¿½ï¿½
     void AfterLost()
     {
         state = BattleState.END;
 
-        dialogueText.text = "ÆÐ¹èÇß´Ù..";
+        dialogueText.text = "ï¿½Ð¹ï¿½ï¿½ß´ï¿½..";
         SceneManager.UnloadSceneAsync("BattleScene");
         GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
     }
 
     #endregion
 
-    #region ÀüÅõ °ü·Ã ÄÚ·çÆ¾
-    // ÀüÅõ ¼³Á¤À» Ã³¸®ÇÏ´Â ÄÚ·çÆ¾
+    #region ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾
     IEnumerator SetupBattle()
     {
-        //¾Æ±º À¯´Ö ÃÊ±âÈ­
+        //ï¿½Æ±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         playerUnit = GameManager.Instance.m_UnitManager.g_PlayerUnits[0].transform.GetComponent<UnitEntity>();
 
         playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
-        //Àû À¯´Ö ÃÊ±âÈ­
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
         enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
 
 
-        // ´ëÈ­ ÅØ½ºÆ®¿¡ ÀûÀÇ ÀÌ¸§À» Ç¥½Ã
-        dialogueText.text = "¾ß»ýÀÇ " + enemyUnit.m_sUnitName + " ÀÌ(°¡) ³ªÅ¸³µ´Ù...";
+        // ï¿½ï¿½È­ ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+        dialogueText.text = "ï¿½ß»ï¿½ï¿½ï¿½ " + enemyUnit.m_sUnitName + " ï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½...";
 
-        // ÇÃ·¹ÀÌ¾î¿Í ÀûÀÇ HUD¸¦ ¾÷µ¥ÀÌÆ®
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ HUDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
-        // ÀüÅõ ¼³Á¤ ÈÄ Àá½Ã ´ë±â
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(2f);
 
-        // ÇÃ·¹ÀÌ¾î ÅÏÀ¸·Î »óÅÂ ÀüÈ¯
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         PlayerAction();
     }
-    #region ÇÃ·¹ÀÌ¾î ¾×¼Ç Ã³¸®
+    #region ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½×¼ï¿½ Ã³ï¿½ï¿½
     IEnumerator PlayerTurn_Attack()
     {
         state = BattleState.PLAYERTURN;
-        //°ø°Ý ½ÇÇà
-        playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
-        enemyHUD.SetHP(enemyUnit.m_iCurrentHP);
-        dialogueText.text = playerUnit.m_sUnitName + "ÀÇ " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " °ø°Ý!!";
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (playerUnit.g_UnitState == UnitEntity.UnitState.BERSERK)
+        {
+            dialogueText.text = playerUnit.m_sUnitName + "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½!";
+            yield return new WaitForSeconds(1f);
+            playerUnit.AttackByIndex(playerUnit, enemyUnit, Random.Range(0,playerUnit.m_AttackBehaviors.Length));
+            enemyHUD.SetHUD(enemyUnit);
+            dialogueText.text = playerUnit.m_sUnitName + "ï¿½ï¿½ " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " ï¿½ï¿½ï¿½ï¿½!!";
+        }
+        else
+        {
+            playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
+            enemyHUD.SetHUD(enemyUnit);
+            dialogueText.text = playerUnit.m_sUnitName + "ï¿½ï¿½ " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " ï¿½ï¿½ï¿½ï¿½!!";
+        }
         yield return new WaitForSeconds(1f);
         if (enemyUnit.m_iCurrentHP <= 0 || playerUnit.m_iCurrentHP <= 0)
             BattleCoroutine = StartCoroutine(Result());
@@ -181,9 +191,9 @@ public class BattleManager : MonoBehaviour
 
         playerUnit.Heal(5);
 
-        // ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀ» HUD¿¡ ¾÷µ¥ÀÌÆ®ÇÏ°í ´ëÈ­ ÅØ½ºÆ® Ç¥½Ã
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ HUDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Ï°ï¿½ ï¿½ï¿½È­ ï¿½Ø½ï¿½Æ® Ç¥ï¿½ï¿½
         playerHUD.SetHP(playerUnit.m_iCurrentHP);
-        dialogueText.text = "Ã¼·ÂÀ» 5 È¸º¹Çß´Ù!";
+        dialogueText.text = "Ã¼ï¿½ï¿½ï¿½ï¿½ 5 È¸ï¿½ï¿½ï¿½ß´ï¿½!";
 
 
         yield return new WaitForSeconds(2f);
@@ -195,38 +205,64 @@ public class BattleManager : MonoBehaviour
     {
         state = BattleState.PLAYERTURN;
 
-        //unitManager¿¡ ÀÖ´Â À¯´ÖÀ¸·Î ±³Ã¼
+        //unitManagerï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
         GameObject newPlayerGO = GameManager.Instance.m_UnitManager.g_PlayerUnits[m_iPlayerActionIndex];
 
-        //playerUnit ÁöÁ¤
+        //playerUnit ï¿½ï¿½ï¿½ï¿½
         playerUnit = newPlayerGO.GetComponent<UnitEntity>();
-        //UI ÃÊ±âÈ­
+        //UI ï¿½Ê±ï¿½È­
         playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
         playerHUD.SetHUD(playerUnit);
         yield return new WaitForSeconds(2f);
 
-        Process();
         isPlayed = true;
+        Process();
+    }
+    IEnumerator PlayerTurn_Run()
+    {
+        state = BattleState.PLAYERTURN;
+        int runChance;
+        if (playerUnit.m_iUnitLevel >= enemyUnit.m_iUnitLevel)
+            runChance = 70;
+        else
+            runChance = 30;
+
+        int randomChance = Random.Range(1, 101);
+        Debug.Log(randomChance);
+        if (runChance < randomChance)
+        {
+            dialogueText.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Æ´ï¿½";
+            yield return new WaitForSeconds(2f);
+            SceneManager.UnloadSceneAsync("BattleScene");
+            GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
+        }
+        else
+        {
+            dialogueText.text = "ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ß´ï¿½!";
+            yield return new WaitForSeconds(2f);
+            isPlayed = true;
+            Process();
+        }
     }
     #endregion
-    // ÀûÀÇ ÅÏÀ» Ã³¸®ÇÏ´Â ÄÚ·çÆ¾
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾
     IEnumerator EnemyTurn()
     {
-        // »óÅÂ ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         state = BattleState.ENEMYTURN;
-        // ÀûÀÌ °ø°ÝÇÏ°í ´ëÈ­ ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½È­ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
         int randomAttackIndex = Random.Range(0, 2);
         enemyUnit.AttackByIndex(enemyUnit, playerUnit, randomAttackIndex);
-        //?ìŠ¤??ì²˜ë¦¬
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         string AttackName = enemyUnit.GetSkillname(enemyUnit, randomAttackIndex);
-        playerHUD.SetHP(playerUnit.m_iCurrentHP);
-        dialogueText.text = enemyUnit.m_sUnitName + " ÀÇ " + AttackName + "°ø°Ý!";
+        playerHUD.SetHUD(playerUnit);
+        dialogueText.text = enemyUnit.m_sUnitName + " ï¿½ï¿½ " + AttackName + "ï¿½ï¿½ï¿½ï¿½!";
 
 
-        // ÇÃ·¹ÀÌ¾î°¡ µ¥¹ÌÁö¸¦ ¹Þ°í Ã¼·Â ¾÷µ¥ÀÌÆ®
+        // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ°ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         yield return new WaitForSeconds(1f);
-        //Ã¼·ÂÀÌ 0º¸´Ù ³·´Ù¸é Result·Î
+        //Ã¼ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ Resultï¿½ï¿½
         if (enemyUnit.m_iCurrentHP <= 0 || playerUnit.m_iCurrentHP <= 0)
             BattleCoroutine = StartCoroutine(Result());
         else if (!isPlayed)
@@ -236,11 +272,11 @@ public class BattleManager : MonoBehaviour
         isPlayed = true;
 
     }
-    // ÇÃ·¹ÀÌ¾î È¸º¹À» Ã³¸®ÇÏ´Â ÄÚ·çÆ¾
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾
 
     IEnumerator Result()
     {
-        dialogueText.text = "ÅÏ ½ÇÇà ¿Ï·á";
+        dialogueText.text = "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½";
     
         yield return new WaitForSeconds(1f);
         if (playerUnit.m_iCurrentHP <= 0)
@@ -258,7 +294,7 @@ public class BattleManager : MonoBehaviour
     IEnumerator PlayerWin()
     {
         state = BattleState.END;
-        dialogueText.text = "½Â¸®Çß´Ù!";
+        dialogueText.text = "ï¿½Â¸ï¿½ï¿½ß´ï¿½!";
         yield return new WaitForSeconds(1f);
         foreach(GameObject entity in GameManager.Instance.m_UnitManager.g_PlayerUnits)
         {
@@ -270,14 +306,15 @@ public class BattleManager : MonoBehaviour
                 mod = 0.25f;
             int gainExpTemp = (int)(enemyUnit.m_iUnitLevel * 3 * mod);
             unitEntity.m_iUnitEXP += gainExpTemp;
-            dialogueText.text = unitEntity.m_sUnitName + "´Â " + gainExpTemp + "ÀÇ °æÇèÄ¡¸¦ ¾ò¾ú´Ù.";
+            dialogueText.text = unitEntity.m_sUnitName + "ï¿½ï¿½ " + gainExpTemp + "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.";
             yield return new WaitForSeconds(1f);
             while(unitEntity.m_iUnitEXP >= unitEntity.m_iUnitLevel * 10)
             {
                 unitEntity.LevelUp();
-                dialogueText.text = unitEntity.m_sUnitName + "´Â" + unitEntity.m_iUnitLevel +"·¹º§·Î ·¹º§¾÷Çß´Ù!";
+                dialogueText.text = unitEntity.m_sUnitName + "ï¿½ï¿½" + unitEntity.m_iUnitLevel +"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½!";
+                playerHUD.levelText.text = "Lvl " + unitEntity.m_iUnitLevel ;
                 yield return new WaitForSeconds(1f);
-                dialogueText.text = unitEntity.m_sUnitName + "´Â °­ÇØÁ®¼­ ±âºÐÀÌ ÁÁÀº °Í °°´Ù!";
+                dialogueText.text = unitEntity.m_sUnitName + "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!";
                 yield return new WaitForSeconds(1f);
             }
         }
@@ -288,17 +325,17 @@ public class BattleManager : MonoBehaviour
 
     #endregion
 
-    #region ¹öÆ° Å¬¸¯ ÀÌº¥Æ®
-    // °ø°Ý ¹öÆ° Å¬¸¯ ½Ã È£ÃâµÇ´Â ¸Þ¼­µå
+    #region ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½Ìºï¿½Æ®
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void OnButton(GameManager.Action action, int index)
     {
-        // ÇÃ·¹ÀÌ¾î ÅÏÀÌ ¾Æ´Ñ °æ¿ì¿¡´Â ¾Æ¹« ÀÛ¾÷µµ ¼öÇàÇÏÁö ¾ÊÀ½
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½Æ¹ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (state != BattleState.ACTION)
             return;
 
-        //¹èÆ² UI Å´
+        //ï¿½ï¿½Æ² UI Å´
         g_BattleButtons.SetActive(true);
-        //»ý¼ºÇß´ø ¹öÆ° Á¦°Å
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
         GameObject[] destroy = GameObject.FindGameObjectsWithTag("CreatedButtons");
         for (int i = 0; i < destroy.Length; i++)
             Destroy(destroy[i]);

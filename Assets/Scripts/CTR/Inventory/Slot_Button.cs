@@ -10,7 +10,7 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
     public static Slot_Button g_SBinstance;
     public Image g_ishow_Item_Image; // 마우스를 따라다닐 이미지
     [SerializeField] Slot m_Sslot;
-    [SerializeField] Item m_ISr_S;
+    [SerializeField] ItemEntity m_ISr_S;
 
     private int m_inum;
 
@@ -48,7 +48,7 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
             }
             else if (Inventory_Controller.g_ICinstance.g_Iclick_Item != null && m_Sslot.g_Ihave_item != null) // 아이템을 선택한 상태에서 비어있지 않은 슬롯을 클릭했을 때
             {
-                Item temp = Inventory_Controller.g_ICinstance.g_Iclick_Item; // 클릭했던 아이템 정보를 임시 변수에 할당
+                ItemEntity temp = Inventory_Controller.g_ICinstance.g_Iclick_Item; // 클릭했던 아이템 정보를 임시 변수에 할당
                 Inventory_Controller.g_ICinstance.g_Iclick_Item = m_Sslot.g_Ihave_item; // 클릭했던 아이템 정보에 현재 클릭한 아이템 정보 할당
                 m_Sslot.g_Ihave_item = temp; // 현재 클릭한 슬롯에 클릭했던 아이템 정보를 가지고 있는 임시변수값 할당
 
@@ -61,8 +61,12 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
             }
         }    
     }
+    public void ExecuteItemEffect()
+    {
 
-    public void Show_Image(Item Clicked_Obj) // 인벤토리에 아이템을 눌렀을때 그 이미지가 마우스를 따라다니게 해줌
+    }
+
+    public void Show_Image(ItemEntity Clicked_Obj) // 인벤토리에 아이템을 눌렀을때 그 이미지가 마우스를 따라다니게 해줌
     {
         if (Clicked_Obj ==null) // 이미지를 클릭하지 않았다면
         {
@@ -77,7 +81,7 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
 
     public void Mouse_Follow(Image show_Image) // 마우스 따라다니는 오브젝트
     {
-        show_Image.sprite = Inventory_Controller.g_ICinstance.g_Iclick_Item.item_Image; // 보여줄 이미지에 선택한 오브젝트 이미지 할당
+        show_Image.sprite = Inventory_Controller.g_ICinstance.g_Iclick_Item.m_ItemSprite; // 보여줄 이미지에 선택한 오브젝트 이미지 할당
 
         Vector3 mouseScreenPosition = Input.mousePosition;
         RectTransform canvasRectTransform = canvas.GetComponent<RectTransform>();
