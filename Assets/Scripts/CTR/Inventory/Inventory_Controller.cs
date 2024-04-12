@@ -22,8 +22,6 @@ public class Inventory_Controller : MonoBehaviour
     public Item g_Iclick_Item; // 클릭한 아이템s
     public int g_iclick_Item_Count; // 클릭한 아이템 갯수
 
-    public TextMeshProUGUI g_tmoney_View; // 현재 소지한 금액 UI
-    public int g_imoney; // 소지 금액
 
 
     // Start is called before the first frame update
@@ -31,22 +29,21 @@ public class Inventory_Controller : MonoBehaviour
     private void Awake()
     {
         g_ICinstance = this;
+        //print(g_ginventory.transform.childCount - 1);
+        
+    }
+    private void Start()
+    {
+        g_Sslot = new Slot[g_ginventory.transform.childCount];
         for (int i = 0; i < g_ginventory.transform.childCount; i++)  // 유니티 창에서 슬롯을 넣어주는게 아니고 스크립트에서 넣어주는거
         {
             g_Sslot[i] = g_ginventory.transform.GetChild(i).GetComponent<Slot>(); // 유니티상에서 인벤토리라는 오브젝트 안에 슬롯들이 있기때문에 그 슬롯들을 가져와서 배열에 넣어줌
         }
     }
-    private void Start()
-    {
-       
-        //g_gin_V.SetActive(false);
-    }
     // Update is called once per frame
     void Update()
     {
         View_Inventory();
-
-        g_tmoney_View.text = g_imoney.ToString();
     }
 
     public void Check_Slot(int num = 1) // 획득한 아이템을 인벤토리에 넣어주는 함수

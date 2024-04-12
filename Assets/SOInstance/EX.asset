@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28d81aa7c74a6448a1b50cb9c5c7754, type: 3}
   m_Name: EX
   m_EditorClassIdentifier: 
-  item_Image: {fileID: -1966114836897130506, guid: 22091185919991047a767e94c6c7f13f, type: 3}
+  item_Image: {fileID: 21300000, guid: e3ab1f908b40d184d8e89d382abc19f9, type: 3}
   item_Name: "\uC608\uC2DC"
