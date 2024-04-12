@@ -10,7 +10,7 @@ public class Slot : MonoBehaviour
     public static Slot g_SInstance;
     public Image g_iitem_Image;
     public Sprite g_snull_item_Image;
-    public Item g_Ihave_item;
+    public ItemEntity g_Ihave_item;
     public TextMeshProUGUI g_titem_Number_UI;
 
     public int item_Number; // 획득한 아이템 갯수
@@ -46,7 +46,7 @@ public class Slot : MonoBehaviour
             }
             else
             {
-                g_iitem_Image.sprite = g_Ihave_item.item_Image;
+                g_iitem_Image.sprite = g_Ihave_item.m_ItemSprite;
             }
         }
         else
@@ -55,7 +55,7 @@ public class Slot : MonoBehaviour
             item_Number = 0;
         }
     }
-    public void Input_Item(Item item, int num = 1) // 아이템 넣기
+    public void Input_Item(ItemEntity item, int num = 1) // 아이템 넣기
     {
         if (item != null) // 받아온 아이템이 있다면
         {
@@ -68,7 +68,7 @@ public class Slot : MonoBehaviour
     {
         if (g_Ihave_item != null)
         {
-            g_iitem_Image.sprite = g_Ihave_item.item_Image ; // 아이템 이미지 할당
+            g_iitem_Image.sprite = g_Ihave_item.m_ItemSprite; // 아이템 이미지 할당
         }
         else
         {

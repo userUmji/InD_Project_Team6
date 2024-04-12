@@ -13,13 +13,13 @@ public class Inventory_Controller : MonoBehaviour
     public GameObject g_ginventory;
     public static Inventory_Controller g_ICinstance;
     public Slot[] g_Sslot; // 인벤토리 안에 있는 각 슬롯들
-    public Item g_Iget_Item; // 획득한 아이템
+    public ItemEntity g_Iget_Item; // 획득한 아이템
 
     public Slot g_Sselect_Item; // 현재 인벤토리에서 선택한 오브젝트 정보
     //public Miri_Slot select_Item_Miri; // 미리보기 인벤토리에서 선택한 오브젝트 정보
     public GameObject g_gselect_Item_Ob;
 
-    public Item g_Iclick_Item; // 클릭한 아이템s
+    public ItemEntity g_Iclick_Item; // 클릭한 아이템s
     public int g_iclick_Item_Count; // 클릭한 아이템 갯수
 
     public TextMeshProUGUI g_tmoney_View; // 현재 소지한 금액 UI
@@ -51,12 +51,12 @@ public class Inventory_Controller : MonoBehaviour
 
     public void Check_Slot(int num = 1) // 획득한 아이템을 인벤토리에 넣어주는 함수
     {
-        Item item = null; // 획득한 아이템이 인벤토리에 있는지 없는지를 판단해주는 변수
+        ItemEntity item = null; // 획득한 아이템이 인벤토리에 있는지 없는지를 판단해주는 변수
         foreach (Slot slot_B in g_Sslot)
         {
             if (slot_B != null && slot_B.g_Ihave_item != null)  // 인벤토리가 비어있지 않다면
             {
-                if (slot_B.g_Ihave_item.item_Name == g_Iget_Item.item_Name) // 현재 가지고 있는 아이템과 인벤토리에 있는 아이템이 같다면
+                if (slot_B.g_Ihave_item.m_sItemName == g_Iget_Item.m_sItemName) // 현재 가지고 있는 아이템과 인벤토리에 있는 아이템이 같다면
                 {
                     item = g_Iget_Item; // 변수에 현재 가지고 있는 아이템을 넣어줌
                     break;
@@ -66,7 +66,7 @@ public class Inventory_Controller : MonoBehaviour
         Put_Invent(item, num);
     }
 
-    public void Put_Invent(Item item, int num = 1)
+    public void Put_Invent(ItemEntity item, int num = 1)
     {
         for (int i = 0; i <= g_Sslot.Length; i++)
         {
@@ -86,7 +86,7 @@ public class Inventory_Controller : MonoBehaviour
             {
                 if (g_Sslot[i].g_Ihave_item != null) // 인벤토리가 비어있지 않다면
                 {
-                    if (g_Sslot[i].g_Ihave_item.item_Name == item.item_Name) // 인벤토리에 현재 가지고 있는 아이템이 있다면
+                    if (g_Sslot[i].g_Ihave_item.m_sItemName == item.m_sItemName) // 인벤토리에 현재 가지고 있는 아이템이 있다면
                     {
                         g_Sslot[i].Input_Item(g_Iget_Item, num); // 슬롯에 아이템을 넣어줌
                         break;
@@ -124,5 +124,13 @@ public class Inventory_Controller : MonoBehaviour
                 g_gin_V.transform.localScale = new Vector3(1, 1, 1);
             }
         }
+    }
+
+    public void Set_GetItem(GameObject itemEntity)
+    {
+        GameObject entity = Instantiate(itemEntity,GameObject.Find("Inventory_GOs").transform);
+        Destroy(entity.transform.GetComponent<SpriteRenderer>());
+        Destroy(entity.transform.GetComponent<Collider2D>());
+        g_Iget_Item = entity.GetComponent<ItemEntity>();
     }
 }
