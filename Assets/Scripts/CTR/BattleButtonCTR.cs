@@ -25,7 +25,6 @@ public class BattleButtonCTR : MonoBehaviour
             for (int i = 0; i < SkillButton_Temp.transform.childCount - 1; i++)
             {
                 SkillButton_Temp.transform.GetChild(i).GetChild(0).transform.GetComponent<Text>().text = g_BattleManager.playerUnit.m_AttackBehaviors[i].GetSkillName();
-                SkillButton_Temp.transform.GetChild(i).GetChild(1).transform.GetComponent<Text>().text = g_BattleManager.playerUnit.m_iSkillAmounts[i] + "/" + g_BattleManager.playerUnit.m_AttackBehaviors[i].m_iUseAmount;
             }
 
             BattleButtons.SetActive(false);

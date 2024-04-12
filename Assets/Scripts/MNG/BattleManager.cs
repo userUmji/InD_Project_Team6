@@ -117,7 +117,10 @@ public class BattleManager : MonoBehaviour
 
     void AfterWin()
     {
-        BattleCoroutine = StartCoroutine(PlayerWin());
+        state = BattleState.END;
+        dialogueText.text = "�¸��ߴ�!";
+        SceneManager.UnloadSceneAsync("BattleScene");
+        GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
     }
     //���� �й� ó��
     void AfterLost()

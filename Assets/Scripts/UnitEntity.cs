@@ -32,7 +32,8 @@ public class UnitEntity : MonoBehaviour
 
 
     //�ε����� �����ϴ°� ���ҰŰ��Ƽ� ��������ϴ�
-    public SOAttackBase[] m_AttackBehaviors;
+    public SOAttackBase[] m_AttackBehaviors = new SOAttackBase[3];
+
 
    
     //GameManager�� �ִ� UnitTable SO�� �ִ� ������ ������� �ش� ���ӿ�����Ʈ �ʱ�ȭ
@@ -57,8 +58,7 @@ public class UnitEntity : MonoBehaviour
         m_iCurrentHP = m_iUnitHP;
         // ��������Ʈ �ʱ�ȭ
         m_spriteUnitImage = UnitData.m_UnitSprite;
-        m_AttackBehaviors = new SOAttackBase[3];
-        m_iSkillAmounts = new int[3];
+        m_AttackBehaviors = new IAttackBehavior[3];
 
         //�ε����� �����ϴ°� ���ҰŰ��Ƽ� ��������ϴ�
         m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
@@ -80,7 +80,7 @@ public class UnitEntity : MonoBehaviour
     public void AttackByIndex(UnitEntity Atker, UnitEntity Defender,int index)
     {
         m_AttackBehaviors[index].ExecuteAttack(Atker, Defender);
-        m_iSkillAmounts[index] -= 1;
+                m_iSkillAmounts[index] -= 1;
     }
     public string GetSkillname(UnitEntity UnitEntity,int index)
     {
@@ -98,8 +98,7 @@ public class UnitEntity : MonoBehaviour
             // ���� ü���� �ִ� ü������ ����
             m_iCurrentHP = m_iUnitHP;
     }
-
-    public void LevelUp()
+        public void LevelUp()
     {
         var UnitData = GameManager.Instance.GetUnitData(m_sUnitName);
         m_iUnitHP += (UnitData.m_iLvlModHP);
@@ -110,5 +109,6 @@ public class UnitEntity : MonoBehaviour
         m_iUnitEXP -= m_iUnitLevel * 10;
         m_iUnitLevel += 1;
     }
+
 
 }
