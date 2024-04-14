@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class ItemEntity : MonoBehaviour
 {
+
     public Sprite m_ItemSprite;
     public string m_sItemName;
+    public string m_sItemDescription; // 임시로 생성한 설명 변수(엄지승)
     public IItemBehavior ExecuteEffect;
     public UnitEntity allyUnit;
     public SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-
         SetItemInfo();
-
-
     }
+
     public void SetItemInfo()
     {
         spriteRenderer = gameObject.transform.GetComponent<SpriteRenderer>();

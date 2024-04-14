@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class Inventory_Controller : MonoBehaviour
@@ -13,6 +14,7 @@ public class Inventory_Controller : MonoBehaviour
     public GameObject g_ginventory;
     public static Inventory_Controller g_ICinstance;
     public Slot[] g_Sslot; // 인벤토리 안에 있는 각 슬롯들
+    public Slot g_Sclick_Slot; // 버릴 슬롯
     public ItemEntity g_Iget_Item; // 획득한 아이템
 
     public Slot g_Sselect_Item; // 현재 인벤토리에서 선택한 오브젝트 정보
@@ -22,33 +24,64 @@ public class Inventory_Controller : MonoBehaviour
     public ItemEntity g_Iclick_Item; // 클릭한 아이템s
     public int g_iclick_Item_Count; // 클릭한 아이템 갯수
 
-    public TextMeshProUGUI g_tmoney_View; // 현재 소지한 금액 UI
-    public int g_imoney; // 소지 금액
+    public bool invent_On_Off_Check; // 인벤토리가 켜져있는지 꺼져있는지 확인해주는 변수
+    public bool lock_UI; // 특수한 UI가 켜져있을때 다른것 건들지 못하게 함
+    public GameObject discard_value_View; // 버릴 개수 입력 창 띄우기
 
-
+    [Header("인벤토리 오른쪽 표시 UI")]
+    public Image Img_View;
+    public TextMeshProUGUI name_View;
+    public TextMeshProUGUI Des_View;
     // Start is called before the first frame update
 
     private void Awake()
     {
         g_ICinstance = this;
+        
+    }
+    private void Start()
+    {
+        lock_UI = true;
+        g_Sslot = new Slot[g_ginventory.transform.childCount];
         for (int i = 0; i < g_ginventory.transform.childCount; i++)  // 유니티 창에서 슬롯을 넣어주는게 아니고 스크립트에서 넣어주는거
         {
             g_Sslot[i] = g_ginventory.transform.GetChild(i).GetComponent<Slot>(); // 유니티상에서 인벤토리라는 오브젝트 안에 슬롯들이 있기때문에 그 슬롯들을 가져와서 배열에 넣어줌
         }
     }
-    private void Start()
-    {
-       
-        //g_gin_V.SetActive(false);
-    }
     // Update is called once per frame
     void Update()
     {
         View_Inventory();
-
-        g_tmoney_View.text = g_imoney.ToString();
+        if (invent_On_Off_Check)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                if (discard_value_View.gameObject.activeSelf == false)
+                {
+                    discard_value_View.gameObject.SetActive(true);
+                    lock_UI = false;
+                }
+                else if(discard_value_View.gameObject.activeSelf == true)
+                {
+                    discard_value_View.gameObject.SetActive(false);
+                    lock_UI = true;
+                }
+            }
+        }
     }
 
+/*    public void Throw_Item() // 인벤토리에서 클릭한 아이템 삭제
+    {
+        if (g_ICinstance.g_Iclick_Item != null)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+
+            }
+            g_ICinstance.g_Iclick_Item = null;
+            g_ICinstance.g_iclick_Item_Count = 0;
+        }
+    }*/
     public void Check_Slot(int num = 1) // 획득한 아이템을 인벤토리에 넣어주는 함수
     {
         ItemEntity item = null; // 획득한 아이템이 인벤토리에 있는지 없는지를 판단해주는 변수
@@ -113,14 +146,19 @@ public class Inventory_Controller : MonoBehaviour
                 {
                     g_Sslot[i].GetComponent<Slot_Button>().Off_Inven();
                 }
+                
                 g_gin_V.transform.localScale = new Vector3(0, 0, 1); // 꺼줌
+                invent_On_Off_Check = false;
             }
         }
         else if (g_gin_V.transform.localScale == new Vector3(0, 0, 1))
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                //g_gin_V.gameObject.SetActive(true); // 켜줌
+                Img_View.gameObject.SetActive(false);
+                name_View.text = " ";
+                Des_View.text = " ";
+                invent_On_Off_Check = true;
                 g_gin_V.transform.localScale = new Vector3(1, 1, 1);
             }
         }
