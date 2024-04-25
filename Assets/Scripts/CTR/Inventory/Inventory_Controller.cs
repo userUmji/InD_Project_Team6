@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class Inventory_Controller : MonoBehaviour
 {
@@ -138,6 +138,7 @@ public class Inventory_Controller : MonoBehaviour
     }
     public void View_Inventory() // 인벤토리 온 오프 함수
     {
+
         if (g_gin_V.transform.localScale == new Vector3(1, 1, 1)) // 인벤토리가 켜있으면
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
