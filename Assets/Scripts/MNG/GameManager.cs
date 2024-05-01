@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
         g_sEnemyBattleUnit = enemyBattleUnit;
         Canvas_WorldScene.SetActive(false);
         SceneOper.allowSceneActivation = true;
+        //AudioManager._instance.SwitchBgm(1); 배틀씬 로드시 BGM 변경
     }
 
 

@@ -1,51 +1,59 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    // °ÔÀÓ ÀÏ½Ã Á¤Áö UI¸¦ ÂüÁ¶ÇÒ GameObject º¯¼ö
+    // ê²Œì„ ì¼ì‹œ ì •ì§€ UIë¥¼ ì°¸ì¡°í•  GameObject ë³€ìˆ˜
     public GameObject g_PauseUI;
 
-    // °ÔÀÓÀÌ ÀÏ½Ã Á¤ÁöµÇ¾ú´ÂÁö¸¦ ³ªÅ¸³»´Â ºÒ¸®¾ğ º¯¼ö
+    // ê²Œì„ì´ ì¼ì‹œ ì •ì§€ë˜ì—ˆëŠ”ì§€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë¶ˆë¦¬ì–¸ ë³€ìˆ˜
     private bool m_paused = false;
 
-    // Start ÇÔ¼ö´Â Ã³À½ ÇÑ ¹ø È£ÃâµË´Ï´Ù.
+    // Start í•¨ìˆ˜ëŠ” ì²˜ìŒ í•œ ë²ˆ í˜¸ì¶œë©ë‹ˆë‹¤.
     void Start()
     {
-        // ½ÃÀÛ ½Ã ÀÏ½Ã Á¤Áö UI¸¦ ºñÈ°¼ºÈ­ÇÕ´Ï´Ù.
+        // ì‹œì‘ ì‹œ ì¼ì‹œ ì •ì§€ UIë¥¼ ë¹„í™œì„±í™”í•©ë‹ˆë‹¤.
         g_PauseUI.SetActive(false);
     }
 
-    // Update ÇÔ¼ö´Â ¸Å ÇÁ·¹ÀÓ¸¶´Ù È£ÃâµË´Ï´Ù.
+    // Update í•¨ìˆ˜ëŠ” ë§¤ í”„ë ˆì„ë§ˆë‹¤ í˜¸ì¶œë©ë‹ˆë‹¤.
     void Update()
     {
-        // "Pause" ÀÔ·ÂÀÌ °¨ÁöµÇ¸é
+        // "Pause" ì…ë ¥ì´ ê°ì§€ë˜ë©´
         if (Input.GetButtonDown("Pause"))
         {
-            // ÀÏ½Ã Á¤Áö »óÅÂ¸¦ ¹İÀü½ÃÅµ´Ï´Ù.
+            // ì¼ì‹œ ì •ì§€ ìƒíƒœë¥¼ ë°˜ì „ì‹œí‚µë‹ˆë‹¤.
             m_paused = !m_paused;
+            AudioManager._instance.PlaySfx(AudioManager.Sfx.Select);
         }
 
-        // ¸¸¾à °ÔÀÓÀÌ ÀÏ½Ã Á¤Áö »óÅÂ¶ó¸é
+        // ë§Œì•½ ê²Œì„ì´ ì¼ì‹œ ì •ì§€ ìƒíƒœë¼ë©´
         if (m_paused)
         {
-            // ÀÏ½Ã Á¤Áö UI¸¦ È°¼ºÈ­ÇÏ°í ½Ã°£À» ¸ØÃä´Ï´Ù.
+            // ì¼ì‹œ ì •ì§€ UIë¥¼ í™œì„±í™”í•˜ê³  ì‹œê°„ì„ ë©ˆì¶¥ë‹ˆë‹¤.
             g_PauseUI.SetActive(true);
             Time.timeScale = 0;
         }
-        else // ÀÏ½Ã Á¤Áö »óÅÂ°¡ ¾Æ´Ï¶ó¸é
+        else // ì¼ì‹œ ì •ì§€ ìƒíƒœê°€ ì•„ë‹ˆë¼ë©´
         {
-            // ÀÏ½Ã Á¤Áö UI¸¦ ºñÈ°¼ºÈ­ÇÏ°í ½Ã°£À» Á¤»óÀûÀ¸·Î ÁøÇàÇÕ´Ï´Ù.
+            // ì¼ì‹œ ì •ì§€ UIë¥¼ ë¹„í™œì„±í™”í•˜ê³  ì‹œê°„ì„ ì •ìƒì ìœ¼ë¡œ ì§„í–‰í•©ë‹ˆë‹¤.
             g_PauseUI.SetActive(false);
             Time.timeScale = 1f;
         }
     }
 
-    // Resume ÇÔ¼ö´Â Àç°³ ¹öÆ°À» ´­·¶À» ¶§ È£ÃâµË´Ï´Ù.
+    // Resume í•¨ìˆ˜ëŠ” ì¬ê°œ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ í˜¸ì¶œë©ë‹ˆë‹¤.
     public void Resume()
     {
-        // ÀÏ½Ã Á¤Áö »óÅÂ¸¦ ¹İÀü½ÃÅµ´Ï´Ù.
+        // ì¼ì‹œ ì •ì§€ ìƒíƒœë¥¼ ë°˜ì „ì‹œí‚µë‹ˆë‹¤.
         m_paused = !m_paused;
+        AudioManager._instance.PlaySfx(AudioManager.Sfx.Click1);
+    }
+
+    // ë²„íŠ¼ í´ë¦­ì‹œ íš¨ê³¼ìŒ ì¬ìƒ
+    public void OnClickSfx()
+    {
+        AudioManager._instance.PlaySfx(AudioManager.Sfx.Click1);
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - SkillButtons
   - CreatedButtons
   - Area
+  - object
   layers:
   - Default
   - TransparentFX
