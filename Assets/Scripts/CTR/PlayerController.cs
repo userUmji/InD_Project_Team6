@@ -1,6 +1,6 @@
 ï»¿using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+//using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using TMPro;
 
@@ -93,15 +93,20 @@ public class PlayerController : MonoBehaviour
     {
         m_fx = _instance.isAct ? 0 : Input.GetAxisRaw("Horizontal");
         m_fy = _instance.isAct ? 0 : Input.GetAxisRaw("Vertical");
+        animator.SetFloat("InputX", m_fx);
+        animator.SetFloat("InputY", m_fy);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            animator.SetBool("Walk", false);
+            // animations // 0 -> ¾Õ, 1 -> µÚ, 3 -> ¿·
+            // animator.SetBool("Walk", false);
+            //Swith_Motion
+            
             Run();
         }
         else
         {
-            animator.SetBool("Run", false);
+          //  animator.SetBool("Run", false);
             Walk();
         }
         
@@ -111,11 +116,11 @@ public class PlayerController : MonoBehaviour
     {
         if (m_fx == 0 && m_fy == 0)
         {
-            animator.SetBool("Walk", false);
+          //  animator.SetBool("Walk", false);
         }
         else
         {
-            animator.SetBool("Walk", true);
+         //   animator.SetBool("Walk", true);
         }
 
         if (m_fx == -1 || m_fy == -1)
@@ -134,11 +139,11 @@ public class PlayerController : MonoBehaviour
     {
         if (m_fx == 0 && m_fy == 0)
         {
-            animator.SetBool("Run", false);
+           // animator.SetBool("Run", false);
         }
         else
         {
-            animator.SetBool("Run", true);
+          //  animator.SetBool("Run", true);
         }
 
         if (m_fx == -1 || m_fy == -1)
