@@ -24,9 +24,9 @@ public class DicCTR : MonoBehaviour,IPointerClickHandler
         {
             if(element.Value.m_sUnitName.Equals("´õ¹Ì"))
                 return;
-            name = element.Key;
+            string unitName = element.Key;
             GameObject DicElementPrefab_temp = Instantiate(m_DicElementPrefab);
-            DicElementPrefab_temp.GetComponent<DIcElementCTR>().Init(name);
+            DicElementPrefab_temp.GetComponent<DIcElementCTR>().Init(unitName);
             m_DicElementsList.Add(DicElementPrefab_temp);
         }
     }
