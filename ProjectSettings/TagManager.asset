@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
-  - Area
   - SkillButtons
   - CreatedButtons
+  - Area
   - Area
   layers:
   - Default

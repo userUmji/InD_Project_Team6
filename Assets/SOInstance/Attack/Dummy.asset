@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d43aab73431df42a9e335fb962d327, type: 3}
   m_Name: Dummy
   m_EditorClassIdentifier: 
+  m_iSkillNo: 0
   SkillType: 0
-  m_fAttackMag: 0
+  m_fAttackMag: 1
   m_sAttackName: "\uB354\uBBF8\uC5D0\uC6A9"
-  m_iUseAmount: 10
+  m_iUseAmount: 5

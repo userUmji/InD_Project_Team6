@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class SOAttackBase : ScriptableObject , IAttackBehavior
 {
+    public int m_iSkillNo;
     public GameManager.Type SkillType;
     public float m_fAttackMag;
     public string m_sAttackName;

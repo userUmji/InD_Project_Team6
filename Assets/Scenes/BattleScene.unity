@@ -1335,6 +1335,8 @@ MonoBehaviour:
   SkillButtonPrefab: {fileID: 0}
   g_Canvas: {fileID: 0}
   g_BattleManager: {fileID: 0}
+  g_eAction: 4
+  g_iIndex: 0
 --- !u!222 &671947255
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1455,6 +1457,8 @@ MonoBehaviour:
   SkillButtonPrefab: {fileID: 0}
   g_Canvas: {fileID: 0}
   g_BattleManager: {fileID: 0}
+  g_eAction: 0
+  g_iIndex: 0
 --- !u!114 &684320969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2284,6 +2288,8 @@ MonoBehaviour:
   SkillButtonPrefab: {fileID: 0}
   g_Canvas: {fileID: 0}
   g_BattleManager: {fileID: 0}
+  g_eAction: 0
+  g_iIndex: 0
 --- !u!114 &1284438766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2464,6 +2470,8 @@ MonoBehaviour:
   SkillButtonPrefab: {fileID: 0}
   g_Canvas: {fileID: 0}
   g_BattleManager: {fileID: 0}
+  g_eAction: 0
+  g_iIndex: 0
 --- !u!222 &1304838212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2693,9 +2701,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d48cfe878aad7f4690e330ebd34146a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_PlayerUnits: []
   g_EnemyUnit: {fileID: 0}
   g_BattleButtons: {fileID: 137649292}
+  g_ChangeButton: {fileID: 684320965}
   playerUnit: {fileID: 0}
   dialogueText: {fileID: 172759284}
   playerHUD: {fileID: 1186916802}

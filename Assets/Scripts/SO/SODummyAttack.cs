@@ -24,8 +24,8 @@ public class SODummyAttack : SOAttackBase
         else if (isDouble == 2)
             finalAttackDamage = (int)(finalAttackDamage * 0.8);
 
-        Defender.m_iCurrentHP -= finalAttackDamage;
-        Defender.g_UnitState = UnitEntity.UnitState.BERSERK;
+        Defender.TakeDamage(finalAttackDamage);
+       // Defender.g_UnitState = UnitEntity.UnitState.BERSERK;
         //Debug.Log(isDouble);
         //Debug.Log(finalAttackDamage);
     }
