@@ -12,8 +12,10 @@ public class ExplainAreaCTR : MonoBehaviour
     public TextMeshProUGUI NameNumber;
     public TextMeshProUGUI Type;
     public TextMeshProUGUI HPExplain;
+    public TextMeshProUGUI HPAmount;
     public Slider HPBar;
     public TextMeshProUGUI IntimacyExplain;
+    public TextMeshProUGUI IntimacyAmount;
     public Slider IntimacyBar;
     public TextMeshProUGUI Skill1;
     public TextMeshProUGUI Skill2;
@@ -34,8 +36,10 @@ public class ExplainAreaCTR : MonoBehaviour
         Type.text = GameManager.Instance.TypeToString(Unit.UnitType);
         HPBar.maxValue = Unit.m_iUnitHP;
         HPBar.value = Unit.m_iUnitHP;
+        HPAmount.text = Unit.m_iUnitHP.ToString();
         IntimacyBar.maxValue = 10.0f;
         IntimacyBar.value = SaveUnit.m_iIntimacy;
+        IntimacyAmount.text = SaveUnit.m_iIntimacy + " / " + 10;
         Skill1.text = GameManager.Instance.Skills[SaveUnit.m_AttackBehav_1].m_sAttackName;
         Skill2.text = GameManager.Instance.Skills[SaveUnit.m_AttackBehav_2].m_sAttackName;
         Skill3.text = GameManager.Instance.Skills[SaveUnit.m_AttackBehav_3].m_sAttackName;
