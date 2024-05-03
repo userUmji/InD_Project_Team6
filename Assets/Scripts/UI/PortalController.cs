@@ -4,26 +4,96 @@ using UnityEngine;
 
 public class PortalController : MonoBehaviour
 {
-    public Transform[] portals; // 포탈들의 Transform 배열
+    public Transform[] portals; // 포털의 Transform 배열
+    public MapController mapController; // MapController 참조
+    public GameObject optionImage; // 옵션 이미지 GameObject
 
-    // 이 메서드는 버튼에서 호출될 것입니다.
+    public float activationDistance = 2f; // 플레이어가 포털과의 활성화 거리
+
+    bool optionImageActive = false; // 옵션 이미지의 활성화 여부
+
+    void Update()
+    {
+        // 플레이어가 포털 근처에 있고 스페이스바를 눌렀을 때
+        if (IsPlayerNearPortal() && Input.GetKeyDown(KeyCode.Space))
+        {
+            optionImageActive = !optionImageActive; // 맵 상태 반전
+
+            // GameManager의 상태를 PAUSE로 설정
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.SetGameState(GameManager.GameState.PAUSE);
+            }
+
+            // 맵 컨트롤러 비활성화
+            ToggleMapController(false);
+
+            // 옵션 이미지 활성화 또는 비활성화
+            if (optionImage != null)
+            {
+                optionImage.gameObject.SetActive(optionImageActive);
+            }
+
+            // 포탈을 활성화하면 유닛 체력 회복
+            if (optionImageActive)
+            {
+                UnitEntity playerUnit = GameObject.FindGameObjectWithTag("Player").GetComponent<UnitEntity>();
+                if (playerUnit != null)
+                {
+                    // 유닛 체력 회복
+                    playerUnit.Heal(100);// 예시로 100큼 회복
+                }
+            }
+
+            // GameManager의 상태를 다시 INPROGRESS로 설정
+            if (!optionImageActive && GameManager.Instance != null)
+            {
+                GameManager.Instance.SetGameState(GameManager.GameState.INPROGRESS);
+            }
+        }
+    }
+
+
+    // 플레이어가 포털 근처에 있는지 확인하는 메서드
+    bool IsPlayerNearPortal()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            foreach (Transform portal in portals)
+            {
+                if (Vector3.Distance(playerObject.transform.position, portal.position) <= activationDistance)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // 포털로 플레이어를 이동시키는 메서드
     public void MovePlayerToPortal(int portalIndex)
     {
-        // 지정된 인덱스에 해당하는 포탈 위치로 플레이어를 이동시킴
         if (portalIndex >= 0 && portalIndex < portals.Length)
         {
-            // 'Player' 태그를 가진 게임 오브젝트를 찾음
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             if (playerObject != null)
             {
-                // 플레이어의 위치를 지정된 포탈의 위치로 이동시킴
                 playerObject.transform.position = portals[portalIndex].position;
             }
         }
         else
         {
-            // 잘못된 포탈 인덱스에 대한 오류 메시지 출력
             Debug.LogError("Invalid portal index: " + portalIndex);
+        }
+    }
+
+    // UI 버튼에서 호출할 함수
+    public void ToggleMapController(bool mapActive)
+    {
+        if (mapController != null)
+        {
+            mapController.gameObject.SetActive(mapActive);
         }
     }
 }

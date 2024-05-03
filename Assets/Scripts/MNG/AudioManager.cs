@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        _instance.SwitchBgm(0);
+        //_instance.SwitchBgm(0);
     }
 
     void Init()

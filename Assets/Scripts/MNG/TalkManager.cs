@@ -26,6 +26,8 @@ public class TalkManager : MonoBehaviour
     // 대화 및 초상화 데이터 생성 함수
     void GenerateData()
     {
+        talkData.Add(100, new string[] { "지금부터", "이벤트를 실행합니다!!" });
+       
         // 대화 데이터 추가
         talkData.Add(1000, new string[] { "안녕!:0", "만나서 반가워!:0" });
         talkData.Add(2000, new string[] { "어서와!:0", "만나서 반가워!:0" });
@@ -35,6 +37,7 @@ public class TalkManager : MonoBehaviour
         talkData.Add(300, new string[] { "아이템2 이다." });
 
         // 초상화 데이터 추가
+        portraitData.Add(100 + 0, portraitArr[0]);
         portraitData.Add(1000 + 0, portraitArr[0]);
         portraitData.Add(2000 + 0, portraitArr[1]);
     }
