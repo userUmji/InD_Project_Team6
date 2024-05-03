@@ -25,13 +25,13 @@ public class ItemEntity : MonoBehaviour
             Debug.Log("Item Name Missed");
         var ItemData = GameManager.Instance.GetItemData(m_sItemName);
         m_ItemSprite = ItemData.m_ItemSprite;
-        allyUnit = GameManager.Instance.m_UnitManager.g_PlayerUnits[0].GetComponent<UnitEntity>();
+        m_sItemDescription = ItemData.m_sItemDescription;
         ExecuteEffect = Instantiate(ItemData.m_ItemEffect);
         spriteRenderer.sprite = m_ItemSprite;
     }
 
-    public void ExecuteItem()
+    public void ExecuteItem(int index)
     {
-        ExecuteEffect.ExecuteItemEffect(allyUnit, null);
+        ExecuteEffect.ExecuteItemEffect(GameManager.Instance.m_UnitManager.g_PlayerUnits[index].GetComponent<UnitEntity>(), null);
     }
 }

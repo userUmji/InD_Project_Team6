@@ -7,26 +7,28 @@ using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
-    // �÷��̾�� ���� ������
-    public GameObject[] g_PlayerUnits;
+    //적 유닛
     public GameObject g_EnemyUnit;
     public GameObject g_BattleButtons;
-    // ���� ���¸� �����ϴ� ������
+    public GameObject g_ChangeButton;
+    // 전투 상태
     public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, ENEMYTURN, RESULT, END }
 
     private Coroutine BattleCoroutine;
     private bool isPlayed = false;
+    private bool isFall = false;
     private GameManager.Action m_ePlayerAction;
     private int m_iPlayerActionIndex;
+   
 
-    // ���� �÷��̾�� ���� ������ ��ũ��Ʈ
+    // 플레이어 유닛
     public UnitEntity playerUnit;
     UnitEntity enemyUnit;
 
-    // ���� �� �߻��ϴ� ��ȭ�� ǥ���ϴ� UI �ؽ�Ʈ
+    // 전투 다이얼로그 텍스트
     public Text dialogueText;
 
-    // �÷��̾�� ���� HUD(Head-Up Display)�� �����ϴ� ��ü
+    // 플레이어 / 적 HUD(Head-Up Display)
     public BattleHUDCTR playerHUD;
     public BattleHUDCTR enemyHUD;
 
@@ -37,29 +39,29 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.g_sEnemyBattleUnit = "����";
+        //GameManager.Instance.g_sEnemyBattleUnit = "더미";
         BattleInit();
     }
-    #region ���� ���� �޼���
+    #region 전투 메서드
     void BattleInit()
     {
-        //�� ���� �ʱ�ȭ
+        //전투 초기화
         g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit);
         state = BattleState.START;
         BattleCoroutine = StartCoroutine(SetupBattle());
     }
-    // �÷��̾� �� ���� ó��   ----------------------------------------------------------------------------------------------------------------------
+
     private void PlayerAction()
     {
-        //state ����
+        //state 설정
         state = BattleState.ACTION;
-        dialogueText.text = playerUnit.m_sUnitName + "�� ��� �� �� �ΰ�..";
+        dialogueText.text = playerUnit.m_sUnitName + "는 무엇을 할까..?";
     }
-    #region �÷��̾� Action ó��
+    #region 플레이어 Action 처리
 
     private void Process()
     {
-        // ��ư���� ������ �÷��̾� ���ǿ� ���� ���μ����� ����
+        // 버튼에서 받은 액션의 종류
         if (m_ePlayerAction == GameManager.Action.ATTACK)
             AttackProcess();
         else if (m_ePlayerAction == GameManager.Action.ITEM)
@@ -102,82 +104,110 @@ public class BattleManager : MonoBehaviour
         if (state != BattleState.PLAYERTURN)
             StartCoroutine(PlayerTurn_Change());
         else
-            StartCoroutine(EnemyTurn());
+        {
+            if (isFall == false)
+                StartCoroutine(EnemyTurn());
+            else
+                StartCoroutine(Result());
+        }
+             
     }
     private void RunProcess()
     {
         if (state != BattleState.PLAYERTURN)
-            StartCoroutine(PlayerTurn_Item());
+            StartCoroutine(PlayerTurn_Run());
         else
             StartCoroutine(EnemyTurn());
     }
+    
 
     #endregion
-    // ���� �¸� ó��
+    // 전투 종료 처리
 
     void AfterWin()
     {
         state = BattleState.END;
-        dialogueText.text = "�¸��ߴ�!";
-        SceneManager.UnloadSceneAsync("BattleScene");
-        GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
+        dialogueText.text = "승리했다";
+        StartCoroutine(PlayerWin());
+
     }
-    //���� �й� ó��
+    void AfterFall()
+    {
+        state = BattleState.ACTION;
+        int fallCount = 0;
+        isFall = true;
+        for(int i = 0; i< GameManager.Instance.m_UnitManager.g_PlayerUnits.Length;i++)
+        {
+            if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_iCurrentHP <= 0)
+                fallCount += 1;
+        }
+        if(fallCount == 3)
+        {
+
+        }
+        else
+            StartCoroutine(Player_FallChange());
+    }
+    //전투 패배 처리
     void AfterLost()
     {
         state = BattleState.END;
 
-        dialogueText.text = "�й��ߴ�..";
+        dialogueText.text = "패배했다..";
         SceneManager.UnloadSceneAsync("BattleScene");
         GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
     }
 
     #endregion
 
-    #region ���� ���� �ڷ�ƾ
-    // ���� ������ ó���ϴ� �ڷ�ƾ
+    #region 전투 코루틴
+    // 전투 셋업
     IEnumerator SetupBattle()
     {
-        //�Ʊ� ���� �ʱ�ȭ
+        //플레이어 유닛 가져오기
         playerUnit = GameManager.Instance.m_UnitManager.g_PlayerUnits[0].transform.GetComponent<UnitEntity>();
 
         playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
-        //�� ���� �ʱ�ȭ
+        //적 유닛 초기화
         enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
         enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
 
+        dialogueText.text = "야생의" + enemyUnit.m_sUnitName + "이 나타났다...";
 
-        // ��ȭ �ؽ�Ʈ�� ���� �̸��� ǥ��
-        dialogueText.text = "�߻��� " + enemyUnit.m_sUnitName + " ��(��) ��Ÿ����...";
-
-        // �÷��̾�� ���� HUD�� ������Ʈ
+        // HUD 초기화
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
-        // ���� ���� �� ��� ���
+        // 대기
         yield return new WaitForSeconds(2f);
 
-        // �÷��̾� ������ ���� ��ȯ
+        // 플레이어 액션으로 진행
         PlayerAction();
     }
-    #region �÷��̾� �׼� ó��
+    IEnumerator Player_FallChange()
+    {
+        dialogueText.text = playerUnit.m_sUnitName + "는 쓰러졌다.....";
+        yield return new WaitForSeconds(2f);
+        isPlayed = false;
+        g_ChangeButton.transform.GetComponent<BattleButtonCTR>().Onclick_Change();
+    }
+    #region 플레이어 액션 실행
     IEnumerator PlayerTurn_Attack()
     {
         state = BattleState.PLAYERTURN;
-        //���� ����
         if (playerUnit.g_UnitState == UnitEntity.UnitState.BERSERK)
         {
-            dialogueText.text = playerUnit.m_sUnitName + "�� ���� ���� �ʴ´�!";
+            dialogueText.text = playerUnit.m_sUnitName + "는 말을 듣지 않는다!";
             yield return new WaitForSeconds(1f);
             playerUnit.AttackByIndex(playerUnit, enemyUnit, Random.Range(0,playerUnit.m_AttackBehaviors.Length));
             enemyHUD.SetHUD(enemyUnit);
-            dialogueText.text = playerUnit.m_sUnitName + "�� " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " ����!!";
+            dialogueText.text = playerUnit.m_sUnitName + "의 " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
         }
         else
         {
             playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
             enemyHUD.SetHUD(enemyUnit);
-            dialogueText.text = playerUnit.m_sUnitName + "�� " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " ����!!";
+            dialogueText.text = playerUnit.m_sUnitName + "의 " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
         }
         yield return new WaitForSeconds(1f);
         if (enemyUnit.m_iCurrentHP <= 0 || playerUnit.m_iCurrentHP <= 0)
@@ -193,10 +223,8 @@ public class BattleManager : MonoBehaviour
         state = BattleState.PLAYERTURN;
 
         playerUnit.Heal(5);
-
-        // �÷��̾��� ü���� HUD�� ������Ʈ�ϰ� ��ȭ �ؽ�Ʈ ǥ��
         playerHUD.SetHP(playerUnit.m_iCurrentHP);
-        dialogueText.text = "ü���� 5 ȸ���ߴ�!";
+        dialogueText.text = "체력을 5 회복했다.!";
 
 
         yield return new WaitForSeconds(2f);
@@ -208,17 +236,17 @@ public class BattleManager : MonoBehaviour
     {
         state = BattleState.PLAYERTURN;
 
-        //unitManager�� �ִ� �������� ��ü
+        //unitManager의 instance를 가져옴
         GameObject newPlayerGO = GameManager.Instance.m_UnitManager.g_PlayerUnits[m_iPlayerActionIndex];
 
-        //playerUnit ����
+        //playerUnit 설정
         playerUnit = newPlayerGO.GetComponent<UnitEntity>();
-        //UI �ʱ�ȭ
+        //UI 초기화
         playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
         playerHUD.SetHUD(playerUnit);
         yield return new WaitForSeconds(2f);
 
-        isPlayed = true;
+        
         Process();
     }
     IEnumerator PlayerTurn_Run()
@@ -234,38 +262,37 @@ public class BattleManager : MonoBehaviour
         Debug.Log(randomChance);
         if (runChance < randomChance)
         {
-            dialogueText.text = "������ �����ƴ�";
+            dialogueText.text = "무사히 도망쳤다";
             yield return new WaitForSeconds(2f);
             SceneManager.UnloadSceneAsync("BattleScene");
             GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
         }
         else
         {
-            dialogueText.text = "����ġ�� ���ߴ�!";
+            dialogueText.text = "도망치지 못했다!";
             yield return new WaitForSeconds(2f);
             isPlayed = true;
             Process();
         }
     }
     #endregion
-    // ���� ���� ó���ϴ� �ڷ�ƾ
     IEnumerator EnemyTurn()
     {
-        // ���� �ʱ�ȭ
+        // state 변경
         state = BattleState.ENEMYTURN;
-        // ���� �����ϰ� ��ȭ �ؽ�Ʈ ������Ʈ
+        // 랜덤 공격
 
         int randomAttackIndex = Random.Range(0, 2);
         enemyUnit.AttackByIndex(enemyUnit, playerUnit, randomAttackIndex);
-        //���� ���� ����
+        //적 공격
         string AttackName = enemyUnit.GetSkillname(enemyUnit, randomAttackIndex);
         playerHUD.SetHUD(playerUnit);
-        dialogueText.text = enemyUnit.m_sUnitName + " �� " + AttackName + "����!";
+        dialogueText.text = enemyUnit.m_sUnitName + "의 " + AttackName + "공격!";
 
 
-        // �÷��̾ �������� �ް� ü�� ������Ʈ
+        // 1초 대기
         yield return new WaitForSeconds(1f);
-        //ü���� 0���� ���ٸ� Result��
+        //Result로
         if (enemyUnit.m_iCurrentHP <= 0 || playerUnit.m_iCurrentHP <= 0)
             BattleCoroutine = StartCoroutine(Result());
         else if (!isPlayed)
@@ -275,21 +302,21 @@ public class BattleManager : MonoBehaviour
         isPlayed = true;
 
     }
-    // �÷��̾� ȸ���� ó���ϴ� �ڷ�ƾ
 
     IEnumerator Result()
     {
-        dialogueText.text = "�� ���� �Ϸ�";
+        dialogueText.text = "턴 실행 완료";
     
         yield return new WaitForSeconds(1f);
         if (playerUnit.m_iCurrentHP <= 0)
-            AfterLost();
+            AfterFall();
         else if (enemyUnit.m_iCurrentHP <= 0)
             AfterWin();
         else
         {
             state = BattleState.ACTION;
             isPlayed = false;
+            isFall = false;
             PlayerAction();
         }
     }
@@ -297,7 +324,7 @@ public class BattleManager : MonoBehaviour
     IEnumerator PlayerWin()
     {
         state = BattleState.END;
-        dialogueText.text = "�¸��ߴ�!";
+        dialogueText.text = "승리했다!";
         yield return new WaitForSeconds(1f);
         foreach(GameObject entity in GameManager.Instance.m_UnitManager.g_PlayerUnits)
         {
@@ -309,36 +336,38 @@ public class BattleManager : MonoBehaviour
                 mod = 0.25f;
             int gainExpTemp = (int)(enemyUnit.m_iUnitLevel * 3 * mod);
             unitEntity.m_iUnitEXP += gainExpTemp;
-            dialogueText.text = unitEntity.m_sUnitName + "�� " + gainExpTemp + "�� ����ġ�� �����.";
+            dialogueText.text = unitEntity.m_sUnitName + "는 " + gainExpTemp + "의 경험치를 얻었다.";
             yield return new WaitForSeconds(1f);
             while(unitEntity.m_iUnitEXP >= unitEntity.m_iUnitLevel * 10)
             {
                 unitEntity.LevelUp();
-                dialogueText.text = unitEntity.m_sUnitName + "��" + unitEntity.m_iUnitLevel +"������ �������ߴ�!";
+                dialogueText.text = unitEntity.m_sUnitName + "는" + unitEntity.m_iUnitLevel +"로 레벨업했다!";
                 playerHUD.levelText.text = "Lvl " + unitEntity.m_iUnitLevel ;
                 yield return new WaitForSeconds(1f);
-                dialogueText.text = unitEntity.m_sUnitName + "�� �������� ����� ���� �� ����!";
+                dialogueText.text = unitEntity.m_sUnitName + "는 강해져서 기분이 좋은 것 같다!";
                 yield return new WaitForSeconds(1f);
             }
         }
-        SceneManager.UnloadSceneAsync("BattleScene");
+        GameManager.Instance.Canvas_WorldScene.SetActive(true);
         GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
+        SceneManager.UnloadSceneAsync("BattleScene");
+       
 
     }
 
     #endregion
 
-    #region ��ư Ŭ�� �̺�Ʈ
-    // ���� ��ư Ŭ�� �� ȣ��Ǵ� �޼���
+    #region 버튼 처리
+    // 버튼 처리
     public void OnButton(GameManager.Action action, int index)
     {
-        // �÷��̾� ���� �ƴ� ��쿡�� �ƹ� �۾��� �������� ����
+        // 액션 상태일때만 사용
         if (state != BattleState.ACTION)
             return;
 
-        //��Ʋ UI Ŵ
+        // 버튼 보이기
         g_BattleButtons.SetActive(true);
-        //�����ߴ� ��ư ����
+        //생성된 버튼 삭제
         GameObject[] destroy = GameObject.FindGameObjectsWithTag("CreatedButtons");
         for (int i = 0; i < destroy.Length; i++)
             Destroy(destroy[i]);

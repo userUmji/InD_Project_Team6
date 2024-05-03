@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     //아이템의 데이터가 있는 테이블
     public ItemTable m_AssetItemTable;
     //데이터에셋을 초기화할 데이터매니저
-    DataAssetManager m_DataManager;
+    public DataAssetManager m_DataManager;
     //플레이어의 유닛을 관리할 유닛메니저
     public UnitManager m_UnitManager;
     //월드씬의 캔버스
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     //게임의 진행 상황 (초기화, 진행중, 대화중, 전투중, 일지정지)
     public enum GameState { INIT, INPROGRESS, DIALOG, BATTLE, PAUSE };
     public GameState g_GameState;
+
+    public List<SOAttackBase> Skills;
 
     public string g_sEnemyBattleUnit;
 
@@ -65,12 +67,12 @@ public class GameManager : MonoBehaviour
         m_DataManager.Init(m_AssetUnitTable, m_AssetItemTable);
         //Unit을 관리할 UnitManager을 생성하고 Init
         m_UnitManager = new UnitManager();
+        m_DataManager.LoadFunc();
+
         m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
         m_UnitManager.SetPlayerUnitEntityByName("백요호", 1);
         m_UnitManager.SetPlayerUnitEntityByName("백호", 2);
         g_GameState = GameState.INPROGRESS;
-
-        m_DataManager.SaveFunc_ALL();
 
     }
     //유닛 데이터를 가져오는 기능
@@ -82,6 +84,10 @@ public class GameManager : MonoBehaviour
     {
         return m_DataManager.GetItemData(className);
     }
+    public UnitTable.UnitStats_Save GetUnitSaveData(string className)
+    {
+        return m_DataManager.GetUnitSaveData(className);
+    }
     public void LoadBattleScene(string enemyBattleUnit)
     {
         g_GameState = GameState.BATTLE;
@@ -91,7 +97,15 @@ public class GameManager : MonoBehaviour
         SceneOper.allowSceneActivation = true;
         //AudioManager._instance.SwitchBgm(1); 배틀씬 로드시 BGM 변경
     }
-
+    public void SaveALLPlayerUnit()
+    {
+        foreach(var Unit in m_UnitManager.g_PlayerUnits)
+        {
+            UnitEntity unitEntity = Unit.transform.GetComponent<UnitEntity>();
+            m_DataManager.SaveByUnit(unitEntity.m_sUnitName, unitEntity);
+        }
+        m_DataManager.SaveFunc_ALL();
+    }
 
 
     #region 타입 관련
@@ -103,7 +117,6 @@ public class GameManager : MonoBehaviour
         MONSTER,
         GHOST
     }
-    
     public int CompareType(Type SkillType, Type UnitType)
     {
         int isDouble = 0;
@@ -116,6 +129,23 @@ public class GameManager : MonoBehaviour
         else
             isDouble = 0;
         return isDouble;
+    }
+    public string TypeToString(Type skillType)
+    {
+        switch(skillType)
+        {
+            case Type.FIRE :
+                return "불";
+            case Type.GHOST:
+                return "귀신";
+            case Type.GODBEAST:
+                return "신수";
+            case Type.ICE:
+                return "얼음";
+            case Type.MONSTER:
+                return "괴수";
+        }
+        return null;
     }
     #endregion
 }

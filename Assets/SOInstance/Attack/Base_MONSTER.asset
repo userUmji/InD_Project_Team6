@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f71eef22bd432448336e0fb157a11c, type: 3}
   m_Name: Base_MONSTER
   m_EditorClassIdentifier: 
+  m_iSkillNo: 0
   SkillType: 3
   m_fAttackMag: 1
   m_sAttackName: "\uAD34\uC218\uC18D\uC131 \uAE30\uBCF8"
+  m_iUseAmount: 5

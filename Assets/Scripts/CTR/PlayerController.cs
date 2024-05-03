@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
             Object_Interaction();
+            Temp_Action();
         }
     }
 
@@ -157,5 +158,13 @@ public class PlayerController : MonoBehaviour
 
         Vector2 movement = new Vector2(m_fx, m_fy).normalized * g_frun_Speed * Time.deltaTime;
         m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지 
+    }
+
+    private void Temp_Action()
+    {
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.Instance.SaveALLPlayerUnit();
+        }
     }
 }
