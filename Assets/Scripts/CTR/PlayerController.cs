@@ -53,41 +53,56 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, lookDirection, 2, g_llayer);
 
         // 레이가 어떤 오브젝트와 충돌했는지 확인
-        if (hit.collider != null) 
+        if (hit.collider != null)
         {
-            if (hit.collider.tag == "Item")
-            {
-                m_scanObject = hit.collider.gameObject; // 충돌한 객체를 스캔된 객체로 설정
 
-                if (Input.GetKeyDown(KeyCode.F)) // F 키가 눌렸는지 확인
+            m_scanObject = hit.collider.gameObject; // 충돌한 객체를 스캔된 객체로 설정
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (hit.collider.tag == "Item")
                 {
-                    // 충돌한 객체로부터 아이템을 가져와 인벤토리 컨트롤러의 현재 아이템으로 설정
+                    // 아이템 처리 코드
                     Inventory_Controller.g_ICinstance.Set_GetItem(hit.transform.gameObject);
-                    // 인벤토리 슬롯을 확인
                     Inventory_Controller.g_ICinstance.Check_Slot();
-                    // 충돌한 객체를 파괴
                     Destroy(hit.transform.gameObject);
                     AudioManager._instance.PlaySfx(AudioManager.Sfx.Item);
                 }
-            }
-            else if  (hit.collider.tag == "object")
-            {
-                m_scanObject = hit.collider.gameObject;
-
-                if (Input.GetKeyDown(KeyCode.Space) && m_scanObject != null) // 점프(스페이스바) 버튼이 눌렸고 스캔된 객체가 있는지 확인
+                else if (hit.collider.tag == "object")
                 {
-                   
-                    // _instance 객체의 Act 메서드를 호출하고 스캔된 객체를 전달
+                    // 오브젝트 처리 코드
                     _instance.Act(m_scanObject);
                     AudioManager._instance.PlaySfx(AudioManager.Sfx.Talk);
                 }
             }
+            if (hit.collider.tag == "Event")
+            {
+                if (!m_scanObject.GetComponent<ObjData>().isNpc)
+                {
+                    if (!m_scanObject.GetComponent<ObjData>().isInteracted)
+                    {
+                        // 스캔된 오브젝트가 이전에 상호작용되지 않았을 경우에만 아래의 코드를 실행합니다.
+                        m_scanObject.GetComponent<ObjData>().isInteracted = true;
+                        _instance.Act(m_scanObject);
+                        AudioManager._instance.PlaySfx(AudioManager.Sfx.Talk);
+                    }
+                    else
+                    {
+                        // 스페이스바를 눌렀을 때 한 번 더 상호작용하도록 설정합니다.
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            _instance.Act(m_scanObject);
+                            AudioManager._instance.PlaySfx(AudioManager.Sfx.Talk);
+                        }
+                    }
+                }
+            }
+
         }
         else // 충돌체가 없는 경우
         {
             m_scanObject = null; // 스캔된 객체를 null로 재설정
         }
-
     }
 
     private void Movement()
@@ -99,10 +114,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            // animations // 0 -> ��, 1 -> ��, 3 -> ��
+            // animations // 0 -> 앞, 1 -> 뒤, 3 -> 옆
             // animator.SetBool("Walk", false);
             //Swith_Motion
-            
+
             Run();
         }
         else

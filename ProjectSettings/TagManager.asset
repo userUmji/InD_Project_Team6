@@ -9,6 +9,7 @@ TagManager:
   - CreatedButtons
   - Area
   - object
+  - Event
   layers:
   - Default
   - TransparentFX

@@ -107,6 +107,11 @@ public class GameManager : MonoBehaviour
         m_DataManager.SaveFunc_ALL();
     }
 
+    // 게임 상태를 설정하는 메서드
+    public void SetGameState(GameState state)
+    {
+        g_GameState = state;
+    }
 
     #region 타입 관련
     public enum Type
