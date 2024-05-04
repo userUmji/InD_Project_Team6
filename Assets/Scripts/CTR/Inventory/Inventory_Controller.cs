@@ -138,31 +138,35 @@ public class Inventory_Controller : MonoBehaviour
     }
     public void View_Inventory() // 인벤토리 온 오프 함수
     {
-
-        if (g_gin_V.transform.localScale == new Vector3(1, 1, 1)) // 인벤토리가 켜있으면
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (GameManager.Instance.g_GameState == GameManager.GameState.BATTLE)
+                return;
+            if (g_gin_V.transform.localScale == new Vector3(1, 1, 1)) // 인벤토리가 켜있으면
+            {
+                Hide_Inv();
+            }
+            else if (g_gin_V.transform.localScale == new Vector3(0, 0, 1))
+            {
+                Show_Inv();
+            }
+        }
+        /*
+            if (g_gin_V.transform.localScale == new Vector3(1, 1, 1)) // 인벤토리가 켜있으면
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
             {
-                for (int i = 0; i < g_ginventory.transform.childCount; i++)  // 유니티 창에서 슬롯을 넣어주는게 아니고 스크립트에서 넣어주는거
-                {
-                    g_Sslot[i].GetComponent<Slot_Button>().Off_Inven();
-                }
-                
-                g_gin_V.transform.localScale = new Vector3(0, 0, 1); // 꺼줌
-                invent_On_Off_Check = false;
+                Hide_Inv();
             }
         }
         else if (g_gin_V.transform.localScale == new Vector3(0, 0, 1))
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                Img_View.gameObject.SetActive(false);
-                name_View.text = " ";
-                Des_View.text = " ";
-                invent_On_Off_Check = true;
-                g_gin_V.transform.localScale = new Vector3(1, 1, 1);
+                Show_Inv();
             }
         }
+        */
     }
 
     public void Set_GetItem(GameObject itemEntity)
@@ -171,5 +175,25 @@ public class Inventory_Controller : MonoBehaviour
         Destroy(entity.transform.GetComponent<SpriteRenderer>());
         Destroy(entity.transform.GetComponent<Collider2D>());
         g_Iget_Item = entity.GetComponent<ItemEntity>();
+    }
+    public void Show_Inv()
+    {
+        Img_View.gameObject.SetActive(false);
+        name_View.text = " ";
+        Des_View.text = " ";
+        invent_On_Off_Check = true;
+        g_gin_V.transform.localScale = new Vector3(1, 1, 1);
+    }
+    public void Hide_Inv()
+    {
+        for (int i = 0; i < g_ginventory.transform.childCount; i++)  // 유니티 창에서 슬롯을 넣어주는게 아니고 스크립트에서 넣어주는거
+        {
+            g_Sslot[i].GetComponent<Slot_Button>().Off_Inven();
+        }
+        g_gin_V.transform.localScale = new Vector3(0, 0, 1); // 꺼줌
+        invent_On_Off_Check = false;
+
+        if (GameManager.Instance.g_GameState == GameManager.GameState.BATTLE)
+            GameObject.Find("BattleManager").transform.GetComponent<BattleManager>().state = BattleManager.BattleState.ACTION;
     }
 }

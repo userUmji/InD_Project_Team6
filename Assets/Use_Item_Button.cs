@@ -17,6 +17,11 @@ public class Use_Item_Button : MonoBehaviour
         {
             gameObject.transform.parent.gameObject.SetActive(false);
         }
+        if(GameManager.Instance.g_GameState == GameManager.GameState.BATTLE)
+        {
+            BattleManager btm = GameObject.Find("BattleManager").transform.GetComponent<BattleManager>();
+            btm.UseItem();
+        }
     }
 
 }

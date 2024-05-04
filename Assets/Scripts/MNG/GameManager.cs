@@ -21,12 +21,11 @@ public class GameManager : MonoBehaviour
     //게임의 진행 상황 (초기화, 진행중, 대화중, 전투중, 일지정지)
     public enum GameState { INIT, INPROGRESS, DIALOG, BATTLE, PAUSE };
     public GameState g_GameState;
-
+    public GameObject g_InventoryGO;
     public List<SOAttackBase> Skills;
 
     public string g_sEnemyBattleUnit;
 
-    //버튼 액션(추후 이동시킬 예정입니다.
     public enum Action { CANCLE, ATTACK, ITEM, CHANGE, RUN }
     //싱글턴 구현
     public static GameManager Instance
@@ -95,7 +94,8 @@ public class GameManager : MonoBehaviour
         g_sEnemyBattleUnit = enemyBattleUnit;
         Canvas_WorldScene.SetActive(false);
         SceneOper.allowSceneActivation = true;
-        //AudioManager._instance.SwitchBgm(1); 배틀씬 로드시 BGM 변경
+        AudioManager._instance.SwitchBgm(1); 
+        
     }
     public void SaveALLPlayerUnit()
     {

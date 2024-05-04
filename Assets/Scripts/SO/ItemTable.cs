@@ -10,6 +10,7 @@ public class ItemTable : ScriptableObject
     {
         public string m_sItemName;
         public string m_sItemDescription;
+        public string m_sItemUseDialog;
         public Sprite m_ItemSprite;
 
 

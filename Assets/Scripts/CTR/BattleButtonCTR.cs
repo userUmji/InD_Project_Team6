@@ -61,7 +61,7 @@ public class BattleButtonCTR : MonoBehaviour
     {
         if (g_BattleManager.state == BattleManager.BattleState.ACTION)
         {
-            Debug.Log("변경 버튼 눌림");
+            //Debug.Log("변경 버튼 눌림");
             //프리펩을 Load
             GameObject ChangeButtonPrefab = Resources.Load<GameObject>("Prefabs/ChangeButtons");
             //instantiate 하고 텍스트를 바꾸기 위해 Temp에 저장
@@ -78,7 +78,8 @@ public class BattleButtonCTR : MonoBehaviour
     }
     public void OnClick_Inventory()
     {
-        Debug.Log("인벤토리 버튼 눌림");
+        GameManager.Instance.g_InventoryGO.transform.GetComponentInChildren<Inventory_Controller>().Show_Inv();
+        g_BattleManager.state = BattleManager.BattleState.SELECT;
     }
 
     private void InitButton_ult(GameObject Buttons)
