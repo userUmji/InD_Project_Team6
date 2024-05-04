@@ -5,7 +5,9 @@ using UnityEngine;
 public class BaseItemEffect : SOItemBase
 {
     public int m_iEffectAmount;
-    public override void ExecuteItemEffect(UnitEntity allyUnit, UnitEntity enemyUnit)
+    public string m_sUseDialog;
+   
+    public override void ExecuteItemEffect(UnitEntity allyUnit)
     {
         allyUnit.Heal(m_iEffectAmount);
     }

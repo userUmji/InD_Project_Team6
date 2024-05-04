@@ -70,7 +70,7 @@ MonoBehaviour:
     UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: e9d118d0d9570104eb8d1d37e25c52c5, type: 3}
     m_iUnitHP: 10000
-    m_iUnitAtk: 0
+    m_iUnitAtk: 1000
     m_iUnitSpeed: 1
     m_iUnitDef: 1
     m_iLvlModHP: 0

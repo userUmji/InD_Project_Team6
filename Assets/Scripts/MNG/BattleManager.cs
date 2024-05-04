@@ -11,8 +11,10 @@ public class BattleManager : MonoBehaviour
     public GameObject g_EnemyUnit;
     public GameObject g_BattleButtons;
     public GameObject g_ChangeButton;
+
+    public GameObject m_Canvas;
     // 전투 상태
-    public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, ENEMYTURN, RESULT, END }
+    public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, SELECT, ENEMYTURN, RESULT, END }
 
     private Coroutine BattleCoroutine;
     private bool isPlayed = false;
@@ -41,6 +43,9 @@ public class BattleManager : MonoBehaviour
     {
         //GameManager.Instance.g_sEnemyBattleUnit = "더미";
         BattleInit();
+
+        GameManager.Instance.g_InventoryGO.transform.SetParent(m_Canvas.transform);
+        
     }
     #region 전투 메서드
     void BattleInit()
@@ -143,22 +148,29 @@ public class BattleManager : MonoBehaviour
         }
         if(fallCount == 3)
         {
-
+            StartCoroutine(PlayerLost());
         }
         else
             StartCoroutine(Player_FallChange());
     }
     //전투 패배 처리
-    void AfterLost()
-    {
-        state = BattleState.END;
 
-        dialogueText.text = "패배했다..";
+    private void ChangeScene()
+    {
+        GameManager.Instance.Canvas_WorldScene.SetActive(true);
+        GameManager.Instance.g_InventoryGO.transform.SetParent(GameManager.Instance.Canvas_WorldScene.transform);
         SceneManager.UnloadSceneAsync("BattleScene");
         GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
     }
 
-    #endregion
+    public void UseItem()
+    {
+        GameManager.Instance.g_InventoryGO.transform.GetComponentInChildren<Inventory_Controller>().Hide_Inv();
+        state = BattleState.PROCESS;
+        m_ePlayerAction = GameManager.Action.ITEM;
+        Process();
+    }
+        #endregion
 
     #region 전투 코루틴
     // 전투 셋업
@@ -222,11 +234,7 @@ public class BattleManager : MonoBehaviour
     {
         state = BattleState.PLAYERTURN;
 
-        playerUnit.Heal(5);
-        playerHUD.SetHP(playerUnit.m_iCurrentHP);
-        dialogueText.text = "체력을 5 회복했다.!";
-
-
+        dialogueText.text = "아이템을 사용했다!";
         yield return new WaitForSeconds(2f);
 
         Process();
@@ -264,8 +272,7 @@ public class BattleManager : MonoBehaviour
         {
             dialogueText.text = "무사히 도망쳤다";
             yield return new WaitForSeconds(2f);
-            SceneManager.UnloadSceneAsync("BattleScene");
-            GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
+            ChangeScene();
         }
         else
         {
@@ -348,11 +355,14 @@ public class BattleManager : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
         }
-        GameManager.Instance.Canvas_WorldScene.SetActive(true);
-        GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
-        SceneManager.UnloadSceneAsync("BattleScene");
-       
-
+        ChangeScene();
+    }
+    
+    IEnumerator PlayerLost()
+    {
+        dialogueText.text = "졌다";
+        yield return new WaitForSeconds(2f);
+        ChangeScene();
     }
 
     #endregion

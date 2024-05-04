@@ -842,54 +842,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &381918729
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 381918731}
-  - component: {fileID: 381918730}
-  m_Layer: 0
-  m_Name: GamgMNG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &381918730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381918729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b676d3a1a5ffc54392ff245c652ef48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AssetUnitTable: {fileID: 11400000, guid: 4c38281b1b7b02043af9e5e9d5c1c78a, type: 2}
-  m_AssetItemTable: {fileID: 11400000, guid: 8eb3cce7129dd584fa43a4fb508b2744, type: 2}
-  Canvas_WorldScene: {fileID: 0}
-  g_GameState: 0
-  g_sEnemyBattleUnit: 
---- !u!4 &381918731
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381918729}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &484863640
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,6 +2656,7 @@ MonoBehaviour:
   g_EnemyUnit: {fileID: 0}
   g_BattleButtons: {fileID: 137649292}
   g_ChangeButton: {fileID: 684320965}
+  m_Canvas: {fileID: 1345978555}
   playerUnit: {fileID: 0}
   dialogueText: {fileID: 172759284}
   playerHUD: {fileID: 1186916802}
@@ -2721,7 +2674,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1558537954
 GameObject:
@@ -2990,7 +2943,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2053159760
 GameObject:
