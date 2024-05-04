@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Units:
   - m_iUnitNo: 1
     m_sUnitName: "\uD574\uD0DC"
-    m_sUnitExplain: 
+    m_sUnitExplain: "\uD574\uD0DC\uD0DC\uD0DC"
     UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: 0797f6e2008a18d40a80e810938495f7, type: 3}
     m_iUnitHP: 50
@@ -29,10 +29,10 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
-    m_AttackBehav_Ult: {fileID: 0}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
   - m_iUnitNo: 2
     m_sUnitName: "\uBC31\uC694\uD638"
-    m_sUnitExplain: 
+    m_sUnitExplain: "\uC694\uD638\uD638"
     UnitType: 3
     m_UnitSprite: {fileID: 21300000, guid: 453d4435967626746b1076fcb56f55ec, type: 3}
     m_iUnitHP: 50
@@ -46,10 +46,10 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-    m_AttackBehav_Ult: {fileID: 0}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
   - m_iUnitNo: 3
     m_sUnitName: "\uBC31\uD638"
-    m_sUnitExplain: 
+    m_sUnitExplain: "\uBC31\uD638\uB7AD"
     UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: 5f7b76d3e2a681d4ea9857b1eea5ce0a, type: 3}
     m_iUnitHP: 50
@@ -63,7 +63,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-    m_AttackBehav_Ult: {fileID: 0}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
   - m_iUnitNo: -1
     m_sUnitName: "\uB354\uBBF8"
     m_sUnitExplain: 
@@ -80,4 +80,4 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 0}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}

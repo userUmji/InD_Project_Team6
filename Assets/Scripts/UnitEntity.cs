@@ -36,7 +36,7 @@ public class UnitEntity : MonoBehaviour
 
     //공격 스킬 초기화
     public SOAttackBase[] m_AttackBehaviors = new SOAttackBase[3];
-    public SOAttackBase m_AttackBehaviors_ult;
+    //public SOAttackBase m_AttackBehaviors_ult;
 
 
 
@@ -62,7 +62,7 @@ public class UnitEntity : MonoBehaviour
         m_iCurrentHP = m_iUnitHP;
 
         m_spriteUnitImage = UnitData.m_UnitSprite;
-        m_AttackBehaviors = new SOAttackBase[3];
+        m_AttackBehaviors = new SOAttackBase[4];
         
         /*
         //랜덤 스킬 넣기를 위해 개발중
@@ -75,10 +75,9 @@ public class UnitEntity : MonoBehaviour
         m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
         m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
         m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
-        for (int i = 0; i < 3; i++)
+        m_AttackBehaviors[3] = Instantiate(UnitData.m_AttackBehav_Ult);
+        for (int i = 0; i < 4; i++)
             m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;
-        m_AttackBehaviors_ult = Instantiate(UnitData.m_AttackBehav_Ult);
-        m_iSkillAmounts[3] = m_AttackBehaviors_ult.m_iUseAmount;
 
         m_iPermanentDefMod = 0;
         m_iPermanentAtkMod = 0;
@@ -98,7 +97,7 @@ public class UnitEntity : MonoBehaviour
 
         m_iUnitLevel = UnitSaveData.m_iUnitLevel;
 
-        m_iSkillAmounts = new int[3];
+        m_iSkillAmounts = new int[4];
 
         m_iUnitHP = UnitData.m_iUnitHP + (UnitData.m_iLvlModHP * m_iUnitLevel);
         m_iUnitAtk = UnitData.m_iUnitAtk + (UnitData.m_iLvlModAtk * m_iUnitLevel);
@@ -108,7 +107,7 @@ public class UnitEntity : MonoBehaviour
         m_iCurrentHP = m_iUnitHP;
 
         m_spriteUnitImage = UnitData.m_UnitSprite;
-        m_AttackBehaviors = new SOAttackBase[3];
+        m_AttackBehaviors = new SOAttackBase[4];
 
         //m_AttackBehaviors[0] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_1]);
         //m_AttackBehaviors[1] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_2]);
@@ -117,8 +116,10 @@ public class UnitEntity : MonoBehaviour
         m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
         m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
         m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
-        for (int i = 0; i < 3; i++)
+        m_AttackBehaviors[3] = Instantiate(UnitData.m_AttackBehav_Ult);
+        for (int i = 0; i < m_iSkillAmounts.Length; i++)
             m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;
+
 
         //세이브데이터에서 불러오기
         m_iPermanentAtkMod = UnitSaveData.m_iPermanentAtkMod;
