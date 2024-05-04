@@ -39,10 +39,9 @@ public class BattleButtonCTR : MonoBehaviour
     {
         if (g_BattleManager.state == BattleManager.BattleState.ACTION)
         {
-            Debug.Log("스킬버튼 눌림");
             SkillButtonPrefab = Resources.Load<GameObject>("Prefabs/SkillButtons");
             GameObject SkillButton_Temp = Instantiate(SkillButtonPrefab, g_Canvas.transform);
-            for (int i = 0; i < SkillButton_Temp.transform.childCount - 1; i++)
+            for (int i = 0; i < SkillButton_Temp.transform.childCount - 2; i++)
             {
                 SkillButton_Temp.transform.GetChild(i).GetChild(0).transform.GetComponent<Text>().text = g_BattleManager.playerUnit.m_AttackBehaviors[i].GetSkillName();
                 SkillButton_Temp.transform.GetChild(i).GetChild(1).transform.GetComponent<TextMeshProUGUI>().text = g_BattleManager.playerUnit.m_iSkillAmounts[i] + "/" + g_BattleManager.playerUnit.m_AttackBehaviors[i].m_iUseAmount;
@@ -54,7 +53,7 @@ public class BattleButtonCTR : MonoBehaviour
                 }
                     
             }
-
+            InitButton_ult(SkillButton_Temp);
             BattleButtons.SetActive(false);
         }
     }
@@ -81,4 +80,20 @@ public class BattleButtonCTR : MonoBehaviour
     {
         Debug.Log("인벤토리 버튼 눌림");
     }
+
+    private void InitButton_ult(GameObject Buttons)
+    {
+        Buttons.transform.GetChild(3).GetChild(0).transform.GetComponent<Text>().text = g_BattleManager.playerUnit.m_AttackBehaviors[3].GetSkillName();
+        Buttons.transform.GetChild(3).GetChild(1).transform.GetComponent<TextMeshProUGUI>().text = g_BattleManager.playerUnit.m_iSkillAmounts[3] + "/" + g_BattleManager.playerUnit.m_AttackBehaviors[3].m_iUseAmount;
+        if (g_BattleManager.playerUnit.m_iSkillAmounts[3] == 0 || g_BattleManager.playerUnit.m_iIntimacy != 10)
+        {
+            if (g_BattleManager.playerUnit.m_iIntimacy != 10)
+                Buttons.transform.GetChild(3).GetChild(0).transform.GetComponent<Text>().text = "???";
+            Buttons.transform.GetChild(3).transform.GetComponent<Button>().interactable = false;
+            Buttons.transform.GetChild(3).GetChild(0).transform.GetComponent<Text>().color = new Color(255, 0, 0);
+            Buttons.transform.GetChild(3).GetChild(1).transform.GetComponent<TextMeshProUGUI>().color = new Color(255, 0, 0);
+        }
+    }
 }
+
+
