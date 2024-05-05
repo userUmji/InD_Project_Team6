@@ -93,9 +93,7 @@ public class GameManager : MonoBehaviour
         AsyncOperation SceneOper = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
         g_sEnemyBattleUnit = enemyBattleUnit;
         Canvas_WorldScene.SetActive(false);
-        SceneOper.allowSceneActivation = true;
-        AudioManager._instance.SwitchBgm(1); 
-        
+        SceneOper.allowSceneActivation = true; 
     }
     public void SaveALLPlayerUnit()
     {

@@ -6,12 +6,21 @@ using UnityEngine.UI;
 public class TextManager : MonoBehaviour
 {
     public TalkManager m_TalkManager;
+    public QuestManager questManager;
     public GameObject m_talkPanel;
     public Image m_portraitImg;
     public Text m_talkText;
     public GameObject m_scanObject;
     public bool isAct;
     public int talkIndex;
+    public Text QuestTalk;
+
+    // 게임이 시작될 때 현재 퀘스트의 상태를 확인하여 로그에 출력합니다.
+    void Start()
+    {
+        QuestTalk.text = questManager.CheckQuest();
+    }
+
 
     // 상호작용 
     public void Act(GameObject scanObj)
@@ -30,13 +39,16 @@ public class TextManager : MonoBehaviour
     void Talk(int id, bool isNpc)
     {
         // 대화 데이터 가져오기
-        string talkData = m_TalkManager.GetTalk(id, talkIndex);
+        int questTalkIndex = questManager.GetQuestTalkIndex(id);
+        string talkData = m_TalkManager.GetTalk(id + questTalkIndex, talkIndex);
 
         // 대화 데이터가 없으면 상호작용 종료
         if (talkData == null)
         {
             isAct = false;
             talkIndex = 0;
+            QuestTalk.text = questManager.CheckQuest();
+            Debug.Log(questManager.CheckQuest(id));
             return;
         }
 
