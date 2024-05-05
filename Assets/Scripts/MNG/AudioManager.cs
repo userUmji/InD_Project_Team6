@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup g_musicMixerGroup;
     AudioSource g_bgmPlayer;
     int g_currentBgmIndex;
+    int previousBgmIndex; // 이전 BGM 인덱스 저장
 
     // 효과음(SFX) 관련 변수들
     [Header("#SFX")]
@@ -34,7 +35,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        //_instance.SwitchBgm(0);
+        _instance.SwitchBgm(0);
     }
 
     void Init()
@@ -46,7 +47,6 @@ public class AudioManager : MonoBehaviour
         g_bgmPlayer.playOnAwake = false;
         g_bgmPlayer.loop = true;
         g_bgmPlayer.outputAudioMixerGroup = g_musicMixerGroup; // 배경음 AudioSource에 배경음의 믹서 그룹 설정
-        g_bgmPlayer.clip = g_bgmClip[g_currentBgmIndex]; // 현재 재생 중인 배경음 클립 설정
 
         // 효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("SfxPlayer");
@@ -96,6 +96,9 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        // 이전 BGM 인덱스 저장
+        previousBgmIndex = g_currentBgmIndex;
+
         // 기존 배경음 중지
         StopBgm();
 
@@ -103,15 +106,38 @@ public class AudioManager : MonoBehaviour
         g_bgmPlayer.clip = g_bgmClip[g_currentBgmIndex]; // 배경음 플레이어에 새로운 클립 설정
         g_bgmPlayer.Play(); // 새로운 배경음 재생
     }
+    void OnEnable()
+    {
+        // 씬이 로드될 때와 언로드될 때의 이벤트 핸들러 등록
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
 
-    // 배틀씬 로드시 Bgm 중지
-     //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    //{
-        //if (scene.name == "BattleScene")
-       // {
-           // _instance.StopBgm();
-           // SceneManager.sceneLoaded -= OnSceneLoaded; // 콜백 함수 제거
-        //}
-    //}
+    void OnDisable()
+    {
+        // 씬이 로드될 때와 언로드될 때의 이벤트 핸들러 등록 해제
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
 
+    // 씬이 로드될 때 호출되는 메서드
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 로드된 씬의 이름이 "BattleScene"인 경우 배틀 BGM으로 전환
+        if (scene.name == "BattleScene")
+        {
+            SwitchBgm(1);
+        }
+    }
+
+    // 씬이 언로드될 때 호출되는 메서드
+    void OnSceneUnloaded(Scene scene)
+    {
+        // 언로드된 씬의 이름이 "BattleScene"인 경우 이전 BGM으로 전환
+        if (scene.name == "BattleScene")
+        {
+            SwitchBgm(previousBgmIndex);
+        }
+    }
 }
+
