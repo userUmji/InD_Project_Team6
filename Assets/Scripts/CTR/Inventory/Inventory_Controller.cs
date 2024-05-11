@@ -148,6 +148,7 @@ public class Inventory_Controller : MonoBehaviour
             }
             else if (g_gin_V.transform.localScale == new Vector3(0, 0, 1))
             {
+                Change_UI.instance.ALL_OFF_UI();
                 Show_Inv();
             }
         }
