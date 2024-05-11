@@ -17,8 +17,9 @@ public class UnitEntity : MonoBehaviour
     public int m_iTempSpeedMod;
     public int[] m_iSkillAmounts;
     public int m_iUnitNo;
+    public int m_iStateDur;
     public UnitState g_UnitState;
-
+    
     public Sprite m_spriteUnitImage;
     public GameManager.Type UnitType;
     #endregion
@@ -32,13 +33,8 @@ public class UnitEntity : MonoBehaviour
     public int m_iIntimacy;
     
     #endregion
-
-
     //공격 스킬 초기화
-    public SOAttackBase[] m_AttackBehaviors = new SOAttackBase[3];
-    //public SOAttackBase m_AttackBehaviors_ult;
-
-
+    public SOAttackBase[] m_AttackBehaviors;
 
     //GameManager에 있는 UnitData 정보로 초기화
     public void SetUnit(string className)
@@ -54,10 +50,10 @@ public class UnitEntity : MonoBehaviour
 
         m_iSkillAmounts = new int[4];
 
-        m_iUnitHP = UnitData.m_iUnitHP + (UnitData.m_iLvlModHP * m_iUnitLevel);
-        m_iUnitAtk = UnitData.m_iUnitAtk + (UnitData.m_iLvlModAtk * m_iUnitLevel);
-        m_iUnitDef = UnitData.m_iUnitDef + (UnitData.m_iLvlModDef * m_iUnitLevel);
-        m_iUnitSpeed = UnitData.m_iUnitSpeed + (UnitData.m_iLvlModSpeed * m_iUnitLevel);
+        m_iUnitHP = UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel);
+        m_iUnitAtk = UnitData.m_iUnitAtk + (3 * m_iUnitLevel);
+        m_iUnitDef = UnitData.m_iUnitDef + (3 * m_iUnitLevel);
+        m_iUnitSpeed = UnitData.m_iUnitSpeed + (3 * m_iUnitLevel);
         UnitType = UnitData.UnitType;
         m_iCurrentHP = m_iUnitHP;
 
@@ -99,10 +95,10 @@ public class UnitEntity : MonoBehaviour
 
         m_iSkillAmounts = new int[4];
 
-        m_iUnitHP = UnitData.m_iUnitHP + (UnitData.m_iLvlModHP * m_iUnitLevel);
-        m_iUnitAtk = UnitData.m_iUnitAtk + (UnitData.m_iLvlModAtk * m_iUnitLevel);
-        m_iUnitDef = UnitData.m_iUnitDef + (UnitData.m_iLvlModDef * m_iUnitLevel);
-        m_iUnitSpeed = UnitData.m_iUnitSpeed + (UnitData.m_iLvlModSpeed * m_iUnitLevel);
+        m_iUnitHP = UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel);
+        m_iUnitAtk = UnitData.m_iUnitAtk + (3 * m_iUnitLevel);
+        m_iUnitDef = UnitData.m_iUnitDef + (3 * m_iUnitLevel);
+        m_iUnitSpeed = UnitData.m_iUnitSpeed + (3 * m_iUnitLevel);
         UnitType = UnitData.UnitType;
         m_iCurrentHP = m_iUnitHP;
 
@@ -170,17 +166,25 @@ public class UnitEntity : MonoBehaviour
         if (m_iCurrentHP < 0)
             m_iCurrentHP = 0;
     }
-        public void LevelUp()
+    public void LevelUp()
     {
         var UnitData = GameManager.Instance.GetUnitData(m_sUnitName);
-        m_iUnitHP += (UnitData.m_iLvlModHP);
-        m_iCurrentHP += (UnitData.m_iLvlModHP);
-        m_iUnitAtk += (UnitData.m_iLvlModAtk);
-        m_iUnitDef += (UnitData.m_iLvlModDef);
-        m_iUnitSpeed += (UnitData.m_iLvlModSpeed );
+        m_iUnitHP += UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel);
+        m_iCurrentHP += 100;
+        m_iUnitAtk += 3;
+        m_iUnitDef += 3;
+        m_iUnitSpeed += 3;
         m_iUnitEXP -= m_iUnitLevel * 10;
         m_iUnitLevel += 1;
     }
-
+    public bool CheckLevelUP()
+    {
+        if (m_iUnitLevel > 50)
+            return false;
+        int exp_Max = GameManager.Instance.g_iReqExp[m_iUnitLevel];
+        if (m_iUnitEXP > exp_Max)
+            return true;
+        return false;
+    }
 
 }

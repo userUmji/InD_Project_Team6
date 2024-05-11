@@ -20,14 +20,6 @@ public class UnitTable : ScriptableObject {
         public int m_iUnitDef;
         //public int m_iUnitLevel;
 
-
-        public int m_iLvlModHP;
-        public int m_iLvlModAtk;
-        public int m_iLvlModSpeed;
-        public int m_iLvlModDef;
-
-
-
         public SOAttackBase m_AttackBehav_1;
         public SOAttackBase m_AttackBehav_2;
         public SOAttackBase m_AttackBehav_3;

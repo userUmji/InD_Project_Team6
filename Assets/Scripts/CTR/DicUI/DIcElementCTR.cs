@@ -22,7 +22,7 @@ public class DIcElementCTR : MonoBehaviour
         UnitImage.sprite = Unit.m_UnitSprite;
         UnitName.text = name;
         UnitLevel.text = SaveUnit.m_iUnitLevel + "Lvl";
-        UnitHP.maxValue = Unit.m_iUnitHP + (SaveUnit.m_iUnitLevel * Unit.m_iLvlModHP);
+        UnitHP.maxValue = Unit.m_iUnitHP + (SaveUnit.m_iUnitLevel * 3);
         UnitHP.value = UnitHP.maxValue;
         UnitIntimacy.maxValue = 10;
         UnitIntimacy.value = SaveUnit.m_iIntimacy;

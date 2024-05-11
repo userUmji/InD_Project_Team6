@@ -157,6 +157,13 @@ public class BattleManager : MonoBehaviour
 
     private void ChangeScene()
     {
+        foreach(var Unit in GameManager.Instance.m_UnitManager.g_PlayerUnits)
+        {
+            UnitEntity entity = Unit.transform.GetComponent<UnitEntity>();
+            entity.m_iTempAtkMod = 0;
+            entity.m_iTempDefMod = 0;
+            entity.m_iTempSpeedMod = 0;
+        }
         GameManager.Instance.Canvas_WorldScene.SetActive(true);
         GameManager.Instance.g_InventoryGO.transform.SetParent(GameManager.Instance.Canvas_WorldScene.transform);
         SceneManager.UnloadSceneAsync("BattleScene");
@@ -312,7 +319,8 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator Result()
     {
-        dialogueText.text = "턴 실행 완료";
+        
+        
     
         yield return new WaitForSeconds(1f);
         if (playerUnit.m_iCurrentHP <= 0)
@@ -333,7 +341,14 @@ public class BattleManager : MonoBehaviour
         state = BattleState.END;
         dialogueText.text = "승리했다!";
         yield return new WaitForSeconds(1f);
-        foreach(GameObject entity in GameManager.Instance.m_UnitManager.g_PlayerUnits)
+        int gainExpTemp;
+        if (enemyUnit.m_iUnitLevel < 16)
+            gainExpTemp = enemyUnit.m_iUnitLevel * 300;
+        else if (enemyUnit.m_iUnitLevel >= 16 && enemyUnit.m_iUnitLevel < 30)
+            gainExpTemp = enemyUnit.m_iUnitLevel * 250;
+        else
+            gainExpTemp = enemyUnit.m_iUnitLevel * 200;
+        foreach (GameObject entity in GameManager.Instance.m_UnitManager.g_PlayerUnits)
         {
             float mod;
             UnitEntity unitEntity = entity.GetComponent<UnitEntity>();
@@ -341,11 +356,12 @@ public class BattleManager : MonoBehaviour
                 mod = 0.5f;
             else
                 mod = 0.25f;
-            int gainExpTemp = (int)(enemyUnit.m_iUnitLevel * 3 * mod);
-            unitEntity.m_iUnitEXP += gainExpTemp;
-            dialogueText.text = unitEntity.m_sUnitName + "는 " + gainExpTemp + "의 경험치를 얻었다.";
+
+            unitEntity.m_iUnitEXP += (int)(gainExpTemp * mod);
+            dialogueText.text = unitEntity.m_sUnitName + "는 " + gainExpTemp *mod + "의 경험치를 얻었다.";
             yield return new WaitForSeconds(1f);
-            while(unitEntity.m_iUnitEXP >= unitEntity.m_iUnitLevel * 10)
+            bool isLevelUP = unitEntity.CheckLevelUP();
+            while (isLevelUP)
             {
                 unitEntity.LevelUp();
                 dialogueText.text = unitEntity.m_sUnitName + "는" + unitEntity.m_iUnitLevel +"로 레벨업했다!";
@@ -353,6 +369,7 @@ public class BattleManager : MonoBehaviour
                 yield return new WaitForSeconds(1f);
                 dialogueText.text = unitEntity.m_sUnitName + "는 강해져서 기분이 좋은 것 같다!";
                 yield return new WaitForSeconds(1f);
+                isLevelUP = unitEntity.CheckLevelUP();
             }
         }
         ChangeScene();
