@@ -8,6 +8,7 @@ public class ItemTable : ScriptableObject
     [System.Serializable]
     public struct ItemStats
     {
+        public int m_iItemNo;
         public string m_sItemName;
         public string m_sItemDescription;
         public string m_sItemUseDialog;

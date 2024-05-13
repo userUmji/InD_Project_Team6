@@ -7,6 +7,7 @@ public class EventZoneCTR: MonoBehaviour
     // g_fCharacterSpeed -> g는 글로벌(public) m은 멤버(private) 뒤의 f(float)/i(int)/s(string)
     public string[] g_gmonster_List;
     public float g_fpercent; // 몬스터 등장 확률
+    public int[] g_iLevelBoundary;
     public Coroutine FindCoroutine;
 
 
@@ -24,16 +25,12 @@ public class EventZoneCTR: MonoBehaviour
             if (collision.CompareTag("Player"))
             {
                 if (FindCoroutine == null)
-                {
-                    Debug.Log("adf");
-               
+                {             
                     FindCoroutine = StartCoroutine("Find_Monster");
                     
                 }
             }
-            
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

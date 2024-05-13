@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f71eef22bd432448336e0fb157a11c, type: 3}
+  m_Name: "\uBA40\uB9AC\uC9D6\uAE30"
+  m_EditorClassIdentifier: 
+  m_iSkillNo: 1
+  SkillType: 0
+  m_EffectState: 0
+  m_iEffectDur: 0
+  m_iEffectChance: 0
+  m_SkillEffect: 0
+  m_fAttackMag: 2
+  m_sAttackName: "\uBA40\uB9AC\uC9D6\uAE30"
+  m_sSkillDescription: "\uBA40\uB9AC \uC9D6\uC5B4 \uC0C1\uB300\uB97C \uACF5\uACA9\uD55C\uB2E4.
+    \uBB34\uC870\uAC74 \uBA3C\uC800 \uACF5\uACA9\uD560\uC218\uC788\uB2E4."
+  m_iUseAmount: 10
+  m_isPlayed: 0
+  m_iAdditionalSpeed: 9999

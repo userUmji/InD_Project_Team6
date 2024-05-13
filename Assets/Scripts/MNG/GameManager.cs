@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameState g_GameState;
     public GameObject g_InventoryGO;
     public List<SOAttackBase> Skills;
+    public int[] g_iReqExp;
 
     public string g_sEnemyBattleUnit;
 
@@ -67,10 +68,9 @@ public class GameManager : MonoBehaviour
         //Unit을 관리할 UnitManager을 생성하고 Init
         m_UnitManager = new UnitManager();
         m_DataManager.LoadFunc();
+        InitExp();
 
         m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
-        m_UnitManager.SetPlayerUnitEntityByName("백요호", 1);
-        m_UnitManager.SetPlayerUnitEntityByName("백호", 2);
         g_GameState = GameState.INPROGRESS;
 
     }
@@ -104,7 +104,6 @@ public class GameManager : MonoBehaviour
         }
         m_DataManager.SaveFunc_ALL();
     }
-
     // 게임 상태를 설정하는 메서드
     public void SetGameState(GameState state)
     {
@@ -151,4 +150,59 @@ public class GameManager : MonoBehaviour
         return null;
     }
     #endregion
+    private void InitExp()
+    {
+        g_iReqExp = new int[51];
+        g_iReqExp[0] = 0;
+        g_iReqExp[1] = 1000;
+        g_iReqExp[2] = 1749;
+        g_iReqExp[3] = 2435;
+        g_iReqExp[4] = 3073;
+        g_iReqExp[5] = 3669;
+        g_iReqExp[6] = 4227;
+        g_iReqExp[7] = 4752;
+        g_iReqExp[8] = 5245;
+        g_iReqExp[9] = 5710;
+        g_iReqExp[10] = 6150;
+        g_iReqExp[11] = 6567;
+        g_iReqExp[12] = 6964;
+        g_iReqExp[13] = 7342;
+        g_iReqExp[14] = 7703;
+        g_iReqExp[15] = 8049;
+        g_iReqExp[16] = 8381;
+        g_iReqExp[17] = 8700;
+        g_iReqExp[18] = 9008;
+        g_iReqExp[19] = 9305;
+        g_iReqExp[20] = 9592;
+        g_iReqExp[21] = 9870;
+        g_iReqExp[22] = 10140;
+        g_iReqExp[23] = 10402;
+        g_iReqExp[24] = 10657;
+        g_iReqExp[25] = 10905;
+        g_iReqExp[26] = 11147;
+        g_iReqExp[27] = 11382;
+        g_iReqExp[28] = 11612;
+        g_iReqExp[29] = 11836;
+        g_iReqExp[30] = 12055;
+        g_iReqExp[31] = 12268;
+        g_iReqExp[32] = 12477;
+        g_iReqExp[33] = 12681;
+        g_iReqExp[34] = 12880;
+        g_iReqExp[35] = 13075;
+        g_iReqExp[36] = 13266;
+        g_iReqExp[37] = 13452;
+        g_iReqExp[38] = 13635;
+        g_iReqExp[39] = 13815;
+        g_iReqExp[40] = 13991;
+        g_iReqExp[41] = 14164;
+        g_iReqExp[42] = 14333;
+        g_iReqExp[43] = 14499;
+        g_iReqExp[44] = 14662;
+        g_iReqExp[45] = 14821;
+        g_iReqExp[46] = 14978;
+        g_iReqExp[47] = 15131;
+        g_iReqExp[48] = 15282;
+        g_iReqExp[49] = 15430;
+        g_iReqExp[50] = 15575;
+    }
 }

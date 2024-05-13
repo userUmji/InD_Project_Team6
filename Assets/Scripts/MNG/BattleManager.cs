@@ -11,7 +11,6 @@ public class BattleManager : MonoBehaviour
     public GameObject g_EnemyUnit;
     public GameObject g_BattleButtons;
     public GameObject g_ChangeButton;
-
     public GameObject m_Canvas;
     // 전투 상태
     public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, SELECT, ENEMYTURN, RESULT, END }
@@ -19,10 +18,10 @@ public class BattleManager : MonoBehaviour
     private Coroutine BattleCoroutine;
     private bool isPlayed = false;
     private bool isFall = false;
+    //버튼에서 전달받은 Action
     private GameManager.Action m_ePlayerAction;
     private int m_iPlayerActionIndex;
    
-
     // 플레이어 유닛
     public UnitEntity playerUnit;
     UnitEntity enemyUnit;
@@ -80,7 +79,7 @@ public class BattleManager : MonoBehaviour
     {
         if (state != BattleState.ENEMYTURN && state != BattleState.PLAYERTURN)
         {
-            if (playerUnit.m_iUnitSpeed + playerUnit.m_iTempSpeedMod + playerUnit.m_iPermanentSpeedMod > enemyUnit.m_iUnitSpeed)
+            if (playerUnit.m_iUnitSpeed + playerUnit.m_iTempSpeedMod + playerUnit.m_iPermanentSpeedMod + playerUnit.m_AttackBehaviors[m_iPlayerActionIndex].m_iAdditionalSpeed > enemyUnit.m_iUnitSpeed)
                 BattleCoroutine = StartCoroutine(PlayerTurn_Attack());
             else if (playerUnit.m_iUnitSpeed + playerUnit.m_iTempSpeedMod + playerUnit.m_iPermanentSpeedMod < enemyUnit.m_iUnitSpeed)
                 BattleCoroutine = StartCoroutine(EnemyTurn());
@@ -140,13 +139,14 @@ public class BattleManager : MonoBehaviour
     {
         state = BattleState.ACTION;
         int fallCount = 0;
+        int unitCount = GameManager.Instance.m_UnitManager.CheckUnitAmount();
         isFall = true;
-        for(int i = 0; i< GameManager.Instance.m_UnitManager.g_PlayerUnits.Length;i++)
+        for(int i = 0; i< unitCount;i++)
         {
             if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_iCurrentHP <= 0)
                 fallCount += 1;
         }
-        if(fallCount == 3)
+        if(fallCount == unitCount)
         {
             StartCoroutine(PlayerLost());
         }
@@ -157,6 +157,16 @@ public class BattleManager : MonoBehaviour
 
     private void ChangeScene()
     {
+        foreach(var Unit in GameManager.Instance.m_UnitManager.g_PlayerUnits)
+        {
+            if (Unit != null)
+            {
+                UnitEntity entity = Unit.transform.GetComponent<UnitEntity>();
+                entity.m_iTempAtkMod = 0;
+                entity.m_iTempDefMod = 0;
+                entity.m_iTempSpeedMod = 0;
+            }
+        }
         GameManager.Instance.Canvas_WorldScene.SetActive(true);
         GameManager.Instance.g_InventoryGO.transform.SetParent(GameManager.Instance.Canvas_WorldScene.transform);
         SceneManager.UnloadSceneAsync("BattleScene");
@@ -184,7 +194,7 @@ public class BattleManager : MonoBehaviour
         enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
         enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
 
-        dialogueText.text = "야생의" + enemyUnit.m_sUnitName + "이 나타났다...";
+        dialogueText.text = "도깨비가 나타났다!";
 
         // HUD 초기화
         playerHUD.SetHUD(playerUnit);
@@ -207,9 +217,9 @@ public class BattleManager : MonoBehaviour
     IEnumerator PlayerTurn_Attack()
     {
         state = BattleState.PLAYERTURN;
-        if (playerUnit.g_UnitState == UnitEntity.UnitState.BERSERK)
+        if (CalEffectChance(playerUnit,UnitEntity.UnitState.BERSERK))
         {
-            dialogueText.text = playerUnit.m_sUnitName + "는 말을 듣지 않는다!";
+            dialogueText.text = playerUnit.m_sUnitName + "은 지금 광란상태다!";
             yield return new WaitForSeconds(1f);
             playerUnit.AttackByIndex(playerUnit, enemyUnit, Random.Range(0,playerUnit.m_AttackBehaviors.Length));
             enemyHUD.SetHUD(enemyUnit);
@@ -217,9 +227,16 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
-            enemyHUD.SetHUD(enemyUnit);
-            dialogueText.text = playerUnit.m_sUnitName + "의 " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
+            if (CalEffectChance(playerUnit,UnitEntity.UnitState.PARALYSIS))
+            {
+                dialogueText.text = playerUnit.m_sUnitName + "은 지금 마비되었다.";
+            }
+            else
+            {
+                playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
+                enemyHUD.SetHUD(enemyUnit);
+                dialogueText.text = playerUnit.m_sUnitName + "의 " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
+            }
         }
         yield return new WaitForSeconds(1f);
         if (enemyUnit.m_iCurrentHP <= 0 || playerUnit.m_iCurrentHP <= 0)
@@ -265,9 +282,7 @@ public class BattleManager : MonoBehaviour
             runChance = 70;
         else
             runChance = 30;
-
         int randomChance = Random.Range(1, 101);
-        Debug.Log(randomChance);
         if (runChance < randomChance)
         {
             dialogueText.text = "무사히 도망쳤다";
@@ -312,7 +327,8 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator Result()
     {
-        dialogueText.text = "턴 실행 완료";
+        TakeStateDamage(playerUnit);
+        TakeStateDamage(enemyUnit);
     
         yield return new WaitForSeconds(1f);
         if (playerUnit.m_iCurrentHP <= 0)
@@ -333,26 +349,52 @@ public class BattleManager : MonoBehaviour
         state = BattleState.END;
         dialogueText.text = "승리했다!";
         yield return new WaitForSeconds(1f);
-        foreach(GameObject entity in GameManager.Instance.m_UnitManager.g_PlayerUnits)
+        int gainExpTemp;
+        if (enemyUnit.m_iUnitLevel < 16)
+            gainExpTemp = enemyUnit.m_iUnitLevel * 300;
+        else if (enemyUnit.m_iUnitLevel >= 16 && enemyUnit.m_iUnitLevel < 30)
+            gainExpTemp = enemyUnit.m_iUnitLevel * 250;
+        else
+            gainExpTemp = enemyUnit.m_iUnitLevel * 200;
+        foreach (GameObject entity in GameManager.Instance.m_UnitManager.g_PlayerUnits)
         {
-            float mod;
-            UnitEntity unitEntity = entity.GetComponent<UnitEntity>();
-            if (unitEntity.m_sUnitName == playerUnit.m_sUnitName)
-                mod = 0.5f;
-            else
-                mod = 0.25f;
-            int gainExpTemp = (int)(enemyUnit.m_iUnitLevel * 3 * mod);
-            unitEntity.m_iUnitEXP += gainExpTemp;
-            dialogueText.text = unitEntity.m_sUnitName + "는 " + gainExpTemp + "의 경험치를 얻었다.";
-            yield return new WaitForSeconds(1f);
-            while(unitEntity.m_iUnitEXP >= unitEntity.m_iUnitLevel * 10)
+            if (entity != null)
             {
-                unitEntity.LevelUp();
-                dialogueText.text = unitEntity.m_sUnitName + "는" + unitEntity.m_iUnitLevel +"로 레벨업했다!";
-                playerHUD.levelText.text = "Lvl " + unitEntity.m_iUnitLevel ;
+                UnitEntity unitEntity = entity.GetComponent<UnitEntity>();
+                float mod;
+                Debug.Log(GameManager.Instance.m_UnitManager.CheckUnitAmount());
+                if(GameManager.Instance.m_UnitManager.CheckUnitAmount() == 1)
+                {
+                    mod = 1.0f;
+                }
+                else if (GameManager.Instance.m_UnitManager.CheckUnitAmount() == 2)
+                {
+                    if (unitEntity.m_sUnitName == playerUnit.m_sUnitName)
+                        mod = 0.75f;
+                    else
+                        mod = 0.25f;
+                }
+                else
+                {
+                    if (unitEntity.m_sUnitName == playerUnit.m_sUnitName)
+                        mod = 0.5f;
+                    else
+                        mod = 0.25f;
+                }
+                unitEntity.m_iUnitEXP += (int)(gainExpTemp * mod);
+                dialogueText.text = unitEntity.m_sUnitName + "는 " + gainExpTemp * mod + "의 경험치를 얻었다.";
                 yield return new WaitForSeconds(1f);
-                dialogueText.text = unitEntity.m_sUnitName + "는 강해져서 기분이 좋은 것 같다!";
-                yield return new WaitForSeconds(1f);
+                bool isLevelUP = unitEntity.CheckLevelUP();
+                while (isLevelUP)
+                {
+                    unitEntity.LevelUp();
+                    dialogueText.text = unitEntity.m_sUnitName + "는" + unitEntity.m_iUnitLevel + "로 레벨업했다!";
+                    playerHUD.levelText.text = "Lvl " + unitEntity.m_iUnitLevel;
+                    yield return new WaitForSeconds(1f);
+                    dialogueText.text = unitEntity.m_sUnitName + "는 강해져서 기분이 좋은 것 같다!";
+                    yield return new WaitForSeconds(1f);
+                    isLevelUP = unitEntity.CheckLevelUP();
+                }
             }
         }
         ChangeScene();
@@ -390,6 +432,31 @@ public class BattleManager : MonoBehaviour
 
         state = BattleState.PROCESS;
         Process();
+    }
+    public void TakeStateDamage(UnitEntity entity)
+    {
+        if (entity.g_UnitState.state == UnitEntity.UnitState.FIRE || entity.g_UnitState.state == UnitEntity.UnitState.ICE)
+        {
+            entity.TakeDamage(entity.g_UnitState.stateDamage);
+            dialogueText.text = entity.m_sUnitName + "는 " + entity.g_UnitState.stateDamage + "의 데미지를 받았다!";
+        }
+        if (entity.g_UnitState.stateDur != 0)
+        {
+            entity.g_UnitState.stateDur -= 1;
+            if (entity.g_UnitState.stateDur == 0)
+                entity.g_UnitState.state = UnitEntity.UnitState.NULL;
+        }
+    }
+    public bool CalEffectChance(UnitEntity entity , UnitEntity.UnitState state)
+    {
+        if(entity.g_UnitState.state == state)
+        {
+            int attackChance = 30;
+            int chance = Random.Range(0, 101);
+            if (attackChance < chance)
+                return true;
+        }
+        return false;
     }
     #endregion
 }

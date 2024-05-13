@@ -4,16 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewBaseAttack", menuName = "AttackBehavior/Base")]
 public class SOBaseAttack : SOAttackBase
 {
-    //���ֵ��� �������̰ų� �������� �����Դϴ�.
-    //SO�� ����� SOInstance�� �����ϰ� ����մϴ�.
-    //m_fAttackMag -> ��ų ����
-    //SkillType -> ��ų Ÿ��
-    //�� �κп��� �ش� ������ ���� ����� ������ �� �ֽ��ϴ�.
-
-
+    //m_fAttackMag -> 공격 배율
+    //SkillType -> 스킬의 타입
+    
     public override void ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
     {
-        // ���� -> ((���ݷ�*��ų����) - ������)*�Ӽ�����
+        // 최종 데미지 -> ((공격력 * 공격 배율) - 방어력)*속성 배율
         int AttackDamage = (int)((Atker.m_iUnitAtk + Atker.m_iTempAtkMod + Atker.m_iPermanentAtkMod)  * m_fAttackMag);
         int finalAttackDamage = AttackDamage - (Defender.m_iUnitDef + Defender.m_iPermanentDefMod + Defender.m_iTempDefMod);
 
@@ -26,8 +22,6 @@ public class SOBaseAttack : SOAttackBase
 
         Defender.m_iCurrentHP -= finalAttackDamage;
 
-        //Debug.Log(isDouble);
-        //Debug.Log(finalAttackDamage);
     }
 
     public override string GetSkillName()
