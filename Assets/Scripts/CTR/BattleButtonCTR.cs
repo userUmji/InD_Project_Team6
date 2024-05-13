@@ -67,7 +67,7 @@ public class BattleButtonCTR : MonoBehaviour
             //instantiate 하고 텍스트를 바꾸기 위해 Temp에 저장
             GameObject ChangeButton_Temp = Instantiate(ChangeButtonPrefab, g_Canvas.transform);
             //버튼의 텍스트를 플레이어의 유닛 이름으로 바꿈
-            for (int i = 0; i < GameManager.Instance.m_UnitManager.g_PlayerUnits.Length; i++)
+            for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
             {
                 ChangeButton_Temp.transform.GetChild(i).transform.GetChild(0).transform.GetComponent<Text>().text = GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
                 if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_iCurrentHP <= 0)

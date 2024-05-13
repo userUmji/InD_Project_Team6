@@ -71,8 +71,6 @@ public class GameManager : MonoBehaviour
         InitExp();
 
         m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
-        m_UnitManager.SetPlayerUnitEntityByName("백요호", 1);
-        m_UnitManager.SetPlayerUnitEntityByName("백호", 2);
         g_GameState = GameState.INPROGRESS;
 
     }
@@ -208,9 +206,5 @@ public class GameManager : MonoBehaviour
         g_iReqExp[48] = 15282;
         g_iReqExp[49] = 15430;
         g_iReqExp[50] = 15575;
-
-        for (int i = 0; i < g_iReqExp.Length; i++)
-                Debug.Log(g_iReqExp[i]);
-       
     }
 }

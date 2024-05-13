@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: "\uD558\uB298\uC758 \uC77C\uACA9"
   m_EditorClassIdentifier: 
   m_iSkillNo: 0
-  SkillType: 3
   m_fAttackMag: 3
   m_sAttackName: "\uD558\uB298\uC758 \uC77C\uACA9"
-  m_sSkillDescription: 
-  m_iUseAmount: 5
+  m_sSkillDescription: "\uCC9C\uBC8C\uC744 \uB0B4\uB824 \uC0C1\uB300\uB97C \uC2EC\uD310\uD558\uB294
+    \uACF5\uACA9\uC774\uB2E4."
+  m_iUseAmount: 10
+  SkillType: 0
+  m_EffectState: 0
+  m_iEffectDur: 0
+  m_iEffectChance: 0
+  m_SkillEffect: 0
+  m_isPlayed: 0
+  m_iAdditionalSpeed: 0

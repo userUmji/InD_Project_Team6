@@ -27,10 +27,10 @@ MonoBehaviour:
     m_iUnitAtk: -2
     m_iUnitSpeed: -6
     m_iUnitDef: -6
-    m_AttackBehav_1: {fileID: 11400000, guid: 6b318cd4ef86cc540935a744a148c6e2, type: 2}
+    m_AttackBehav_1: {fileID: 11400000, guid: a15589d8b51bde742bee1f591e7b5f9a, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: e52a6d012be37c14892fb6224964fd87, type: 2}
   - m_iUnitNo: 2
     m_sUnitName: "\uC800\uC2B9\uCC28\uC0AC"
     m_sUnitExplain: "\uC800\uC2B9\uCC28\uC0AC\uB294 \uBD89\uC740 \uB3D9\uC544\uC904\uACFC

@@ -12712,7 +12712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   g_gmonster_List:
-  - "\uB354\uBBF8"
+  - "\uBC31\uC694\uD638"
   g_fpercent: 50
 --- !u!61 &1229687253
 BoxCollider2D:
@@ -20256,10 +20256,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
   - {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
   - {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
+  - {fileID: 11400000, guid: a15589d8b51bde742bee1f591e7b5f9a, type: 2}
   - {fileID: 11400000, guid: 60c8f224a8f88be4bb1de19329a2f2a2, type: 2}
-  - {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-  - {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-  - {fileID: 11400000, guid: 6b318cd4ef86cc540935a744a148c6e2, type: 2}
+  - {fileID: 11400000, guid: e52a6d012be37c14892fb6224964fd87, type: 2}
+  - {fileID: 11400000, guid: c766b3698dccb2749966cc0cfc74c8e8, type: 2}
+  - {fileID: 11400000, guid: d90fb8b41dbddb94f98913f164a161d7, type: 2}
+  - {fileID: 11400000, guid: 01ac79fb80412e5448cde8b922bb832b, type: 2}
+  - {fileID: 11400000, guid: 3ee4a365287f4c742ac428ac6f010072, type: 2}
+  - {fileID: 11400000, guid: 685acfa8366bb72488edadc2d4f1057c, type: 2}
+  - {fileID: 11400000, guid: 3371762efdd5e5f4bb149c99113d92e7, type: 2}
+  - {fileID: 11400000, guid: 06e74d940df1a1e468ccf9bf407e3fd3, type: 2}
+  - {fileID: 11400000, guid: 819aa490c0f08604c85e3c20373df473, type: 2}
+  - {fileID: 11400000, guid: 8add1b5541b29db4ca7edb6f0d945176, type: 2}
+  - {fileID: 11400000, guid: d6324c13b0c6bef4b80b2f84e5dd8df6, type: 2}
+  - {fileID: 11400000, guid: b17e94eb24da6db4f97ab71773789107, type: 2}
+  - {fileID: 11400000, guid: 66680be00fe137043b257f75d02ee1df, type: 2}
+  - {fileID: 11400000, guid: 169318a20a8ac574da166b0ff00a403f, type: 2}
+  - {fileID: 11400000, guid: e426be528ffeb2f4fb7c2b2716619a86, type: 2}
+  - {fileID: 11400000, guid: 67ed1cab905480e4c9c3d383868ddc51, type: 2}
+  - {fileID: 11400000, guid: bab8a46376f99aa4fb5f2d5a2afe98ba, type: 2}
+  g_iReqExp: 
   g_sEnemyBattleUnit: 
 --- !u!4 &1862885429
 Transform:

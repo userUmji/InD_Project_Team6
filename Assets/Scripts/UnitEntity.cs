@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class UnitEntity : MonoBehaviour
 {
+    public class UnitStateInfo
+    {
+        public UnitState state;
+        public int stateDur;
+        public int stateDamage;
+    }
+    public class UnitItemStateInfo
+    {
+        public int atk;
+        public int def;
+        public int spd;
+        public int dur;
+    }
     public enum UnitState { NULL, ICE, FIRE, BERSERK, PARALYSIS};
     #region 기본 정보
     public string m_sUnitName;
@@ -12,14 +25,18 @@ public class UnitEntity : MonoBehaviour
     public int m_iUnitDef;
     public int m_iUnitSpeed;
     public int m_iCurrentHP;
+
     public int m_iTempAtkMod;
     public int m_iTempDefMod;
     public int m_iTempSpeedMod;
+
     public int[] m_iSkillAmounts;
     public int m_iUnitNo;
     public int m_iStateDur;
-    public UnitState g_UnitState;
-    
+    //public UnitState g_UnitState;
+    public UnitStateInfo g_UnitState;
+
+
     public Sprite m_spriteUnitImage;
     public GameManager.Type UnitType;
     #endregion
@@ -60,17 +77,16 @@ public class UnitEntity : MonoBehaviour
         m_spriteUnitImage = UnitData.m_UnitSprite;
         m_AttackBehaviors = new SOAttackBase[4];
         
-        /*
+        
         //랜덤 스킬 넣기를 위해 개발중
         List<SOAttackBase> attack_Temp = GameManager.Instance.Skills.FindAll(type => type.SkillType == UnitType);
 
-        m_AttackBehaviors[0] = ChooseRandomAttack(attack_Temp);
-        m_AttackBehaviors[1] = ChooseRandomAttack(attack_Temp);
-        m_AttackBehaviors[2] = ChooseRandomAttack(attack_Temp);
-        */
-        m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
-        m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
-        m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
+        ChooseRandomAttack();
+ 
+        
+        //m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
+        //m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
+        //m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
         m_AttackBehaviors[3] = Instantiate(UnitData.m_AttackBehav_Ult);
         for (int i = 0; i < 4; i++)
             m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;
@@ -81,7 +97,8 @@ public class UnitEntity : MonoBehaviour
         m_iTempAtkMod = 0;
         m_iTempDefMod = 0;
         m_iTempSpeedMod = 0;
-        g_UnitState = UnitState.NULL;
+        g_UnitState = new UnitStateInfo();
+        g_UnitState.state = UnitState.NULL;
     }
     public void SetPlayerUnit(string className)
     {
@@ -127,7 +144,9 @@ public class UnitEntity : MonoBehaviour
         m_iTempAtkMod = 0;
         m_iTempDefMod = 0;
         m_iTempSpeedMod = 0;
-        g_UnitState = UnitState.NULL;
+        g_UnitState = new UnitStateInfo();
+        g_UnitState.state = UnitState.NULL;
+        
     }
     //공격 메서드
     public void AttackByIndex(UnitEntity Atker, UnitEntity Defender,int index)
@@ -151,7 +170,7 @@ public class UnitEntity : MonoBehaviour
     public void ChooseRandomAttack()
     {
         List<SOAttackBase> list = GameManager.Instance.Skills.FindAll(type => type.SkillType == UnitType);
-        for (int i = 0; i < m_AttackBehaviors.Length; i++)
+        for (int i = 0; i < m_AttackBehaviors.Length - 1; i++)
         {
             int randomIndex = Random.Range(0, list.Count);
             SOAttackBase temp = Instantiate(list[randomIndex]);
@@ -166,6 +185,7 @@ public class UnitEntity : MonoBehaviour
         if (m_iCurrentHP < 0)
             m_iCurrentHP = 0;
     }
+   
     public void LevelUp()
     {
         var UnitData = GameManager.Instance.GetUnitData(m_sUnitName);
@@ -185,6 +205,12 @@ public class UnitEntity : MonoBehaviour
         if (m_iUnitEXP > exp_Max)
             return true;
         return false;
+    }
+    public void ResetTempStatus()
+    {
+        m_iTempAtkMod = 0;
+        m_iTempDefMod = 0;
+        m_iTempSpeedMod = 0;
     }
 
 }

@@ -27,5 +27,15 @@ public class UnitManager
     {
         g_PlayerUnits[index] = unitGO;
     }
+    public int CheckUnitAmount()
+    {
+        int amount = 0;
+        for (int i = 0; i< g_PlayerUnits.Length; i++)
+        {
+            if (g_PlayerUnits[i] != null)
+                amount += 1;
+        }
+        return amount;
+    }
 
 }
