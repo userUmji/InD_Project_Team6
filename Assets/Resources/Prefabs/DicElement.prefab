@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 180.51172, y: 15.5}
+  m_AnchoredPosition: {x: 159, y: 29}
   m_SizeDelta: {x: 179.0234, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &94551688657453672
@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: lvl
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8d0c5a2440eb1a84aa844eb5ea4db7b0, type: 2}
-  m_sharedMaterial: {fileID: -8021206811808133868, guid: 8d0c5a2440eb1a84aa844eb5ea4db7b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aee6ecad34ec2e442ac8a06c82b2054b, type: 2}
+  m_sharedMaterial: {fileID: -2719412135743317003, guid: aee6ecad34ec2e442ac8a06c82b2054b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -368,8 +368,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8d0c5a2440eb1a84aa844eb5ea4db7b0, type: 2}
-  m_sharedMaterial: {fileID: -8021206811808133868, guid: 8d0c5a2440eb1a84aa844eb5ea4db7b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aee6ecad34ec2e442ac8a06c82b2054b, type: 2}
+  m_sharedMaterial: {fileID: -2719412135743317003, guid: aee6ecad34ec2e442ac8a06c82b2054b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -393,8 +393,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -783,10 +783,6 @@ MonoBehaviour:
     m_iUnitAtk: 0
     m_iUnitSpeed: 0
     m_iUnitDef: 0
-    m_iLvlModHP: 0
-    m_iLvlModAtk: 0
-    m_iLvlModSpeed: 0
-    m_iLvlModDef: 0
     m_AttackBehav_1: {fileID: 0}
     m_AttackBehav_2: {fileID: 0}
     m_AttackBehav_3: {fileID: 0}
