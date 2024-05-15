@@ -180,6 +180,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.L))
         {
             GameManager.Instance.SaveALLPlayerUnit();
+
         }
     }
 }

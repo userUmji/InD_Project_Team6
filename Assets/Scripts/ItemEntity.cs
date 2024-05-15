@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemEntity : MonoBehaviour
 {
-
+    public int m_iItemNumber;
     public Sprite m_ItemSprite;
     public string m_sItemName;
     public string m_sItemDescription;
@@ -25,6 +25,7 @@ public class ItemEntity : MonoBehaviour
         if (m_sItemName == null)
             Debug.Log("Item Name Missed");
         var ItemData = GameManager.Instance.GetItemData(m_sItemName);
+        m_iItemNumber = ItemData.m_iItemNo;
         m_ItemSprite = ItemData.m_ItemSprite;
         m_sItemDescription = ItemData.m_sItemDescription;
         m_sItemUseDialog = ItemData.m_sItemUseDialog;

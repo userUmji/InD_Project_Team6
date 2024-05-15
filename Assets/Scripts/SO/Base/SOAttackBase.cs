@@ -17,7 +17,14 @@ public abstract class SOAttackBase : ScriptableObject , IAttackBehavior
     public SkillEffect m_SkillEffect;
     public bool m_isPlayed;
     public int m_iAdditionalSpeed;
+
+    public int m_IsDouble;
+    public bool m_IsEffected;
+
+
     //공격을 구현할 인터페이스와 ScriptableObject를 상속받은 SOBase 파일입니다.
     public abstract void ExecuteAttack(UnitEntity Atker, UnitEntity Defender);
     public abstract string GetSkillName();
+    public abstract int GetIsDouble();
+    public abstract bool GetIsEffected();
 }
