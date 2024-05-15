@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour
     public GameObject g_BattleButtons;
     public GameObject g_ChangeButton;
     public GameObject m_Canvas;
+    public GameObject g_Cursor;
     // 전투 상태
     public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, SELECT, ENEMYTURN, RESULT, END }
 
@@ -195,6 +196,8 @@ public class BattleManager : MonoBehaviour
         enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
         enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
 
+        if (enemyUnit.UnitType == GameManager.Type.GODBEAST)
+            dialogueText.text = "앗! " + enemyUnit.m_sUnitName + "이다!!";
         dialogueText.text = "도깨비가 나타났다!";
 
         // HUD 초기화
@@ -209,8 +212,9 @@ public class BattleManager : MonoBehaviour
     }
     IEnumerator Player_FallChange()
     {
-        dialogueText.text = playerUnit.m_sUnitName + "는 쓰러졌다.....";
+        dialogueText.text = playerUnit.m_sUnitName + "이 쓰러졌다.....";
         yield return new WaitForSeconds(2f);
+        dialogueText.text = "다음 도깨비를 선택하여 싸우자.";
         isPlayed = false;
         g_ChangeButton.transform.GetComponent<BattleButtonCTR>().Onclick_Change();
     }
@@ -218,13 +222,21 @@ public class BattleManager : MonoBehaviour
     IEnumerator PlayerTurn_Attack()
     {
         state = BattleState.PLAYERTURN;
+        for (int i = 0; i < playerUnit.m_AttackBehaviors.Length; i++)
+        {
+            playerUnit.m_AttackBehaviors[i].m_isPlayed = false;
+        }
         if (CalEffectChance(playerUnit,UnitEntity.UnitState.BERSERK))
         {
             dialogueText.text = playerUnit.m_sUnitName + "은 지금 광란상태다!";
             yield return new WaitForSeconds(1f);
-            playerUnit.AttackByIndex(playerUnit, enemyUnit, Random.Range(0,playerUnit.m_AttackBehaviors.Length));
+            int randomIndex = Random.Range(0, playerUnit.m_AttackBehaviors.Length);
+            playerUnit.AttackByIndex(playerUnit, enemyUnit, randomIndex);
             enemyHUD.SetHUD(enemyUnit);
-            dialogueText.text = playerUnit.m_sUnitName + "의 " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
+            dialogueText.text = playerUnit.m_sUnitName + "! " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
+            yield return new WaitForSeconds(1f);
+            yield return CheckDouble(randomIndex, playerUnit, enemyUnit);
+            yield return CheckEffected(randomIndex, playerUnit, enemyUnit);
         }
         else
         {
@@ -237,6 +249,9 @@ public class BattleManager : MonoBehaviour
                 playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
                 enemyHUD.SetHUD(enemyUnit);
                 dialogueText.text = playerUnit.m_sUnitName + "의 " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
+                yield return new WaitForSeconds(1f);
+                yield return CheckDouble(m_iPlayerActionIndex, playerUnit, enemyUnit);
+                yield return CheckEffected(m_iPlayerActionIndex, playerUnit, enemyUnit);
             }
         }
         yield return new WaitForSeconds(1f);
@@ -270,6 +285,7 @@ public class BattleManager : MonoBehaviour
         //UI 초기화
         playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
         playerHUD.SetHUD(playerUnit);
+        dialogueText.text = "도깨비를 바꿨다.";
         yield return new WaitForSeconds(2f);
 
         
@@ -286,13 +302,13 @@ public class BattleManager : MonoBehaviour
         int randomChance = Random.Range(1, 101);
         if (runChance < randomChance)
         {
-            dialogueText.text = "무사히 도망쳤다";
+            dialogueText.text = "도깨비에게서 도망쳤다!";
             yield return new WaitForSeconds(2f);
             ChangeScene();
         }
         else
         {
-            dialogueText.text = "도망치지 못했다!";
+            dialogueText.text = "앗! 도망에 실패했다.";
             yield return new WaitForSeconds(2f);
             isPlayed = true;
             Process();
@@ -310,10 +326,11 @@ public class BattleManager : MonoBehaviour
         //적 공격
         string AttackName = enemyUnit.GetSkillname(enemyUnit, randomAttackIndex);
         playerHUD.SetHUD(playerUnit);
-        dialogueText.text = enemyUnit.m_sUnitName + "의 " + AttackName + "공격!";
+        dialogueText.text = enemyUnit.m_sUnitName + "이 " + AttackName + "공격을 했다!";
+        yield return new WaitForSeconds(1f);
+        yield return CheckDouble(randomAttackIndex, enemyUnit, playerUnit);
+        yield return CheckEffected(randomAttackIndex, enemyUnit, playerUnit);
 
-
-        // 1초 대기
         yield return new WaitForSeconds(1f);
         //Result로
         if (enemyUnit.m_iCurrentHP <= 0 || playerUnit.m_iCurrentHP <= 0)
@@ -348,7 +365,7 @@ public class BattleManager : MonoBehaviour
     IEnumerator PlayerWin()
     {
         state = BattleState.END;
-        dialogueText.text = "승리했다!";
+        dialogueText.text = "도깨비를 처치했다!";
         yield return new WaitForSeconds(1f);
         int gainExpTemp;
         if (enemyUnit.m_iUnitLevel < 16)
@@ -403,13 +420,72 @@ public class BattleManager : MonoBehaviour
     
     IEnumerator PlayerLost()
     {
-        dialogueText.text = "졌다";
+        dialogueText.text = "거대한 도깨비에게 져버렸다.....";
         yield return new WaitForSeconds(2f);
         ChangeScene();
     }
 
     #endregion
+    #region 기타 메서드
+    private WaitForSeconds CheckDouble(int index , UnitEntity Atker, UnitEntity Defer)
+    {
+        if (Atker.m_AttackBehaviors[index].m_IsDouble == 1)
+        {
+            dialogueText.text = Defer.m_sUnitName + "에게 치명적인듯 하다!";
+            return new WaitForSeconds(1f);
 
+        }
+        else if (Atker.m_AttackBehaviors[index].m_IsDouble == 2)
+        {
+            dialogueText.text = Defer.m_sUnitName + "에게는 별로인듯 하다!";
+            return new WaitForSeconds(1f);
+        }
+        else
+            return new WaitForSeconds(0f);
+    }
+
+    private WaitForSeconds CheckEffected(int index, UnitEntity Atker, UnitEntity Defer)
+    {
+        if(Atker.m_AttackBehaviors[index].m_IsEffected == true)
+        {
+            dialogueText.text = StateEffect(index, Atker, Defer);
+            return new WaitForSeconds(1f);
+        }
+        else
+        {
+            return new WaitForSeconds(0f);
+        }
+    }
+    private string StateEffect(int index, UnitEntity Atker, UnitEntity Defer)
+    {
+        if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.SLOW)
+            return Defer.m_sUnitName + "은 조금 느려진듯 하다";
+        else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.CARELESSNESS)
+            return Defer.m_sUnitName + "은 조금 방심한듯 하다.";
+        else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.DEPRESSED)
+            return Defer.m_sUnitName + "은 의욕을 상실한듯 하다.";
+        else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.HALF)
+            return Defer.m_sUnitName + "일격!";
+        else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.ULTIMATE)
+            return Defer.m_sUnitName + "은 최대의 힘을 냈다!";
+        else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.ONLYONCE)
+            return "이 스킬은 연속으로 사용할 수 없다!";
+
+        if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.FIRE && Atker.m_AttackBehaviors[index].m_iEffectDur == 3)
+            return Defer.m_sUnitName + "의 몸에 불씨가 붙었다.";
+        else if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.ICE && Atker.m_AttackBehaviors[index].m_iEffectDur == 3)
+            return Defer.m_sUnitName + "의 몸에 얼음이 붙었다.";
+        else if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.FIRE && Atker.m_AttackBehaviors[index].m_iEffectDur == 5)
+            return Defer.m_sUnitName + "의 몸은 화상을 입었다.";
+        else if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.ICE && Atker.m_AttackBehaviors[index].m_iEffectDur == 5)
+            return Defer.m_sUnitName + "의 몸은 동상을 입었다.";
+        else if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.PARALYSIS)
+            return Defer.m_sUnitName + "는 마비되었다.";
+        else if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.BERSERK)
+            return Defer.m_sUnitName + "는 광란에 빠졌다.";
+
+        return "";
+    }
     #region 버튼 처리
     // 버튼 처리
     public void OnButton(GameManager.Action action, int index)
@@ -459,5 +535,6 @@ public class BattleManager : MonoBehaviour
         }
         return false;
     }
+    #endregion
     #endregion
 }

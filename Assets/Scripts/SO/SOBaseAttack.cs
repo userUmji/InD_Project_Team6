@@ -9,23 +9,35 @@ public class SOBaseAttack : SOAttackBase
     
     public override void ExecuteAttack(UnitEntity Atker, UnitEntity Defender)
     {
+        m_IsEffected = false;  
         // 최종 데미지 -> ((공격력 * 공격 배율) - 방어력)*속성 배율
         int AttackDamage = (int)((Atker.m_iUnitAtk + Atker.m_iTempAtkMod + Atker.m_iPermanentAtkMod)  * m_fAttackMag);
         int finalAttackDamage = AttackDamage - (Defender.m_iUnitDef + Defender.m_iPermanentDefMod + Defender.m_iTempDefMod);
 
-        int isDouble = GameManager.Instance.CompareType(SkillType, Defender.UnitType);
+        m_IsDouble = GameManager.Instance.CompareType(SkillType, Defender.UnitType);
 
-        if (isDouble == 1)
+        if (m_IsDouble == 1)
             finalAttackDamage = (int)(finalAttackDamage * 1.2);
-        else if (isDouble == 2)
+        else if (m_IsDouble == 2)
             finalAttackDamage = (int)(finalAttackDamage * 0.8);
 
         Defender.m_iCurrentHP -= finalAttackDamage;
+        Debug.Log(m_sAttackName + " " + m_IsEffected);
 
     }
 
     public override string GetSkillName()
     {
         return m_sAttackName;
+    }
+
+    public override int GetIsDouble()
+    {
+        return m_IsDouble;
+    }
+
+    public override bool GetIsEffected()
+    {
+        return false;
     }
 }
