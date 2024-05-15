@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +14,7 @@ public class BattleButtonCTR : MonoBehaviour
 
     public int g_iIndex;
 
-    // µ¨¸®°ÔÀÌÆ® ¼±¾ğ
+    // ë¸ë¦¬ê²Œì´íŠ¸ ì„ ì–¸
     delegate void OnButton(GameManager.Action action, int index);
 
 
@@ -26,12 +26,12 @@ public class BattleButtonCTR : MonoBehaviour
 
         if(g_eAction == GameManager.Action.RUN)
         {
-            //BattleManager ÇÒ´ç
+            //BattleManager í• ë‹¹
             g_BattleManager = GameObject.Find("BattleManager").transform.GetComponent<BattleManager>();
-            // µ¨¸®°ÔÀÌÆ®¸¦ »ı¼ºÇÏ°í ÇÒ´ç
+            // ë¸ë¦¬ê²Œì´íŠ¸ë¥¼ ìƒì„±í•˜ê³  í• ë‹¹
             OnButton buttonDelegate = new OnButton(g_BattleManager.OnButton);
 
-            // Button ÄÄÆ÷³ÍÆ®ÀÇ onClick ÀÌº¥Æ®¿¡ µ¨¸®°ÔÀÌÆ® µî·Ï
+            // Button ì»´í¬ë„ŒíŠ¸ì˜ onClick ì´ë²¤íŠ¸ì— ë¸ë¦¬ê²Œì´íŠ¸ ë“±ë¡
             gameObject.GetComponent<Button>().onClick.AddListener(() => buttonDelegate(g_eAction, g_iIndex));
         }
     }
@@ -67,17 +67,17 @@ public class BattleButtonCTR : MonoBehaviour
     {
         if (g_BattleManager.state == BattleManager.BattleState.ACTION)
         {
-            //Debug.Log("º¯°æ ¹öÆ° ´­¸²");
-            //ÇÁ¸®ÆéÀ» Load
+            //Debug.Log("ë³€ê²½ ë²„íŠ¼ ëˆŒë¦¼");
+            //í”„ë¦¬í©ì„ Load
             GameObject ChangeButtonPrefab = Resources.Load<GameObject>("Prefabs/ChangeButtons");
-            //instantiate ÇÏ°í ÅØ½ºÆ®¸¦ ¹Ù²Ù±â À§ÇØ Temp¿¡ ÀúÀå
+            //instantiate í•˜ê³  í…ìŠ¤íŠ¸ë¥¼ ë°”ê¾¸ê¸° ìœ„í•´ Tempì— ì €ì¥
             GameObject ChangeButton_Temp = Instantiate(ChangeButtonPrefab, g_Canvas.transform);
-            //¹öÆ°ÀÇ ÅØ½ºÆ®¸¦ ÇÃ·¹ÀÌ¾îÀÇ À¯´Ö ÀÌ¸§À¸·Î ¹Ù²Ş
+            //ë²„íŠ¼ì˜ í…ìŠ¤íŠ¸ë¥¼ í”Œë ˆì´ì–´ì˜ ìœ ë‹› ì´ë¦„ìœ¼ë¡œ ë°”ê¿ˆ
             for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
             {
                 DIcElementCTR element =  ChangeButton_Temp.transform.GetChild(0).transform.GetChild(i).transform.GetComponent<DIcElementCTR>();
                 element.Init(GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName);
-                //Ã¼·ÂÀÌ 0ÀÌ°Å³ª ÀÌ¹Ì ³ª¿ÍÀÖ´Â À¯´ÖÀÌ¸é
+                //Ã¼ï¿½ï¿½ï¿½ï¿½ 0ï¿½Ì°Å³ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
                 if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_iCurrentHP <= 0 
                     || GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName == g_BattleManager.playerUnit.m_sUnitName)
                     ChangeButton_Temp.transform.GetChild(0).transform.GetChild(i).GetComponent<Button>().interactable = false;

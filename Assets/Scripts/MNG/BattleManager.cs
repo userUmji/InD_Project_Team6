@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class BattleManager : MonoBehaviour
@@ -28,7 +29,7 @@ public class BattleManager : MonoBehaviour
     UnitEntity enemyUnit;
 
     // 전투 다이얼로그 텍스트
-    public Text dialogueText;
+    public TextMeshProUGUI dialogueText;
 
     // 플레이어 / 적 HUD(Head-Up Display)
     public BattleHUDCTR playerHUD;

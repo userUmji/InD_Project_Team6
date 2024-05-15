@@ -1,15 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SaveGameManager : MonoBehaviour
 {
     public GameObject player;
     public QuestManager questManager;
-    public Text QuestTalk; // Text Çü½Ä »ç¿ëÀ» À§ÇÑ ¼±¾ğ
+    public TextMeshProUGUI QuestTalk; // Text í˜•ì‹ ì‚¬ìš©ì„ ìœ„í•œ ì„ ì–¸
 
-    public GameObject menuSet; // menuSet º¯¼ö ¼±¾ğ
+    public GameObject menuSet; // menuSet ë³€ìˆ˜ ì„ ì–¸
 
     void Start()
     {
@@ -17,18 +18,18 @@ public class SaveGameManager : MonoBehaviour
         QuestTalk.text = questManager.CheckQuest();
     }
 
-    // °ÔÀÓÀ» ÀúÀåÇÏ´Â ÇÔ¼ö
+    // ê²Œì„ì„ ì €ì¥í•˜ëŠ” í•¨ìˆ˜
     public void SaveGame()
     {
-        // ÇÃ·¹ÀÌ¾îÀÇ ÇöÀç À§Ä¡ ÀúÀå
+        // í”Œë ˆì´ì–´ì˜ í˜„ì¬ ìœ„ì¹˜ ì €ì¥
         PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
         PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
 
-        // Äù½ºÆ® ÁøÇà »óÈ² ÀúÀå
+        // í€˜ìŠ¤íŠ¸ ì§„í–‰ ìƒí™© ì €ì¥
         PlayerPrefs.SetInt("QuestId", questManager.questId);
         PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
 
-        // PlayerPrefs ÀúÀå
+        // PlayerPrefs ì €ì¥
         PlayerPrefs.Save();
 
         menuSet.SetActive(false);
