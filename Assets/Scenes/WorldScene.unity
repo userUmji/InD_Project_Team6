@@ -14470,6 +14470,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 249026042}
     m_Modifications:
     - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
+      propertyPath: number
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
       propertyPath: m_sItemName
       value: "\uC4F4\uBFCC\uB9AC"
       objectReference: {fileID: 0}
@@ -15050,6 +15054,7 @@ MonoBehaviour:
   g_gmonster_List:
   - "\uBC31\uC694\uD638"
   g_fpercent: 50
+  g_iLevelBoundary: 
 --- !u!61 &1229687253
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15220,6 +15225,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  item_Num_Sort: 
   g_Sclick_Slot: {fileID: 0}
   g_Iget_Item: {fileID: 0}
   g_Sselect_Item: {fileID: 0}
@@ -16459,7 +16465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -27.200012, y: 196}
+  m_AnchoredPosition: {x: -27.200012, y: 230.88}
   m_SizeDelta: {x: 160.4423, y: 64.376}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1398142193
@@ -16482,7 +16488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "F \uBC84\uB9AC\uAE30"
+  m_text: "F \uC815\uB82C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d0c5a2440eb1a84aa844eb5ea4db7b0, type: 2}
   m_sharedMaterial: {fileID: -8021206811808133868, guid: 8d0c5a2440eb1a84aa844eb5ea4db7b0, type: 2}
@@ -20002,6 +20008,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 249026042}
     m_Modifications:
+    - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
+      propertyPath: number
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
       propertyPath: m_ItemSprite
       value: 
@@ -25998,6 +26008,7 @@ MonoBehaviour:
   g_gin_V: {fileID: 6874825290338808965}
   g_ginventory: {fileID: 6874825288982085356}
   g_Sslot: []
+  item_Num_Sort: 
   g_Sclick_Slot: {fileID: 0}
   g_Iget_Item: {fileID: 0}
   g_Sselect_Item: {fileID: 0}
@@ -26631,7 +26642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -27.200012, y: 239.69}
+  m_AnchoredPosition: {x: -27.200012, y: 195.4}
   m_SizeDelta: {x: 160.4423, y: 64.376}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6874825288975534745

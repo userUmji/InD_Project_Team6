@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemEntity : MonoBehaviour
 {
-
+    public int number; // 엄지승이 임시로 구현한 아이템 번호입니다. 이후 변경 또는 수정 부탁드립니다.
     public Sprite m_ItemSprite;
     public string m_sItemName;
     public string m_sItemDescription;
