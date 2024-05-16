@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
             Object_Interaction();
-            Temp_Action();
         }
     }
 
@@ -63,10 +62,15 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.tag == "Item")
                 {
                     // 아이템 처리 코드
-                    Inventory_Controller.g_ICinstance.Set_GetItem(hit.transform.gameObject);
+                    GameObject pickedItem = hit.transform.gameObject;
+                    Inventory_Controller.g_ICinstance.Set_GetItem(pickedItem);
                     Inventory_Controller.g_ICinstance.Check_Slot();
-                    Destroy(hit.transform.gameObject);
+                    ItemManager.Instance.RemoveItem(pickedItem.GetComponent<ItemEntity>()); // 아이템 매니저에서 아이템 제거
+                    Destroy(pickedItem); // 아이템 오브젝트 파괴
                     AudioManager._instance.PlaySfx(AudioManager.Sfx.Item);
+
+                    // 획득한 아이템 오브젝트의 이름 출력
+                    Debug.Log("획득한 아이템: " + pickedItem.name);
                 }
                 else if (hit.collider.tag == "object")
                 {
@@ -175,12 +179,5 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지 
     }
 
-    private void Temp_Action()
-    {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            GameManager.Instance.SaveALLPlayerUnit();
-
-        }
-    }
+   
 }

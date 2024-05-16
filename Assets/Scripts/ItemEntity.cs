@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ItemEntity : MonoBehaviour
@@ -41,5 +42,15 @@ public class ItemEntity : MonoBehaviour
     public string GetUseDialog()
     {
         return m_sItemUseDialog;
+    }
+
+
+
+// 아이템 정보를 저장하기 위한 내부 클래스 정의
+[System.Serializable]
+    public class ItemStats_Save
+    {
+        public string m_sItemName;
+        public int m_iItemCount; // 아이템의 갯수를 저장하는 변수 추가
     }
 }

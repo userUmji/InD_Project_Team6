@@ -29,6 +29,12 @@ public class SaveGameManager : MonoBehaviour
         PlayerPrefs.SetInt("QuestId", questManager.questId);
         PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
 
+        GameManager.Instance.SaveALLPlayerUnit();
+
+       
+
+        // 인벤토리 저장
+        InventorySaveLoad.SaveInventory();
         // PlayerPrefs 저장
         PlayerPrefs.Save();
 
@@ -48,5 +54,8 @@ public class SaveGameManager : MonoBehaviour
         player.transform.position = new Vector3(x, y, 0);
         questManager.questId = questId;
         questManager.questActionIndex = questActionIndex;
+
+        // 인벤토리 불러오기
+        InventorySaveLoad.LoadInventory();
     }
 }
