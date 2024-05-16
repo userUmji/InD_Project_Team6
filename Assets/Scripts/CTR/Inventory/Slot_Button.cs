@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class Slot_Button : MonoBehaviour, IPointerClickHandler
 {
     // g_fCharacterSpeed -> g는 글로벌(public) m은 멤버(private) 뒤의 f(float)/i(int)/s(string)
     public static Slot_Button g_SBinstance;
     public Image g_ishow_Item_Image; // 마우스를 따라다닐 이미지
+    public GameObject g_guse_Button; // 사용 버튼
+    public static GameObject g_gUse_View_OB; // 오른쪽 마우스로 클릭했을때 변수 할당
     [SerializeField] Slot m_Sslot;
-    [SerializeField] Item m_ISr_S;
+    [SerializeField] ItemEntity m_ISr_S;
 
     private int m_inum;
 
@@ -18,51 +21,97 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
     public void Awake()
     {
         g_SBinstance = this;
+
     }
     // Start is called before the first frame update
     void Start()
     {
         m_Sslot = GetComponent<Slot>();
+       // g_ishow_Item_Image = GetComponent<Image>();
     }
+
+
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left) // 아이템 이동
+        if (eventData.button == PointerEventData.InputButton.Left && Inventory_Controller.g_ICinstance.lock_UI) // 아이템 이동
         {
             m_ISr_S = m_Sslot.g_Ihave_item;
-            m_inum = m_Sslot.item_Number;
+            m_inum = m_Sslot.g_iitem_Number;
             if (m_Sslot.g_Ihave_item != null && Inventory_Controller.g_ICinstance.g_Iclick_Item == null)// 선택된 오브젝트가 없을때
             {
                 Inventory_Controller.g_ICinstance.g_Iclick_Item = m_Sslot.g_Ihave_item; // 현재 클릭한 아이템 정보를 인벤토리 스크립트 변수에 할당
-                Inventory_Controller.g_ICinstance.g_iclick_Item_Count = m_Sslot.item_Number; // 현재 클릭한 아이템 정보를 인벤토리  스크립트 변수에 할당
+                Inventory_Controller.g_ICinstance.g_iclick_Item_Count = m_Sslot.g_iitem_Number; // 현재 클릭한 아이템 정보를 인벤토리  스크립트 변수에 할당
                 m_Sslot.g_Ihave_item = null; // 누른 슬롯에 아이템을 비워줌
-                m_Sslot.item_Number = 0; // 누른 슬롯에 아이템 숫자를 지워줌
+                m_Sslot.g_iitem_Number = 0; // 누른 슬롯에 아이템 숫자를 지워줌
             }
 
             else if (Inventory_Controller.g_ICinstance.g_Iclick_Item != null && m_Sslot.g_Ihave_item == null)// 아이템을 선택한 상태에서 빈 슬롯을 클릭했을 때
             {
                 m_Sslot.g_Ihave_item = Inventory_Controller.g_ICinstance.g_Iclick_Item; // 클릭한 슬롯 아이템에 클릭했었던 아이템 정보를 할당
-                m_Sslot.item_Number = Inventory_Controller.g_ICinstance.g_iclick_Item_Count; // 클릭한 슬롯 아이템 갯수에 클릭했던 아이템의 아이템 갯수를 할당
+                m_Sslot.g_iitem_Number = Inventory_Controller.g_ICinstance.g_iclick_Item_Count; // 클릭한 슬롯 아이템 갯수에 클릭했던 아이템의 아이템 갯수를 할당
                 Inventory_Controller.g_ICinstance.g_Iclick_Item = null; // 클릭했던 아이템 정보 삭제
                 Inventory_Controller.g_ICinstance.g_iclick_Item_Count = 0; // 클릭했던 아이템 갯수 삭제
             }
             else if (Inventory_Controller.g_ICinstance.g_Iclick_Item != null && m_Sslot.g_Ihave_item != null) // 아이템을 선택한 상태에서 비어있지 않은 슬롯을 클릭했을 때
             {
-                Item temp = Inventory_Controller.g_ICinstance.g_Iclick_Item; // 클릭했던 아이템 정보를 임시 변수에 할당
+                ItemEntity temp = Inventory_Controller.g_ICinstance.g_Iclick_Item; // 클릭했던 아이템 정보를 임시 변수에 할당
                 Inventory_Controller.g_ICinstance.g_Iclick_Item = m_Sslot.g_Ihave_item; // 클릭했던 아이템 정보에 현재 클릭한 아이템 정보 할당
                 m_Sslot.g_Ihave_item = temp; // 현재 클릭한 슬롯에 클릭했던 아이템 정보를 가지고 있는 임시변수값 할당
 
                 int temp_count = Inventory_Controller.g_ICinstance.g_iclick_Item_Count; // 클릭했던 슬롯의 아이템 갯수 값을 임시 변수에 할당
-                Inventory_Controller.g_ICinstance.g_iclick_Item_Count = m_Sslot.item_Number; //클릭했던 슬롯의 아이템 갯수 변수에 현재 클릭한 슬롯 아이템 갯수 할당
-                m_Sslot.item_Number = temp_count; // 현재 클릭한 슬롯 아이템 갯수에 임시 변수 값 할당
+                Inventory_Controller.g_ICinstance.g_iclick_Item_Count = m_Sslot.g_iitem_Number; //클릭했던 슬롯의 아이템 갯수 변수에 현재 클릭한 슬롯 아이템 갯수 할당
+                m_Sslot.g_iitem_Number = temp_count; // 현재 클릭한 슬롯 아이템 갯수에 임시 변수 값 할당
 
                 temp = null; // 임시 변수
                 temp_count = 0; // 초기화
             }
-        }    
+        }
+
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (m_Sslot.g_Ihave_item != null) // 소지한 아이템이 있다면
+            {
+                if (g_guse_Button.activeSelf == false)
+                {
+                    g_gUse_View_OB = gameObject;
+                    Use_Item_Button.g_gclick_item = gameObject;
+                    g_guse_Button.gameObject.SetActive(true);
+                    g_guse_Button.transform.position = new Vector2(transform.position.x + 150, transform.position.y - 50);
+                    Inventory_Controller.g_ICinstance.lock_UI = false;
+
+                }
+                else if (g_gUse_View_OB == gameObject)
+                {
+                    g_gUse_View_OB = null;
+                    Use_Item_Button.g_gclick_item = null;
+                    g_guse_Button.gameObject.SetActive(false);
+                    Inventory_Controller.g_ICinstance.lock_UI = true;
+                }
+                else
+                {
+                    g_gUse_View_OB = gameObject;
+                    Use_Item_Button.g_gclick_item = gameObject;
+                    g_guse_Button.transform.position = new Vector2(transform.position.x + 150, transform.position.y - 50);
+                    Inventory_Controller.g_ICinstance.lock_UI = false;
+                }
+            }
+            else
+            {
+                g_gUse_View_OB = null;
+                g_guse_Button.gameObject.SetActive(false);
+                Inventory_Controller.g_ICinstance.lock_UI = true;
+            }
+        }
     }
 
-    public void Show_Image(Item Clicked_Obj) // 인벤토리에 아이템을 눌렀을때 그 이미지가 마우스를 따라다니게 해줌
+    
+    public void ExecuteItemEffect()
+    {
+
+    }
+
+    public void Show_Image(ItemEntity Clicked_Obj) // 인벤토리에 아이템을 눌렀을때 그 이미지가 마우스를 따라다니게 해줌
     {
         if (Clicked_Obj ==null) // 이미지를 클릭하지 않았다면
         {
@@ -77,21 +126,21 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
 
     public void Mouse_Follow(Image show_Image) // 마우스 따라다니는 오브젝트
     {
-        show_Image.sprite = Inventory_Controller.g_ICinstance.g_Iclick_Item.item_Image; // 보여줄 이미지에 선택한 오브젝트 이미지 할당
+        show_Image.sprite = Inventory_Controller.g_ICinstance.g_Iclick_Item.m_ItemSprite; // 보여줄 이미지에 선택한 오브젝트 이미지 할당
 
         Vector3 mouseScreenPosition = Input.mousePosition;
         RectTransform canvasRectTransform = canvas.GetComponent<RectTransform>();
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, mouseScreenPosition, null, out localPoint);
-        show_Image.transform.localPosition = new Vector2(localPoint.x - 30, localPoint.y + 30);
+        show_Image.transform.localPosition = new Vector2(localPoint.x - 60, localPoint.y + 60);
     }
 
     public void Off_Inven()
     {
         if (m_ISr_S != null)
         {
-            m_Sslot.item_Number = m_inum;
+            m_Sslot.g_iitem_Number = m_inum;
             m_Sslot.g_Ihave_item = m_ISr_S;
             m_inum = 0;
             m_ISr_S = null;
@@ -101,13 +150,15 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-      //  print(m_Sslot.g_Ihave_item.name);
+        //  print(m_Sslot.g_Ihave_item.name);
         //
         if (Inventory_Controller.g_ICinstance.g_Iclick_Item != null) // 선택된 아이템이 있다면
         {
             Show_Image(Inventory_Controller.g_ICinstance.g_Iclick_Item); // 함수에 클릭한 아이템 할당
             Mouse_Follow(g_ishow_Item_Image); // 함수에 마우스를 따라다닐 이미지 변수 할당
         }
+
+        
         else // 선택된 아이템이 없다면
         {
             g_ishow_Item_Image.sprite = null; // 마우스를 따라다닐 이미지 변수 초기화

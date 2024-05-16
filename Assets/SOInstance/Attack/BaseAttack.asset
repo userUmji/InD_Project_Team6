@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f71eef22bd432448336e0fb157a11c, type: 3}
   m_Name: BaseAttack
   m_EditorClassIdentifier: 
+  m_iSkillNo: 0
   SkillType: 0
   m_fAttackMag: 1.2
-  m_sAttackName: "\uAE30\uBCF8"
-  m_iUseAmount: 20
+  m_sAttackName: 
+  m_iUseAmount: 5

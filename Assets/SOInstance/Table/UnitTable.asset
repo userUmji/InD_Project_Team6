@@ -13,63 +13,188 @@ MonoBehaviour:
   m_Name: UnitTable
   m_EditorClassIdentifier: 
   m_Units:
-  - m_sUnitName: "\uD574\uD0DC"
+  - m_iUnitNo: 1
+    m_sUnitName: "\uD574\uD0DC"
+    m_sUnitExplain: "\uD574\uCE58\uB77C\uB294 \uC774\uB984\uC73C\uB85C\uB3C4 \uBD88\uB9AC\uB294
+      \uC2E0\uC218\uC778 \uD574\uD0DC\uB294  \uC8FC\uC778\uC744 \uC12C\uAE30\uB294
+      \uAC83\uC744 \uAC00\uC7A5 \uD070 \uC5C5\uC73C\uB85C \uC5EC\uAE30\uBA70 \uC0B4\uC544\uAC04\uB2E4. 
+      \uB3C4\uAE68\uBE44 \uC911 \uAC00\uC7A5 \uC6B0\uC9C1\uD55C \uC131\uACA9\uC744
+      \uAC00\uC9C0\uACE0 \uC788\uB294 \uD574\uD0DC\uB294 \uAC15\uD558\uACE0 \uBE60\uB974\uBA70
+      \uB610\uD55C \uC601\uB9AC\uD558\uB2E4. "
     UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: 0797f6e2008a18d40a80e810938495f7, type: 3}
-    m_iUnitHP: 50
-    m_iUnitAtk: 10
-    m_iUnitSpeed: 5
-    m_iUnitDef: 0
-    m_iUnitLevel: 10
-    m_iLvlModHP: 0
-    m_iLvlModAtk: 0
-    m_iLvlModSpeed: 0
-    m_iLvlModDef: 0
-    m_AttackBehav_1: {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
+    m_iUnitHP: 65
+    m_iUnitAtk: -2
+    m_iUnitSpeed: -6
+    m_iUnitDef: -6
+    m_AttackBehav_1: {fileID: 11400000, guid: a15589d8b51bde742bee1f591e7b5f9a, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
-  - m_sUnitName: "\uBC31\uC694\uD638"
-    UnitType: 3
-    m_UnitSprite: {fileID: 21300000, guid: 453d4435967626746b1076fcb56f55ec, type: 3}
-    m_iUnitHP: 50
-    m_iUnitAtk: 10
-    m_iUnitSpeed: 10
-    m_iUnitDef: 0
-    m_iUnitLevel: 10
-    m_iLvlModHP: 0
-    m_iLvlModAtk: 0
-    m_iLvlModSpeed: 0
-    m_iLvlModDef: 0
+    m_AttackBehav_Ult: {fileID: 11400000, guid: e52a6d012be37c14892fb6224964fd87, type: 2}
+  - m_iUnitNo: 2
+    m_sUnitName: "\uC800\uC2B9\uCC28\uC0AC"
+    m_sUnitExplain: "\uC800\uC2B9\uCC28\uC0AC\uB294 \uBD89\uC740 \uB3D9\uC544\uC904\uACFC
+      \uBA85\uBD80\uB97C \uB4E4\uACE0  \uC8FD\uC740 \uC774\uB4E4\uC758 \uD63C\uC744
+      \uC800\uC2B9\uC73C\uB85C \uC778\uB3C4\uD558\uB294 \uC548\uB0B4\uC790\uC774\uB2E4."
+    UnitType: 4
+    m_UnitSprite: {fileID: 21300000, guid: df87c991e4cd5e3419a09a5029bec454, type: 3}
+    m_iUnitHP: 55
+    m_iUnitAtk: -6
+    m_iUnitSpeed: -4
+    m_iUnitDef: -10
     m_AttackBehav_1: {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-  - m_sUnitName: "\uBC31\uD638"
-    UnitType: 0
-    m_UnitSprite: {fileID: 21300000, guid: 5f7b76d3e2a681d4ea9857b1eea5ce0a, type: 3}
-    m_iUnitHP: 50
-    m_iUnitAtk: 5
-    m_iUnitSpeed: 5
-    m_iUnitDef: 0
-    m_iUnitLevel: 10
-    m_iLvlModHP: 0
-    m_iLvlModAtk: 0
-    m_iLvlModSpeed: 0
-    m_iLvlModDef: 0
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 3
+    m_sUnitName: "\uB9E5"
+    m_sUnitExplain: "\uC0AC\uB78C\uC758 \uC545\uBABD\uC744 \uBA39\uACE0 \uC0AC\uB294
+      \uB9E5\uC740  \uC0AC\uB78C\uB4E4\uC5D0\uAC8C \uCE5C\uC219\uD55C \uB3C4\uAE68\uBE44\uB85C
+      \uC54C\uB824\uC838\uC788\uB2E4."
+    UnitType: 3
+    m_UnitSprite: {fileID: 21300000, guid: 30cd50c85bc49fe48959dafa57d04883, type: 3}
+    m_iUnitHP: 55
+    m_iUnitAtk: -4
+    m_iUnitSpeed: -8
+    m_iUnitDef: -6
     m_AttackBehav_1: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-  - m_sUnitName: "\uB354\uBBF8"
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 4
+    m_sUnitName: "\uBD88\uAC00\uC0AC\uB9AC"
+    m_sUnitExplain: "\uCCA0\uC744 \uBA39\uB294 \uAD34\uC218\uC778 \uBD88\uAC00\uC0AC\uB9AC\uB294
+      \uB2E4 \uC131\uC7A5\uD558\uACE0 \uB098\uBA74 \uAC70\uB300\uD55C\uC0B0\uACFC
+      \uAC19\uC740 \uAD34\uC218\uAC00 \uB418\uC5B4 \uC544\uC8FC \uB728\uAC70\uC6B4
+      \uC1F3\uBB3C\uC744 \uBFDC\uC5B4 \uBAA8\uB4E0 \uAC83\uC744 \uB179\uC5EC\uBC84\uB9B0\uB2E4."
+    UnitType: 1
+    m_UnitSprite: {fileID: 21300000, guid: 2952b5d2baa4e3a46a34097dde2d6e17, type: 3}
+    m_iUnitHP: 55
+    m_iUnitAtk: -2
+    m_iUnitSpeed: -10
+    m_iUnitDef: -6
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 5
+    m_sUnitName: "\uAC15\uCCA0\uC774"
+    m_sUnitExplain: "\uC6B0\uB77D\uBD80\uB77D\uD55C \uC18C\uC758 \uBAB8\uACFC \uC0AC\uB098\uC6B4
+      \uB9F9\uC218\uC758 \uC5BC\uAD74\uC744  \uAC00\uC9C0\uACE0 \uC788\uB294 \uAC15\uCCA0\uC774\uB294
+      \uC7AC\uD574\uC640 \uD749\uC791\uC744 \uBAB0\uACE0 \uB2E4\uB2C8\uB294 \uB3C4\uAE68\uBE44\uB85C
+      \uB18D\uC0AC\uAFBC\uB4E4\uC5D0\uAC8C \uACF5\uD3EC\uC758 \uC874\uC7AC\uC774\uB2E4."
+    UnitType: 1
+    m_UnitSprite: {fileID: 21300000, guid: 18eba34ef44cdfc47a2ca6b1f8e284bc, type: 3}
+    m_iUnitHP: 60
+    m_iUnitAtk: -6
+    m_iUnitSpeed: -6
+    m_iUnitDef: -8
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 6
+    m_sUnitName: "\uBC31\uC694\uD638"
+    m_sUnitExplain: "\uBC31\uC694\uD638\uB294 \uC0C8\uD558\uC580 \uC124\uC6D0\uC744
+      \uB2EC\uB9AC\uBA70 \uD30C\uB780 \uBD88\uAF43\uC744 \uB0B4\uBFDC\uB294  \uD558\uC580
+      \uC5EC\uC6B0 \uAD34\uC218\uC774\uB2E4. \uBC31\uC694\uD638\uC758 \uBAA9 \uC8FC\uBCC0\uC758
+      \uD138\uC740 \uC11C\uBB18\uB77C\uB294  \uC791\uC740\uC950\uB4E4\uC774 \uBB49\uCCD0\uC788\uB2E4."
+    UnitType: 2
+    m_UnitSprite: {fileID: 21300000, guid: 30dc83d3b619e3b4ba601735fd18ab78, type: 3}
+    m_iUnitHP: 55
+    m_iUnitAtk: -4
+    m_iUnitSpeed: -4
+    m_iUnitDef: -8
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 7
+    m_sUnitName: "\uC7A5\uC0B0\uBC94"
+    m_sUnitExplain: "\uC7A5\uC0B0\uBC94\uC740 \uAE4A\uC740 \uC232\uC18D\uC5D0\uC11C
+      \uC0AC\uB78C\uC758 \uC18C\uB9AC\uB97C \uD749\uB0B4 \uB0B4\uC5B4 \uC0AC\uB78C\uB4E4\uC744
+      \uC720\uC778\uD574\uC11C \uC7A1\uC544\uBA39\uB294 \uB3C4\uAE68\uBE44\uB2E4. "
+    UnitType: 3
+    m_UnitSprite: {fileID: 21300000, guid: e843ad98b8fbab643a7fbfffc257a79b, type: 3}
+    m_iUnitHP: 60
+    m_iUnitAtk: -2
+    m_iUnitSpeed: -6
+    m_iUnitDef: -8
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 8
+    m_sUnitName: "\uD604\uBB34"
+    m_sUnitExplain: "\uD604\uBB34\uB294 \uC0AC\uC2E0\uC218 \uC911 \uAC00\uC7A5 \uB098\uC774\uAC00
+      \uB9CE\uC740 \uC2E0\uC218\uC774\uB2E4.  \uADF8\uB9CC\uD07C \uB2E4\uC591\uD55C
+      \uC9C0\uC2DD\uC73C\uB85C \uB3C4\uAE68\uBE44\uB4E4\uC5D0\uAC8C \uCD94\uC559\uBC1B\uB294\uB2E4."
+    UnitType: 0
+    m_UnitSprite: {fileID: 21300000, guid: 3c6412202fe517a428f53baffa13f410, type: 3}
+    m_iUnitHP: 75
+    m_iUnitAtk: -5
+    m_iUnitSpeed: -10
+    m_iUnitDef: -2
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 9
+    m_sUnitName: "\uC8FC\uC791"
+    m_sUnitExplain: "\uC2E0\uC218\uC911\uC5D0 \uAC00\uC7A5 \uC544\uB984\uB2F5\uB2E4\uACE0
+      \uC804\uD574\uC9C0\uB294 \uC8FC\uC791\uC740  \uC790\uC2E0\uC758 \uC9C0\uC5ED\uC744
+      \uB0A0\uC544\uB2E4\uB2C8\uBA70 \uB300\uC9C0\uB97C \uAD00\uCC30\uD558\uB294
+      \uC218\uD638\uC2E0\uC774\uB2E4."
+    UnitType: 0
+    m_UnitSprite: {fileID: 21300000, guid: 1d5142814e0487842860fa5020f8cb92, type: 3}
+    m_iUnitHP: 65
+    m_iUnitAtk: 3
+    m_iUnitSpeed: -2
+    m_iUnitDef: -7
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 10
+    m_sUnitName: "\uBC31\uD638"
+    m_sUnitExplain: "\uBC31\uD638\uB294 \uC124\uC0B0\uC758 \uBAA8\uB4E0 \uC0DD\uBA85\uC744
+      \uB2E4\uC2A4\uB9AC\uBA70, \uC885\uC885  \uB300\uC9C0\uAC00 \uD754\uB4E4\uB9B4
+      \uC815\uB3C4\uC758 \uD3EC\uD6A8\uB97C \uB0B4\uC9C0\uB974\uACE0 \uD55C\uB2E4."
+    UnitType: 0
+    m_UnitSprite: {fileID: 21300000, guid: 949efd6f6a913134dba8046d306de54a, type: 3}
+    m_iUnitHP: 70
+    m_iUnitAtk: 8
+    m_iUnitSpeed: 3
+    m_iUnitDef: -2
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: 11
+    m_sUnitName: "\uD669\uB8E1"
+    m_sUnitExplain: "\uC2E0\uC218\uC758 \uC655\uC774\uB77C \uBD88\uB9AC\uB294 \uC131\uC2A4\uB7EC\uC6B4
+      \uC2E0\uBB3C.  \uADF8 \uC6A9\uB4E4 \uC911\uC5D0\uC11C\uB3C4 \uAC00\uC7A5 \uAC15\uD558\uB2E4\uACE0
+      \uC804\uD574\uC9C4\uB2E4."
+    UnitType: 0
+    m_UnitSprite: {fileID: 21300000, guid: fd04d9f5d48eb4b47b965113baa560cf, type: 3}
+    m_iUnitHP: 80
+    m_iUnitAtk: 28
+    m_iUnitSpeed: 18
+    m_iUnitDef: 18
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+  - m_iUnitNo: -1
+    m_sUnitName: "\uB354\uBBF8"
+    m_sUnitExplain: 
     UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: e9d118d0d9570104eb8d1d37e25c52c5, type: 3}
-    m_iUnitHP: 10000
-    m_iUnitAtk: 1
+    m_iUnitHP: -10
+    m_iUnitAtk: 0
     m_iUnitSpeed: 1
-    m_iUnitDef: 1
-    m_iUnitLevel: 10
-    m_iLvlModHP: 0
-    m_iLvlModAtk: 0
-    m_iLvlModSpeed: 0
-    m_iLvlModDef: 0
-    m_AttackBehav_1: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-    m_AttackBehav_2: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-    m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
+    m_iUnitDef: -10
+    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}

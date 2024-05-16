@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+//using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    // g_fCharacterSpeed -> g´Â ±Û·Î¹ú(public) mÀº ¸â¹ö(private) µÚÀÇ f(float)/i(int)/s(string) 
+    // g_fCharacterSpeed -> gëŠ” ê¸€ë¡œë²Œ(public) mì€ ë©¤ë²„(private) ë’¤ì˜ f(float)/i(int)/s(string) 
     private Animator animator;
     private float m_fx;
     private float m_fy;
@@ -32,65 +32,97 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
             Object_Interaction();
+            Temp_Action();
         }
     }
 
     private void Object_Interaction()
     {
-        // Ä³¸¯ÅÍ°¡ ¹Ù¶óº¸´Â ¹İ´ë ¹æÇâÀ¸·Î ·¹ÀÌÄ³½ºÆ®
+        // ìºë¦­í„°ê°€ ë°”ë¼ë³´ëŠ” ë°˜ëŒ€ ë°©í–¥ìœ¼ë¡œ ë ˆì´ìºìŠ¤íŠ¸
         Vector2 lookDirection;
 
-        // Ä³¸¯ÅÍ°¡ ¿ŞÂÊÀ» ¹Ù¶óº¸´Â °æ¿ì
+        // ìºë¦­í„°ê°€ ì™¼ìª½ì„ ë°”ë¼ë³´ëŠ” ê²½ìš°
         if (transform.localScale.x < 0)
         {
             lookDirection = -transform.right;
         }
         else
         {
-            lookDirection = transform.right; // ÃÊ±â°ªÀº ¿À¸¥ÂÊÀ¸·Î ¼³Á¤
+            lookDirection = transform.right; // ì´ˆê¸°ê°’ì€ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì„¤ì •
         }
         RaycastHit2D hit = Physics2D.Raycast(transform.position, lookDirection, 2, g_llayer);
 
-        // ·¹ÀÌ°¡ ¾î¶² ¿ÀºêÁ§Æ®¿Í Ãæµ¹Çß´ÂÁö È®ÀÎ
-        if (hit.collider != null) 
+        // ë ˆì´ê°€ ì–´ë–¤ ì˜¤ë¸Œì íŠ¸ì™€ ì¶©ëŒí–ˆëŠ”ì§€ í™•ì¸
+        if (hit.collider != null)
         {
-            m_scanObject = hit.collider.gameObject; // Ãæµ¹ÇÑ °´Ã¼¸¦ ½ºÄµµÈ °´Ã¼·Î ¼³Á¤
 
-            if (Input.GetKeyDown(KeyCode.F)) // F Å°°¡ ´­·È´ÂÁö È®ÀÎ
+            m_scanObject = hit.collider.gameObject; // ì¶©ëŒí•œ ê°ì²´ë¥¼ ìŠ¤ìº”ëœ ê°ì²´ë¡œ ì„¤ì •
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                // Ãæµ¹ÇÑ °´Ã¼·ÎºÎÅÍ ¾ÆÀÌÅÛÀ» °¡Á®¿Í ÀÎº¥Åä¸® ÄÁÆ®·Ñ·¯ÀÇ ÇöÀç ¾ÆÀÌÅÛÀ¸·Î ¼³Á¤
-                Inventory_Controller.g_ICinstance.g_Iget_Item = hit.transform.GetComponent<Drop_Item>().g_Iitem;
-                // ÀÎº¥Åä¸® ½½·ÔÀ» È®ÀÎ
-                Inventory_Controller.g_ICinstance.Check_Slot();
-                // Ãæµ¹ÇÑ °´Ã¼¸¦ ÆÄ±«
-                Destroy(hit.transform.gameObject);
+                if (hit.collider.tag == "Item")
+                {
+                    // ì•„ì´í…œ ì²˜ë¦¬ ì½”ë“œ
+                    Inventory_Controller.g_ICinstance.Set_GetItem(hit.transform.gameObject);
+                    Inventory_Controller.g_ICinstance.Check_Slot();
+                    Destroy(hit.transform.gameObject);
+                    AudioManager._instance.PlaySfx(AudioManager.Sfx.Item);
+                }
+                else if (hit.collider.tag == "object")
+                {
+                    // ì˜¤ë¸Œì íŠ¸ ì²˜ë¦¬ ì½”ë“œ
+                    _instance.Act(m_scanObject);
+                    AudioManager._instance.PlaySfx(AudioManager.Sfx.Talk);
+                }
             }
-            else if (Input.GetButtonDown("Jump") && m_scanObject != null) // Á¡ÇÁ(½ºÆäÀÌ½º¹Ù) ¹öÆ°ÀÌ ´­·È°í ½ºÄµµÈ °´Ã¼°¡ ÀÖ´ÂÁö È®ÀÎ
+            if (hit.collider.tag == "Event")
             {
-                // _instance °´Ã¼ÀÇ Act ¸Ş¼­µå¸¦ È£ÃâÇÏ°í ½ºÄµµÈ °´Ã¼¸¦ Àü´Ş
-                _instance.Act(m_scanObject);
+                if (!m_scanObject.GetComponent<ObjData>().isNpc)
+                {
+                    if (!m_scanObject.GetComponent<ObjData>().isInteracted)
+                    {
+                        // ìŠ¤ìº”ëœ ì˜¤ë¸Œì íŠ¸ê°€ ì´ì „ì— ìƒí˜¸ì‘ìš©ë˜ì§€ ì•Šì•˜ì„ ê²½ìš°ì—ë§Œ ì•„ë˜ì˜ ì½”ë“œë¥¼ ì‹¤í–‰í•©ë‹ˆë‹¤.
+                        m_scanObject.GetComponent<ObjData>().isInteracted = true;
+                        _instance.Act(m_scanObject);
+                        AudioManager._instance.PlaySfx(AudioManager.Sfx.Talk);
+                    }
+                    else
+                    {
+                        // ìŠ¤í˜ì´ìŠ¤ë°”ë¥¼ ëˆŒë €ì„ ë•Œ í•œ ë²ˆ ë” ìƒí˜¸ì‘ìš©í•˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤.
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            _instance.Act(m_scanObject);
+                            AudioManager._instance.PlaySfx(AudioManager.Sfx.Talk);
+                        }
+                    }
+                }
             }
+
         }
-        else // Ãæµ¹Ã¼°¡ ¾ø´Â °æ¿ì
+        else // ì¶©ëŒì²´ê°€ ì—†ëŠ” ê²½ìš°
         {
-            m_scanObject = null; // ½ºÄµµÈ °´Ã¼¸¦ null·Î Àç¼³Á¤
+            m_scanObject = null; // ìŠ¤ìº”ëœ ê°ì²´ë¥¼ nullë¡œ ì¬ì„¤ì •
         }
-
     }
 
     private void Movement()
     {
         m_fx = _instance.isAct ? 0 : Input.GetAxisRaw("Horizontal");
         m_fy = _instance.isAct ? 0 : Input.GetAxisRaw("Vertical");
+        animator.SetFloat("InputX", m_fx);
+        animator.SetFloat("InputY", m_fy);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            animator.SetBool("Walk", false);
+            // animations // 0 -> ì•, 1 -> ë’¤, 3 -> ì˜†
+            // animator.SetBool("Walk", false);
+            //Swith_Motion
+
             Run();
         }
         else
         {
-            animator.SetBool("Run", false);
+          //  animator.SetBool("Run", false);
             Walk();
         }
         
@@ -100,11 +132,11 @@ public class PlayerController : MonoBehaviour
     {
         if (m_fx == 0 && m_fy == 0)
         {
-            animator.SetBool("Walk", false);
+          //  animator.SetBool("Walk", false);
         }
         else
         {
-            animator.SetBool("Walk", true);
+         //   animator.SetBool("Walk", true);
         }
 
         if (m_fx == -1 || m_fy == -1)
@@ -116,18 +148,18 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
         Vector2 movement = new Vector2(m_fx, m_fy) * g_fspeed * Time.deltaTime;
-        m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // ÇÃ·¹ÀÌ¾î¿Í ¿ÀºêÁ§Æ® Ãæµ¹½Ã ¶³¸²Çö»ó ¹æÁö 
+        m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // í”Œë ˆì´ì–´ì™€ ì˜¤ë¸Œì íŠ¸ ì¶©ëŒì‹œ ë–¨ë¦¼í˜„ìƒ ë°©ì§€ 
     }
 
     void Run()
     {
         if (m_fx == 0 && m_fy == 0)
         {
-            animator.SetBool("Run", false);
+           // animator.SetBool("Run", false);
         }
         else
         {
-            animator.SetBool("Run", true);
+          //  animator.SetBool("Run", true);
         }
 
         if (m_fx == -1 || m_fy == -1)
@@ -140,6 +172,15 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 movement = new Vector2(m_fx, m_fy).normalized * g_frun_Speed * Time.deltaTime;
-        m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // ÇÃ·¹ÀÌ¾î¿Í ¿ÀºêÁ§Æ® Ãæµ¹½Ã ¶³¸²Çö»ó ¹æÁö 
+        m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // í”Œë ˆì´ì–´ì™€ ì˜¤ë¸Œì íŠ¸ ì¶©ëŒì‹œ ë–¨ë¦¼í˜„ìƒ ë°©ì§€ 
+    }
+
+    private void Temp_Action()
+    {
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.Instance.SaveALLPlayerUnit();
+
+        }
     }
 }
