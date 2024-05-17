@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Enemy_Conroller.cs.meta
+guid: 8c42e9a30c90b5a46823aa0556dd0921
+========
+guid: 8577951657eb10d4d8c9c1891ccf259d
+>>>>>>>> 04_02:Assets/Scripts/CTR/Enemy_Conroller.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
