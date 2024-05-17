@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UnitEntity : MonoBehaviour
 {
+    //유닛 상태이상
     public class UnitStateInfo
     {
         public UnitState state;

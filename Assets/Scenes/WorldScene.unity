@@ -16830,7 +16830,7 @@ MonoBehaviour:
   g_tdescription_Window: {fileID: 6874825290947510822}
   g_titem_Num_Name: {fileID: 6874825289285784547}
   g_iitem_Img_View: {fileID: 6874825288955691377}
-  g_iitem_Number: 1
+  g_iitem_Number: 0
 --- !u!114 &1311899539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28041,7 +28041,7 @@ MonoBehaviour:
   g_tdescription_Window: {fileID: 6874825290947510822}
   g_titem_Num_Name: {fileID: 6874825289285784547}
   g_iitem_Img_View: {fileID: 6874825288955691377}
-  g_iitem_Number: 2
+  g_iitem_Number: 0
 --- !u!114 &2551743461835933115
 MonoBehaviour:
   m_ObjectHideFlags: 0
