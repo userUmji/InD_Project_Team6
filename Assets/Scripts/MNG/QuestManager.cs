@@ -74,8 +74,17 @@ public class QuestManager : MonoBehaviour
             case 30:
                 // 퀘스트 ID가 30인 경우, questActionIndex가 1일 때 questObject의 첫 번째 요소를 비활성화합니다.
                 if (questActionIndex == 1)
+                {
                     questObject[1].SetActive(false);
+                    questObject[2].SetActive(true); // 세 번째 요소 활성화
+                    questObject[3].SetActive(true); // 네 번째 요소 활성화
+                }
                 break;
+
+
+              
+
+
         }
     }
 

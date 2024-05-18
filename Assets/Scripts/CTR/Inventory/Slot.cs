@@ -90,11 +90,7 @@ public class Slot : MonoBehaviour
     {
         if (item != null) // 받아온 아이템이 있다면
         {
-            Debug.Log("Item:" + item.m_sItemName + "amount:" + num );
-
             g_Ihave_item = item;  // 가진 아이템 정보에 가져온 아이템을 넣고
-
-            //Debug.Log(g_iitem_Number += num);
             g_iitem_Number += num;
         }
     }

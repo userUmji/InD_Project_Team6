@@ -31,26 +31,6 @@ public class WorldMapController : MonoBehaviour
 
     void Update()
     {
-        // 'M' 키를 눌렀을 때 맵과 미니맵을 보이거나 숨기도록 처리
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            // 현재 맵이 보이는 상태면 맵을 숨김
-            bool mapIsActive = !mapRect.gameObject.activeSelf;
-            mapRect.gameObject.SetActive(mapIsActive);
-
-            // 배경도 함께 활성화/비활성화
-            background.SetActive(mapIsActive);
-
-            // 미니맵도 함께 활성화/비활성화
-            foreach (RegionInfo region in regions)
-            {
-                if (region.miniMap != null)
-                {
-                    region.miniMap.SetActive(mapIsActive && region.regionCollider.bounds.Contains(player.position));
-                }
-            }
-        }
-
         // 맵이 보이는 상태일 때만 맵 위치 업데이트
         if (mapRect.gameObject.activeSelf)
         {
@@ -101,6 +81,20 @@ public class WorldMapController : MonoBehaviour
                     currentMapName = region.mapName; // 현재 지도 이름 업데이트
                 }
                 isInAnyRegion = true; // 플레이어가 어떤 지역에 속해 있음을 표시
+
+                // 해당 지역의 미니맵 활성화
+                if (region.miniMap != null)
+                {
+                    region.miniMap.SetActive(true);
+                }
+            }
+            else
+            {
+                // 해당 지역의 미니맵 비활성화
+                if (region.miniMap != null)
+                {
+                    region.miniMap.SetActive(false);
+                }
             }
         }
 
@@ -111,4 +105,5 @@ public class WorldMapController : MonoBehaviour
             currentMapName = ""; // 현재 지도 이름 초기화
         }
     }
+
 }
