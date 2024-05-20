@@ -37,7 +37,7 @@ public class Inventory_Controller : MonoBehaviour
     private void Awake()
     {
         g_ICinstance = this;
-        
+
     }
     private void Start()
     {
@@ -46,6 +46,7 @@ public class Inventory_Controller : MonoBehaviour
         for (int i = 0; i < g_ginventory.transform.childCount; i++)  // 유니티 창에서 슬롯을 넣어주는게 아니고 스크립트에서 넣어주는거
         {
             g_Sslot[i] = g_ginventory.transform.GetChild(i).GetComponent<Slot>(); // 유니티상에서 인벤토리라는 오브젝트 안에 슬롯들이 있기때문에 그 슬롯들을 가져와서 배열에 넣어줌
+            g_Sslot[i].g_iitem_Number = 0;
         }
     }
     // Update is called once per frame
@@ -61,7 +62,7 @@ public class Inventory_Controller : MonoBehaviour
                     discard_value_View.gameObject.SetActive(true);
                     lock_UI = false;
                 }
-                else if(discard_value_View.gameObject.activeSelf == true)
+                else if (discard_value_View.gameObject.activeSelf == true)
                 {
                     discard_value_View.gameObject.SetActive(false);
                     lock_UI = true;
@@ -70,18 +71,7 @@ public class Inventory_Controller : MonoBehaviour
         }
     }
 
-/*    public void Throw_Item() // 인벤토리에서 클릭한 아이템 삭제
-    {
-        if (g_ICinstance.g_Iclick_Item != null)
-        {
-            if (Input.GetKeyDown(KeyCode.X))
-            {
 
-            }
-            g_ICinstance.g_Iclick_Item = null;
-            g_ICinstance.g_iclick_Item_Count = 0;
-        }
-    }*/
     public void Check_Slot(int num = 1) // 획득한 아이템을 인벤토리에 넣어주는 함수
     {
         ItemEntity item = null; // 획득한 아이템이 인벤토리에 있는지 없는지를 판단해주는 변수
@@ -152,29 +142,16 @@ public class Inventory_Controller : MonoBehaviour
                 Show_Inv();
             }
         }
-        /*
-            if (g_gin_V.transform.localScale == new Vector3(1, 1, 1)) // 인벤토리가 켜있으면
-        {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
-            {
-                Hide_Inv();
-            }
-        }
-        else if (g_gin_V.transform.localScale == new Vector3(0, 0, 1))
-        {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                Show_Inv();
-            }
-        }
-        */
     }
 
     public void Set_GetItem(GameObject itemEntity)
     {
-        GameObject entity = Instantiate(itemEntity,GameObject.Find("Inventory_GOs").transform);
-        Destroy(entity.transform.GetComponent<SpriteRenderer>());
-        Destroy(entity.transform.GetComponent<Collider2D>());
+        GameObject entity = Instantiate(itemEntity, GameObject.Find("Inventory_GOs").transform);
+        if (entity.GetComponent<SpriteRenderer>() != null && entity.GetComponent<Collider2D>() != null)
+        {
+            Destroy(entity.transform.GetComponent<SpriteRenderer>());
+            Destroy(entity.transform.GetComponent<Collider2D>());
+        }
         g_Iget_Item = entity.GetComponent<ItemEntity>();
     }
     public void Show_Inv()
