@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.IO;
-using Newtonsoft.Json;
 
 public class SaveGameManager : MonoBehaviour
 {
@@ -16,12 +14,10 @@ public class SaveGameManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
         GameLoad();
         QuestTalk.text = questManager.CheckQuest();
     }
 
-    
     // 게임을 저장하는 함수
     public void SaveGame()
     {
@@ -35,10 +31,10 @@ public class SaveGameManager : MonoBehaviour
 
         GameManager.Instance.SaveALLPlayerUnit();
 
-
+       
 
         // 인벤토리 저장
-        SaveInventory();
+        InventorySaveLoad.SaveInventory();
         // PlayerPrefs 저장
         PlayerPrefs.Save();
 
@@ -60,52 +56,6 @@ public class SaveGameManager : MonoBehaviour
         questManager.questActionIndex = questActionIndex;
 
         // 인벤토리 불러오기
-        LoadInventory();
+        InventorySaveLoad.LoadInventory();
     }
-    #region 인벤토리 저장
-    private void SaveInventory()
-    {
-        Dictionary<string, int> ItemSaveDic = new Dictionary<string, int>();
-
-        foreach (Slot slot in Inventory_Controller.g_ICinstance.g_Sslot)
-        {
-            if (slot != null && slot.g_Ihave_item != null)
-            {
-                ItemEntity.ItemStats_Save itemStats = new ItemEntity.ItemStats_Save();
-                ItemSaveDic.Add(slot.g_Ihave_item.m_sItemName, slot.g_iitem_Number); //갯수만큼 넣어줌
-            }
-        }
-
-        string path = Path.Combine(Application.persistentDataPath, "inventory_data.json");
-
-        string json = JsonConvert.SerializeObject(ItemSaveDic, Formatting.Indented);
-
-        File.WriteAllText(path, json);
-    }
-
-    private static void LoadInventory()
-    {
-        string path = Path.Combine(Application.persistentDataPath, "inventory_data.json");
-
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-
-
-            Dictionary<string, int> tempDic = JsonConvert.DeserializeObject<Dictionary<string, int>>(json);
-
-            foreach (var item in tempDic)
-            {
-                GameObject entity = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ItemEntity"));
-                entity.transform.GetComponent<ItemEntity>().m_sItemName = item.Key;
-                entity.transform.GetComponent<ItemEntity>().SetItemInfo();
-
-                Inventory_Controller.g_ICinstance.Set_GetItem(entity);
-                Inventory_Controller.g_ICinstance.Check_Slot(item.Value);
-
-                Debug.Log("Loaded Item:" + item.Key + "Amount:" + item.Value);
-            }
-        }
-    }
-    #endregion
 }
