@@ -54,7 +54,9 @@ public class BattleManager : MonoBehaviour
         //전투 초기화
         g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit);
         state = BattleState.START;
-        BattleCoroutine = StartCoroutine(SetupBattle());
+        if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
+            GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
+         BattleCoroutine = StartCoroutine(SetupBattle());
     }
 
     private void PlayerAction()
@@ -380,7 +382,6 @@ public class BattleManager : MonoBehaviour
             {
                 UnitEntity unitEntity = entity.GetComponent<UnitEntity>();
                 float mod;
-                Debug.Log(GameManager.Instance.m_UnitManager.CheckUnitAmount());
                 if(GameManager.Instance.m_UnitManager.CheckUnitAmount() == 1)
                 {
                     mod = 1.0f;
