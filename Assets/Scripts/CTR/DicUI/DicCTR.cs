@@ -32,9 +32,7 @@ public class DicCTR : MonoBehaviour,IPointerClickHandler
     }
    private void InitUI()
    {
-        for (int i = 0; i < g_ElementUI.transform.childCount; i++)
-            Destroy(g_ElementUI.transform.GetChild(i).gameObject);
-        for (int i = 0; i< m_DicElementsList.Count;i++)
+        for(int i = 0; i<m_DicElementsList.Count;i++)
         {
             m_DicElementsList[i].transform.SetParent(g_ElementUI.transform);
         }
@@ -45,7 +43,7 @@ public class DicCTR : MonoBehaviour,IPointerClickHandler
         GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
         if (clickedObject.transform.GetComponent<DIcElementCTR>() != null)
         {
-            g_ExplainArea.Init(clickedObject.transform.GetComponent<DIcElementCTR>().m_UnitName);
+            g_ExplainArea.Init(clickedObject.transform.GetComponent<DIcElementCTR>().UnitName.text);
         }
     }
 }

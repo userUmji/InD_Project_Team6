@@ -35,6 +35,7 @@ public class BattleManager : MonoBehaviour
     public BattleHUDCTR playerHUD;
     public BattleHUDCTR enemyHUD;
 
+    public string g_ItemUseScript;
     // ���� ����
 
     public BattleState state;
@@ -54,9 +55,7 @@ public class BattleManager : MonoBehaviour
         //전투 초기화
         g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit);
         state = BattleState.START;
-        if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
-            GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
-         BattleCoroutine = StartCoroutine(SetupBattle());
+        BattleCoroutine = StartCoroutine(SetupBattle());
     }
 
     private void PlayerAction()
@@ -382,6 +381,7 @@ public class BattleManager : MonoBehaviour
             {
                 UnitEntity unitEntity = entity.GetComponent<UnitEntity>();
                 float mod;
+                Debug.Log(GameManager.Instance.m_UnitManager.CheckUnitAmount());
                 if(GameManager.Instance.m_UnitManager.CheckUnitAmount() == 1)
                 {
                     mod = 1.0f;
@@ -486,6 +486,11 @@ public class BattleManager : MonoBehaviour
             return Defer.m_sUnitName + "는 광란에 빠졌다.";
 
         return "";
+    }
+
+    public void CatchProcess()
+    {
+
     }
     #region 버튼 처리
     // 버튼 처리

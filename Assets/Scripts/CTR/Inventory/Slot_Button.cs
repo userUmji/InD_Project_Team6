@@ -72,14 +72,17 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
         {
             if (m_Sslot.g_Ihave_item != null) // 소지한 아이템이 있다면
             {
-                if (g_guse_Button.activeSelf == false)
+                if (m_Sslot.g_Ihave_item.m_sItemName == "복주머니")
                 {
+                    m_Sslot.g_Ihave_item.ExecuteItem(0);
+                }
+                if (g_guse_Button.activeSelf == false)
+                { 
                     g_gUse_View_OB = gameObject;
                     Use_Item_Button.g_gclick_item = gameObject;
                     g_guse_Button.gameObject.SetActive(true);
                     g_guse_Button.transform.position = new Vector2(transform.position.x + 150, transform.position.y - 50);
                     Inventory_Controller.g_ICinstance.lock_UI = false;
-
                 }
                 else if (g_gUse_View_OB == gameObject)
                 {
@@ -103,6 +106,12 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
                 Inventory_Controller.g_ICinstance.lock_UI = true;
             }
         }
+    }
+
+    
+    public void ExecuteItemEffect()
+    {
+
     }
 
     public void Show_Image(ItemEntity Clicked_Obj) // 인벤토리에 아이템을 눌렀을때 그 이미지가 마우스를 따라다니게 해줌
@@ -144,11 +153,15 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
+        //  print(m_Sslot.g_Ihave_item.name);
+        //
         if (Inventory_Controller.g_ICinstance.g_Iclick_Item != null) // 선택된 아이템이 있다면
         {
             Show_Image(Inventory_Controller.g_ICinstance.g_Iclick_Item); // 함수에 클릭한 아이템 할당
             Mouse_Follow(g_ishow_Item_Image); // 함수에 마우스를 따라다닐 이미지 변수 할당
         }
+
+        
         else // 선택된 아이템이 없다면
         {
             g_ishow_Item_Image.sprite = null; // 마우스를 따라다닐 이미지 변수 초기화
