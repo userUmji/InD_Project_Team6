@@ -13,16 +13,99 @@ MonoBehaviour:
   m_Name: ItemTable
   m_EditorClassIdentifier: 
   m_Items:
-  - m_sItemName: "\uC57D\uCD08"
-    m_sItemDescription: "\uAC01 \uC544\uC774\uD15C\uC5D0 \uB530\uB77C \uB3C4\uAE68\uBE44\uC758
-      \uCCB4\uB825\uC744 \uD68C\uBCF5\uD55C\uB2E4."
-    m_sItemUseDialog: "\uC57D\uCD08\uB97C \uC0AC\uC6A9\uD588\uB2E4! \uB3C4\uAE68\uBE44\uB294
-      5\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD588\uB2E4."
-    m_ItemSprite: {fileID: 21300000, guid: f7155fac0d464a04796941cd3fbbfaac, type: 3}
-    m_ItemEffect: {fileID: 11400000, guid: 39b8a7ddc9c23524981d41fa114cc7b0, type: 2}
-  - m_sItemName: "\uC4F4\uBFCC\uB9AC"
-    m_sItemDescription: "\uC4F4\uB9DB\uC774 \uB9CE\uC774 \uB098\uB294 \uBFCC\uB9AC\uC785\uB2C8\uB2E4."
-    m_sItemUseDialog: "\uC4F4\uBFCC\uB9AC\uB97C \uC0AC\uC6A9\uD588\uB2E4! \uB3C4\uAE68\uBE44\uB294
-      5\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD588\uB2E4."
-    m_ItemSprite: {fileID: 21300000, guid: 05806b63f014ac3449ddae915b77a961, type: 3}
-    m_ItemEffect: {fileID: 11400000, guid: cc6245ace77876b40beb1df9df67a334, type: 2}
+  - m_iItemNo: 1
+    m_sItemName: "\uBCF5\uC8FC\uBA38\uB2C8"
+    m_sItemDescription: "\uB3C4\uAE68\uBE44\uB97C \uD3EC\uD68D\uD560\uC218\uC788\uB294
+      \uC544\uC8FC \uC911\uC694\uD55C \uBB3C\uAC74. "
+    m_sItemUseDialog: "\uC744 \uBCF5\uC8FC\uBA38\uB2C8\uC5D0 \uAC00\uB454\uB2E4!/3..2..1 "
+    m_ItemSprite: {fileID: 21300000, guid: 9cc75609210cbaf4ab3f3634d859951a, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 2901dc5a7de4f5e428dc05b99320fcde, type: 2}
+  - m_iItemNo: 2
+    m_sItemName: "\uD1F4\uCE58\uBD80\uC801"
+    m_sItemDescription: "\uB3C4\uAE68\uBE44\uB97C \uD1F4\uCE58\uD560\uC218\uC788\uB294
+      \uC544\uC8FC \uC911\uC694\uD55C \uBB3C\uAC74. "
+    m_sItemUseDialog: "\uC744 \uCC98\uCE58\uD588\uB2E4!  "
+    m_ItemSprite: {fileID: 21300000, guid: 9cc75609210cbaf4ab3f3634d859951a, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 2901dc5a7de4f5e428dc05b99320fcde, type: 2}
+  - m_iItemNo: 3
+    m_sItemName: "\uB098\uC5FC\uCD08 \uC78E"
+    m_sItemDescription: "\"\uC608\uB85C\uBD80\uD130 \uCD9C\uD608\uC744 \uB9C9\uC544\uC900\uB2E4\uB294
+      \uC2E0\uAE30\uD55C \uC57D\uCD08.  \uC774 \uC57D\uCD08\uB97C \uBA39\uC740 \uC790\uB294
+      \uCD9C\uD608\uC774 \uBA4E\uACE0 \uD798\uC774 \uC0DD\uAE34\uB2E4\uACE0 \uD55C\uB2E4.
+      \uC774\uAC83\uC740 \uC57D\uCD08\uC758 \uC78E \uC77C\uBD80. \" "
+    m_sItemUseDialog: "\uC758 \uCCB4\uB825\uC774 \uD68C\uBCF5\uB418\uC5C8\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: 1e98aa362befca142800cf50312da64c, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 064036e102ae3db479ebdda146107f02, type: 2}
+  - m_iItemNo: 4
+    m_sItemName: "\uB098\uC5FC\uCD08 \uC904\uAE30"
+    m_sItemDescription: "\uCD9C\uD608\uC744 \uB9C9\uC544\uC8FC\uB294 \uC2E0\uAE30\uD55C
+      \uC57D\uCD08\uC758 \uC904\uAE30. \uC78E\uBCF4\uB2E4 \uB354\uC6B1 \uC4F0\uB2E4.  "
+    m_sItemUseDialog: "\uC758 \uCCB4\uB825\uC774 \uD68C\uBCF5\uB418\uC5C8\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: 1e98aa362befca142800cf50312da64c, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: c70314f1ca605834bac19593c28f8243, type: 2}
+  - m_iItemNo: 5
+    m_sItemName: "\uB098\uC5FC\uCD08 \uBFCC\uB9AC"
+    m_sItemDescription: "\uB098\uC5FC\uCD08\uC758 \uBFCC\uB9AC. \uBA39\uB294 \uC989\uC2DC
+      \uC0C1\uCC98\uB97C \uD68C\uBCF5\uD55C\uB2E4\uB294 \uC544\uC8FC \uADC0\uD55C
+      \uC57D\uC7AC.  "
+    m_sItemUseDialog: "\uC758 \uCCB4\uB825\uC774 \uD68C\uBCF5\uB418\uC5C8\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: 1e98aa362befca142800cf50312da64c, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: c07b85eb6647b564bb967d06083352de, type: 2}
+  - m_iItemNo: 6
+    m_sItemName: "\uACF5\uACA9\uC758 \uD55C\uC57D"
+    m_sItemDescription: "\uBA39\uB294\uC790\uC5D0\uAC8C \uAC15\uCCA0\uAC19\uC774
+      \uAC15\uD55C \uD798\uC744 \uC8FC\uB294 \uD55C\uC57D.  "
+    m_sItemUseDialog: "\uC758 \uACF5\uACA9\uB825\uC774 \uC870\uAE08 \uC62C\uB790\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: 83b17981c9d05c141bc61ef9877eb1fc, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 92e969247a6e5564fa210b181814432a, type: 2}
+  - m_iItemNo: 7
+    m_sItemName: "\uBC29\uC5B4\uC758 \uD55C\uC57D"
+    m_sItemDescription: "\uBA39\uB294\uC790\uC5D0\uAC8C \uBC14\uC704\uCC98\uB7FC
+      \uAC15\uD55C \uD798\uC744 \uC8FC\uB294 \uD55C\uC57D.  "
+    m_sItemUseDialog: "\uC758 \uBC29\uC5B4\uB825\uC774 \uC870\uAE08 \uC62C\uB790\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: 61b4d4007552af44aa1fa05403bb8005, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: fa8fd4d344e57a041b5cf82f4e5b2572, type: 2}
+  - m_iItemNo: 8
+    m_sItemName: "\uC18D\uB3C4\uC758 \uD55C\uC57D"
+    m_sItemDescription: "\uBA39\uB294\uC790\uC5D0\uAC8C \uBC14\uB78C\uAC19\uC774
+      \uAC15\uD55C \uD798\uC744 \uC8FC\uB294 \uD55C\uC57D. "
+    m_sItemUseDialog: "\uC758 \uC2A4\uD53C\uB4DC\uAC00 \uC870\uAE08 \uC62C\uB790\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: e521db2b78e33f041a8df7d039b20eab, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 80a6813fe302798408b0cc725da6e9f8, type: 2}
+  - m_iItemNo: 9
+    m_sItemName: "\uACF5\uACA9\uC758 \uBC84\uC12F"
+    m_sItemDescription: "\uBA39\uB294 \uC989\uC2DC \uD314\uD314\uD574\uC9C4\uB2E4\uACE0
+      \uC804\uD574\uC9C0\uB294 \uBC84\uC12F. "
+    m_sItemUseDialog: "\uC758 \uACF5\uACA9\uB825\uC774 \uC77C\uC2DC\uC801\uC73C\uB85C
+      \uC624\uB978\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: fa6d8fcf4d7300f469336a4848e3796c, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 63db25fe553b31946904d0b0774cd3bb, type: 2}
+  - m_iItemNo: 10
+    m_sItemName: "\uBC29\uC5B4\uC758 \uBC84\uC12F"
+    m_sItemDescription: "\uBA39\uB294 \uC989\uC2DC \uB2E8\uB2E8\uD574\uC9C4\uB2E4\uACE0
+      \uC804\uD574\uC9C0\uB294 \uBC84\uC12F. "
+    m_sItemUseDialog: "\uC758 \uBC29\uC5B4\uB825\uC774 \uC77C\uC2DC\uC801\uC73C\uB85C
+      \uC624\uB978\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: 56470dc1eeae47641ab7d82cff93f464, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: e3d4e767a7923e842af1ade47d313203, type: 2}
+  - m_iItemNo: 11
+    m_sItemName: "\uC2E0\uD1B5\uBC29\uD1B5\uD55C \uBC84\uC12F"
+    m_sItemDescription: "\uBA39\uB294 \uC989\uC2DC \uB3C4\uAE68\uBE44\uAC19\uC740
+      \uD798\uC744 \uC900\uB2E4\uACE0 \uC804\uD574\uC9C0\uB294 \uBC84\uC12F. "
+    m_sItemUseDialog: "\uC740 \uD798\uC774 \uB118\uCE5C\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: 8a9440f93b5cf494083909e243d1eeb9, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 3101f6bc54ff4ad46b3f4cc6ba8a6987, type: 2}
+  - m_iItemNo: 12
+    m_sItemName: "\uD6A8\uB2A5\uC758 \uBC84\uC12F"
+    m_sItemDescription: "\uBA39\uB294 \uC790\uC5D0\uAC8C \uC545\uD55C \uAE30\uC6B4\uC744
+      \uC5C6\uC560\uC900\uB2E4\uACE0 \uC804\uD574\uC9C0\uB294 \uBC84\uC12F "
+    m_sItemUseDialog: "\uC740 \uAE30\uC6B4\uC744 \uCC28\uB9B0\uAC83\uAC19\uB2E4! "
+    m_ItemSprite: {fileID: 21300000, guid: 342bc9eb42b48884481b9a9441b8c191, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 2901dc5a7de4f5e428dc05b99320fcde, type: 2}
+  - m_iItemNo: 13
+    m_sItemName: "\uB2EC\uB2EC\uD55C \uC57D\uACFC"
+    m_sItemDescription: "\uB2EC\uB2EC\uD55C \uC57D\uACFC. \uB9C8\uC74C\uACFC \uC815\uC131\uC774
+      \uB4E4\uC5B4\uC788\uB294 \uC120\uC870\uC758 \uC9C0\uD61C.  "
+    m_sItemUseDialog: "\uC5B4\uCA50\uC9C0 \uC870\uAE08 \uAE30\uBD84\uC774 \uC88B\uC544\uBCF4\uC778\uB2E4.  "
+    m_ItemSprite: {fileID: 21300000, guid: 9cc75609210cbaf4ab3f3634d859951a, type: 3}
+    m_ItemEffect: {fileID: 11400000, guid: 2901dc5a7de4f5e428dc05b99320fcde, type: 2}

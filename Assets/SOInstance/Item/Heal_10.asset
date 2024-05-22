@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc974b95a4c52284dbee15238fc1666a, type: 3}
   m_Name: Heal_10
   m_EditorClassIdentifier: 
-  m_iEffectAmount: 10
   m_sUseDialog: "\uC4F4\uBFCC\uB9AC\uB97C \uC0AC\uC6A9\uD588\uB2E4! \uB3C4\uAE68\uBE44\uB294
     5\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD588\uB2E4."
+  g_sType: "\uD68C\uBCF5"
+  m_iEffectAmount: 10
+  g_iStr: 0
+  g_iDef: 0
+  g_iSpd: 0
+  g_iLikeability: 0

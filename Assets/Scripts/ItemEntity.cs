@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class ItemEntity : MonoBehaviour
 {
-    public int m_iItemNumber;
+    public int number; // 엄지승이 임시로 구현한 아이템 번호입니다. 이후 변경 또는 수정 부탁드립니다.
     public Sprite m_ItemSprite;
     public string m_sItemName;
     public string m_sItemDescription;
@@ -26,7 +25,6 @@ public class ItemEntity : MonoBehaviour
         if (m_sItemName == null)
             Debug.Log("Item Name Missed");
         var ItemData = GameManager.Instance.GetItemData(m_sItemName);
-        m_iItemNumber = ItemData.m_iItemNo;
         m_ItemSprite = ItemData.m_ItemSprite;
         m_sItemDescription = ItemData.m_sItemDescription;
         m_sItemUseDialog = ItemData.m_sItemUseDialog;
@@ -42,15 +40,5 @@ public class ItemEntity : MonoBehaviour
     public string GetUseDialog()
     {
         return m_sItemUseDialog;
-    }
-
-
-
-// 아이템 정보를 저장하기 위한 내부 클래스 정의
-[System.Serializable]
-    public class ItemStats_Save
-    {
-        public string m_sItemName;
-        public int m_iItemCount; // 아이템의 갯수를 저장하는 변수 추가
     }
 }

@@ -71,7 +71,7 @@ public class SaveGameManager : MonoBehaviour
         {
             if (slot != null && slot.g_Ihave_item != null)
             {
-                ItemEntity.ItemStats_Save itemStats = new ItemEntity.ItemStats_Save();
+                //ItemEntity.ItemStats_Save itemStats = new ItemEntity.ItemStats_Save();
                 ItemSaveDic.Add(slot.g_Ihave_item.m_sItemName, slot.g_iitem_Number); //갯수만큼 넣어줌
             }
         }
