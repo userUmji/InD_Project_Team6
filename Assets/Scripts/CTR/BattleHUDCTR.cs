@@ -10,7 +10,6 @@ public class BattleHUDCTR : MonoBehaviour
     public TextMeshProUGUI nameText;   // 이름을 표시하는 텍스트
     public TextMeshProUGUI levelText;  // 레벨을 표시하는 텍스트
     public TextMeshProUGUI StateText;
-    public TextMeshProUGUI HPText;
     public Slider hpSlider; // 체력을 표시하는 슬라이더
 
     public Image g_imagePortrait; // 초상화 이미지
@@ -26,7 +25,6 @@ public class BattleHUDCTR : MonoBehaviour
         hpSlider.maxValue = unit.m_iUnitHP;
         // 슬라이더의 값(체력)을 유닛의 현재 체력으로 설정
         hpSlider.value = unit.m_iCurrentHP;
-        HPText.text = unit.m_iCurrentHP + "/" + unit.m_iUnitHP;
         //StateText.text = unit.g_UnitState.ToString();
     }
 
