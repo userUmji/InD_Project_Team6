@@ -21,8 +21,10 @@ MonoBehaviour:
   m_iUseAmount: 10
   SkillType: 1
   m_EffectState: 0
-  m_iEffectDur: 0
+  m_iEffectDur: 3
   m_iEffectChance: 50
   m_SkillEffect: 2
   m_isPlayed: 0
   m_iAdditionalSpeed: 0
+  m_IsDouble: 0
+  m_IsEffected: 0

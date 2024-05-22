@@ -13,12 +13,7 @@ public class Inventory_Controller : MonoBehaviour
     [Header("실제 인벤토리")]
     public GameObject g_ginventory;
     public static Inventory_Controller g_ICinstance;
-    [Header("인벤토리 슬롯")]
-    public List<Slot> g_Sslot; // 인벤토리 안에 있는 각 슬롯들
-    public List<int> item_Num_Sort; // 인벤토리 안에 있는 각 슬롯들
-
-    //public Dictionary<int, Slot> g_Dsort_Slot; // 인베토리 슬롯 정렬을 위한 딕셔너리
-
+    public Slot[] g_Sslot; // 인벤토리 안에 있는 각 슬롯들
     public Slot g_Sclick_Slot; // 버릴 슬롯
     public ItemEntity g_Iget_Item; // 획득한 아이템
 
@@ -42,15 +37,16 @@ public class Inventory_Controller : MonoBehaviour
     private void Awake()
     {
         g_ICinstance = this;
-        
+
     }
     private void Start()
     {
         lock_UI = true;
-        //g_Sslot = new Slot[g_ginventory.transform.childCount];
+        g_Sslot = new Slot[g_ginventory.transform.childCount];
         for (int i = 0; i < g_ginventory.transform.childCount; i++)  // 유니티 창에서 슬롯을 넣어주는게 아니고 스크립트에서 넣어주는거
         {
-            g_Sslot.Add(g_ginventory.transform.GetChild(i).GetComponent<Slot>()); // 유니티상에서 인벤토리라는 오브젝트 안에 슬롯들이 있기때문에 그 슬롯들을 가져와서 배열에 넣어줌
+            g_Sslot[i] = g_ginventory.transform.GetChild(i).GetComponent<Slot>(); // 유니티상에서 인벤토리라는 오브젝트 안에 슬롯들이 있기때문에 그 슬롯들을 가져와서 배열에 넣어줌
+            g_Sslot[i].g_iitem_Number = 0;
         }
     }
     // Update is called once per frame
@@ -66,96 +62,15 @@ public class Inventory_Controller : MonoBehaviour
                     discard_value_View.gameObject.SetActive(true);
                     lock_UI = false;
                 }
-                else if(discard_value_View.gameObject.activeSelf == true)
+                else if (discard_value_View.gameObject.activeSelf == true)
                 {
                     discard_value_View.gameObject.SetActive(false);
                     lock_UI = true;
                 }
             }
-            else if(Input.GetKeyDown(KeyCode.F))
-            {
-                item_Num_Sort.Clear();
-
-                for (int i = 0; i < g_Sslot.Count; i++)
-                {
-                    if (g_Sslot[i].g_Ihave_item != null)
-                    {
-                        item_Num_Sort.Add(g_Sslot[i].g_Ihave_item.number);
-                    }
-                }
-                item_Num_Sort.Sort();
-
-/*                for (int i = 0; i < item_Num_Sort.Count; i++)
-                {
-                    for (int g = 0; g < g_Sslot.Count; g++)
-                    {
-                        if (g_Sslot[g].g_Ihave_item != null)
-                        {
-                            if (item_Num_Sort[i] == g_Sslot[g].g_Ihave_item.number)
-                            {
-                                Slot temp = g_Sslot[i];
-                                g_Sslot[i] = g_Sslot[g];
-                                g_Sslot[g] = temp;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            
-                        }
-                    }
-                }*/
-
-
-                
-                for (int i = 0; i < item_Num_Sort.Count; i++)
-                {
-                    for (int g = 0; g < g_Sslot.Count; g++)
-                    {
-                        if (g_Sslot[g].g_Ihave_item != null)
-                        {
-                            if (item_Num_Sort[i] == g_Sslot[g].g_Ihave_item.number)
-                            {
-                               // Slot temp = g_Sslot[i];
-                                Slot temp = new Slot();
-                                temp.g_iitem_Image = g_Sslot[i].g_iitem_Image;
-                                temp.g_snull_item_Image = g_Sslot[i].g_snull_item_Image;
-                                temp.g_Ihave_item = g_Sslot[i].g_Ihave_item;
-                                temp.g_iitem_Number = g_Sslot[i].g_iitem_Number;
-
-                                g_ginventory.transform.GetChild(i).gameObject.GetComponent<Slot>().g_iitem_Image.sprite = g_Sslot[g].g_iitem_Image.sprite;
-                                g_ginventory.transform.GetChild(i).gameObject.GetComponent<Slot>().g_snull_item_Image = g_Sslot[g].g_snull_item_Image;
-                                g_ginventory.transform.GetChild(i).gameObject.GetComponent<Slot>().g_Ihave_item = g_Sslot[g].g_Ihave_item;
-                                g_ginventory.transform.GetChild(i).gameObject.GetComponent<Slot>().g_iitem_Number = g_Sslot[g].g_iitem_Number;
-
-                                g_Sslot[g].g_iitem_Image.sprite = temp.g_iitem_Image.sprite;
-                                g_Sslot[g].g_snull_item_Image = temp.g_snull_item_Image;
-                                g_Sslot[g].g_Ihave_item = temp.g_Ihave_item;
-                                g_Sslot[g].g_iitem_Number = temp.g_iitem_Number;
-                                temp = null;
-                                break;
-                            }
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                }
-                /* foreach(Slot s in g_Sslot)
-                 {
-                     print(s.g_Ihave_item.number);
-                 }*/
-                //List<int> num;
-                /*for (int i = 0; i < g_Sslot.Count; i++)
-                {
-                    g_Sslot[i].g_Ihave_item.number;
-                    //g_Sslot.Sort((x, y) => x.g_Ihave_item.number);
-                    //num.Add(g_Sslot[i].GetComponent<ItemEntity>().number);
-                }*/
-            }
         }
     }
+
 
     public void Check_Slot(int num = 1) // 획득한 아이템을 인벤토리에 넣어주는 함수
     {
@@ -176,7 +91,7 @@ public class Inventory_Controller : MonoBehaviour
 
     public void Put_Invent(ItemEntity item, int num = 1)
     {
-        for (int i = 0; i <= g_Sslot.Count; i++)
+        for (int i = 0; i <= g_Sslot.Length; i++)
         {
             if (item == null) //인벤토리에 현재 가지고 있는 아이템이 없다면
             {
@@ -227,29 +142,16 @@ public class Inventory_Controller : MonoBehaviour
                 Show_Inv();
             }
         }
-        /*
-            if (g_gin_V.transform.localScale == new Vector3(1, 1, 1)) // 인벤토리가 켜있으면
-        {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
-            {
-                Hide_Inv();
-            }
-        }
-        else if (g_gin_V.transform.localScale == new Vector3(0, 0, 1))
-        {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                Show_Inv();
-            }
-        }
-        */
     }
 
     public void Set_GetItem(GameObject itemEntity)
     {
-        GameObject entity = Instantiate(itemEntity,GameObject.Find("Inventory_GOs").transform);
-        Destroy(entity.transform.GetComponent<SpriteRenderer>());
-        Destroy(entity.transform.GetComponent<Collider2D>());
+        GameObject entity = Instantiate(itemEntity, GameObject.Find("Inventory_GOs").transform);
+        if (entity.GetComponent<SpriteRenderer>() != null && entity.GetComponent<Collider2D>() != null)
+        {
+            Destroy(entity.transform.GetComponent<SpriteRenderer>());
+            Destroy(entity.transform.GetComponent<Collider2D>());
+        }
         g_Iget_Item = entity.GetComponent<ItemEntity>();
     }
     public void Show_Inv()

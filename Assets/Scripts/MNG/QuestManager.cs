@@ -17,10 +17,9 @@ public class QuestManager : MonoBehaviour
 
     void GenerateData()
     {
-        questList.Add(10, new QuestData("도께비들과 이야기 나누기.", new int[] { 1000, 2000 }));
-        questList.Add(20, new QuestData("아이템을 획득하기.", new int[] { 5000, 2000 }));
-        questList.Add(30, new QuestData("특정지역 도달", new int[] { 100 }));
-        questList.Add(40, new QuestData("퀘스트 올 클리어.", new int[] { 0 }));
+        questList.Add(10, new QuestData("처음주인공 등장", new int[] { 100, 200 }));
+        questList.Add(20, new QuestData("해태와의 만남", new int[] { 300, 400, 500 }));
+        questList.Add(30, new QuestData("퀘스트 올 클리어.", new int[] { 0 }));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -61,21 +60,38 @@ public class QuestManager : MonoBehaviour
             case 10:
                 // 퀘스트 ID가 10인 경우,
                 // questActionIndex가 2일 때 questObject의 첫 번째 요소를 활성화합니다.
-                if (questActionIndex == 2)
-                    questObject[0].SetActive(true);
+                 if (questActionIndex == 1)
+                {
+                     questObject[0].SetActive(false);
+                     questObject[1].SetActive(true);
+                 }
+                else if (questActionIndex == 2)
+                {
+                    questObject[1].SetActive(false);
+                }
                 break;
             case 20:
                 // 퀘스트 ID가 20인 경우, questActionIndex가 1일 때 questObject의 첫 번째 요소를 비활성화합니다.
                 if (questActionIndex == 1)
-                    questObject[0].SetActive(false);
+                {
+                    questObject[2].SetActive(false);
+                }
                 else if (questActionIndex == 2)
-                    questObject[1].SetActive(true);
+                {
+                    questObject[5].SetActive(true);
+                    questObject[4].SetActive(false);
+                }
+                else if (questActionIndex == 3)
+                {
+                    questObject[3].SetActive(false);
+                    questObject[5].SetActive(false);
+                }
                 break;
             case 30:
-                // 퀘스트 ID가 30인 경우, questActionIndex가 1일 때 questObject의 첫 번째 요소를 비활성화합니다.
-                if (questActionIndex == 1)
-                    questObject[1].SetActive(false);
+                if (questActionIndex == 0)
+                    questObject[3].SetActive(false);
                 break;
+
         }
     }
 
