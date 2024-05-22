@@ -32,10 +32,10 @@ public class BaseItemEffect : SOItemBase
                 allyUnit.m_iPermanentSpeedMod += g_iSpd;
                 break;
             case "호감도":
-                
+                allyUnit.m_iIntimacy += 1;
                 break;
             case "효능":
-
+                allyUnit.g_UnitState.stateDur = 0;
                 break;
             case "신통방통":
                 allyUnit.m_iPermanentAtkMod += g_iStr;

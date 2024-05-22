@@ -34,15 +34,12 @@ public class PortalController : MonoBehaviour
                 optionImage.gameObject.SetActive(optionImageActive);
             }
 
+            
             // 포탈을 활성화하면 유닛 체력 회복
             if (optionImageActive)
             {
-                UnitEntity playerUnit = GameObject.FindGameObjectWithTag("Player").GetComponent<UnitEntity>();
-                if (playerUnit != null)
-                {
-                    // 유닛 체력 회복
-                    playerUnit.Heal(100);// 예시로 100큼 회복
-                }
+                for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
+                    GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().Heal(100000);
             }
 
             // GameManager의 상태를 다시 INPROGRESS로 설정
