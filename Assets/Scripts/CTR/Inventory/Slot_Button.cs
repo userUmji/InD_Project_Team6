@@ -74,11 +74,16 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
             {
                 if (g_guse_Button.activeSelf == false)
                 {
+                    if(m_Sslot.g_Ihave_item.m_sItemName == "복주머니")
+                    {
+                       // m_Sslot.g_Ihave_item.;
+                    }
                     g_gUse_View_OB = gameObject;
                     Use_Item_Button.g_gclick_item = gameObject;
                     g_guse_Button.gameObject.SetActive(true);
                     g_guse_Button.transform.position = new Vector2(transform.position.x + 150, transform.position.y - 50);
                     Inventory_Controller.g_ICinstance.lock_UI = false;
+
 
                 }
                 else if (g_gUse_View_OB == gameObject)

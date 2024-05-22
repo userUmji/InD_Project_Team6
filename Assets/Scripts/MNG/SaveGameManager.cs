@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Newtonsoft.Json;
+using System.IO;
 
 public class SaveGameManager : MonoBehaviour
 {
@@ -31,10 +33,10 @@ public class SaveGameManager : MonoBehaviour
 
         GameManager.Instance.SaveALLPlayerUnit();
 
-       
+
 
         // 인벤토리 저장
-        InventorySaveLoad.SaveInventory();
+        SaveInventory();
         // PlayerPrefs 저장
         PlayerPrefs.Save();
 
@@ -104,3 +106,4 @@ public class SaveGameManager : MonoBehaviour
         }
     }
 }
+#endregion

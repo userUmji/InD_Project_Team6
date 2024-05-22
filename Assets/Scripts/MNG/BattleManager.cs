@@ -35,6 +35,7 @@ public class BattleManager : MonoBehaviour
     public BattleHUDCTR playerHUD;
     public BattleHUDCTR enemyHUD;
 
+    public string g_ItemUseScript;
     // ���� ����
 
     public BattleState state;
@@ -485,6 +486,11 @@ public class BattleManager : MonoBehaviour
             return Defer.m_sUnitName + "는 광란에 빠졌다.";
 
         return "";
+    }
+
+    public void CatchProcess()
+    {
+
     }
     #region 버튼 처리
     // 버튼 처리
