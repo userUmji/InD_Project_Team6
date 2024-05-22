@@ -30,16 +30,6 @@ public class SODummyAttack : SOAttackBase
         //Debug.Log(finalAttackDamage);
     }
 
-    public override int GetIsDouble()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool GetIsEffected()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override string GetSkillName()
     {
         return m_sAttackName;
