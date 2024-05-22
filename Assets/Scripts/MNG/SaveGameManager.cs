@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.IO;
-using Newtonsoft.Json;
 
 public class SaveGameManager : MonoBehaviour
 {
@@ -16,12 +14,10 @@ public class SaveGameManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
         GameLoad();
         QuestTalk.text = questManager.CheckQuest();
     }
 
-    
     // 게임을 저장하는 함수
     public void SaveGame()
     {
@@ -35,10 +31,10 @@ public class SaveGameManager : MonoBehaviour
 
         GameManager.Instance.SaveALLPlayerUnit();
 
-
+       
 
         // 인벤토리 저장
-        SaveInventory();
+        InventorySaveLoad.SaveInventory();
         // PlayerPrefs 저장
         PlayerPrefs.Save();
 
@@ -107,5 +103,4 @@ public class SaveGameManager : MonoBehaviour
             }
         }
     }
-    #endregion
 }

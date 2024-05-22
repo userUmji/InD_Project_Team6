@@ -105,6 +105,12 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    
+    public void ExecuteItemEffect()
+    {
+
+    }
+
     public void Show_Image(ItemEntity Clicked_Obj) // 인벤토리에 아이템을 눌렀을때 그 이미지가 마우스를 따라다니게 해줌
     {
         if (Clicked_Obj ==null) // 이미지를 클릭하지 않았다면
@@ -144,11 +150,15 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
+        //  print(m_Sslot.g_Ihave_item.name);
+        //
         if (Inventory_Controller.g_ICinstance.g_Iclick_Item != null) // 선택된 아이템이 있다면
         {
             Show_Image(Inventory_Controller.g_ICinstance.g_Iclick_Item); // 함수에 클릭한 아이템 할당
             Mouse_Follow(g_ishow_Item_Image); // 함수에 마우스를 따라다닐 이미지 변수 할당
         }
+
+        
         else // 선택된 아이템이 없다면
         {
             g_ishow_Item_Image.sprite = null; // 마우스를 따라다닐 이미지 변수 초기화
