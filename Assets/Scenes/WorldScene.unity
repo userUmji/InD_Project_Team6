@@ -131,6 +131,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 249026042}
     m_Modifications:
     - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
+      propertyPath: m_sItemName
+      value: "\uB098\uC5FC\uCD08 \uC78E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
       propertyPath: m_ItemSprite
       value: 
       objectReference: {fileID: 21300000, guid: f7155fac0d464a04796941cd3fbbfaac, type: 3}
@@ -16668,7 +16672,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
       propertyPath: m_sItemName
-      value: "\uC4F4\uBFCC\uB9AC"
+      value: "\uACF5\uACA9\uC758 \uBC84\uC12F"
       objectReference: {fileID: 0}
     - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
       propertyPath: m_ItemSprite
@@ -20012,7 +20016,7 @@ MonoBehaviour:
   - mapName: "\uBBF8\uB974\uC758???"
     regionCollider: {fileID: 1515075374}
     miniMap: {fileID: 468427219}
-  mapNameText: {fileID: 1708120976}
+  mapNameText: {fileID: 0}
   background: {fileID: 1306916126}
 --- !u!1 &1452212661
 GameObject:
@@ -21043,7 +21047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 484561809}
   questManager: {fileID: 442684183}
-  QuestTalk: {fileID: 91337487}
+  QuestTalk: {fileID: 0}
   menuSet: {fileID: 1277267513}
 --- !u!1 &1487784685
 GameObject:
@@ -22479,6 +22483,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 249026042}
     m_Modifications:
+    - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
+      propertyPath: m_sItemName
+      value: "\uB098\uC5FC\uCD08 \uC904\uAE30"
+      objectReference: {fileID: 0}
     - target: {fileID: 1275417128244485899, guid: b32be91bf957bd84c88ea2058a9a8543, type: 3}
       propertyPath: m_ItemSprite
       value: 
@@ -38212,7 +38220,7 @@ MonoBehaviour:
   m_scanObject: {fileID: 0}
   isAct: 0
   talkIndex: 0
-  QuestTalk: {fileID: 91337487}
+  QuestTalk: {fileID: 0}
 --- !u!1 &2003065750
 GameObject:
   m_ObjectHideFlags: 0

@@ -60,11 +60,11 @@ public class QuestManager : MonoBehaviour
             case 10:
                 // 퀘스트 ID가 10인 경우,
                 // questActionIndex가 2일 때 questObject의 첫 번째 요소를 활성화합니다.
-                 if (questActionIndex == 1)
+                if (questActionIndex == 1)
                 {
-                     questObject[0].SetActive(false);
-                     questObject[1].SetActive(true);
-                 }
+                    questObject[0].SetActive(false);
+                    questObject[1].SetActive(true);
+                }
                 else if (questActionIndex == 2)
                 {
                     questObject[1].SetActive(false);
