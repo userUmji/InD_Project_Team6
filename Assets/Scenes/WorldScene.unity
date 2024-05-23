@@ -9361,8 +9361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 152.1, y: -38, z: 0}
-  umji: 0
-  door: {fileID: 0}
 --- !u!61 &225965216
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11983,9 +11981,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List: []
-  g_fpercent: 30
-  g_iLevelBoundary: 
+  g_iLevelBoundary: 1900000026000000
+  g_iseason_Check: 3
+  monsters: []
+  monsters_name: []
 --- !u!1 &301283355
 GameObject:
   m_ObjectHideFlags: 0
@@ -12320,9 +12319,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List: []
-  g_fpercent: 30
-  g_iLevelBoundary: 
+  g_iLevelBoundary: 1900000026000000
+  g_iseason_Check: 3
+  monsters: []
+  monsters_name: []
 --- !u!1 &308474679
 GameObject:
   m_ObjectHideFlags: 0
@@ -21413,8 +21413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 3.5, y: 89, z: 0}
-  umji: 0
-  door: {fileID: 0}
 --- !u!61 &447670512
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30582,9 +30580,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List: []
-  g_fpercent: 30
-  g_iLevelBoundary: 
+  g_iLevelBoundary: 1900000026000000
+  g_iseason_Check: 3
+  monsters: []
+  monsters_name: []
 --- !u!1 &661854551
 GameObject:
   m_ObjectHideFlags: 0
@@ -30865,8 +30864,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 52.8, y: -45, z: 0}
-  umji: 0
-  door: {fileID: 0}
 --- !u!1 &665310981
 GameObject:
   m_ObjectHideFlags: 0
@@ -32369,8 +32366,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: -86, y: 5, z: 0}
-  umji: 0
-  door: {fileID: 0}
 --- !u!61 &711960991
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38283,8 +38278,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  umji: 1
-  door: {fileID: 0}
 --- !u!61 &773934961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -42459,9 +42452,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List: []
-  g_fpercent: 30
-  g_iLevelBoundary: 
+  g_iLevelBoundary: 1900000026000000
+  g_iseason_Check: 3
+  monsters: []
+  monsters_name: []
 --- !u!1 &877832663
 GameObject:
   m_ObjectHideFlags: 0
@@ -45838,9 +45832,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List: []
-  g_fpercent: 30
-  g_iLevelBoundary: 
+  g_iLevelBoundary: 1900000026000000
+  g_iseason_Check: 3
+  monsters: []
+  monsters_name: []
 --- !u!1 &954247000
 GameObject:
   m_ObjectHideFlags: 0
@@ -53617,8 +53612,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: -55, y: -67, z: 0}
-  umji: 0
-  door: {fileID: 0}
 --- !u!61 &1146467177
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -56871,10 +56864,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List:
-  - "\uBC31\uC694\uD638"
-  g_fpercent: 50
   g_iLevelBoundary: 
+  g_iseason_Check: 0
+  monsters: []
+  monsters_name: []
 --- !u!61 &1229687253
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -68331,9 +68324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List: []
-  g_fpercent: 30
-  g_iLevelBoundary: 
+  g_iLevelBoundary: 1900000026000000
+  g_iseason_Check: 3
+  monsters: []
+  monsters_name: []
 --- !u!1 &1423464580
 GameObject:
   m_ObjectHideFlags: 0
@@ -78608,9 +78602,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List: []
-  g_fpercent: 30
-  g_iLevelBoundary: 
+  g_iLevelBoundary: 1900000026000000
+  g_iseason_Check: 3
+  monsters: []
+  monsters_name: []
 --- !u!1 &1716980604
 GameObject:
   m_ObjectHideFlags: 0
@@ -93280,9 +93275,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf3ac68d41b0a545af036272c54153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gmonster_List: []
-  g_fpercent: 30
-  g_iLevelBoundary: 
+  g_iLevelBoundary: 1900000026000000
+  g_iseason_Check: 3
+  monsters: []
+  monsters_name: []
 --- !u!1 &1833740081
 GameObject:
   m_ObjectHideFlags: 0
@@ -113473,8 +113469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  umji: 1
-  door: {fileID: 0}
 --- !u!1 &1963576523
 GameObject:
   m_ObjectHideFlags: 0
@@ -117791,8 +117785,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  umji: 1
-  door: {fileID: 0}
 --- !u!61 &2065103171
 BoxCollider2D:
   m_ObjectHideFlags: 0
