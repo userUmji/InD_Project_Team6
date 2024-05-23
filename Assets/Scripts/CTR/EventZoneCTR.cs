@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class EventZoneCTR: MonoBehaviour
 {
+    [System.Serializable]
+    public class Monster
+    {
+        public string m_sName;
+        public int m_iChance;
+    }
     // g_fCharacterSpeed -> g는 글로벌(public) m은 멤버(private) 뒤의 f(float)/i(int)/s(string)
-    public string[] g_gmonster_List;
+    [SerializeField] public Monster[] g_gmonster_List;
     public float g_fpercent; // 몬스터 등장 확률
     public int[] g_iLevelBoundary;
     public Coroutine FindCoroutine;
@@ -51,11 +57,46 @@ public class EventZoneCTR: MonoBehaviour
 
             if (random_percent_num <= g_fpercent) // percent이 변수 안에 들어있는 숫자 만큼의 퍼센트로 이벤트 발생
             {
-                int random_monster_number = Random.Range(0, g_gmonster_List.Length); // 몬스터 뽑기
-                GameManager.Instance.LoadBattleScene(g_gmonster_List[random_monster_number]);
+                int max_chace = 0;
+                for (int i = 0; i< g_gmonster_List.Length;i++)
+                {
+                    max_chace += g_gmonster_List[i].m_iChance;
+                }
+                int random_monster_number = Random.Range(0, max_chace); // 몬스터 뽑기\
+                string name = CalMonsterChance(g_gmonster_List, random_monster_number);
+
+                int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
+                GameManager.Instance.LoadBattleScene(g_gmonster_List[random_monster_number].m_sName,random_monster_lvl);
+
                 FindCoroutine = null;
                 break;
             }
         }
+    }
+
+    private string CalMonsterChance(Monster[] mons, int chance)
+    {
+        int[] chanceArr = new int[mons.Length];
+        for (int i = 0; i < mons.Length; i++)
+        {
+            chanceArr[i] = 0;
+            for (int j = 0; j < i +1; j++)
+            {
+                chanceArr[i] += mons[j].m_iChance;
+            }
+        }
+        for (int i = 0; i < chanceArr.Length; i++)
+        {
+            if(i == 0)
+            {
+                if (chanceArr[i] > chance)
+                    return mons[i].m_sName;
+            }
+            if (chanceArr[i-1] < chance && chance < chanceArr[i])
+            {
+                return mons[i].m_sName;
+            }
+        }
+        return "더미";
     }
 }
