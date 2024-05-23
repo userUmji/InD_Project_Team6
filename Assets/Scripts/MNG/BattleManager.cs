@@ -53,7 +53,7 @@ public class BattleManager : MonoBehaviour
     void BattleInit()
     {
         //전투 초기화
-        g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit);
+        g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit , GameManager.Instance.g_iEnemyBattleLvl);
         state = BattleState.START;
         BattleCoroutine = StartCoroutine(SetupBattle());
     }

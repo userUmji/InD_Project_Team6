@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public int[] g_iReqExp;
 
     public string g_sEnemyBattleUnit;
+    public int g_iEnemyBattleLvl;
 
     public enum Action { CANCLE, ATTACK, ITEM, CHANGE, RUN }
     //싱글턴 구현
@@ -87,11 +88,12 @@ public class GameManager : MonoBehaviour
     {
         return m_DataManager.GetUnitSaveData(className);
     }
-    public void LoadBattleScene(string enemyBattleUnit)
+    public void LoadBattleScene(string enemyBattleUnit, int lvl)
     {
         g_GameState = GameState.BATTLE;
         AsyncOperation SceneOper = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
         g_sEnemyBattleUnit = enemyBattleUnit;
+        g_iEnemyBattleLvl = lvl;
         Canvas_WorldScene.SetActive(false);
         SceneOper.allowSceneActivation = true; 
     }
