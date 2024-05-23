@@ -10,9 +10,7 @@ public class UmJi_Map_Spawn : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
             collision.gameObject.transform.position = door.transform.GetChild(0).transform.position;
-
 
         }
     }

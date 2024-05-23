@@ -192,7 +192,8 @@ public class EventZoneCTR: MonoBehaviour
             if(monsters_name.Count != 0)
             {
                 random = Random.Range(0, monsters_name.Count);
-                print(monsters_name[random] + "����!!!!!!!!!!!!!!!!!!!!!!!");
+                print(monsters_name[random] + "나타났다!!!!!!!!!!!!!!!!!!!!!!!");
+                /*
                 GameManager.Instance.LoadBattleScene(monsters_name[random]);
                 int max_chace = 0;
                 for (int i = 0; i< g_gmonster_List.Length;i++)
@@ -204,7 +205,7 @@ public class EventZoneCTR: MonoBehaviour
 
                 int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
                 GameManager.Instance.LoadBattleScene(g_gmonster_List[random_monster_number].m_sName,random_monster_lvl);
-
+                */
                 FindCoroutine = null;
                 monsters_name.Clear();
                 break;
