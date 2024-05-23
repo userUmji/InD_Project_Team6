@@ -12,7 +12,7 @@ public class ChangeScene : MonoBehaviour
 
     public void SceneChange1()
     {
-        SceneManager.LoadScene("UmJi");
+        SceneManager.LoadScene("WorldScene");
     }
 
     public void SceneChange2()

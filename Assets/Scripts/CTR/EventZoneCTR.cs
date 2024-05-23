@@ -16,9 +16,18 @@ public class Monster_Info
 }
 public class EventZoneCTR: MonoBehaviour
 {
+    [System.Serializable]
+    public class Monster
+    {
+        public string m_sName;
+        public int m_iChance;
+    }
+    // g_fCharacterSpeed -> gï¿½ï¿½ ï¿½Û·Î¹ï¿½(public) mï¿½ï¿½ ï¿½ï¿½ï¿½(private) ï¿½ï¿½ï¿½ï¿½ f(float)/i(int)/s(string)
+    [SerializeField] public Monster[] g_gmonster_List;
+    public float g_fpercent; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
     public int[] g_iLevelBoundary;
     public Coroutine FindCoroutine;
-    [Header("0¹ø: º½, 1¹ø: ¿©¸§, 2¹ø: °¡À», 3¹ø: °Ü¿ï")]
+    [Header("0ï¿½ï¿½: ï¿½ï¿½, 1ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½, 2ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½, 3ï¿½ï¿½: ï¿½Ü¿ï¿½")]
     public int g_iseason_Check;
 
     public List<Monster_Info> monsters = new List<Monster_Info>();
@@ -30,58 +39,58 @@ public class EventZoneCTR: MonoBehaviour
     }
     private void Reset_List()
     {
-        // º½
+        // ï¿½ï¿½
         if (g_iseason_Check == 0)
         {
-            Monster_Info mon_If = new Monster_Info("ÀÏ¹Ýµµ±úºñ", 100);
+            Monster_Info mon_If = new Monster_Info("ï¿½Ï¹Ýµï¿½ï¿½ï¿½ï¿½ï¿½", 100);
             monsters.Add(mon_If);
         }
-        // ¿©¸§
+        // ï¿½ï¿½ï¿½ï¿½
         else if (g_iseason_Check == 1)
         {
-            Monster_Info mon_If = new Monster_Info("ÀÏ¹Ýµµ±úºñ", 50);
+            Monster_Info mon_If = new Monster_Info("ï¿½Ï¹Ýµï¿½ï¿½ï¿½ï¿½ï¿½", 50);
             monsters.Add(mon_If);
 
-            Monster_Info mon_If1 = new Monster_Info("Àú½ÂÂ÷»ç", 25);
+            Monster_Info mon_If1 = new Monster_Info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 25);
             monsters.Add(mon_If1);
 
-            Monster_Info mon_If2 = new Monster_Info("¸Æ", 25);
+            Monster_Info mon_If2 = new Monster_Info("ï¿½ï¿½", 25);
             monsters.Add(mon_If2);
         }
-        // °¡À»
+        // ï¿½ï¿½ï¿½ï¿½
         else if (g_iseason_Check == 2)
         {
-            Monster_Info mon_If = new Monster_Info("ÀÏ¹Ýµµ±úºñ", 25);
+            Monster_Info mon_If = new Monster_Info("ï¿½Ï¹Ýµï¿½ï¿½ï¿½ï¿½ï¿½", 25);
             monsters.Add(mon_If);
 
-            Monster_Info mon_If1 = new Monster_Info("ºÒ°¡»ç¸®", 25);
+            Monster_Info mon_If1 = new Monster_Info("ï¿½Ò°ï¿½ï¿½ç¸®", 25);
             monsters.Add(mon_If1);
 
-            Monster_Info mon_If2 = new Monster_Info("°­Ã¶ÀÌ", 25);
+            Monster_Info mon_If2 = new Monster_Info("ï¿½ï¿½Ã¶ï¿½ï¿½", 25);
             monsters.Add(mon_If2);
 
-            Monster_Info mon_If3 = new Monster_Info("¸Æ", 15);
+            Monster_Info mon_If3 = new Monster_Info("ï¿½ï¿½", 15);
             monsters.Add(mon_If3);
 
-            Monster_Info mon_If4 = new Monster_Info("Àú½ÂÂ÷»ç", 10);
+            Monster_Info mon_If4 = new Monster_Info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 10);
             monsters.Add(mon_If4);
         }
-        // °Ü¿ï
+        // ï¿½Ü¿ï¿½
         else if (g_iseason_Check == 3)
         {
-            Monster_Info mon_If = new Monster_Info("ÀÏ¹Ýµµ±úºñ", 25);
+            Monster_Info mon_If = new Monster_Info("ï¿½Ï¹Ýµï¿½ï¿½ï¿½ï¿½ï¿½", 25);
             monsters.Add(mon_If);
 
-            Monster_Info mon_If1 = new Monster_Info("Àå»ê¹ü", 25);
+            Monster_Info mon_If1 = new Monster_Info("ï¿½ï¿½ï¿½ï¿½", 25);
             monsters.Add(mon_If1);
 
-            Monster_Info mon_If2 = new Monster_Info("¹é¿äÈ£", 25);
+            Monster_Info mon_If2 = new Monster_Info("ï¿½ï¿½ï¿½È£", 25);
             monsters.Add(mon_If2);
 
-            Monster_Info mon_If3 = new Monster_Info("ºÒ°¡»ç¸®", 15);
+            Monster_Info mon_If3 = new Monster_Info("ï¿½Ò°ï¿½ï¿½ç¸®", 15);
             monsters.Add(mon_If3);
 
-            Monster_Info mon_If4 = new Monster_Info("°­Ã¶ÀÌ", 10);
+            Monster_Info mon_If4 = new Monster_Info("ï¿½ï¿½Ã¶ï¿½ï¿½", 10);
             monsters.Add(mon_If4);
         }
     }
@@ -115,13 +124,13 @@ public class EventZoneCTR: MonoBehaviour
         }
     }
 
-    IEnumerator Find_Monster() // Æ¯Á¤ ±¸¿ª¾È¿¡ ¸ó½ºÅÍ¿Í °áÅõ½ÃÀÛ
+    IEnumerator Find_Monster() // Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         while (true)
         {
             yield return new WaitForSecondsRealtime(1f);
 
-            int random_percent_num = Random.Range(1, 101); // ÆÛ¼¾Æ®°ü·Ã ¼ýÀÚ »Ì±â
+            int random_percent_num = Random.Range(1, 101); // ï¿½Û¼ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½
             
             if (random_percent_num <= 10)
             {
@@ -183,8 +192,19 @@ public class EventZoneCTR: MonoBehaviour
             if(monsters_name.Count != 0)
             {
                 random = Random.Range(0, monsters_name.Count);
-                print(monsters_name[random] + "µîÀå!!!!!!!!!!!!!!!!!!!!!!!");
+                print(monsters_name[random] + "ï¿½ï¿½ï¿½ï¿½!!!!!!!!!!!!!!!!!!!!!!!");
                 GameManager.Instance.LoadBattleScene(monsters_name[random]);
+                int max_chace = 0;
+                for (int i = 0; i< g_gmonster_List.Length;i++)
+                {
+                    max_chace += g_gmonster_List[i].m_iChance;
+                }
+                int random_monster_number = Random.Range(0, max_chace); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½\
+                string name = CalMonsterChance(g_gmonster_List, random_monster_number);
+
+                int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
+                GameManager.Instance.LoadBattleScene(g_gmonster_List[random_monster_number].m_sName,random_monster_lvl);
+
                 FindCoroutine = null;
                 monsters_name.Clear();
                 break;
@@ -193,14 +213,40 @@ public class EventZoneCTR: MonoBehaviour
 
             /* for (int i =0; i < g_fpercent.Length; i++)
              {
-                 if (g_fpercent[i] <= random_percent_num) // percentÀÌ º¯¼ö ¾È¿¡ µé¾îÀÖ´Â ¼ýÀÚ ¸¸Å­ÀÇ ÆÛ¼¾Æ®·Î ÀÌº¥Æ® ¹ß»ý
+                 if (g_fpercent[i] <= random_percent_num) // percentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­ï¿½ï¿½ ï¿½Û¼ï¿½Æ®ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ß»ï¿½
                  {
-                     int random_monster_number = Random.Range(0, g_gmonster_List.Length); // ¸ó½ºÅÍ »Ì±â
+                     int random_monster_number = Random.Range(0, g_gmonster_List.Length); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½
                      GameManager.Instance.LoadBattleScene(g_gmonster_List[i]);
                      FindCoroutine = null;
                      break;
                  }
              }  */
         }
+    }
+
+    private string CalMonsterChance(Monster[] mons, int chance)
+    {
+        int[] chanceArr = new int[mons.Length];
+        for (int i = 0; i < mons.Length; i++)
+        {
+            chanceArr[i] = 0;
+            for (int j = 0; j < i +1; j++)
+            {
+                chanceArr[i] += mons[j].m_iChance;
+            }
+        }
+        for (int i = 0; i < chanceArr.Length; i++)
+        {
+            if(i == 0)
+            {
+                if (chanceArr[i] > chance)
+                    return mons[i].m_sName;
+            }
+            if (chanceArr[i-1] < chance && chance < chanceArr[i])
+            {
+                return mons[i].m_sName;
+            }
+        }
+        return "ï¿½ï¿½ï¿½ï¿½";
     }
 }
