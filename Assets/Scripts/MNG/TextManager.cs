@@ -65,10 +65,22 @@ public class TextManager : MonoBehaviour
         else // NPC가 아닌 경우
         {
             // 대화 텍스트 설정
-            m_talkText.text = talkData;
-            // 초상화 이미지 투명하게 설정
-            m_portraitImg.color = new Color(1, 1, 1, 0);
+            m_talkText.text = talkData.Split(':')[0];
+
+            // 초상화 이미지가 있는 경우에만 설정
+            if (talkData.Contains(":"))
+            {
+                // 초상화 이미지 설정
+                m_portraitImg.sprite = m_TalkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
+                m_portraitImg.color = new Color(1, 1, 1, 1); // 초상화 이미지 투명도 설정
+            }
+            else
+            {
+                // 초상화 이미지 투명하게 설정
+                m_portraitImg.color = new Color(1, 1, 1, 0);
+            }
         }
+
 
         // 상호작용 활성화 및 대화 인덱스 증가
         isAct = true;
