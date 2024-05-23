@@ -18,8 +18,9 @@ public class QuestManager : MonoBehaviour
     void GenerateData()
     {
         questList.Add(10, new QuestData("처음주인공 등장", new int[] { 100, 200 }));
-        questList.Add(20, new QuestData("해태와의 만남", new int[] { 300, 400, 500, 600 }));
-        questList.Add(30, new QuestData("현무를 만나기위해 미르의 여름으로!!", new int[] { 700, 0 }));
+        questList.Add(20, new QuestData("해태와의 만남", new int[] { 300, 400, 500 }));
+        questList.Add(30, new QuestData("현무를 만나기위해 미르의 여름으로!!", new int[] { 800,1200, 900 }));
+        questList.Add(40, new QuestData("주작을 만나기위해 미르의 가을로!!", new int[] { 1500, 0 }));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -93,8 +94,14 @@ public class QuestManager : MonoBehaviour
                 break;
             case 30:
                 if (questActionIndex == 1)
+                    questObject[8].SetActive(false);
+                else if (questActionIndex == 2)
+                {
+                    questObject[8].SetActive(false);
                     questObject[7].SetActive(false);
+                }
                 break;
+
 
         }
     }
