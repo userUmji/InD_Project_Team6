@@ -9,10 +9,7 @@ public class Use_Item_Button : MonoBehaviour
 
     public void Use_Item()
     {
-        if (g_gclick_item.GetComponent<Slot>().g_Ihave_item.m_sItemName == "복주머니")
-        {
-            return;
-        }
+        Debug.Log("adsf");
         g_gclick_item.GetComponent<Slot>().g_Ihave_item.ExecuteItem(index);
         g_gclick_item.GetComponent<Slot>().g_iitem_Number -= 1;
         g_gclick_item.GetComponent<Slot>().Refresh();

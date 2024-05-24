@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 //using UnityEngine.UIElements;
 
 public class Slot_Button : MonoBehaviour, IPointerClickHandler
@@ -77,7 +78,20 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
                     m_Sslot.g_Ihave_item.ExecuteItem(0);
                 }
                 if (g_guse_Button.activeSelf == false)
-                { 
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if(GameManager.Instance.m_UnitManager.g_PlayerUnits[i] != null)
+                        {
+                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                                = GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
+                        }
+                        else
+                        {
+                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
+                            g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
+                        }
+                    }
                     g_gUse_View_OB = gameObject;
                     Use_Item_Button.g_gclick_item = gameObject;
                     g_guse_Button.gameObject.SetActive(true);
@@ -86,6 +100,19 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
                 }
                 else if (g_gUse_View_OB == gameObject)
                 {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i] != null)
+                        {
+                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                                = GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
+                        }
+                        else
+                        {
+                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
+                            g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
+                        }
+                    }
                     g_gUse_View_OB = null;
                     Use_Item_Button.g_gclick_item = null;
                     g_guse_Button.gameObject.SetActive(false);
@@ -93,6 +120,19 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
                 }
                 else
                 {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i] != null)
+                        {
+                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                                = GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
+                        }
+                        else
+                        {
+                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
+                            g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
+                        }
+                    }
                     g_gUse_View_OB = gameObject;
                     Use_Item_Button.g_gclick_item = gameObject;
                     g_guse_Button.transform.position = new Vector2(transform.position.x + 150, transform.position.y - 50);
