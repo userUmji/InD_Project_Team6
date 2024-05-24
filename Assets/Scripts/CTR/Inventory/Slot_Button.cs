@@ -75,23 +75,12 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
             {
                 if (m_Sslot.g_Ihave_item.m_sItemName == "복주머니")
                 {
-                    m_Sslot.g_Ihave_item.ExecuteItem(0);
+                    SetButton_CatchItem();
+                    return;
                 }
                 if (g_guse_Button.activeSelf == false)
                 {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if(GameManager.Instance.m_UnitManager.g_PlayerUnits[i] != null)
-                        {
-                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                                = GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
-                        }
-                        else
-                        {
-                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
-                            g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
-                        }
-                    }
+                    SetButton();
                     g_gUse_View_OB = gameObject;
                     Use_Item_Button.g_gclick_item = gameObject;
                     g_guse_Button.gameObject.SetActive(true);
@@ -100,19 +89,7 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
                 }
                 else if (g_gUse_View_OB == gameObject)
                 {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i] != null)
-                        {
-                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                                = GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
-                        }
-                        else
-                        {
-                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
-                            g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
-                        }
-                    }
+                    SetButton();
                     g_gUse_View_OB = null;
                     Use_Item_Button.g_gclick_item = null;
                     g_guse_Button.gameObject.SetActive(false);
@@ -120,19 +97,7 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
                 }
                 else
                 {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i] != null)
-                        {
-                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
-                                = GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
-                        }
-                        else
-                        {
-                            g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
-                            g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
-                        }
-                    }
+                    SetButton();
                     g_gUse_View_OB = gameObject;
                     Use_Item_Button.g_gclick_item = gameObject;
                     g_guse_Button.transform.position = new Vector2(transform.position.x + 150, transform.position.y - 50);
@@ -160,7 +125,58 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
             g_ishow_Item_Image.gameObject.SetActive(true); // 마우스를 따라다니는 이미지 활성화
         }
     }
+    private void SetButton()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i] != null)
+            {
+                g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text
+                    = GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
+                g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
+                g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
+            }
+        }
+    }
+    private void SetButton_CatchItem()
+    {
+        if (GameManager.Instance.g_GameState == GameManager.GameState.BATTLE)
+        {
+            g_guse_Button.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "사용한다!";
+            g_guse_Button.transform.GetChild(0).GetComponent<Button>().interactable = true;
+            for (int i = 1; i < 3; i++)
+            {
+                g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
+                g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
 
+            }
+            g_gUse_View_OB = gameObject;
+            Use_Item_Button.g_gclick_item = gameObject;
+            g_guse_Button.gameObject.SetActive(true);
+            g_guse_Button.transform.position = new Vector2(transform.position.x + 150, transform.position.y - 50);
+            Inventory_Controller.g_ICinstance.lock_UI = false;
+        }
+        else
+        {
+            g_guse_Button.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "사용할 수 없다!";
+            g_guse_Button.transform.GetChild(0).GetComponent<Button>().interactable = false;
+            for (int i = 1; i < 3; i++)
+            {
+                g_guse_Button.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "X";
+                g_guse_Button.transform.GetChild(i).GetComponent<Button>().interactable = false;
+
+            }
+            g_gUse_View_OB = gameObject;
+            Use_Item_Button.g_gclick_item = gameObject;
+            g_guse_Button.gameObject.SetActive(true);
+            g_guse_Button.transform.position = new Vector2(transform.position.x + 150, transform.position.y - 50);
+            Inventory_Controller.g_ICinstance.lock_UI = false;
+        }
+    }
     public void Mouse_Follow(Image show_Image) // 마우스 따라다니는 오브젝트
     {
         show_Image.sprite = Inventory_Controller.g_ICinstance.g_Iclick_Item.m_ItemSprite; // 보여줄 이미지에 선택한 오브젝트 이미지 할당

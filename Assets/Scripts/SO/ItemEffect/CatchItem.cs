@@ -6,6 +6,7 @@ public class CatchItem : SOItemBase
 {
     public override void ExecuteItemEffect(UnitEntity allyUnit)
     {
+        Debug.Log("복 주머니");
         if(GameManager.Instance.g_GameState == GameManager.GameState.BATTLE)
         {
             BattleManager btm = GameObject.Find("BattleManager").GetComponent<BattleManager>();

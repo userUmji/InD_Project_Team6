@@ -20,7 +20,8 @@ public class EventZoneCTR: MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StopCoroutine(FindCoroutine);
+            if(FindCoroutine != null)
+                StopCoroutine(FindCoroutine);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

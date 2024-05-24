@@ -20,6 +20,7 @@ public class BattleManager : MonoBehaviour
     private Coroutine BattleCoroutine;
     private bool isPlayed = false;
     private bool isFall = false;
+    private bool isCaptureScucess = false;
     //버튼에서 전달받은 Action
     private GameManager.Action m_ePlayerAction;
     private int m_iPlayerActionIndex;
@@ -56,6 +57,8 @@ public class BattleManager : MonoBehaviour
         //전투 초기화
         g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit , GameManager.Instance.g_iEnemyBattleLvl);
         state = BattleState.START;
+        if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
+            GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
         BattleCoroutine = StartCoroutine(SetupBattle());
     }
 
@@ -103,7 +106,13 @@ public class BattleManager : MonoBehaviour
     private void ItemProcess()
     {
         if (state != BattleState.PLAYERTURN)
-            StartCoroutine(PlayerTurn_Item());
+        {
+            if (g_isCapture == true)
+                StartCoroutine(CaptureProcess());
+            else
+                StartCoroutine(PlayerTurn_Item());
+        }
+
         else
             StartCoroutine(EnemyTurn());
     }
@@ -367,8 +376,7 @@ public class BattleManager : MonoBehaviour
     IEnumerator PlayerWin()
     {
         state = BattleState.END;
-        dialogueText.text = "도깨비를 처치했다!";
-        yield return new WaitForSeconds(1f);
+
         int gainExpTemp;
         if (enemyUnit.m_iUnitLevel < 16)
             gainExpTemp = enemyUnit.m_iUnitLevel * 300;
@@ -376,6 +384,16 @@ public class BattleManager : MonoBehaviour
             gainExpTemp = enemyUnit.m_iUnitLevel * 250;
         else
             gainExpTemp = enemyUnit.m_iUnitLevel * 200;
+
+        if (isCaptureScucess)
+        {
+            dialogueText.text = "도깨비를 잡았다!";
+            gainExpTemp = (int)(gainExpTemp * 1.2f);
+        }
+        else
+            dialogueText.text = "도깨비를 처치했다!";
+        yield return new WaitForSeconds(1f);
+
         foreach (GameObject entity in GameManager.Instance.m_UnitManager.g_PlayerUnits)
         {
             if (entity != null)
@@ -463,11 +481,17 @@ public class BattleManager : MonoBehaviour
             UnitSaveData.m_AttackBehav_2 = enemyUnit.m_AttackBehaviors[1].m_iSkillNo;
             UnitSaveData.m_AttackBehav_3 = enemyUnit.m_AttackBehaviors[2].m_iSkillNo;
             dialogueText.text = "도깨비를 잡았다!";
-
+            isCaptureScucess = true;
+            StartCoroutine(PlayerWin());
+            StopCoroutine(CaptureProcess());
         }
         else
+        {
             dialogueText.text = "놓쳤따!";
-
+            g_isCapture = false;
+            Process();
+            isPlayed = true;
+        }
         yield return new WaitForSeconds(1f);
     }
 

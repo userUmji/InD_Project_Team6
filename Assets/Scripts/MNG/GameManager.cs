@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     //월드씬의 캔버스
     public GameObject Canvas_WorldScene;
     //게임의 진행 상황 (초기화, 진행중, 대화중, 전투중, 일지정지)
-    public enum GameState { INIT, INPROGRESS, DIALOG, BATTLE, PAUSE };
+    public enum GameState { INIT, INPROGRESS, DIALOG,  PORTAL ,BATTLE, PAUSE };
     public GameState g_GameState;
     public GameObject g_InventoryGO;
     public List<SOAttackBase> Skills;
@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
         InitExp();
 
         m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
+        
         g_GameState = GameState.INPROGRESS;
 
     }
@@ -102,10 +103,13 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i<m_UnitManager.CheckUnitAmount();i++)
         {
             UnitEntity unitEntity = m_UnitManager.g_PlayerUnits[i].transform.GetComponent<UnitEntity>();
-            m_DataManager.SaveByUnit(unitEntity.m_sUnitName, unitEntity );
-
+            m_DataManager.SaveByUnit(unitEntity.m_sUnitName, unitEntity);
         }
         m_DataManager.SaveFunc_ALL();
+    }
+    public void SavePlayerUnit(string name, UnitEntity entity)
+    {
+        m_DataManager.SaveByUnit(name, entity);
     }
     // 게임 상태를 설정하는 메서드
     public void SetGameState(GameState state)
