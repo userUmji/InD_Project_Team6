@@ -75,6 +75,12 @@ public class TalkManager : MonoBehaviour
                                               "뭔가에 씌인듯한...사신수같지 않아!:0",
                                               "..!:0"  });
 
+        talkData.Add(30 + 1300, new string[] { "후...어찌저찌 이겼네..:0",
+                                              "그치만 이건 뭔가 이상해.:0",
+                                              "평소 사신수라고 생각되지 않을만큼 날카롭고 적대적인 모습..:0",
+                                              "그래 틀림없어. 미르에 무슨일이 생긴거야!:0",
+                                              "다른 사신수들도 전부 만나봐야겠어...!:0"  });
+
         talkData.Add(1100, new string[] { "미르의 여름은 위쪽이었지?:0","위로 이동하자!!:0" });
 
 
@@ -126,6 +132,7 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(900 + 0, portraitArr[2]);
         portraitData.Add(1100 + 0, portraitArr[2]);
         portraitData.Add(1200 + 0, portraitArr[2]);
+        portraitData.Add(1300 + 0, portraitArr[2]);
         portraitData.Add(1500 + 0, portraitArr[2]);
         portraitData.Add(5000 + 0, portraitArr[0]);
         portraitData.Add(1000 + 0, portraitArr[0]);
