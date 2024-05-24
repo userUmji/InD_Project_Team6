@@ -54,16 +54,16 @@ public class UnitEntity : MonoBehaviour
     public SOAttackBase[] m_AttackBehaviors;
 
     //GameManager에 있는 UnitData 정보로 초기화
-    public void SetUnit(string className)
+    public void SetUnit(string className, int lvl)
     {
         var UnitData = GameManager.Instance.GetUnitData(className);
-        var UnitSaveData = GameManager.Instance.GetUnitSaveData(className);
+        //var UnitSaveData = GameManager.Instance.GetUnitSaveData(className);
 
         //UnitEntity 초기화
         m_sUnitName = UnitData.m_sUnitName;
         gameObject.name += "-" + m_sUnitName;
 
-        m_iUnitLevel = UnitSaveData.m_iUnitLevel;
+        m_iUnitLevel = lvl;
 
         m_iSkillAmounts = new int[4];
 
@@ -76,17 +76,11 @@ public class UnitEntity : MonoBehaviour
 
         m_spriteUnitImage = UnitData.m_UnitSprite;
         m_AttackBehaviors = new SOAttackBase[4];
-        
-        
-        //랜덤 스킬 넣기를 위해 개발중
+       
         List<SOAttackBase> attack_Temp = GameManager.Instance.Skills.FindAll(type => type.SkillType == UnitType);
 
         ChooseRandomAttack();
  
-        
-        //m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
-        //m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
-        //m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
         m_AttackBehaviors[3] = Instantiate(UnitData.m_AttackBehav_Ult);
         for (int i = 0; i < 4; i++)
             m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;

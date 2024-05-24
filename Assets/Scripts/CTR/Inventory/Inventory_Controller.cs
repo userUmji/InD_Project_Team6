@@ -47,6 +47,7 @@ public class Inventory_Controller : MonoBehaviour
         {
             g_Sslot[i] = g_ginventory.transform.GetChild(i).GetComponent<Slot>(); // 유니티상에서 인벤토리라는 오브젝트 안에 슬롯들이 있기때문에 그 슬롯들을 가져와서 배열에 넣어줌
         }
+        g_gin_V.transform.localScale = new Vector3(0, 0, 1);
     }
     // Update is called once per frame
     void Update()
