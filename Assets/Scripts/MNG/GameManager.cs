@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
     public int CompareType(Type SkillType, Type UnitType)
     {
         int isDouble = 0;
-        if (UnitType == Type.GODBEAST)
+        if (UnitType == Type.GODBEAST ||SkillType == Type.GODBEAST)
             isDouble = 0;
         else if (SkillType - UnitType == -1 || SkillType - UnitType == 3)
             isDouble = 1;

@@ -108,12 +108,6 @@ public class Slot_Button : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    
-    public void ExecuteItemEffect()
-    {
-
-    }
-
     public void Show_Image(ItemEntity Clicked_Obj) // 인벤토리에 아이템을 눌렀을때 그 이미지가 마우스를 따라다니게 해줌
     {
         if (Clicked_Obj ==null) // 이미지를 클릭하지 않았다면

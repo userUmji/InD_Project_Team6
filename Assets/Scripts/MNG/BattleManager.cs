@@ -26,7 +26,7 @@ public class BattleManager : MonoBehaviour
    
     // 플레이어 유닛
     public UnitEntity playerUnit;
-    UnitEntity enemyUnit;
+    public UnitEntity enemyUnit;
 
     // 전투 다이얼로그 텍스트
     public TextMeshProUGUI dialogueText;
@@ -36,6 +36,7 @@ public class BattleManager : MonoBehaviour
     public BattleHUDCTR enemyHUD;
 
     public string g_ItemUseScript;
+    public bool g_isCapture;
     // ���� ����
 
     public BattleState state;
@@ -425,6 +426,52 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         ChangeScene();
     }
+
+    IEnumerator CaptureProcess()
+    {
+        bool isCapture = false;
+        int randomNum = Random.Range(0, 100);
+
+        if (enemyUnit.m_iUnitHP / 4 >= enemyUnit.m_iCurrentHP)
+        {
+            if (randomNum > 20)
+                isCapture = true;
+        }
+        else if (enemyUnit.m_iUnitHP / 2 > enemyUnit.m_iCurrentHP && enemyUnit.m_iUnitHP / 4 <= enemyUnit.m_iCurrentHP)
+        {
+            if (randomNum > 40)
+                isCapture = true;
+
+        }
+        else if (enemyUnit.m_iUnitHP * 3 / 4 > enemyUnit.m_iCurrentHP && enemyUnit.m_iUnitHP / 2 < enemyUnit.m_iCurrentHP)
+        {
+            if (randomNum > 60)
+                isCapture = true;
+        }
+        else
+        {
+            if (randomNum > 80)
+                isCapture = true;
+        }
+        if (isCapture == true)
+        {
+            yield return new WaitForSeconds(1f);
+            var UnitSaveData = GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName);
+            UnitSaveData.m_isCaptured = true;
+            UnitSaveData.m_iUnitLevel = enemyUnit.m_iUnitLevel;
+            UnitSaveData.m_AttackBehav_1 = enemyUnit.m_AttackBehaviors[0].m_iSkillNo;
+            UnitSaveData.m_AttackBehav_2 = enemyUnit.m_AttackBehaviors[1].m_iSkillNo;
+            UnitSaveData.m_AttackBehav_3 = enemyUnit.m_AttackBehaviors[2].m_iSkillNo;
+            dialogueText.text = "도깨비를 잡았다!";
+
+        }
+        else
+            dialogueText.text = "놓쳤따!";
+
+        yield return new WaitForSeconds(1f);
+    }
+
+
 
     #endregion
     #region 기타 메서드
