@@ -25,6 +25,3 @@ MonoBehaviour:
   m_SkillEffect: 3
   m_isPlayed: 0
   m_iAdditionalSpeed: 0
-  animation: {fileID: 7400000, guid: f5f7f23fceeb4fe43b0146de7e63cdd0, type: 2}
-  m_IsDouble: 0
-  m_IsEffected: 0

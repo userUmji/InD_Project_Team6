@@ -18,10 +18,11 @@ public class QuestManager : MonoBehaviour
     void GenerateData()
     {
         questList.Add(10, new QuestData("처음주인공 등장", new int[] { 100, 200 }));
-        questList.Add(20, new QuestData("해태와의 만남", new int[] { 300, 400, 500 }));
+        questList.Add(20, new QuestData("해태와의 만남", new int[] { 300,  500 }));
         questList.Add(30, new QuestData("현무를 만나기위해 미르의 여름으로!!", new int[] { 800,1200, 900, 1300 }));
         questList.Add(40, new QuestData("주작을 만나기위해 미르의 가을로!!", new int[] { 1500,1600 }));
         questList.Add(50, new QuestData("백호를 만나기위해 미르의 겨울로!!", new int[] { 2100, 2200, 0 }));
+        questList.Add(60, new QuestData("황룡을 만나기위해 미르의 중앙으로!!", new int[] { 0 }));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -77,21 +78,20 @@ public class QuestManager : MonoBehaviour
                 if (questActionIndex == 1)
                 {
                     questObject[2].SetActive(false);
+                    questObject[4].SetActive(false);
+                    questObject[5].SetActive(true);
                 }
                 else if (questActionIndex == 2)
                 {
-                    questObject[5].SetActive(true);
-                    questObject[4].SetActive(false);
+                    questObject[3].SetActive(false);
+                    questObject[5].SetActive(false);
+
                 }
                 else if (questActionIndex == 3)
                 {
-                    questObject[3].SetActive(false);
-                    questObject[5].SetActive(false);
-                }
-                else if (questActionIndex == 4)
-                {
                     questObject[6].SetActive(false);
                 }
+              
                 break;
             case 30:
                 if (questActionIndex == 1)
@@ -100,6 +100,7 @@ public class QuestManager : MonoBehaviour
                 {
                     questObject[10].SetActive(false);
                     questObject[7].SetActive(false);
+                    questObject[9].SetActive(false);
                 }
                 else if (questActionIndex == 3)
                 {

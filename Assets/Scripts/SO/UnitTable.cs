@@ -18,8 +18,6 @@ public class UnitTable : ScriptableObject {
         public int m_iUnitAtk;
         public int m_iUnitSpeed;
         public int m_iUnitDef;
-        //public Animation m_Animation;
-        public AnimationClip m_Animation;
         //public int m_iUnitLevel;
 
         public SOAttackBase m_AttackBehav_1;
