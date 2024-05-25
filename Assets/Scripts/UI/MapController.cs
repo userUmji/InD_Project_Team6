@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MapController : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class MapController : MonoBehaviour
     }
 
     public List<RegionInfo> regions = new List<RegionInfo>(); // 지역 정보 리스트
-    public Text mapNameText; // 지도 이름을 표시할 UI 텍스트
+    public TextMeshProUGUI mapNameText; // 지도 이름을 표시할 UI 텍스트
 
     private string currentMapName = ""; // 현재 플레이어가 위치한 지역 이름
 
