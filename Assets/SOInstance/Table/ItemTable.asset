@@ -18,14 +18,14 @@ MonoBehaviour:
     m_sItemDescription: "\uB3C4\uAE68\uBE44\uB97C \uD3EC\uD68D\uD560\uC218\uC788\uB294
       \uC544\uC8FC \uC911\uC694\uD55C \uBB3C\uAC74. "
     m_sItemUseDialog: "\uC744 \uBCF5\uC8FC\uBA38\uB2C8\uC5D0 \uAC00\uB454\uB2E4!/3..2..1 "
-    m_ItemSprite: {fileID: 21300000, guid: 9cc75609210cbaf4ab3f3634d859951a, type: 3}
+    m_ItemSprite: {fileID: 21300000, guid: da1bf9069d662e24aa9e98e279b9a649, type: 3}
     m_ItemEffect: {fileID: 11400000, guid: 0163ee16e8b46d746bcf3c3ff7329abf, type: 2}
   - m_iItemNo: 2
     m_sItemName: "\uD1F4\uCE58\uBD80\uC801"
     m_sItemDescription: "\uB3C4\uAE68\uBE44\uB97C \uD1F4\uCE58\uD560\uC218\uC788\uB294
       \uC544\uC8FC \uC911\uC694\uD55C \uBB3C\uAC74. "
     m_sItemUseDialog: "\uC744 \uCC98\uCE58\uD588\uB2E4!  "
-    m_ItemSprite: {fileID: 21300000, guid: 9cc75609210cbaf4ab3f3634d859951a, type: 3}
+    m_ItemSprite: {fileID: 21300000, guid: f37f4e45b9246a345aa775fa0c520c15, type: 3}
     m_ItemEffect: {fileID: 11400000, guid: 2901dc5a7de4f5e428dc05b99320fcde, type: 2}
   - m_iItemNo: 3
     m_sItemName: "\uB098\uC5FC\uCD08 \uC78E"
