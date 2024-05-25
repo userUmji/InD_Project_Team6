@@ -816,7 +816,10 @@ MonoBehaviour:
   levelText: {fileID: 1365391918}
   HPText: {fileID: 1200397917}
   hpSlider: {fileID: 112319217}
+  animator: {fileID: 378487549}
+  animator_SkillEffect: {fileID: 1994066467}
   g_imagePortrait: {fileID: 1558537956}
+  g_imageAnimation: {fileID: 378487548}
 --- !u!1 &222895688
 GameObject:
   m_ObjectHideFlags: 0
@@ -2635,7 +2638,10 @@ MonoBehaviour:
   levelText: {fileID: 41984687}
   HPText: {fileID: 378539120}
   hpSlider: {fileID: 1477210701}
+  animator: {fileID: 0}
+  animator_SkillEffect: {fileID: 1779798943}
   g_imagePortrait: {fileID: 1625256841}
+  g_imageAnimation: {fileID: 0}
 --- !u!1 &1200397915
 GameObject:
   m_ObjectHideFlags: 0
