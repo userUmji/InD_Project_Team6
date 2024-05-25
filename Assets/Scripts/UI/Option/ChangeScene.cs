@@ -14,7 +14,10 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("WorldScene");
     }
-
+    public void SceneChage3()
+    {
+        SceneManager.LoadScene("CutScene");
+    }
     public void SceneChange2()
     {
         SceneManager.LoadScene("BattleScene");

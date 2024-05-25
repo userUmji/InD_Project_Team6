@@ -458,7 +458,8 @@ public class BattleManager : MonoBehaviour
     {
         dialogueText.text = "거대한 도깨비에게 져버렸다.....";
         yield return new WaitForSeconds(2f);
-        ChangeScene();
+        GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
+        GameManager.Instance.LoseChangeScene();
     }
 
     IEnumerator CaptureProcess()

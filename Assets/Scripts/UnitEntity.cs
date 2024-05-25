@@ -57,8 +57,31 @@ public class UnitEntity : MonoBehaviour
     public void SetUnit(string className, int lvl)
     {
         var UnitData = GameManager.Instance.GetUnitData(className);
-        //var UnitSaveData = GameManager.Instance.GetUnitSaveData(className);
 
+        if(m_sUnitName == "일반 도깨비")
+        {
+            int randomType = Random.Range(0, 5);
+            UnitType = (GameManager.Type)randomType;
+        }
+        else
+            UnitType = UnitData.UnitType;
+        /*
+        if (m_sUnitName == "일반 도깨비")
+        {
+            if (GameManager.Instance.g_Season == 0)
+                UnitType = GameManager.Type.GODBEAST;
+            else if (GameManager.Instance.g_Season == 1)
+                UnitType = GameManager.Type.MONSTER;
+            else if (GameManager.Instance.g_Season == 2)
+                UnitType = GameManager.Type.FIRE;
+            else if (GameManager.Instance.g_Season == 3)
+                UnitType = GameManager.Type.ICE;
+            else
+                UnitType = GameManager.Type.GHOST;
+        }
+        else
+            UnitType = UnitData.UnitType;
+        */
         //UnitEntity 초기화
         m_sUnitName = UnitData.m_sUnitName;
         gameObject.name += "-" + m_sUnitName;
@@ -71,7 +94,7 @@ public class UnitEntity : MonoBehaviour
         m_iUnitAtk = UnitData.m_iUnitAtk + (3 * m_iUnitLevel);
         m_iUnitDef = UnitData.m_iUnitDef + (3 * m_iUnitLevel);
         m_iUnitSpeed = UnitData.m_iUnitSpeed + (3 * m_iUnitLevel);
-        UnitType = UnitData.UnitType;
+        
         m_iCurrentHP = m_iUnitHP;
         m_iUnitNo = UnitData.m_iUnitNo;
 
@@ -118,13 +141,13 @@ public class UnitEntity : MonoBehaviour
         m_spriteUnitImage = UnitData.m_UnitSprite;
         m_AttackBehaviors = new SOAttackBase[4];
 
-        m_AttackBehaviors[0] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_1]);
-        m_AttackBehaviors[1] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_2]);
-        m_AttackBehaviors[2] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_3]);
+        //m_AttackBehaviors[0] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_1]);
+        //m_AttackBehaviors[1] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_2]);
+        //m_AttackBehaviors[2] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_3]);
 
-        //m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
-        //m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
-        //m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
+        m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
+        m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
+        m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
         m_AttackBehaviors[3] = Instantiate(UnitData.m_AttackBehav_Ult);
         for (int i = 0; i < m_iSkillAmounts.Length; i++)
             m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;

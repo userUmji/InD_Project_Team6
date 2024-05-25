@@ -15,6 +15,7 @@ public class EventZoneCTR: MonoBehaviour
     public float g_fpercent; // ���� ���� Ȯ��
     public int[] g_iLevelBoundary;
     public Coroutine FindCoroutine;
+    public int g_iSeason;
     int random;
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -47,7 +48,7 @@ public class EventZoneCTR: MonoBehaviour
         }
     }
 
-    IEnumerator Find_Monster() // Ư�� �����ȿ� ���Ϳ� ��������
+    IEnumerator Find_Monster() 
     {
         while (true)
         {
@@ -59,12 +60,13 @@ public class EventZoneCTR: MonoBehaviour
             {
                 max_chace += g_gmonster_List[i].m_iChance;
             }
-            int random_monster_number = Random.Range(0, max_chace); // ���� �̱�\
+            int random_monster_number = Random.Range(0, max_chace); 
             string name = CalMonsterChance(g_gmonster_List, random_monster_number);
 
             FindCoroutine = null;
             
             int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
+            GameManager.Instance.g_Season = g_iSeason;
             if(GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
                 GameManager.Instance.LoadBattleScene(name, random_monster_lvl);
             break;

@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public GameObject g_DictionaryGO;
     public List<SOAttackBase> Skills;
     public int[] g_iReqExp;
+    public int g_Season;
 
     public string g_sEnemyBattleUnit;
     public int g_iEnemyBattleLvl;
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
         }
         g_GameState = GameState.INIT;
         DontDestroyOnLoad(gameObject);
+        
 
         Init();
     }
@@ -161,6 +163,10 @@ public class GameManager : MonoBehaviour
         return null;
     }
     #endregion
+    public void LoseChangeScene()
+    {
+        SceneManager.LoadScene("GameOverScene");
+    }
     private void InitExp()
     {
         g_iReqExp = new int[51];

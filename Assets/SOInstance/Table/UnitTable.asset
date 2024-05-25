@@ -203,9 +203,9 @@ MonoBehaviour:
     m_sUnitExplain: 
     UnitType: 0
     m_UnitSprite: {fileID: 21300000, guid: e9d118d0d9570104eb8d1d37e25c52c5, type: 3}
-    m_iUnitHP: -10
-    m_iUnitAtk: 0
-    m_iUnitSpeed: 1
+    m_iUnitHP: 0
+    m_iUnitAtk: -10
+    m_iUnitSpeed: -10
     m_iUnitDef: -10
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
