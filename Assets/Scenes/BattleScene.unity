@@ -3717,6 +3717,10 @@ MonoBehaviour:
   g_ChangeButton: {fileID: 684320965}
   m_Canvas: {fileID: 1345978555}
   g_Cursor: {fileID: 953577731}
+  BattleBGSprites:
+  - {fileID: 21300000, guid: 170392485892c0943991129b9cbb3ef5, type: 3}
+  - {fileID: 21300000, guid: b0efbc267bf5af34ebc3f2f8e5488a47, type: 3}
+  BG: {fileID: 1839056583}
   playerUnit: {fileID: 0}
   enemyUnit: {fileID: 0}
   dialogueText: {fileID: 1881092430}
