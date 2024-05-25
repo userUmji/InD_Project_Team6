@@ -17,35 +17,35 @@ public class PortalController : MonoBehaviour
         // 플레이어가 포털 근처에 있고 스페이스바를 눌렀을 때
         if (IsPlayerNearPortal() && Input.GetKeyDown(KeyCode.Space))
         {
-            optionImageActive = !optionImageActive; // 맵 상태 반전
-
-            // GameManager의 상태를 PAUSE로 설정
-            if (GameManager.Instance != null)
+            if (optionImage.activeSelf == false)
             {
-                GameManager.Instance.SetGameState(GameManager.GameState.PAUSE);
+                optionImage.SetActive(true);
+                // GameManager의 상태를 PAUSE로 설정
+
+                GameManager.Instance.SetGameState(GameManager.GameState.PORTAL);
+                
+
+                // 맵 컨트롤러 비활성화
+                ToggleMapController(false);
+
+                // 옵션 이미지 활성화 또는 비활성화
+                if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
+                    GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
+
+                // 포탈을 활성화하면 유닛 체력 회복
+                if (optionImageActive)
+                {
+                    for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
+                        GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().Heal(100000);
+                }
             }
-
-            // 맵 컨트롤러 비활성화
-            ToggleMapController(false);
-
-            // 옵션 이미지 활성화 또는 비활성화
-            if (optionImage != null)
+            else if (optionImage.activeSelf == true)
             {
-                optionImage.gameObject.SetActive(optionImageActive);
-            }
+                optionImage.SetActive(false);
 
-            
-            // 포탈을 활성화하면 유닛 체력 회복
-            if (optionImageActive)
-            {
-                for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
-                    GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().Heal(100000);
-            }
-
-            // GameManager의 상태를 다시 INPROGRESS로 설정
-            if (!optionImageActive && GameManager.Instance != null)
-            {
+                // GameManager의 상태를 다시 INPROGRESS로 설정 
                 GameManager.Instance.SetGameState(GameManager.GameState.INPROGRESS);
+                
             }
         }
     }
@@ -77,6 +77,9 @@ public class PortalController : MonoBehaviour
             if (playerObject != null)
             {
                 playerObject.transform.position = portals[portalIndex].position;
+                ToggleMapController(false);
+                optionImage.SetActive(false);
+                GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
             }
         }
         else
@@ -93,4 +96,11 @@ public class PortalController : MonoBehaviour
             mapController.gameObject.SetActive(mapActive);
         }
     }
+
+    public void ShowDic()
+    {
+        GameManager.Instance.g_DictionaryGO.SetActive(true);
+        optionImage.SetActive(false);
+    }
+
 }

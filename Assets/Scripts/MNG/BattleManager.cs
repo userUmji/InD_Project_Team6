@@ -20,13 +20,14 @@ public class BattleManager : MonoBehaviour
     private Coroutine BattleCoroutine;
     private bool isPlayed = false;
     private bool isFall = false;
+    private bool isCaptureScucess = false;
     //버튼에서 전달받은 Action
     private GameManager.Action m_ePlayerAction;
     private int m_iPlayerActionIndex;
    
     // 플레이어 유닛
     public UnitEntity playerUnit;
-    UnitEntity enemyUnit;
+    public UnitEntity enemyUnit;
 
     // 전투 다이얼로그 텍스트
     public TextMeshProUGUI dialogueText;
@@ -36,6 +37,7 @@ public class BattleManager : MonoBehaviour
     public BattleHUDCTR enemyHUD;
 
     public string g_ItemUseScript;
+    public bool g_isCapture;
     // ���� ����
 
     public BattleState state;
@@ -53,8 +55,10 @@ public class BattleManager : MonoBehaviour
     void BattleInit()
     {
         //전투 초기화
-        g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit);
+        g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit , GameManager.Instance.g_iEnemyBattleLvl);
         state = BattleState.START;
+        if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
+            GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
         BattleCoroutine = StartCoroutine(SetupBattle());
     }
 
@@ -102,7 +106,13 @@ public class BattleManager : MonoBehaviour
     private void ItemProcess()
     {
         if (state != BattleState.PLAYERTURN)
-            StartCoroutine(PlayerTurn_Item());
+        {
+            if (g_isCapture == true)
+                StartCoroutine(CaptureProcess());
+            else
+                StartCoroutine(PlayerTurn_Item());
+        }
+
         else
             StartCoroutine(EnemyTurn());
     }
@@ -366,8 +376,7 @@ public class BattleManager : MonoBehaviour
     IEnumerator PlayerWin()
     {
         state = BattleState.END;
-        dialogueText.text = "도깨비를 처치했다!";
-        yield return new WaitForSeconds(1f);
+
         int gainExpTemp;
         if (enemyUnit.m_iUnitLevel < 16)
             gainExpTemp = enemyUnit.m_iUnitLevel * 300;
@@ -375,13 +384,22 @@ public class BattleManager : MonoBehaviour
             gainExpTemp = enemyUnit.m_iUnitLevel * 250;
         else
             gainExpTemp = enemyUnit.m_iUnitLevel * 200;
+
+        if (isCaptureScucess)
+        {
+            dialogueText.text = "도깨비를 잡았다!";
+            gainExpTemp = (int)(gainExpTemp * 1.2f);
+        }
+        else
+            dialogueText.text = "도깨비를 처치했다!";
+        yield return new WaitForSeconds(1f);
+
         foreach (GameObject entity in GameManager.Instance.m_UnitManager.g_PlayerUnits)
         {
             if (entity != null)
             {
                 UnitEntity unitEntity = entity.GetComponent<UnitEntity>();
                 float mod;
-                Debug.Log(GameManager.Instance.m_UnitManager.CheckUnitAmount());
                 if(GameManager.Instance.m_UnitManager.CheckUnitAmount() == 1)
                 {
                     mod = 1.0f;
@@ -425,6 +443,75 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         ChangeScene();
     }
+
+    IEnumerator CaptureProcess()
+    {
+
+        if(GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName).m_isCaptured == true)
+        {
+            dialogueText.text = "이미 잡은 도깨비다!";
+            yield return new WaitForSeconds(1f);
+            g_isCapture = false;
+            Process();
+            isPlayed = true;
+        }
+        else
+        {
+            bool isCapture = false;
+            int randomNum = Random.Range(0, 100);
+
+            if (enemyUnit.m_iUnitHP / 4 >= enemyUnit.m_iCurrentHP)
+            {
+                if (randomNum > 20)
+                    isCapture = true;
+            }
+            else if (enemyUnit.m_iUnitHP / 2 > enemyUnit.m_iCurrentHP && enemyUnit.m_iUnitHP / 4 <= enemyUnit.m_iCurrentHP)
+            {
+                if (randomNum > 40)
+                    isCapture = true;
+
+            }
+            else if (enemyUnit.m_iUnitHP * 3 / 4 > enemyUnit.m_iCurrentHP && enemyUnit.m_iUnitHP / 2 < enemyUnit.m_iCurrentHP)
+            {
+                if (randomNum > 60)
+                    isCapture = true;
+            }
+            else
+            {
+                if (randomNum > 80)
+                    isCapture = true;
+            }
+            if (isCapture == true)
+            {
+                yield return new WaitForSeconds(1f);
+                var UnitSaveData = GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName);
+                UnitSaveData.m_isCaptured = true;
+                UnitSaveData.m_iUnitLevel = enemyUnit.m_iUnitLevel;
+                Debug.Log(enemyUnit.m_AttackBehaviors[0].m_iSkillNo);
+                Debug.Log(enemyUnit.m_AttackBehaviors[1].m_iSkillNo);
+                Debug.Log(enemyUnit.m_AttackBehaviors[2].m_iSkillNo);
+                UnitSaveData.m_AttackBehav_1 = enemyUnit.m_AttackBehaviors[0].m_iSkillNo-1;
+                UnitSaveData.m_AttackBehav_2 = enemyUnit.m_AttackBehaviors[1].m_iSkillNo -1;
+                UnitSaveData.m_AttackBehav_3 = enemyUnit.m_AttackBehaviors[2].m_iSkillNo - 1;
+                dialogueText.text = "도깨비를 잡았다!";
+                isCaptureScucess = true;
+                StartCoroutine(PlayerWin());
+                StopCoroutine(CaptureProcess());
+            }
+            else
+            {
+                dialogueText.text = "놓쳤따!";
+                yield return new WaitForSeconds(1f);
+                g_isCapture = false;
+                Process();
+                isPlayed = true;
+            }
+
+        }
+
+    }
+
+
 
     #endregion
     #region 기타 메서드

@@ -19,13 +19,15 @@ public class GameManager : MonoBehaviour
     //월드씬의 캔버스
     public GameObject Canvas_WorldScene;
     //게임의 진행 상황 (초기화, 진행중, 대화중, 전투중, 일지정지)
-    public enum GameState { INIT, INPROGRESS, DIALOG, BATTLE, PAUSE };
+    public enum GameState { INIT, INPROGRESS, DIALOG,  PORTAL ,BATTLE, PAUSE };
     public GameState g_GameState;
     public GameObject g_InventoryGO;
+    public GameObject g_DictionaryGO;
     public List<SOAttackBase> Skills;
     public int[] g_iReqExp;
 
     public string g_sEnemyBattleUnit;
+    public int g_iEnemyBattleLvl;
 
     public enum Action { CANCLE, ATTACK, ITEM, CHANGE, RUN }
     //싱글턴 구현
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         InitExp();
 
         m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
+        GetUnitSaveData("해태").m_isCaptured = true;
         g_GameState = GameState.INPROGRESS;
 
     }
@@ -87,11 +90,12 @@ public class GameManager : MonoBehaviour
     {
         return m_DataManager.GetUnitSaveData(className);
     }
-    public void LoadBattleScene(string enemyBattleUnit)
+    public void LoadBattleScene(string enemyBattleUnit, int lvl)
     {
         g_GameState = GameState.BATTLE;
         AsyncOperation SceneOper = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
         g_sEnemyBattleUnit = enemyBattleUnit;
+        g_iEnemyBattleLvl = lvl;
         Canvas_WorldScene.SetActive(false);
         SceneOper.allowSceneActivation = true; 
     }
@@ -100,10 +104,13 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i<m_UnitManager.CheckUnitAmount();i++)
         {
             UnitEntity unitEntity = m_UnitManager.g_PlayerUnits[i].transform.GetComponent<UnitEntity>();
-            m_DataManager.SaveByUnit(unitEntity.m_sUnitName, unitEntity );
-
+            m_DataManager.SaveByUnit(unitEntity.m_sUnitName, unitEntity);
         }
         m_DataManager.SaveFunc_ALL();
+    }
+    public void SavePlayerUnit(string name, UnitEntity entity)
+    {
+        m_DataManager.SaveByUnit(name, entity);
     }
     // 게임 상태를 설정하는 메서드
     public void SetGameState(GameState state)
@@ -123,7 +130,7 @@ public class GameManager : MonoBehaviour
     public int CompareType(Type SkillType, Type UnitType)
     {
         int isDouble = 0;
-        if (UnitType == Type.GODBEAST)
+        if (UnitType == Type.GODBEAST ||SkillType == Type.GODBEAST)
             isDouble = 0;
         else if (SkillType - UnitType == -1 || SkillType - UnitType == 3)
             isDouble = 1;

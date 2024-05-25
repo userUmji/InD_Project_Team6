@@ -100,6 +100,7 @@ public class DataAssetManager
     public void SaveByUnit(string className, UnitEntity saveData)
     {
         UnitTable.UnitStats_Save SaveData_Temp = new UnitTable.UnitStats_Save();
+        SaveData_Temp.m_isCaptured = true;
         SaveData_Temp.m_iIntimacy = saveData.m_iIntimacy;
         SaveData_Temp.m_iPermanentAtkMod = saveData.m_iPermanentAtkMod;
         SaveData_Temp.m_iPermanentDefMod = saveData.m_iPermanentDefMod;
