@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: "\uC228\uC5B4\uB54C\uB9AC\uAE30"
   m_EditorClassIdentifier: 
   m_iSkillNo: 7
-  SkillType: 4
-  m_EffectState: 0
-  m_iEffectDur: 0
-  m_iEffectChance: 0
-  m_SkillEffect: 0
   m_fAttackMag: 1.5
   m_sAttackName: "\uC228\uC5B4\uB54C\uB9AC\uAE30"
   m_sSkillDescription: "\uAE30\uC2B5\uC73C\uB85C \uC0C1\uB300\uB97C \uB178\uB9B0\uB2E4.
     \uBB34\uC870\uAC74 \uBA3C\uC800 \uACF5\uACA9\uD560\uC218\uC788\uB2E4."
   m_iUseAmount: 10
+  SkillType: 4
+  m_EffectState: 0
+  m_iEffectDur: 0
+  m_iEffectChance: 0
+  m_SkillEffect: 0
   m_isPlayed: 0
   m_iAdditionalSpeed: 9999
+  animation: {fileID: 7400000, guid: f5f7f23fceeb4fe43b0146de7e63cdd0, type: 2}
+  m_IsDouble: 0
+  m_IsEffected: 0
