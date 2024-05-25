@@ -203,9 +203,9 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(2100 + 0, portraitArr[2]);
         portraitData.Add(2200 + 0, portraitArr[2]);
         portraitData.Add(2500 + 0, portraitArr[2]);
-        portraitData.Add(2500 + 1, portraitArr[3]);
+        portraitData.Add(2500 + 1, portraitArr[2]);
         portraitData.Add(2600 + 0, portraitArr[2]);
-        portraitData.Add(2600 + 1, portraitArr[4]);
+        portraitData.Add(2600 + 1, portraitArr[2]);
 
 
 
