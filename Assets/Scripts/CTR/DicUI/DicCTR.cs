@@ -103,7 +103,7 @@ public class DicCTR : MonoBehaviour,IPointerClickHandler
             {
                 if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName == g_PortalEventButton.name)
                 {
-                    if (i != index)
+                    if (i != index && GameManager.Instance.m_UnitManager.g_PlayerUnits[index] != null)
                     {
                         GameManager.Instance.m_UnitManager.SetPlayerUnitEntityByName(GameManager.Instance.m_UnitManager.g_PlayerUnits[index].GetComponent<UnitEntity>().m_sUnitName, i);
                         GameManager.Instance.m_UnitManager.SetPlayerUnitEntityByName(g_PortalEventButton.name, index);
