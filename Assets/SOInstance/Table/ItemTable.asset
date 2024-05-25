@@ -29,10 +29,10 @@ MonoBehaviour:
     m_ItemEffect: {fileID: 11400000, guid: 2901dc5a7de4f5e428dc05b99320fcde, type: 2}
   - m_iItemNo: 3
     m_sItemName: "\uB098\uC5FC\uCD08 \uC78E"
-    m_sItemDescription: "\"\uC608\uB85C\uBD80\uD130 \uCD9C\uD608\uC744 \uB9C9\uC544\uC900\uB2E4\uB294
+    m_sItemDescription: "\uC608\uB85C\uBD80\uD130 \uCD9C\uD608\uC744 \uB9C9\uC544\uC900\uB2E4\uB294
       \uC2E0\uAE30\uD55C \uC57D\uCD08.  \uC774 \uC57D\uCD08\uB97C \uBA39\uC740 \uC790\uB294
       \uCD9C\uD608\uC774 \uBA4E\uACE0 \uD798\uC774 \uC0DD\uAE34\uB2E4\uACE0 \uD55C\uB2E4.
-      \uC774\uAC83\uC740 \uC57D\uCD08\uC758 \uC78E \uC77C\uBD80. \" "
+      \uC774\uAC83\uC740 \uC57D\uCD08\uC758 \uC78E \uC77C\uBD80. "
     m_sItemUseDialog: "\uC758 \uCCB4\uB825\uC774 \uD68C\uBCF5\uB418\uC5C8\uB2E4! "
     m_ItemSprite: {fileID: 21300000, guid: 1e98aa362befca142800cf50312da64c, type: 3}
     m_ItemEffect: {fileID: 11400000, guid: 064036e102ae3db479ebdda146107f02, type: 2}

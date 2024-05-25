@@ -10,6 +10,6 @@ public class off_UI : MonoBehaviour
     {
         discard_value.text = "";
         transform.parent.gameObject.SetActive(false);
-        
+        Inventory_Controller.g_ICinstance.lock_UI = true;
     }
 }
