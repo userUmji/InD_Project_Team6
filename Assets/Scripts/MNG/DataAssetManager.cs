@@ -93,7 +93,7 @@ public class DataAssetManager
             SaveData.m_iPermanentDefMod = 0;
             SaveData.m_iPermanentSpeedMod = 0;
             SaveData.m_iUnitEXP = 0;
-            SaveData.m_iUnitLevel = 10;
+            SaveData.m_iUnitLevel = 5;
             m_UnitSaveDic.Add(Unit.m_sUnitName, SaveData);
         }
     }

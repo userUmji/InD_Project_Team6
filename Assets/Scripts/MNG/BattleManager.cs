@@ -14,6 +14,8 @@ public class BattleManager : MonoBehaviour
     public GameObject g_ChangeButton;
     public GameObject m_Canvas;
     public GameObject g_Cursor;
+    public Sprite[] BattleBGSprites;
+    public Image BG;
     // 전투 상태
     public enum BattleState { START, ACTION, PLAYERTURN, PROCESS, SELECT, ENEMYTURN, RESULT, END }
 
@@ -57,6 +59,7 @@ public class BattleManager : MonoBehaviour
         //전투 초기화
         enemyHUD.animator_SkillEffect.SetInteger("EffectNum", 20);
         playerHUD.animator_SkillEffect.SetInteger("EffectNum", 20);
+        BG.sprite = BattleBGSprites[Random.Range(0, BattleBGSprites.Length)];
         g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit, GameManager.Instance.g_iEnemyBattleLvl);
         state = BattleState.START;
         if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
