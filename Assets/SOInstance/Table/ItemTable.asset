@@ -101,7 +101,7 @@ MonoBehaviour:
       \uC5C6\uC560\uC900\uB2E4\uACE0 \uC804\uD574\uC9C0\uB294 \uBC84\uC12F "
     m_sItemUseDialog: "\uC740 \uAE30\uC6B4\uC744 \uCC28\uB9B0\uAC83\uAC19\uB2E4! "
     m_ItemSprite: {fileID: 21300000, guid: 342bc9eb42b48884481b9a9441b8c191, type: 3}
-    m_ItemEffect: {fileID: 11400000, guid: 2901dc5a7de4f5e428dc05b99320fcde, type: 2}
+    m_ItemEffect: {fileID: 11400000, guid: 26cade0e53ccbd947825f53fb2f7ad2b, type: 2}
   - m_iItemNo: 13
     m_sItemName: "\uB2EC\uB2EC\uD55C \uC57D\uACFC"
     m_sItemDescription: "\uB2EC\uB2EC\uD55C \uC57D\uACFC. \uB9C8\uC74C\uACFC \uC815\uC131\uC774
