@@ -46,6 +46,7 @@ public class Inventory_Controller : MonoBehaviour
         for (int i = 0; i < g_ginventory.transform.childCount; i++)  // 유니티 창에서 슬롯을 넣어주는게 아니고 스크립트에서 넣어주는거
         {
             g_Sslot[i] = g_ginventory.transform.GetChild(i).GetComponent<Slot>(); // 유니티상에서 인벤토리라는 오브젝트 안에 슬롯들이 있기때문에 그 슬롯들을 가져와서 배열에 넣어줌
+            g_Sslot[i].g_iitem_Number = 0;
         }
         g_gin_V.transform.localScale = new Vector3(0, 0, 1);
     }
