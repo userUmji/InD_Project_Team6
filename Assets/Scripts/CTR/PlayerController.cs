@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
                     GameObject pickedItem = hit.transform.gameObject;
                     Inventory_Controller.g_ICinstance.Set_GetItem(pickedItem);
                     Inventory_Controller.g_ICinstance.Check_Slot();
-                    ItemManager.Instance.RemoveItem(pickedItem.GetComponent<ItemEntity>()); // 아이템 매니저에서 아이템 제거
+                   // ItemManager.Instance.RemoveItem(pickedItem.GetComponent<ItemEntity>()); // 아이템 매니저에서 아이템 제거
                     Destroy(pickedItem); // 아이템 오브젝트 파괴
                     AudioManager._instance.PlaySfx(AudioManager.Sfx.Item);
 
