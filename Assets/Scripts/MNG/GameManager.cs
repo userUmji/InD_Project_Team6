@@ -73,6 +73,9 @@ public class GameManager : MonoBehaviour
         InitExp();
 
         m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
+        GetUnitSaveData("해태").m_AttackBehav_1 = 0;
+        GetUnitSaveData("해태").m_AttackBehav_2 = 3;
+        GetUnitSaveData("해태").m_AttackBehav_3 = 2;
         GetUnitSaveData("해태").m_isCaptured = true;
         g_GameState = GameState.INPROGRESS;
 

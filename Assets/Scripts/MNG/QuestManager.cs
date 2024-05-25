@@ -67,6 +67,12 @@ public class QuestManager : MonoBehaviour
                 {
                     questObject[0].SetActive(false);
                     questObject[1].SetActive(true);
+                    questObject[2].SetActive(true);
+                    questObject[3].SetActive(true);
+                    questObject[4].SetActive(true);
+                    questObject[6].SetActive(true);
+                    questObject[8].SetActive(true);
+
                 }
                 else if (questActionIndex == 2)
                 {
@@ -90,12 +96,19 @@ public class QuestManager : MonoBehaviour
                 else if (questActionIndex == 3)
                 {
                     questObject[6].SetActive(false);
+                    questObject[10].SetActive(true);
+
                 }
               
                 break;
             case 30:
                 if (questActionIndex == 1)
+                {
+                   
+                    questObject[10].SetActive(true);
                     questObject[8].SetActive(false);
+                }
+                    
                 else if (questActionIndex == 2)
                 {
                     questObject[10].SetActive(false);
