@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f71eef22bd432448336e0fb157a11c, type: 3}
   m_Name: "\uD558\uB298\uC758 \uC77C\uACA9"
   m_EditorClassIdentifier: 
-  m_iSkillNo: 0
+  m_iSkillNo: 5
   m_fAttackMag: 3
   m_sAttackName: "\uD558\uB298\uC758 \uC77C\uACA9"
   m_sSkillDescription: "\uCC9C\uBC8C\uC744 \uB0B4\uB824 \uC0C1\uB300\uB97C \uC2EC\uD310\uD558\uB294
@@ -25,3 +25,5 @@ MonoBehaviour:
   m_SkillEffect: 0
   m_isPlayed: 0
   m_iAdditionalSpeed: 0
+  m_IsDouble: 0
+  m_IsEffected: 0

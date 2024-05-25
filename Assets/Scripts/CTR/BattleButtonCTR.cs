@@ -92,8 +92,11 @@ public class BattleButtonCTR : MonoBehaviour
     }
     public void OnClick_Inventory()
     {
-        GameManager.Instance.g_InventoryGO.transform.GetComponentInChildren<Inventory_Controller>().Show_Inv();
-        g_BattleManager.state = BattleManager.BattleState.SELECT;
+        if (g_BattleManager.state == BattleManager.BattleState.ACTION)
+        {
+            GameManager.Instance.g_InventoryGO.transform.GetComponentInChildren<Inventory_Controller>().Show_Inv();
+            g_BattleManager.state = BattleManager.BattleState.SELECT;
+        }
     }
     private void InitButton_ult(GameObject Buttons)
     {

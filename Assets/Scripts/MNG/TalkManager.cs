@@ -75,16 +75,51 @@ public class TalkManager : MonoBehaviour
                                               "뭔가에 씌인듯한...사신수같지 않아!:0",
                                               "..!:0"  });
 
+        talkData.Add(30 + 1300, new string[] { "후...어찌저찌 이겼네..:0",
+                                              "그치만 이건 뭔가 이상해.:0",
+                                              "평소 사신수라고 생각되지 않을만큼 날카롭고 적대적인 모습..:0",
+                                              "그래 틀림없어. 미르에 무슨일이 생긴거야!:0",
+                                              "다른 사신수들도 전부 만나봐야겠어...!:0"  });
+
         talkData.Add(1100, new string[] { "미르의 여름은 위쪽이었지?:0","위로 이동하자!!:0" });
 
 
 
 
-        talkData.Add(1500, new string[] { "와..미르의 가을에 이런 궁중정원이 있었다니, 아름다워!:0",
+        talkData.Add(40 + 1500, new string[] { "와..미르의 가을에 이런 궁중정원이 있었다니, 아름다워!:0",
                                             "역시, 주작도 똑같아. 이상한 눈을 하고있어.:0",
                                             "도대체 뭐에 씌인거지?:0",
                                             "지금은 그런걸 생각할때가 아니야.:0",
                                             "자 얘들아 가자!:0"});
+
+        talkData.Add(40 + 1600, new string[] { "후..이번에도 간신히 이겼네!:0",
+                                            "사신수가 전부 뭔가에 홀린다는건..그냥 도깨비의 소행은 아니야.:0",
+                                            "(쿠르르쾅!!)...!번개가 또?:0",
+                                            "이상해..이만한 번개를 낼수있는 도깨비는  황룡밖에 없는데..!:0",
+                                            "설마 황룡이 돌아온건가?? 미르에 다시?:0",
+                                             " 도대체 미르에는 무슨일이 일어난거야...:0"});
+
+
+        talkData.Add(50 + 2100, new string[] { "추워..얼어버릴것만 같아.:0",
+                                            "백호는 다를줄 알았는데, 역시 뭔가에 씌여있네:0",
+                                            "..미르를 지키기 위해서 여기까지 달려왔어.:0",
+                                            "분명 이 앞에 뭔가가 있는건 분명해!:0",
+                                            "도깨비들아 가자!?:0"});
+
+
+
+
+        talkData.Add(50 + 2200, new string[] { "질뻔했어..후! :0",
+                                            "드디어 사신수들을 모두 만났네....신기하지, 원래에 나였으면 상상도 못할일이야.:0",
+                                            "이제 확실해졌어. 황룡이 돌아오고나서 부터 미르에 무슨일이 생긴거야.:0",
+                                            "그걸 막기위해 사신수가 나섰지만, 다들 뭔가에 씌인거지.:0",
+                                            "황룡을 만나러 가야겠어.:0"});
+
+
+
+
+
+
 
 
 
@@ -126,7 +161,11 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(900 + 0, portraitArr[2]);
         portraitData.Add(1100 + 0, portraitArr[2]);
         portraitData.Add(1200 + 0, portraitArr[2]);
+        portraitData.Add(1300 + 0, portraitArr[2]);
         portraitData.Add(1500 + 0, portraitArr[2]);
+        portraitData.Add(1600 + 0, portraitArr[2]);
+        portraitData.Add(2100 + 0, portraitArr[2]);
+        portraitData.Add(2200 + 0, portraitArr[2]);
         portraitData.Add(5000 + 0, portraitArr[0]);
         portraitData.Add(1000 + 0, portraitArr[0]);
         portraitData.Add(2000 + 0, portraitArr[1]);
