@@ -45,7 +45,7 @@ public class BattleHUDCTR : MonoBehaviour
         }
         else if (Num == 3)
         {
-
+            Scale = new Vector2(56.0f, 63.0f);
         }
         else if (Num == 4)
         {
@@ -53,7 +53,7 @@ public class BattleHUDCTR : MonoBehaviour
         }
         else if (Num == 5)
         {
-
+            Scale = new Vector2(64.0f, 69.0f);
         }
         else if (Num == 6)
         {
@@ -62,7 +62,7 @@ public class BattleHUDCTR : MonoBehaviour
         }
         else if (Num == 7)
         {
-
+            Scale = new Vector2(60.0f, 66.0f);
         }
         else if (Num == 8)
         {
@@ -78,7 +78,11 @@ public class BattleHUDCTR : MonoBehaviour
         }
         else if (Num == 11)
         {
-
+            Scale = new Vector2(72.0f, 72.0f);
+        }
+        else
+        {
+            Scale = new Vector2(56.0f, 60.0f);
         }
         Scale *= 7;
         g_imageAnimation.sizeDelta = Scale;

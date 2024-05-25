@@ -320,7 +320,7 @@ public class BattleManager : MonoBehaviour
         else
             runChance = 30;
         int randomChance = Random.Range(1, 101);
-        if (runChance < randomChance)
+        if (runChance > randomChance)
         {
             dialogueText.text = "도깨비에게서 도망쳤다!";
             yield return new WaitForSeconds(2f);
@@ -464,6 +464,14 @@ public class BattleManager : MonoBehaviour
         if (GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName).m_isCaptured == true)
         {
             dialogueText.text = "이미 잡은 도깨비다!";
+            yield return new WaitForSeconds(1f);
+            g_isCapture = false;
+            Process();
+            isPlayed = true;
+        }
+        else if (enemyUnit.m_sUnitName == "일반 도깨비")
+        {
+            dialogueText.text = "이 도깨비는 잡을 수 없다!";
             yield return new WaitForSeconds(1f);
             g_isCapture = false;
             Process();
