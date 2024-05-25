@@ -24,7 +24,7 @@ public class BattleManager : MonoBehaviour
     //버튼에서 전달받은 Action
     private GameManager.Action m_ePlayerAction;
     private int m_iPlayerActionIndex;
-   
+
     // 플레이어 유닛
     public UnitEntity playerUnit;
     public UnitEntity enemyUnit;
@@ -49,17 +49,20 @@ public class BattleManager : MonoBehaviour
         BattleInit();
 
         GameManager.Instance.g_InventoryGO.transform.SetParent(m_Canvas.transform);
-        
+
     }
     #region 전투 메서드
     void BattleInit()
     {
         //전투 초기화
-        g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit , GameManager.Instance.g_iEnemyBattleLvl);
+        enemyHUD.animator_SkillEffect.SetInteger("EffectNum", 20);
+        playerHUD.animator_SkillEffect.SetInteger("EffectNum", 20);
+        g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit, GameManager.Instance.g_iEnemyBattleLvl);
         state = BattleState.START;
         if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
             GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
         BattleCoroutine = StartCoroutine(SetupBattle());
+
     }
 
     private void PlayerAction()
@@ -127,7 +130,7 @@ public class BattleManager : MonoBehaviour
             else
                 StartCoroutine(Result());
         }
-             
+
     }
     private void RunProcess()
     {
@@ -136,7 +139,7 @@ public class BattleManager : MonoBehaviour
         else
             StartCoroutine(EnemyTurn());
     }
-    
+
 
     #endregion
     // 전투 종료 처리
@@ -154,12 +157,12 @@ public class BattleManager : MonoBehaviour
         int fallCount = 0;
         int unitCount = GameManager.Instance.m_UnitManager.CheckUnitAmount();
         isFall = true;
-        for(int i = 0; i< unitCount;i++)
+        for (int i = 0; i < unitCount; i++)
         {
             if (GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_iCurrentHP <= 0)
                 fallCount += 1;
         }
-        if(fallCount == unitCount)
+        if (fallCount == unitCount)
         {
             StartCoroutine(PlayerLost());
         }
@@ -170,7 +173,7 @@ public class BattleManager : MonoBehaviour
 
     private void ChangeScene()
     {
-        foreach(var Unit in GameManager.Instance.m_UnitManager.g_PlayerUnits)
+        foreach (var Unit in GameManager.Instance.m_UnitManager.g_PlayerUnits)
         {
             if (Unit != null)
             {
@@ -193,7 +196,7 @@ public class BattleManager : MonoBehaviour
         m_ePlayerAction = GameManager.Action.ITEM;
         Process();
     }
-        #endregion
+    #endregion
 
     #region 전투 코루틴
     // 전투 셋업
@@ -205,7 +208,9 @@ public class BattleManager : MonoBehaviour
         playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
         //적 유닛 초기화
         enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
-        enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
+        //enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
+        Debug.Log(enemyUnit.m_iUnitNo);
+        enemyHUD.CheckUnitNo(enemyUnit.m_iUnitNo);
 
         if (enemyUnit.UnitType == GameManager.Type.GODBEAST)
             dialogueText.text = "앗! " + enemyUnit.m_sUnitName + "이다!!";
@@ -237,21 +242,23 @@ public class BattleManager : MonoBehaviour
         {
             playerUnit.m_AttackBehaviors[i].m_isPlayed = false;
         }
-        if (CalEffectChance(playerUnit,UnitEntity.UnitState.BERSERK))
+        if (CalEffectChance(playerUnit, UnitEntity.UnitState.BERSERK))
         {
             dialogueText.text = playerUnit.m_sUnitName + "은 지금 광란상태다!";
             yield return new WaitForSeconds(1f);
             int randomIndex = Random.Range(0, playerUnit.m_AttackBehaviors.Length);
+            ShowSkilleffect(enemyHUD, playerUnit.m_AttackBehaviors[randomIndex]);
             playerUnit.AttackByIndex(playerUnit, enemyUnit, randomIndex);
             enemyHUD.SetHUD(enemyUnit);
             dialogueText.text = playerUnit.m_sUnitName + "! " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.8f);
+            enemyHUD.animator_SkillEffect.SetInteger("EffectNum", 20);
             yield return CheckDouble(randomIndex, playerUnit, enemyUnit);
             yield return CheckEffected(randomIndex, playerUnit, enemyUnit);
         }
         else
         {
-            if (CalEffectChance(playerUnit,UnitEntity.UnitState.PARALYSIS))
+            if (CalEffectChance(playerUnit, UnitEntity.UnitState.PARALYSIS))
             {
                 dialogueText.text = playerUnit.m_sUnitName + "은 지금 마비되었다.";
             }
@@ -259,8 +266,10 @@ public class BattleManager : MonoBehaviour
             {
                 playerUnit.AttackByIndex(playerUnit, enemyUnit, m_iPlayerActionIndex);
                 enemyHUD.SetHUD(enemyUnit);
+                ShowSkilleffect(enemyHUD, playerUnit.m_AttackBehaviors[m_iPlayerActionIndex]);
                 dialogueText.text = playerUnit.m_sUnitName + "의 " + playerUnit.GetSkillname(playerUnit, m_iPlayerActionIndex) + " 공격!!";
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.8f);
+                enemyHUD.animator_SkillEffect.SetInteger("EffectNum", 20);
                 yield return CheckDouble(m_iPlayerActionIndex, playerUnit, enemyUnit);
                 yield return CheckEffected(m_iPlayerActionIndex, playerUnit, enemyUnit);
             }
@@ -299,7 +308,7 @@ public class BattleManager : MonoBehaviour
         dialogueText.text = "도깨비를 바꿨다.";
         yield return new WaitForSeconds(2f);
 
-        
+
         Process();
     }
     IEnumerator PlayerTurn_Run()
@@ -331,14 +340,19 @@ public class BattleManager : MonoBehaviour
         // state 변경
         state = BattleState.ENEMYTURN;
         // 랜덤 공격
-
-        int randomAttackIndex = Random.Range(0, 2);
+        int randomAttackIndex;
+        if (enemyUnit.UnitType != GameManager.Type.GODBEAST)
+            randomAttackIndex = Random.Range(0, 3);
+        else
+            randomAttackIndex = Random.Range(0, 4);
+        ShowSkilleffect(playerHUD, enemyUnit.m_AttackBehaviors[randomAttackIndex]);
         enemyUnit.AttackByIndex(enemyUnit, playerUnit, randomAttackIndex);
         //적 공격
         string AttackName = enemyUnit.GetSkillname(enemyUnit, randomAttackIndex);
         playerHUD.SetHUD(playerUnit);
         dialogueText.text = enemyUnit.m_sUnitName + "이 " + AttackName + "공격을 했다!";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
+        playerHUD.animator_SkillEffect.SetInteger("EffectNum", 20);
         yield return CheckDouble(randomAttackIndex, enemyUnit, playerUnit);
         yield return CheckEffected(randomAttackIndex, enemyUnit, playerUnit);
 
@@ -358,7 +372,7 @@ public class BattleManager : MonoBehaviour
     {
         TakeStateDamage(playerUnit);
         TakeStateDamage(enemyUnit);
-    
+
         yield return new WaitForSeconds(1f);
         if (playerUnit.m_iCurrentHP <= 0)
             AfterFall();
@@ -400,7 +414,7 @@ public class BattleManager : MonoBehaviour
             {
                 UnitEntity unitEntity = entity.GetComponent<UnitEntity>();
                 float mod;
-                if(GameManager.Instance.m_UnitManager.CheckUnitAmount() == 1)
+                if (GameManager.Instance.m_UnitManager.CheckUnitAmount() == 1)
                 {
                     mod = 1.0f;
                 }
@@ -436,7 +450,7 @@ public class BattleManager : MonoBehaviour
         }
         ChangeScene();
     }
-    
+
     IEnumerator PlayerLost()
     {
         dialogueText.text = "거대한 도깨비에게 져버렸다.....";
@@ -447,7 +461,7 @@ public class BattleManager : MonoBehaviour
     IEnumerator CaptureProcess()
     {
 
-        if(GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName).m_isCaptured == true)
+        if (GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName).m_isCaptured == true)
         {
             dialogueText.text = "이미 잡은 도깨비다!";
             yield return new WaitForSeconds(1f);
@@ -490,8 +504,8 @@ public class BattleManager : MonoBehaviour
                 Debug.Log(enemyUnit.m_AttackBehaviors[0].m_iSkillNo);
                 Debug.Log(enemyUnit.m_AttackBehaviors[1].m_iSkillNo);
                 Debug.Log(enemyUnit.m_AttackBehaviors[2].m_iSkillNo);
-                UnitSaveData.m_AttackBehav_1 = enemyUnit.m_AttackBehaviors[0].m_iSkillNo-1;
-                UnitSaveData.m_AttackBehav_2 = enemyUnit.m_AttackBehaviors[1].m_iSkillNo -1;
+                UnitSaveData.m_AttackBehav_1 = enemyUnit.m_AttackBehaviors[0].m_iSkillNo - 1;
+                UnitSaveData.m_AttackBehav_2 = enemyUnit.m_AttackBehaviors[1].m_iSkillNo - 1;
                 UnitSaveData.m_AttackBehav_3 = enemyUnit.m_AttackBehaviors[2].m_iSkillNo - 1;
                 dialogueText.text = "도깨비를 잡았다!";
                 isCaptureScucess = true;
@@ -515,7 +529,7 @@ public class BattleManager : MonoBehaviour
 
     #endregion
     #region 기타 메서드
-    private WaitForSeconds CheckDouble(int index , UnitEntity Atker, UnitEntity Defer)
+    private WaitForSeconds CheckDouble(int index, UnitEntity Atker, UnitEntity Defer)
     {
         if (Atker.m_AttackBehaviors[index].m_IsDouble == 1)
         {
@@ -534,7 +548,7 @@ public class BattleManager : MonoBehaviour
 
     private WaitForSeconds CheckEffected(int index, UnitEntity Atker, UnitEntity Defer)
     {
-        if(Atker.m_AttackBehaviors[index].m_IsEffected == true)
+        if (Atker.m_AttackBehaviors[index].m_IsEffected == true)
         {
             dialogueText.text = StateEffect(index, Atker, Defer);
             return new WaitForSeconds(1f);
@@ -575,8 +589,9 @@ public class BattleManager : MonoBehaviour
         return "";
     }
 
-    public void CatchProcess()
+    public void ShowSkilleffect(BattleHUDCTR hud, SOAttackBase attack)
     {
+        hud.animator_SkillEffect.SetInteger("EffectNum", attack.EffectNum);
 
     }
     #region 버튼 처리
@@ -617,9 +632,9 @@ public class BattleManager : MonoBehaviour
                 entity.g_UnitState.state = UnitEntity.UnitState.NULL;
         }
     }
-    public bool CalEffectChance(UnitEntity entity , UnitEntity.UnitState state)
+    public bool CalEffectChance(UnitEntity entity, UnitEntity.UnitState state)
     {
-        if(entity.g_UnitState.state == state)
+        if (entity.g_UnitState.state == state)
         {
             int attackChance = 30;
             int chance = Random.Range(0, 101);
