@@ -190,8 +190,9 @@ public class UnitEntity : MonoBehaviour
         m_iUnitAtk += 3;
         m_iUnitDef += 3;
         m_iUnitSpeed += 3;
-        m_iUnitEXP -= m_iUnitLevel * 10;
+        m_iUnitEXP -= GameManager.Instance.g_iReqExp[m_iUnitLevel];
         m_iUnitLevel += 1;
+        GameManager.Instance.SavePlayerUnit(m_sUnitName, gameObject.transform.GetComponent<UnitEntity>());
     }
     public bool CheckLevelUP()
     {

@@ -231,7 +231,7 @@ public class BattleManager : MonoBehaviour
     }
     IEnumerator Player_FallChange()
     {
-        dialogueText.text = playerUnit.m_sUnitName + "이 쓰러졌다.....";
+        dialogueText.text = playerUnit.m_sUnitName + "이(가) 쓰러졌다.....";
         yield return new WaitForSeconds(2f);
         dialogueText.text = "다음 도깨비를 선택하여 싸우자.";
         isPlayed = false;
@@ -247,7 +247,7 @@ public class BattleManager : MonoBehaviour
         }
         if (CalEffectChance(playerUnit, UnitEntity.UnitState.BERSERK))
         {
-            dialogueText.text = playerUnit.m_sUnitName + "은 지금 광란상태다!";
+            dialogueText.text = playerUnit.m_sUnitName + "은(는) 지금 광란상태다!";
             yield return new WaitForSeconds(1f);
             int randomIndex = Random.Range(0, playerUnit.m_AttackBehaviors.Length);
             ShowSkilleffect(enemyHUD, playerUnit.m_AttackBehaviors[randomIndex]);
@@ -263,7 +263,7 @@ public class BattleManager : MonoBehaviour
         {
             if (CalEffectChance(playerUnit, UnitEntity.UnitState.PARALYSIS))
             {
-                dialogueText.text = playerUnit.m_sUnitName + "은 지금 마비되었다.";
+                dialogueText.text = playerUnit.m_sUnitName + "은(는) 지금 마비되었다.";
             }
             else
             {
@@ -353,7 +353,7 @@ public class BattleManager : MonoBehaviour
         //적 공격
         string AttackName = enemyUnit.GetSkillname(enemyUnit, randomAttackIndex);
         playerHUD.SetHUD(playerUnit);
-        dialogueText.text = enemyUnit.m_sUnitName + "이 " + AttackName + "공격을 했다!";
+        dialogueText.text = enemyUnit.m_sUnitName + "이(가) " + AttackName + "공격을 했다!";
         yield return new WaitForSeconds(0.8f);
         playerHUD.animator_SkillEffect.SetInteger("EffectNum", 20);
         yield return CheckDouble(randomAttackIndex, enemyUnit, playerUnit);
@@ -572,15 +572,15 @@ public class BattleManager : MonoBehaviour
     private string StateEffect(int index, UnitEntity Atker, UnitEntity Defer)
     {
         if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.SLOW)
-            return Defer.m_sUnitName + "은 조금 느려진듯 하다";
+            return Defer.m_sUnitName + "은(는) 조금 느려진듯 하다";
         else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.CARELESSNESS)
-            return Defer.m_sUnitName + "은 조금 방심한듯 하다.";
+            return Defer.m_sUnitName + "은(는) 조금 방심한듯 하다.";
         else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.DEPRESSED)
-            return Defer.m_sUnitName + "은 의욕을 상실한듯 하다.";
+            return Defer.m_sUnitName + "은(는) 의욕을 상실한듯 하다.";
         else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.HALF)
             return Defer.m_sUnitName + "일격!";
         else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.ULTIMATE)
-            return Defer.m_sUnitName + "은 최대의 힘을 냈다!";
+            return Defer.m_sUnitName + "은(는) 최대의 힘을 냈다!";
         else if (Atker.m_AttackBehaviors[index].m_SkillEffect == SOAttackBase.SkillEffect.ONLYONCE)
             return "이 스킬은 연속으로 사용할 수 없다!";
 
@@ -593,9 +593,9 @@ public class BattleManager : MonoBehaviour
         else if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.ICE && Atker.m_AttackBehaviors[index].m_iEffectDur == 5)
             return Defer.m_sUnitName + "의 몸은 동상을 입었다.";
         else if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.PARALYSIS)
-            return Defer.m_sUnitName + "는 마비되었다.";
+            return Defer.m_sUnitName + "은(는) 마비되었다.";
         else if (Atker.m_AttackBehaviors[index].m_EffectState == UnitEntity.UnitState.BERSERK)
-            return Defer.m_sUnitName + "는 광란에 빠졌다.";
+            return Defer.m_sUnitName + "은(는) 광란에 빠졌다.";
 
         return "";
     }
