@@ -75,6 +75,10 @@ public class TalkManager : MonoBehaviour
                                               "뭔가에 씌인듯한...사신수같지 않아!:0",
                                               "..!:0"  });
 
+        talkData.Add(900, new string[] { "...현무가 있는 장소야:0",
+                                              "지금은 볼일이 없으니깐 다음에 오자:0"
+                                               });
+
         talkData.Add(30 + 1300, new string[] { "후...어찌저찌 이겼네..:0",
                                               "그치만 이건 뭔가 이상해.:0",
                                               "평소 사신수라고 생각되지 않을만큼 날카롭고 적대적인 모습..:0",
@@ -92,6 +96,10 @@ public class TalkManager : MonoBehaviour
                                             "지금은 그런걸 생각할때가 아니야.:0",
                                             "자 얘들아 가자!:0"});
 
+        talkData.Add(1500, new string[] { "...주작이 있는 장소야:0",
+                                              "지금은 볼일이 없으니깐 다음에 오자:0"
+                                               });
+
         talkData.Add(40 + 1600, new string[] { "후..이번에도 간신히 이겼네!:0",
                                             "사신수가 전부 뭔가에 홀린다는건..그냥 도깨비의 소행은 아니야.:0",
                                             "(쿠르르쾅!!)...!번개가 또?:0",
@@ -105,6 +113,10 @@ public class TalkManager : MonoBehaviour
                                             "..미르를 지키기 위해서 여기까지 달려왔어.:0",
                                             "분명 이 앞에 뭔가가 있는건 분명해!:0",
                                             "도깨비들아 가자!?:0"});
+
+        talkData.Add(2100, new string[] { "...주작이 있는 장소야:0",
+                                              "지금은 볼일이 없으니깐 다음에 오자:0"
+                                               });
 
 
 
@@ -203,7 +215,7 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(2100 + 0, portraitArr[2]);
         portraitData.Add(2200 + 0, portraitArr[2]);
         portraitData.Add(2500 + 0, portraitArr[2]);
-        portraitData.Add(2500 + 1, portraitArr[2]);
+        portraitData.Add(2500 + 1, portraitArr[3]);
         portraitData.Add(2600 + 0, portraitArr[2]);
         portraitData.Add(2600 + 1, portraitArr[2]);
 
