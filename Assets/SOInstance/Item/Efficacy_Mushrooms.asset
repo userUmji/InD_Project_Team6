@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc974b95a4c52284dbee15238fc1666a, type: 3}
-  m_Name: Likeability
+  m_Name: Efficacy_Mushrooms
   m_EditorClassIdentifier: 
   m_sUseDialog: 
-  g_sType: "\uD638\uAC10\uB3C4"
+  g_sType: "\uD6A8\uB2A5"
   m_iEffectAmount: 0
   g_iStr: 0
   g_iDef: 0

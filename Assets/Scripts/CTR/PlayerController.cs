@@ -108,7 +108,6 @@ public class PlayerController : MonoBehaviour
             m_scanObject = null; // 스캔된 객체를 null로 재설정
         }
     }
-
     private void Movement()
     {
         m_fx = _instance.isAct ? 0 : Input.GetAxisRaw("Horizontal");
@@ -118,29 +117,23 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            // animations // 0 -> 앞, 1 -> 뒤, 3 -> 옆
-            // animator.SetBool("Walk", false);
-            //Swith_Motion
-
             Run();
         }
         else
         {
-          //  animator.SetBool("Run", false);
             Walk();
         }
-        
     }
 
     void Walk()
     {
         if (m_fx == 0 && m_fy == 0)
         {
-          //  animator.SetBool("Walk", false);
+            // 움직이지 않을 때 처리
         }
         else
         {
-         //   animator.SetBool("Walk", true);
+            // 움직일 때 처리
         }
 
         if (m_fx == -1 || m_fy == -1)
@@ -151,19 +144,20 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
-        Vector2 movement = new Vector2(m_fx, m_fy) * g_fspeed * Time.deltaTime;
-        m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지 
+
+        Vector2 movement = new Vector2(m_fx, m_fy).normalized * g_fspeed * Time.deltaTime;
+        m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지
     }
 
     void Run()
     {
         if (m_fx == 0 && m_fy == 0)
         {
-           // animator.SetBool("Run", false);
+            // 움직이지 않을 때 처리
         }
         else
         {
-          //  animator.SetBool("Run", true);
+            // 움직일 때 처리
         }
 
         if (m_fx == -1 || m_fy == -1)
@@ -176,8 +170,74 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 movement = new Vector2(m_fx, m_fy).normalized * g_frun_Speed * Time.deltaTime;
-        m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지 
+        m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지
     }
+    /* private void Movement()
+     {
+         m_fx = _instance.isAct ? 0 : Input.GetAxisRaw("Horizontal");
+         m_fy = _instance.isAct ? 0 : Input.GetAxisRaw("Vertical");
+         animator.SetFloat("InputX", m_fx);
+         animator.SetFloat("InputY", m_fy);
 
-   
+         if (Input.GetKey(KeyCode.LeftShift))
+         {
+
+
+             Run();
+         }
+         else
+         {
+             Walk();
+         }
+
+     }
+
+     void Walk()
+     {
+         if (m_fx == 0 && m_fy == 0)
+         {
+
+         }
+         else
+         {
+
+         }
+
+         if (m_fx == -1 || m_fy == -1)
+         {
+             transform.localScale = new Vector3(-1, 1, 1);
+         }
+         else if (m_fx == 1 || m_fy == 1)
+         {
+             transform.localScale = new Vector3(1, 1, 1);
+         }
+         Vector2 movement = new Vector2(m_fx, m_fy) * g_fspeed * Time.deltaTime;
+         m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지 
+     }
+
+     void Run()
+     {
+         if (m_fx == 0 && m_fy == 0)
+         {
+
+         }
+         else
+         {
+
+         }
+
+         if (m_fx == -1 || m_fy == -1)
+         {
+             transform.localScale = new Vector3(-1, 1, 1);
+         }
+         else if (m_fx == 1 || m_fy == 1)
+         {
+             transform.localScale = new Vector3(1, 1, 1);
+         }
+
+         Vector2 movement = new Vector2(m_fx, m_fy).normalized * g_frun_Speed * Time.deltaTime;
+         m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지 
+     }*/
+
+
 }
