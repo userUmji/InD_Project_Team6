@@ -17,6 +17,7 @@ public abstract class SOAttackBase : ScriptableObject , IAttackBehavior
     public SkillEffect m_SkillEffect;
     public bool m_isPlayed;
     public int m_iAdditionalSpeed;
+    public AnimationClip animation;
 
     public int m_IsDouble;
     public bool m_IsEffected;
