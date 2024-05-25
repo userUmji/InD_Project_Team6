@@ -114,6 +114,22 @@ public class Inventory_Controller : MonoBehaviour
  
             }
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (discard_value_View.activeSelf == false)
+            {
+                {
+                    discard_value_View.SetActive(true);
+                    lock_UI = false;
+                }
+            }
+            else
+            {
+                discard_value_View.SetActive(false);
+                lock_UI = true;
+            }
+        }
+
     }
 
     public void Check_Slot(int num = 1) // 획득한 아이템을 인벤토리에 넣어주는 함수

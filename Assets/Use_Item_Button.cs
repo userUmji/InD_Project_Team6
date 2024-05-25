@@ -22,6 +22,7 @@ public class Use_Item_Button : MonoBehaviour
             BattleManager btm = GameObject.Find("BattleManager").transform.GetComponent<BattleManager>();
             btm.UseItem();
         }
+        Inventory_Controller.g_ICinstance.lock_UI = true;
     }
 
 }
