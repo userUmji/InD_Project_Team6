@@ -27,6 +27,7 @@ MonoBehaviour:
     m_iUnitAtk: -2
     m_iUnitSpeed: -6
     m_iUnitDef: -6
+    m_Animation: {fileID: 0}
     m_AttackBehav_1: {fileID: 11400000, guid: a15589d8b51bde742bee1f591e7b5f9a, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
@@ -42,6 +43,7 @@ MonoBehaviour:
     m_iUnitAtk: -6
     m_iUnitSpeed: -4
     m_iUnitDef: -10
+    m_Animation: {fileID: 7400000, guid: 368f1658020076c44b66588e143286c8, type: 2}
     m_AttackBehav_1: {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
@@ -57,6 +59,7 @@ MonoBehaviour:
     m_iUnitAtk: -4
     m_iUnitSpeed: -8
     m_iUnitDef: -6
+    m_Animation: {fileID: 0}
     m_AttackBehav_1: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
@@ -73,6 +76,7 @@ MonoBehaviour:
     m_iUnitAtk: -2
     m_iUnitSpeed: -10
     m_iUnitDef: -6
+    m_Animation: {fileID: 7400000, guid: 87d6bd913fcf8df4a97ba909e3c7f1e3, type: 2}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -89,6 +93,7 @@ MonoBehaviour:
     m_iUnitAtk: -6
     m_iUnitSpeed: -6
     m_iUnitDef: -8
+    m_Animation: {fileID: 0}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -105,6 +110,7 @@ MonoBehaviour:
     m_iUnitAtk: -4
     m_iUnitSpeed: -4
     m_iUnitDef: -8
+    m_Animation: {fileID: 7400000, guid: 338c8622a7a6f77469143976b95974f9, type: 2}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -120,6 +126,7 @@ MonoBehaviour:
     m_iUnitAtk: -2
     m_iUnitSpeed: -6
     m_iUnitDef: -8
+    m_Animation: {fileID: 0}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -135,6 +142,7 @@ MonoBehaviour:
     m_iUnitAtk: -5
     m_iUnitSpeed: -10
     m_iUnitDef: -2
+    m_Animation: {fileID: 7400000, guid: b262d602c6967254699a8825e577a37e, type: 2}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -151,6 +159,7 @@ MonoBehaviour:
     m_iUnitAtk: 3
     m_iUnitSpeed: -2
     m_iUnitDef: -7
+    m_Animation: {fileID: 7400000, guid: d2544bc67defc084887edc9a496546c0, type: 2}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -166,6 +175,7 @@ MonoBehaviour:
     m_iUnitAtk: 8
     m_iUnitSpeed: 3
     m_iUnitDef: -2
+    m_Animation: {fileID: 7400000, guid: 1be9f1c5c8b873a4fa008cadf30e13b8, type: 2}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -181,6 +191,7 @@ MonoBehaviour:
     m_iUnitAtk: 28
     m_iUnitSpeed: 18
     m_iUnitDef: 18
+    m_Animation: {fileID: 0}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -194,6 +205,7 @@ MonoBehaviour:
     m_iUnitAtk: 0
     m_iUnitSpeed: 1
     m_iUnitDef: -10
+    m_Animation: {fileID: 0}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
@@ -207,6 +219,7 @@ MonoBehaviour:
     m_iUnitAtk: 0
     m_iUnitSpeed: 1
     m_iUnitDef: -10
+    m_Animation: {fileID: 0}
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}

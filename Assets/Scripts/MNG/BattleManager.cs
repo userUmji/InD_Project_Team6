@@ -60,6 +60,7 @@ public class BattleManager : MonoBehaviour
         if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
             GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
         BattleCoroutine = StartCoroutine(SetupBattle());
+
     }
 
     private void PlayerAction()
@@ -205,7 +206,9 @@ public class BattleManager : MonoBehaviour
         playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
         //적 유닛 초기화
         enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
-        enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
+        //enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
+        Debug.Log(enemyUnit.m_iUnitNo);
+        enemyHUD.CheckUnitNo(enemyUnit.m_iUnitNo);
 
         if (enemyUnit.UnitType == GameManager.Type.GODBEAST)
             dialogueText.text = "앗! " + enemyUnit.m_sUnitName + "이다!!";
