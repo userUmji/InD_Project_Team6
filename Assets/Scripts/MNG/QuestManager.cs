@@ -21,8 +21,8 @@ public class QuestManager : MonoBehaviour
         questList.Add(20, new QuestData("해태와의 만남", new int[] { 300,  500 }));
         questList.Add(30, new QuestData("현무를 만나기위해 미르의 여름으로!!", new int[] { 800,1200, 900, 1300 }));
         questList.Add(40, new QuestData("주작을 만나기위해 미르의 가을로!!", new int[] { 1500,1600 }));
-        questList.Add(50, new QuestData("백호를 만나기위해 미르의 겨울로!!", new int[] { 2100, 2200, 0 }));
-        questList.Add(60, new QuestData("황룡을 만나기위해 미르의 중앙으로!!", new int[] { 0 }));
+        questList.Add(50, new QuestData("백호를 만나기위해 미르의 겨울로!!", new int[] { 2100, 2200}));
+        questList.Add(60, new QuestData("황룡을 만나기위해 미르의 중앙으로!!", new int[] { 2500, 2600, 0 }));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -99,6 +99,7 @@ public class QuestManager : MonoBehaviour
                 else if (questActionIndex == 2)
                 {
                     questObject[10].SetActive(false);
+                    questObject[17].SetActive(true);
                     questObject[7].SetActive(false);
                     questObject[9].SetActive(false);
                 }
@@ -106,6 +107,7 @@ public class QuestManager : MonoBehaviour
                 {
                     questObject[11].SetActive(false);
                     questObject[12].SetActive(true);
+                    questObject[18].SetActive(true);
 
                 }
                 break;
@@ -113,13 +115,19 @@ public class QuestManager : MonoBehaviour
             case 40:
                 if (questActionIndex == 1)
                     questObject[13].SetActive(false);
-                     questObject[14].SetActive(true);
+                    questObject[14].SetActive(true);
+                    questObject[19].SetActive(true);
                 break;
 
             case 50:
                 if (questActionIndex == 1)
                     questObject[15].SetActive(false);
                 questObject[16].SetActive(true);
+                break;
+            case 60:
+                if (questActionIndex == 1)
+                    questObject[20].SetActive(false);
+                questObject[21].SetActive(true);
                 break;
 
 

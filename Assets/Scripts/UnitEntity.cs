@@ -73,6 +73,7 @@ public class UnitEntity : MonoBehaviour
         m_iUnitSpeed = UnitData.m_iUnitSpeed + (3 * m_iUnitLevel);
         UnitType = UnitData.UnitType;
         m_iCurrentHP = m_iUnitHP;
+        m_iUnitNo = UnitData.m_iUnitNo;
 
         m_spriteUnitImage = UnitData.m_UnitSprite;
         m_AttackBehaviors = new SOAttackBase[4];
@@ -112,6 +113,7 @@ public class UnitEntity : MonoBehaviour
         m_iUnitSpeed = UnitData.m_iUnitSpeed + (3 * m_iUnitLevel);
         UnitType = UnitData.UnitType;
         m_iCurrentHP = m_iUnitHP;
+        m_iUnitNo = UnitData.m_iUnitNo;
 
         m_spriteUnitImage = UnitData.m_UnitSprite;
         m_AttackBehaviors = new SOAttackBase[4];
