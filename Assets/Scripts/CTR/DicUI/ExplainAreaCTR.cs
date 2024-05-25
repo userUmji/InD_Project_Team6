@@ -62,9 +62,9 @@ public class ExplainAreaCTR : MonoBehaviour
                 SkillUlt.text = "???";
                 Info4.Init(SaveUnit.m_AttackBehav_Ult, false);
             }
-            CheckMod_Status(SaveUnit.m_iPermanentAtkMod + Unit.m_iUnitAtk, AtkExplain);
-            CheckMod_Status(SaveUnit.m_iPermanentDefMod + Unit.m_iUnitDef, DefExplain);
-            CheckMod_Status(SaveUnit.m_iPermanentSpeedMod + Unit.m_iUnitSpeed, SpeedExplain);
+            CheckMod_Status(SaveUnit.m_iPermanentAtkMod + Unit.m_iUnitAtk + (3 * SaveUnit.m_iUnitLevel), AtkExplain);
+            CheckMod_Status(SaveUnit.m_iPermanentDefMod + Unit.m_iUnitDef + (3 * SaveUnit.m_iUnitLevel), DefExplain);
+            CheckMod_Status(SaveUnit.m_iPermanentSpeedMod + Unit.m_iUnitSpeed + (3 * SaveUnit.m_iUnitLevel), SpeedExplain);
         }
         else
         {
@@ -95,6 +95,7 @@ public class ExplainAreaCTR : MonoBehaviour
 
     private void CheckMod_Status(int amount, TextMeshProUGUI text)
     {
+        Debug.Log(amount);
         if (amount <= 40)
             text.text = "아직 부족한것같아...";
         else if (amount > 41 && amount <= 80)

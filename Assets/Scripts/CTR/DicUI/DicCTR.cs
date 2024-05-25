@@ -30,7 +30,7 @@ public class DicCTR : MonoBehaviour,IPointerClickHandler
 
         foreach (var element in GameManager.Instance.m_DataManager.m_UnitDic)
         {
-            if(element.Value.m_sUnitName.Equals("더미"))
+            if(element.Value.m_sUnitName.Equals("더미") || element.Value.m_sUnitName.Equals("일반 도깨비"))
                 return;
             string unitName = element.Key;
             GameObject DicElementPrefab_temp = Instantiate(m_DicElementPrefab);
