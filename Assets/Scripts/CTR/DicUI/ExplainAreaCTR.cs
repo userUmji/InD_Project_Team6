@@ -68,7 +68,7 @@ public class ExplainAreaCTR : MonoBehaviour
         }
         else
         {
-            UnitImage.sprite = Resources.Load<Sprite>("Image/Unit/UnkownUnit");
+            UnitImage.sprite = Resources.Load<Sprite>("Images/Unit/UnknownUnit");
             ExplainText.text = "???";
             NameNumber.text = "NO." + Unit.m_iUnitNo + "\n" + "???" + " LV" + "???";
             Type.text = "???";
