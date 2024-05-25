@@ -21,8 +21,7 @@ public class SOBaseAttack : SOAttackBase
         else if (m_IsDouble == 2)
             finalAttackDamage = (int)(finalAttackDamage * 0.8);
 
-        Defender.m_iCurrentHP -= finalAttackDamage;
-        Debug.Log(m_sAttackName + " " + m_IsEffected);
+        Defender.TakeDamage(finalAttackDamage);
 
     }
 

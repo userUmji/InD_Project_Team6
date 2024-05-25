@@ -10,7 +10,7 @@ public class Use_Item_Button : MonoBehaviour
     public void Use_Item()
     {
         g_gclick_item.GetComponent<Slot>().g_Ihave_item.ExecuteItem(index);
-        if (g_gclick_item.GetComponent<Slot>().g_Ihave_item.m_sItemName != "복주머니") ;
+        if (g_gclick_item.GetComponent<Slot>().g_Ihave_item.m_sItemName != "복주머니") 
             g_gclick_item.GetComponent<Slot>().g_iitem_Number -= 1;
         g_gclick_item.GetComponent<Slot>().Refresh();
         if (g_gclick_item.GetComponent<Slot>().g_iitem_Number == 0)

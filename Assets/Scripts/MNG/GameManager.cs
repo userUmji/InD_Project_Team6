@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public enum GameState { INIT, INPROGRESS, DIALOG,  PORTAL ,BATTLE, PAUSE };
     public GameState g_GameState;
     public GameObject g_InventoryGO;
+    public GameObject g_DictionaryGO;
     public List<SOAttackBase> Skills;
     public int[] g_iReqExp;
 
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
         InitExp();
 
         m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
-        
+        GetUnitSaveData("해태").m_isCaptured = true;
         g_GameState = GameState.INPROGRESS;
 
     }

@@ -32,7 +32,6 @@ public class ExplainAreaCTR : MonoBehaviour
 
     public void Init(string name)
     {
-        Debug.Log("dasf");
         var Unit = GameManager.Instance.GetUnitData(name);
         var SaveUnit = GameManager.Instance.GetUnitSaveData(name);
         if (SaveUnit.m_isCaptured)

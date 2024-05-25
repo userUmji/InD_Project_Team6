@@ -400,7 +400,6 @@ public class BattleManager : MonoBehaviour
             {
                 UnitEntity unitEntity = entity.GetComponent<UnitEntity>();
                 float mod;
-                Debug.Log(GameManager.Instance.m_UnitManager.CheckUnitAmount());
                 if(GameManager.Instance.m_UnitManager.CheckUnitAmount() == 1)
                 {
                     mod = 1.0f;
@@ -447,52 +446,69 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator CaptureProcess()
     {
-        bool isCapture = false;
-        int randomNum = Random.Range(0, 100);
 
-        if (enemyUnit.m_iUnitHP / 4 >= enemyUnit.m_iCurrentHP)
+        if(GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName).m_isCaptured == true)
         {
-            if (randomNum > 20)
-                isCapture = true;
-        }
-        else if (enemyUnit.m_iUnitHP / 2 > enemyUnit.m_iCurrentHP && enemyUnit.m_iUnitHP / 4 <= enemyUnit.m_iCurrentHP)
-        {
-            if (randomNum > 40)
-                isCapture = true;
-
-        }
-        else if (enemyUnit.m_iUnitHP * 3 / 4 > enemyUnit.m_iCurrentHP && enemyUnit.m_iUnitHP / 2 < enemyUnit.m_iCurrentHP)
-        {
-            if (randomNum > 60)
-                isCapture = true;
-        }
-        else
-        {
-            if (randomNum > 80)
-                isCapture = true;
-        }
-        if (isCapture == true)
-        {
+            dialogueText.text = "이미 잡은 도깨비다!";
             yield return new WaitForSeconds(1f);
-            var UnitSaveData = GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName);
-            UnitSaveData.m_isCaptured = true;
-            UnitSaveData.m_iUnitLevel = enemyUnit.m_iUnitLevel;
-            UnitSaveData.m_AttackBehav_1 = enemyUnit.m_AttackBehaviors[0].m_iSkillNo;
-            UnitSaveData.m_AttackBehav_2 = enemyUnit.m_AttackBehaviors[1].m_iSkillNo;
-            UnitSaveData.m_AttackBehav_3 = enemyUnit.m_AttackBehaviors[2].m_iSkillNo;
-            dialogueText.text = "도깨비를 잡았다!";
-            isCaptureScucess = true;
-            StartCoroutine(PlayerWin());
-            StopCoroutine(CaptureProcess());
-        }
-        else
-        {
-            dialogueText.text = "놓쳤따!";
             g_isCapture = false;
             Process();
             isPlayed = true;
         }
-        yield return new WaitForSeconds(1f);
+        else
+        {
+            bool isCapture = false;
+            int randomNum = Random.Range(0, 100);
+
+            if (enemyUnit.m_iUnitHP / 4 >= enemyUnit.m_iCurrentHP)
+            {
+                if (randomNum > 20)
+                    isCapture = true;
+            }
+            else if (enemyUnit.m_iUnitHP / 2 > enemyUnit.m_iCurrentHP && enemyUnit.m_iUnitHP / 4 <= enemyUnit.m_iCurrentHP)
+            {
+                if (randomNum > 40)
+                    isCapture = true;
+
+            }
+            else if (enemyUnit.m_iUnitHP * 3 / 4 > enemyUnit.m_iCurrentHP && enemyUnit.m_iUnitHP / 2 < enemyUnit.m_iCurrentHP)
+            {
+                if (randomNum > 60)
+                    isCapture = true;
+            }
+            else
+            {
+                if (randomNum > 80)
+                    isCapture = true;
+            }
+            if (isCapture == true)
+            {
+                yield return new WaitForSeconds(1f);
+                var UnitSaveData = GameManager.Instance.GetUnitSaveData(enemyUnit.m_sUnitName);
+                UnitSaveData.m_isCaptured = true;
+                UnitSaveData.m_iUnitLevel = enemyUnit.m_iUnitLevel;
+                Debug.Log(enemyUnit.m_AttackBehaviors[0].m_iSkillNo);
+                Debug.Log(enemyUnit.m_AttackBehaviors[1].m_iSkillNo);
+                Debug.Log(enemyUnit.m_AttackBehaviors[2].m_iSkillNo);
+                UnitSaveData.m_AttackBehav_1 = enemyUnit.m_AttackBehaviors[0].m_iSkillNo-1;
+                UnitSaveData.m_AttackBehav_2 = enemyUnit.m_AttackBehaviors[1].m_iSkillNo -1;
+                UnitSaveData.m_AttackBehav_3 = enemyUnit.m_AttackBehaviors[2].m_iSkillNo - 1;
+                dialogueText.text = "도깨비를 잡았다!";
+                isCaptureScucess = true;
+                StartCoroutine(PlayerWin());
+                StopCoroutine(CaptureProcess());
+            }
+            else
+            {
+                dialogueText.text = "놓쳤따!";
+                yield return new WaitForSeconds(1f);
+                g_isCapture = false;
+                Process();
+                isPlayed = true;
+            }
+
+        }
+
     }
 
 
