@@ -58,10 +58,12 @@ public class UnitEntity : MonoBehaviour
     {
         var UnitData = GameManager.Instance.GetUnitData(className);
 
-        if(m_sUnitName == "일반 도깨비")
+        if(className == "일반 도깨비")
         {
             int randomType = Random.Range(0, 5);
             UnitType = (GameManager.Type)randomType;
+            Debug.Log(randomType);
+            Debug.Log(UnitType);
         }
         else
             UnitType = UnitData.UnitType;

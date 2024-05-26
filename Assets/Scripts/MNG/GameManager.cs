@@ -99,12 +99,25 @@ public class GameManager : MonoBehaviour
     {
         InitGOs();
         g_GameState = GameState.BATTLE;
+        
+
+
+
+
         AsyncOperation SceneOper = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
         g_sEnemyBattleUnit = enemyBattleUnit;
         g_iEnemyBattleLvl = lvl;
         GetWorldCanvasGO().SetActive(false);
         SceneOper.allowSceneActivation = true; 
     }
+    IEnumerator LoadBattleScene()
+    {
+
+        
+        yield return new WaitForSeconds(5);
+    }
+
+
     public void SaveALLPlayerUnit()
     {
         for(int i = 0; i<m_UnitManager.CheckUnitAmount();i++)
