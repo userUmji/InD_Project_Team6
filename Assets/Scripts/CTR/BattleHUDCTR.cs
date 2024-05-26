@@ -36,7 +36,6 @@ public class BattleHUDCTR : MonoBehaviour
 
     public void CheckUnitNo(int Num)
     {
-        Debug.Log(Num);
         animator.SetInteger("UnitNo", Num);
         Vector2 Scale = new Vector2(500, 500);
         if (Num == 2)

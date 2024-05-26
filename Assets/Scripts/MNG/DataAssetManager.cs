@@ -173,10 +173,12 @@ public class DataAssetManager
             txtFileTemp = "해태";
         }
         splitNames = txtFileTemp.Split(',');
+        Debug.Log(splitNames.Length);
         for (int i = 0;i < splitNames.Length;i++)
         {
             if (splitNames[i].Trim().Length != 0)
             {
+                Debug.Log(splitNames[i]);
                 GameManager.Instance.m_UnitManager.SetPlayerUnitEntityByName(splitNames[i], i);
             }
 

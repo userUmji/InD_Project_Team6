@@ -163,7 +163,10 @@ public class QuestManager : MonoBehaviour
                 if (questActionIndex == 1)
                     questObject[24].SetActive(false);
                 questObject[20].SetActive(false);
+                questObject[25].SetActive(true);
                 questObject[21].SetActive(true);
+                questObject[25].SetActive(false);
+                questObject[26].SetActive(true);
                 break;
 
 

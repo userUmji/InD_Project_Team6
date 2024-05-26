@@ -13,7 +13,7 @@ public class UnitManager
     }
     public void SetPlayerUnitEntityByName(string unitName, int index)
     {
-
+        Debug.Log(unitName);
         GameObject UnitEntity_temp = GameObject.Instantiate(UnitPrefab,GameObject.Find("PlayerUnits").transform);
         UnitEntity_temp.transform.GetComponent<UnitEntity>().SetPlayerUnit(unitName);
         GameObject.Destroy(g_PlayerUnits[index]);
