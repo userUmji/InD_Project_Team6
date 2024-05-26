@@ -70,7 +70,6 @@ public class SaveGameManager : MonoBehaviour
     }
 
 
-
     public void GameLoad()
     {
         if (!PlayerPrefs.HasKey("PlayerX"))
