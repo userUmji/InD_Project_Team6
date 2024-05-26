@@ -72,7 +72,7 @@ public class ChangeScene : MonoBehaviour
         GameManager.Instance.g_iEnemyBattleLvl = lvl;
         GameManager.Instance.GetWorldCanvasGO().SetActive(false);
         oper.allowSceneActivation = true;
-
+        LoadBattleCr = null;
     }
 
 }
