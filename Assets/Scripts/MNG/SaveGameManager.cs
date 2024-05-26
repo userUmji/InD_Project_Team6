@@ -51,6 +51,7 @@ public class SaveGameManager : MonoBehaviour
         PlayerPrefs.Save();
 
         menuSet.SetActive(false);
+        GameManager.Instance.SetGameState(GameManager.GameState.INPROGRESS);
     }
     private void OnDestroy()
     {

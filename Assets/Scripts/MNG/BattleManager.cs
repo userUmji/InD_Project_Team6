@@ -313,6 +313,7 @@ public class BattleManager : MonoBehaviour
 
 
         Process();
+        isPlayed = true;
     }
     IEnumerator PlayerTurn_Run()
     {

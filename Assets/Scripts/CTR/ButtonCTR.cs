@@ -20,22 +20,6 @@ public class ButtonCTR : MonoBehaviour
         OnButton buttonDelegate = new OnButton(g_BattleManager.OnButton);
         // Button 컴포넌트의 onClick 이벤트에 델리게이트 등록
         gameObject.transform.GetComponent<Button>().onClick.AddListener(() => buttonDelegate(g_eAction, g_iIndex));
-
-        /*
-        if (gameObject.transform.GetComponent<EventTrigger>() == null)
-        {
-            gameObject.AddComponent<EventTrigger>();
-        }
-        EventTrigger.Entry entry_MouseOn = new EventTrigger.Entry();
-        entry_MouseOn.eventID = EventTriggerType.PointerEnter;
-        entry_MouseOn.callback.AddListener((data) => OnMouseEnter((PointerEventData)data));
-
-        EventTrigger.Entry entry_MouseExit = new EventTrigger.Entry();
-        entry_MouseOn.eventID = EventTriggerType.PointerExit;
-        entry_MouseOn.callback.AddListener((data) => OnMouseExit((PointerEventData)data));
-        gameObject.transform.GetComponent<EventTrigger>().triggers.Add(entry_MouseOn);
-        gameObject.transform.GetComponent<EventTrigger>().triggers.Add(entry_MouseExit); 
-        */
     }
     public void OnMouseEnter()
     {
