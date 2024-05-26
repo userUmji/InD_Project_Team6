@@ -119,7 +119,7 @@ public class DataAssetManager
         string path = Application.persistentDataPath + "Save.json";
         if (File.Exists(path))
             System.IO.File.Delete(path);
-        string SaveData = JsonConvert.SerializeObject(m_UnitSaveDic);
+        string SaveData = JsonConvert.SerializeObject(m_UnitSaveDic,Formatting.Indented);
         File.WriteAllText(path, SaveData);
         Debug.Log("Save Complete " + path);
     }

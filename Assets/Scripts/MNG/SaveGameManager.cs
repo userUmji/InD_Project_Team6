@@ -69,10 +69,7 @@ public class SaveGameManager : MonoBehaviour
         Debug.Log("Player data and quest data have been deleted.");
     }
 
-    private void OnDestroy()
-    {
-        //SavePlayerUnits();
-    }
+
 
     public void GameLoad()
     {
