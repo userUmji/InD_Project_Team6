@@ -14,6 +14,7 @@ public class BattleManager : MonoBehaviour
     public GameObject g_ChangeButton;
     public GameObject m_Canvas;
     public GameObject g_Cursor;
+    public GameObject g_ChangeImage;
     public Sprite[] BattleBGSprites;
     public Image BG;
     // 전투 상태
@@ -205,6 +206,25 @@ public class BattleManager : MonoBehaviour
     // 전투 셋업
     IEnumerator SetupBattle()
     {
+        g_ChangeImage.SetActive(true);
+        int waitTime = 60;
+        RectTransform rect = g_ChangeImage.GetComponent<RectTransform>();
+        Vector2 TargetScale = new Vector2(19200, 10800);
+        while (true)
+        {
+            rect.sizeDelta = TargetScale / 60 * waitTime;
+            waitTime -= 1;
+            yield return new WaitForSeconds(0.01f);
+            if (waitTime <= 0)
+            {
+                break;
+            }
+        }
+        g_ChangeImage.SetActive(false); 
+        rect.sizeDelta = new Vector2(19200,10800);
+
+
+        
         //플레이어 유닛 가져오기
         playerUnit = GameManager.Instance.m_UnitManager.g_PlayerUnits[0].transform.GetComponent<UnitEntity>();
 
