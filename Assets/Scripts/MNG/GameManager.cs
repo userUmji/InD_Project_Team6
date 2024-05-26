@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public UnitManager m_UnitManager;
     //월드씬의 캔버스
     private GameObject Canvas_WorldScene;
+    public GameObject SceneChanger;
     //게임의 진행 상황 (초기화, 진행중, 대화중, 전투중, 일지정지)
     public enum GameState { INIT, INPROGRESS, DIALOG,  PORTAL ,BATTLE, PAUSE };
     public GameState g_GameState;
@@ -97,31 +98,16 @@ public class GameManager : MonoBehaviour
     }
     public void LoadBattleScene(string enemyBattleUnit, int lvl)
     {
-        InitGOs();
-        g_GameState = GameState.BATTLE;
-        
-
-
-
-
-        AsyncOperation SceneOper = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
-        g_sEnemyBattleUnit = enemyBattleUnit;
-        g_iEnemyBattleLvl = lvl;
-        GetWorldCanvasGO().SetActive(false);
-        SceneOper.allowSceneActivation = true; 
+        GetSceneChanger().transform.GetComponent<ChangeScene>().LoadBattleScene(enemyBattleUnit, lvl);
     }
-    IEnumerator LoadBattleScene()
+
+    public GameObject GetSceneChanger()
     {
-        int waitTime = 0;
-        while(true) { 
+        if (SceneChanger == null)
+            SceneChanger = GameObject.Find("SceneChanger");
 
-
-            yield return new WaitForEndOfFrame();
-        }
-        
-        
+        return SceneChanger;
     }
-
 
     public void SaveALLPlayerUnit()
     {
