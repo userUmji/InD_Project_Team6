@@ -28,6 +28,7 @@ public class ItemEntity : MonoBehaviour
         m_ItemSprite = ItemData.m_ItemSprite;
         m_sItemDescription = ItemData.m_sItemDescription;
         m_sItemUseDialog = ItemData.m_sItemUseDialog;
+        number = ItemData.m_iItemNo;
         ExecuteEffect = Instantiate(ItemData.m_ItemEffect);
         spriteRenderer.sprite = m_ItemSprite;
     }

@@ -24,7 +24,7 @@ public class EventZoneCTR: MonoBehaviour
                 StopCoroutine(FindCoroutine);
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
+ /*   private void OnTriggerStay2D(Collider2D collision)
     {
         if (GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
         {
@@ -37,13 +37,16 @@ public class EventZoneCTR: MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
-    private void OnTriggerEnter2D(Collider2D collision)
+   private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
         {
-            FindCoroutine = StartCoroutine("Find_Monster");
+            if (collision.CompareTag("Player"))
+            {
+                FindCoroutine = StartCoroutine("Find_Monster");
+            }
         }
     }
 
@@ -65,10 +68,11 @@ public class EventZoneCTR: MonoBehaviour
                     int random_monster_number = Random.Range(0, max_chace);
                     string name = CalMonsterChance(g_gmonster_List, random_monster_number);
 
-                    //FindCoroutine = null;
+                    
                     int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
 
                     GameManager.Instance.LoadBattleScene(name, random_monster_lvl);
+                   // FindCoroutine = null;
                     break;
                 }
             }
