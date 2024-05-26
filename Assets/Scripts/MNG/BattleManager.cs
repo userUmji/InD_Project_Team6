@@ -521,6 +521,7 @@ public class BattleManager : MonoBehaviour
                 UnitSaveData.m_AttackBehav_3 = enemyUnit.m_AttackBehaviors[2].m_iSkillNo - 1;
                 dialogueText.text = "도깨비를 잡았다!";
                 isCaptureScucess = true;
+                //GameManager.Instance.m_DataManager.SaveByUnit(enemyUnit.m_sUnitName, enemyUnit);
                 StartCoroutine(PlayerWin());
                 StopCoroutine(CaptureProcess());
             }
