@@ -55,5 +55,6 @@ public class Change_UI : MonoBehaviour
                 off_UI[i].SetActive(false);
             }
         }
+        GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
     }
 }

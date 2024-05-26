@@ -122,7 +122,7 @@ public class DicCTR : MonoBehaviour,IPointerClickHandler
 
             GameManager.Instance.m_UnitManager.SetPlayerUnitEntityByName(g_PortalEventButton.name, index);
             g_PortalChangeButton.SetActive(false);
-           
+            GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
         }
         else
         {

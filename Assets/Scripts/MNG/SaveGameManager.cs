@@ -24,11 +24,14 @@ public class SaveGameManager : MonoBehaviour
         GameManager.Instance.GetUnitSaveData("해태").m_AttackBehav_3 = 2;
         GameManager.Instance.GetUnitSaveData("해태").m_isCaptured = true;
         GameManager.Instance.m_DataManager.LoadPlayerUnits();
+
+
     }
 
     // 게임을 저장하는 함수
     public void SaveGame()
     {
+
         // 플레이어의 현재 위치 저장
         PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
         PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
@@ -40,12 +43,19 @@ public class SaveGameManager : MonoBehaviour
         GameManager.Instance.SaveALLPlayerUnit();
         SavePlayerUnits();
 
+
+
         // 인벤토리 저장
         SaveInventory();
         // PlayerPrefs 저장
         PlayerPrefs.Save();
 
         menuSet.SetActive(false);
+        GameManager.Instance.SetGameState(GameManager.GameState.INPROGRESS);
+    }
+    private void OnDestroy()
+    {
+        //SavePlayerUnits();
     }
 
     // 플레이어 위치와 퀘스트 ID의 저장 기록을 삭제하는 함수
@@ -80,6 +90,7 @@ public class SaveGameManager : MonoBehaviour
 
         // 인벤토리 불러오기
         LoadInventory();
+
     }
 
     #region 인벤토리 저장
@@ -143,7 +154,6 @@ public class SaveGameManager : MonoBehaviour
         File.WriteAllText(path, UnitNames);
         Debug.Log("PlayerUnit Save Complete " + path);
     }
-
     public void LoadPlayerUnits()
     {
         //GameManager.Instance.m_UnitManager.g_PlayerUnits[]
@@ -168,6 +178,7 @@ public class SaveGameManager : MonoBehaviour
                 Debug.Log(splitNames[i]);
                 GameManager.Instance.m_UnitManager.SetPlayerUnitEntityByName(splitNames[i], i);
             }
+
         }
     }
     #endregion
