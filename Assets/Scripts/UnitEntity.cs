@@ -83,10 +83,19 @@ public class UnitEntity : MonoBehaviour
 
         m_spriteUnitImage = UnitData.m_UnitSprite;
         m_AttackBehaviors = new SOAttackBase[4];
-       
-        List<SOAttackBase> attack_Temp = GameManager.Instance.Skills.FindAll(type => type.SkillType == UnitType);
+       if(m_sUnitName != "황룡")
+       {
 
-        ChooseRandomAttack();
+            ChooseRandomAttack();
+       }
+        else
+        {
+            m_AttackBehaviors[0] = UnitData.m_AttackBehav_1;
+            m_AttackBehaviors[1] = UnitData.m_AttackBehav_2;
+            m_AttackBehaviors[2] = UnitData.m_AttackBehav_3;
+            m_AttackBehaviors[3] = UnitData.m_AttackBehav_Ult;
+        }
+
  
         m_AttackBehaviors[3] = Instantiate(UnitData.m_AttackBehav_Ult);
         for (int i = 0; i < 4; i++)

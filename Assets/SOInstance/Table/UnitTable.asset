@@ -45,7 +45,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: 5081fb3e31f47864cbd952eb39b5a018, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: 01d634f7cba7c5d4e90abc0134b95223, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: 89b368e5e61efc848a9fd170a8a36659, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: 66752277e9ccf0e4282298246983631b, type: 2}
   - m_iUnitNo: 3
     m_sUnitName: "\uB9E5"
     m_sUnitExplain: "\uC0AC\uB78C\uC758 \uC545\uBABD\uC744 \uBA39\uACE0 \uC0AC\uB294
@@ -76,7 +76,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: 190857e03cf9b7f4692f0eba9cb6b2d3, type: 2}
   - m_iUnitNo: 5
     m_sUnitName: "\uAC15\uCCA0\uC774"
     m_sUnitExplain: "\uC6B0\uB77D\uBD80\uB77D\uD55C \uC18C\uC758 \uBAB8\uACFC \uC0AC\uB098\uC6B4
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: e6e5fc93318eb764a80d09f9473f9ba6, type: 2}
   - m_iUnitNo: 6
     m_sUnitName: "\uBC31\uC694\uD638"
     m_sUnitExplain: "\uBC31\uC694\uD638\uB294 \uC0C8\uD558\uC580 \uC124\uC6D0\uC744
@@ -108,7 +108,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: 5b017e2517a99ad42bb9036d8d17934f, type: 2}
   - m_iUnitNo: 7
     m_sUnitName: "\uC7A5\uC0B0\uBC94"
     m_sUnitExplain: "\uC7A5\uC0B0\uBC94\uC740 \uAE4A\uC740 \uC232\uC18D\uC5D0\uC11C
@@ -123,7 +123,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: a49d1840d638ca14b91ecd2e0ffb90d8, type: 2}
   - m_iUnitNo: 8
     m_sUnitName: "\uD604\uBB34"
     m_sUnitExplain: "\uD604\uBB34\uB294 \uC0AC\uC2E0\uC218 \uC911 \uAC00\uC7A5 \uB098\uC774\uAC00
@@ -138,7 +138,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: 64e0c39cf64b02b4bab479574f9fc192, type: 2}
   - m_iUnitNo: 9
     m_sUnitName: "\uC8FC\uC791"
     m_sUnitExplain: "\uC2E0\uC218\uC911\uC5D0 \uAC00\uC7A5 \uC544\uB984\uB2F5\uB2E4\uACE0
@@ -154,7 +154,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: 3da9c7d91088c3e448f87c99eb7f588e, type: 2}
   - m_iUnitNo: 10
     m_sUnitName: "\uBC31\uD638"
     m_sUnitExplain: "\uBC31\uD638\uB294 \uC124\uC0B0\uC758 \uBAA8\uB4E0 \uC0DD\uBA85\uC744
@@ -169,7 +169,7 @@ MonoBehaviour:
     m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
     m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: 051b1b35b7b4b334c9715f8328250e4c, type: 2}
   - m_iUnitNo: 11
     m_sUnitName: "\uD669\uB8E1"
     m_sUnitExplain: "\uC2E0\uC218\uC758 \uC655\uC774\uB77C \uBD88\uB9AC\uB294 \uC131\uC2A4\uB7EC\uC6B4
@@ -181,10 +181,10 @@ MonoBehaviour:
     m_iUnitAtk: 28
     m_iUnitSpeed: 18
     m_iUnitDef: 18
-    m_AttackBehav_1: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_2: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_3: {fileID: 11400000, guid: a7ec246dc0d21e54cbfeb5f29fa9c629, type: 2}
-    m_AttackBehav_Ult: {fileID: 11400000, guid: b923fe12ae00e0a4baceaf85c94b8e57, type: 2}
+    m_AttackBehav_1: {fileID: 11400000, guid: 450c08b225080cc42b5ae3ec7a91dbba, type: 2}
+    m_AttackBehav_2: {fileID: 11400000, guid: 74650948638ef0547a92a7ed56003149, type: 2}
+    m_AttackBehav_3: {fileID: 11400000, guid: ae22780710317f6478227a7363dba523, type: 2}
+    m_AttackBehav_Ult: {fileID: 11400000, guid: 5f9474d875a1b294f9117e3cca216266, type: 2}
   - m_iUnitNo: -1
     m_sUnitName: "\uB354\uBBF8"
     m_sUnitExplain: 
