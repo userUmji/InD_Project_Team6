@@ -15,6 +15,7 @@ public class SaveGameManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Inited");
         GameLoad();
         QuestTalk.text = questManager.CheckQuest();
         GameManager.Instance.m_DataManager.LoadFunc();

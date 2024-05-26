@@ -62,10 +62,29 @@ public class UnitEntity : MonoBehaviour
         {
             int randomType = Random.Range(0, 5);
             UnitType = (GameManager.Type)randomType;
+            Debug.Log(randomType);
+            Debug.Log(UnitType);
         }
         else
             UnitType = UnitData.UnitType;
-
+        /*
+        if (m_sUnitName == "일반 도깨비")
+        {
+            if (GameManager.Instance.g_Season == 0)
+                UnitType = GameManager.Type.GODBEAST;
+            else if (GameManager.Instance.g_Season == 1)
+                UnitType = GameManager.Type.MONSTER;
+            else if (GameManager.Instance.g_Season == 2)
+                UnitType = GameManager.Type.FIRE;
+            else if (GameManager.Instance.g_Season == 3)
+                UnitType = GameManager.Type.ICE;
+            else
+                UnitType = GameManager.Type.GHOST;
+        }
+        else
+            UnitType = UnitData.UnitType;
+        */
+        //UnitEntity 초기화
         m_sUnitName = UnitData.m_sUnitName;
         gameObject.name += "-" + m_sUnitName;
 

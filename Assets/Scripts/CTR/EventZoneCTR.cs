@@ -15,6 +15,7 @@ public class EventZoneCTR: MonoBehaviour
     public float g_fpercent; // ���� ���� Ȯ��
     public int[] g_iLevelBoundary;
     public Coroutine FindCoroutine;
+    public int g_iSeason;
     int random;
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -51,26 +52,24 @@ public class EventZoneCTR: MonoBehaviour
     {
         while (true)
         {
-            if (GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
+            int random_percent_num = Random.Range(1, 101);
+            if(random_percent_num > g_fpercent)
             {
-                int random_percent_num = Random.Range(1, 101);
-                if (random_percent_num < g_fpercent)
+                int max_chace = 0;
+                for (int i = 0; i < g_gmonster_List.Length; i++)
                 {
-                    GameManager.Instance.g_GameState = GameManager.GameState.BATTLE;
-                    int max_chace = 0;
-                    for (int i = 0; i < g_gmonster_List.Length; i++)
-                    {
-                        max_chace += g_gmonster_List[i].m_iChance;
-                    }
-                    int random_monster_number = Random.Range(0, max_chace);
-                    string name = CalMonsterChance(g_gmonster_List, random_monster_number);
-
-                    //FindCoroutine = null;
-                    int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
-
-                    GameManager.Instance.LoadBattleScene(name, random_monster_lvl);
-                    break;
+                    max_chace += g_gmonster_List[i].m_iChance;
                 }
+                int random_monster_number = Random.Range(0, max_chace);
+                string name = CalMonsterChance(g_gmonster_List, random_monster_number);
+
+                FindCoroutine = null;
+
+                int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
+                GameManager.Instance.g_Season = g_iSeason;
+                if (GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
+                    GameManager.Instance.LoadBattleScene(name, random_monster_lvl);
+                break;
             }
             yield return new WaitForSecondsRealtime(1f);
         }
@@ -80,6 +79,7 @@ public class EventZoneCTR: MonoBehaviour
     private string CalMonsterChance(Monster[] mons, int chance)
     {
         int[] chanceArr = new int[mons.Length];
+        Debug.Log(chance);
         for (int i = 0; i < mons.Length; i++)
         {
             chanceArr[i] = 0;
@@ -100,6 +100,6 @@ public class EventZoneCTR: MonoBehaviour
                 return mons[i].m_sName;
             }
         }
-        return "";
+        return "일반 도깨비";
     }
 }
