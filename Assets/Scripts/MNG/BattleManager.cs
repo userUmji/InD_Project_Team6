@@ -206,6 +206,8 @@ public class BattleManager : MonoBehaviour
     // 전투 셋업
     IEnumerator SetupBattle()
     {
+        enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
+        enemyHUD.CheckUnitNo(enemyUnit.m_iUnitNo);
         g_ChangeImage.SetActive(true);
         int waitTime = 60;
         RectTransform rect = g_ChangeImage.GetComponent<RectTransform>();
@@ -230,10 +232,8 @@ public class BattleManager : MonoBehaviour
 
         playerHUD.g_imagePortrait.sprite = playerUnit.m_spriteUnitImage;
         //적 유닛 초기화
-        enemyUnit = g_EnemyUnit.GetComponent<UnitEntity>();
-        //enemyHUD.g_imagePortrait.sprite = enemyUnit.m_spriteUnitImage;
-        Debug.Log(enemyUnit.m_iUnitNo);
-        enemyHUD.CheckUnitNo(enemyUnit.m_iUnitNo);
+
+
 
         if (enemyUnit.UnitType == GameManager.Type.GODBEAST)
             dialogueText.text = "앗! " + enemyUnit.m_sUnitName + "이다!!";
