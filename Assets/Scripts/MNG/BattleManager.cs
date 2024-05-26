@@ -50,7 +50,7 @@ public class BattleManager : MonoBehaviour
         //GameManager.Instance.g_sEnemyBattleUnit = "더미";
         BattleInit();
 
-        GameManager.Instance.g_InventoryGO.transform.SetParent(m_Canvas.transform);
+        GameManager.Instance.GetInventoryGO().transform.SetParent(m_Canvas.transform);
 
     }
     #region 전투 메서드
@@ -62,8 +62,8 @@ public class BattleManager : MonoBehaviour
         BG.sprite = BattleBGSprites[Random.Range(0, BattleBGSprites.Length)];
         g_EnemyUnit = GameManager.Instance.m_UnitManager.SetUnitEntityByName(GameManager.Instance.g_sEnemyBattleUnit, GameManager.Instance.g_iEnemyBattleLvl);
         state = BattleState.START;
-        if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
-            GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
+        if (GameManager.Instance.GetInventoryGO().transform.localScale == new Vector3(1, 1, 1))
+            GameManager.Instance.GetInventoryGO().transform.localScale = new Vector3(0, 0, 1);
         BattleCoroutine = StartCoroutine(SetupBattle());
 
     }
@@ -186,15 +186,15 @@ public class BattleManager : MonoBehaviour
                 entity.m_iTempSpeedMod = 0;
             }
         }
-        GameManager.Instance.Canvas_WorldScene.SetActive(true);
-        GameManager.Instance.g_InventoryGO.transform.SetParent(GameManager.Instance.Canvas_WorldScene.transform);
+        GameManager.Instance.GetWorldCanvasGO().SetActive(true);
+        GameManager.Instance.GetInventoryGO().transform.SetParent(GameManager.Instance.GetWorldCanvasGO().transform);
         SceneManager.UnloadSceneAsync("BattleScene");
         GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
     }
 
     public void UseItem()
     {
-        GameManager.Instance.g_InventoryGO.transform.GetComponentInChildren<Inventory_Controller>().Hide_Inv();
+        GameManager.Instance.GetInventoryGO().transform.GetComponentInChildren<Inventory_Controller>().Hide_Inv();
         state = BattleState.PROCESS;
         m_ePlayerAction = GameManager.Action.ITEM;
         Process();

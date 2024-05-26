@@ -9,6 +9,7 @@ public class WorldMapController : MonoBehaviour
     public Transform player; // 플레이어 Transform
     public RectTransform mapRect; // 지도 UI Rect Transform
     public RectTransform playerIcon; // 플레이어 아이콘 UI Rect Transform
+    public GameObject Dic;
 
     // 게임 맵의 크기 (예를 들어, 가로 200, 세로 200)
     public Vector2 mapSize = new Vector2(200, 200);

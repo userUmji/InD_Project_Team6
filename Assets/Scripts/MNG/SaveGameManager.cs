@@ -11,18 +11,27 @@ public class SaveGameManager : MonoBehaviour
     public GameObject player;
     public QuestManager questManager;
     public TextMeshProUGUI QuestTalk; // Text 형식 사용을 위한 선언
-
     public GameObject menuSet; // menuSet 변수 선언
 
     void Start()
     {
+        Debug.Log("Inited");
         GameLoad();
         QuestTalk.text = questManager.CheckQuest();
+        GameManager.Instance.m_DataManager.LoadFunc();
+        GameManager.Instance.GetUnitSaveData("해태").m_AttackBehav_1 = 0;
+        GameManager.Instance.GetUnitSaveData("해태").m_AttackBehav_2 = 3;
+        GameManager.Instance.GetUnitSaveData("해태").m_AttackBehav_3 = 2;
+        GameManager.Instance.GetUnitSaveData("해태").m_isCaptured = true;
+        GameManager.Instance.m_DataManager.LoadPlayerUnits();
+
+
     }
 
     // 게임을 저장하는 함수
     public void SaveGame()
     {
+
         // 플레이어의 현재 위치 저장
         PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
         PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
@@ -32,6 +41,7 @@ public class SaveGameManager : MonoBehaviour
         PlayerPrefs.SetInt("QuestActionIndex", questManager.questActionIndex);
 
         GameManager.Instance.SaveALLPlayerUnit();
+        SavePlayerUnits();
 
 
 
@@ -42,7 +52,10 @@ public class SaveGameManager : MonoBehaviour
 
         menuSet.SetActive(false);
     }
-
+    private void OnDestroy()
+    {
+        //SavePlayerUnits();
+    }
     public void GameLoad()
     {
         if (!PlayerPrefs.HasKey("PlayerX"))
@@ -59,6 +72,7 @@ public class SaveGameManager : MonoBehaviour
 
         // 인벤토리 불러오기
         LoadInventory();
+
     }
     #region 인벤토리 저장
     private void SaveInventory()
@@ -105,5 +119,50 @@ public class SaveGameManager : MonoBehaviour
             }
         }
     }
+
+    #endregion
+
+    #region 플레이어 유닛 저장
+    public void SavePlayerUnits()
+    {
+        string UnitNames = "";
+        for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
+        {
+            UnitNames += GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
+            UnitNames += ",";
+        }
+        string path = Application.persistentDataPath + "PlayerUnits.json";
+        if (File.Exists(path))
+            System.IO.File.Delete(path);
+        File.WriteAllText(path, UnitNames);
+        Debug.Log("PlayerUnit Save Complete " + path);
+    }
+    public void LoadPlayerUnits()
+    {
+        //GameManager.Instance.m_UnitManager.g_PlayerUnits[]
+
+        string[] splitNames;
+        string txtFileTemp;
+        string path = Application.persistentDataPath + "PlayerUnits.json";
+        if (File.Exists(path))
+        {
+            txtFileTemp = File.ReadAllText(path);
+        }
+        else
+        {
+            txtFileTemp = "해태";
+        }
+        splitNames = txtFileTemp.Split(',');
+        Debug.Log(splitNames.Length);
+        for (int i = 0; i < splitNames.Length; i++)
+        {
+            if (splitNames[i].Trim().Length != 0)
+            {
+                Debug.Log(splitNames[i]);
+                GameManager.Instance.m_UnitManager.SetPlayerUnitEntityByName(splitNames[i], i);
+            }
+
+        }
+    }
+    #endregion
 }
-#endregion

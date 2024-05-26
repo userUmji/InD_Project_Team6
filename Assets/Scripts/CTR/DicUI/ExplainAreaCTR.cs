@@ -40,9 +40,9 @@ public class ExplainAreaCTR : MonoBehaviour
             ExplainText.text = Unit.m_sUnitExplain;
             NameNumber.text = "NO." + Unit.m_iUnitNo + "\n" + Unit.m_sUnitName + " LV" + SaveUnit.m_iUnitLevel;
             Type.text = GameManager.Instance.TypeToString(Unit.UnitType);
-            HPBar.maxValue = Unit.m_iUnitHP;
+            HPBar.maxValue = Unit.m_iUnitHP + ((SaveUnit.m_iUnitLevel - 5) * 2 * SaveUnit.m_iUnitLevel);
             HPBar.value = Unit.m_iUnitHP;
-            HPAmount.text = Unit.m_iUnitHP.ToString();
+            HPAmount.text = (Unit.m_iUnitHP + ((SaveUnit.m_iUnitLevel - 5) * 2 * SaveUnit.m_iUnitLevel)).ToString();
             IntimacyBar.maxValue = 10.0f;
             IntimacyBar.value = SaveUnit.m_iIntimacy;
             IntimacyAmount.text = SaveUnit.m_iIntimacy + " / " + 10;
