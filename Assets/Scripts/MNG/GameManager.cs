@@ -17,14 +17,16 @@ public class GameManager : MonoBehaviour
     //플레이어의 유닛을 관리할 유닛메니저
     public UnitManager m_UnitManager;
     //월드씬의 캔버스
-    public GameObject Canvas_WorldScene;
+    private GameObject Canvas_WorldScene;
+    public GameObject SceneChanger;
     //게임의 진행 상황 (초기화, 진행중, 대화중, 전투중, 일지정지)
     public enum GameState { INIT, INPROGRESS, DIALOG,  PORTAL ,BATTLE, PAUSE };
     public GameState g_GameState;
-    public GameObject g_InventoryGO;
-    public GameObject g_DictionaryGO;
+    private GameObject g_InventoryGO;
+    private GameObject g_DictionaryGO;
     public List<SOAttackBase> Skills;
     public int[] g_iReqExp;
+    public int g_Season;
 
     public string g_sEnemyBattleUnit;
     public int g_iEnemyBattleLvl;
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         }
         g_GameState = GameState.INIT;
         DontDestroyOnLoad(gameObject);
+        
 
         Init();
     }
@@ -71,8 +74,8 @@ public class GameManager : MonoBehaviour
         m_UnitManager = new UnitManager();
         m_DataManager.LoadFunc();
         InitExp();
-
-        m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
+        
+       // m_UnitManager.SetPlayerUnitEntityByName("해태", 0);
         GetUnitSaveData("해태").m_AttackBehav_1 = 0;
         GetUnitSaveData("해태").m_AttackBehav_2 = 3;
         GetUnitSaveData("해태").m_AttackBehav_3 = 2;
@@ -95,13 +98,17 @@ public class GameManager : MonoBehaviour
     }
     public void LoadBattleScene(string enemyBattleUnit, int lvl)
     {
-        g_GameState = GameState.BATTLE;
-        AsyncOperation SceneOper = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
-        g_sEnemyBattleUnit = enemyBattleUnit;
-        g_iEnemyBattleLvl = lvl;
-        Canvas_WorldScene.SetActive(false);
-        SceneOper.allowSceneActivation = true; 
+        GetSceneChanger().transform.GetComponent<ChangeScene>().LoadBattleScene(enemyBattleUnit, lvl);
     }
+
+    public GameObject GetSceneChanger()
+    {
+        if (SceneChanger == null)
+            SceneChanger = GameObject.Find("SceneChanger");
+
+        return SceneChanger;
+    }
+
     public void SaveALLPlayerUnit()
     {
         for(int i = 0; i<m_UnitManager.CheckUnitAmount();i++)
@@ -111,6 +118,16 @@ public class GameManager : MonoBehaviour
         }
         m_DataManager.SaveFunc_ALL();
     }
+    public void SavePlayerUnit()
+    {
+        for (int i = 0; i < m_UnitManager.CheckUnitAmount(); i++)
+        {
+            UnitEntity unitEntity = m_UnitManager.g_PlayerUnits[i].transform.GetComponent<UnitEntity>();
+            m_DataManager.SaveByUnit(unitEntity.m_sUnitName, unitEntity);
+        }
+    }
+
+
     public void SavePlayerUnit(string name, UnitEntity entity)
     {
         m_DataManager.SaveByUnit(name, entity);
@@ -160,7 +177,42 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
+    public GameObject GetInventoryGO()
+    {
+        if(g_InventoryGO == null)
+            g_InventoryGO = GameObject.Find("Inventory");
+
+        return g_InventoryGO;
+    }
+    public GameObject GetDictionaryGO()
+    {
+        if (g_DictionaryGO == null)
+            g_DictionaryGO = GameObject.Find("Map").transform.GetComponent<WorldMapController>().Dic;
+
+            
+        return g_DictionaryGO;
+    }
+    public GameObject GetWorldCanvasGO()
+    {
+        if(Canvas_WorldScene == null)
+        {
+           Canvas_WorldScene =  GameObject.Find("Canvas_World");
+        }
+        return Canvas_WorldScene;
+    }
     #endregion
+    public void LoseChangeScene()
+    {
+        SceneManager.LoadScene("GameOverScene");
+    }
+
+    public void InitGOs()
+    {
+        GetWorldCanvasGO();
+        GetDictionaryGO();
+        GetInventoryGO();
+    }
+
     private void InitExp()
     {
         g_iReqExp = new int[51];

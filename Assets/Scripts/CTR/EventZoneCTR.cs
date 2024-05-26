@@ -47,27 +47,32 @@ public class EventZoneCTR: MonoBehaviour
         }
     }
 
-    IEnumerator Find_Monster() // Ư�� �����ȿ� ���Ϳ� ��������
+    IEnumerator Find_Monster() 
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(1f);
-
-            int random_percent_num = Random.Range(1, 101);
-            int max_chace = 0;
-            for (int i = 0; i < g_gmonster_List.Length; i++)
+            if (GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
             {
-                max_chace += g_gmonster_List[i].m_iChance;
-            }
-            int random_monster_number = Random.Range(0, max_chace); // ���� �̱�\
-            string name = CalMonsterChance(g_gmonster_List, random_monster_number);
+                int random_percent_num = Random.Range(1, 101);
+                if (random_percent_num < g_fpercent)
+                {
+                    GameManager.Instance.g_GameState = GameManager.GameState.BATTLE;
+                    int max_chace = 0;
+                    for (int i = 0; i < g_gmonster_List.Length; i++)
+                    {
+                        max_chace += g_gmonster_List[i].m_iChance;
+                    }
+                    int random_monster_number = Random.Range(0, max_chace);
+                    string name = CalMonsterChance(g_gmonster_List, random_monster_number);
 
-            FindCoroutine = null;
-            
-            int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
-            if(GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
-                GameManager.Instance.LoadBattleScene(name, random_monster_lvl);
-            break;
+                    //FindCoroutine = null;
+                    int random_monster_lvl = Random.Range(g_iLevelBoundary[0], g_iLevelBoundary[1]);
+
+                    GameManager.Instance.LoadBattleScene(name, random_monster_lvl);
+                    break;
+                }
+            }
+            yield return new WaitForSecondsRealtime(1f);
         }
     }
     
@@ -75,7 +80,6 @@ public class EventZoneCTR: MonoBehaviour
     private string CalMonsterChance(Monster[] mons, int chance)
     {
         int[] chanceArr = new int[mons.Length];
-        Debug.Log(chance);
         for (int i = 0; i < mons.Length; i++)
         {
             chanceArr[i] = 0;
@@ -96,6 +100,6 @@ public class EventZoneCTR: MonoBehaviour
                 return mons[i].m_sName;
             }
         }
-        return "일반 도깨비";
+        return "";
     }
 }

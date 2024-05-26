@@ -21,23 +21,22 @@ public class PortalController : MonoBehaviour
             {
                 optionImage.SetActive(true);
                 // GameManager의 상태를 PAUSE로 설정
-
                 GameManager.Instance.SetGameState(GameManager.GameState.PORTAL);
-                
+
 
                 // 맵 컨트롤러 비활성화
                 ToggleMapController(false);
 
                 // 옵션 이미지 활성화 또는 비활성화
-                if (GameManager.Instance.g_InventoryGO.transform.localScale == new Vector3(1, 1, 1))
-                    GameManager.Instance.g_InventoryGO.transform.localScale = new Vector3(0, 0, 1);
+                if (GameManager.Instance.GetInventoryGO().transform.localScale == new Vector3(1, 1, 1))
+                    GameManager.Instance.GetInventoryGO().transform.localScale = new Vector3(0, 0, 1);
 
-                // 포탈을 활성화하면 유닛 체력 회복
-                if (optionImageActive)
+                for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
                 {
-                    for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
-                        GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().Heal(100000);
+                    GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().ResetUnit();
                 }
+
+                
             }
             else if (optionImage.activeSelf == true)
             {
@@ -99,7 +98,7 @@ public class PortalController : MonoBehaviour
 
     public void ShowDic()
     {
-        GameManager.Instance.g_DictionaryGO.SetActive(true);
+        GameManager.Instance.GetDictionaryGO().SetActive(true);
         optionImage.SetActive(false);
     }
 

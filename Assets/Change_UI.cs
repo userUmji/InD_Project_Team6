@@ -17,11 +17,14 @@ public class Change_UI : MonoBehaviour
     }
     public void Change_UI_Button()
     {
+        if (GameManager.Instance.g_GameState == GameManager.GameState.BATTLE)
+            return;
         for(int i = 0; i < off_UI.Length; i++)
         {
             if (off_UI[i].name == "Inventory")
             {
                 off_UI[i].transform.localScale = new Vector3(0, 0, 1);
+
             }
             else
             {
@@ -52,5 +55,6 @@ public class Change_UI : MonoBehaviour
                 off_UI[i].SetActive(false);
             }
         }
+        GameManager.Instance.g_GameState = GameManager.GameState.INPROGRESS;
     }
 }

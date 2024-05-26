@@ -51,7 +51,7 @@ public class BattleButtonCTR : MonoBehaviour
                 if (g_BattleManager.playerUnit.m_iSkillAmounts[i] == 0)
                 {
                     skillButtons.transform.GetChild(i).transform.GetComponent<Button>().interactable = false;
-                    skillButtons.transform.GetChild(i).GetChild(1).transform.GetComponent<Text>().color = new Color(255, 0, 0);
+                    skillButtons.transform.GetChild(i).GetChild(1).transform.GetComponent<TextMeshProUGUI>().color = new Color(255, 0, 0);
                     skillButtons.transform.GetChild(i).GetChild(2).transform.GetComponent<TextMeshProUGUI>().color = new Color(255, 0, 0);
                 }
                 if (g_BattleManager.playerUnit.m_AttackBehaviors[i].m_SkillEffect == SOAttackBase.SkillEffect.ONLYONCE && g_BattleManager.playerUnit.m_AttackBehaviors[i].m_isPlayed == true)
@@ -94,7 +94,7 @@ public class BattleButtonCTR : MonoBehaviour
     {
         if (g_BattleManager.state == BattleManager.BattleState.ACTION)
         {
-            GameManager.Instance.g_InventoryGO.transform.GetComponentInChildren<Inventory_Controller>().Show_Inv();
+            GameManager.Instance.GetInventoryGO().transform.GetComponentInChildren<Inventory_Controller>().Show_Inv();
             g_BattleManager.state = BattleManager.BattleState.SELECT;
         }
     }

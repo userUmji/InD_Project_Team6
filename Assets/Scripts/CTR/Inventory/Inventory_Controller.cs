@@ -229,6 +229,9 @@ public class Inventory_Controller : MonoBehaviour
         invent_On_Off_Check = false;
 
         if (GameManager.Instance.g_GameState == GameManager.GameState.BATTLE)
+        {
             GameObject.Find("BattleManager").transform.GetComponent<BattleManager>().state = BattleManager.BattleState.ACTION;
+        }
+
     }
 }

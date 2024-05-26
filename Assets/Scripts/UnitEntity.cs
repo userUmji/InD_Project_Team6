@@ -57,9 +57,15 @@ public class UnitEntity : MonoBehaviour
     public void SetUnit(string className, int lvl)
     {
         var UnitData = GameManager.Instance.GetUnitData(className);
-        //var UnitSaveData = GameManager.Instance.GetUnitSaveData(className);
 
-        //UnitEntity 초기화
+        if(className == "일반 도깨비")
+        {
+            int randomType = Random.Range(0, 5);
+            UnitType = (GameManager.Type)randomType;
+        }
+        else
+            UnitType = UnitData.UnitType;
+
         m_sUnitName = UnitData.m_sUnitName;
         gameObject.name += "-" + m_sUnitName;
 
@@ -71,16 +77,25 @@ public class UnitEntity : MonoBehaviour
         m_iUnitAtk = UnitData.m_iUnitAtk + (3 * m_iUnitLevel);
         m_iUnitDef = UnitData.m_iUnitDef + (3 * m_iUnitLevel);
         m_iUnitSpeed = UnitData.m_iUnitSpeed + (3 * m_iUnitLevel);
-        UnitType = UnitData.UnitType;
+        
         m_iCurrentHP = m_iUnitHP;
         m_iUnitNo = UnitData.m_iUnitNo;
 
         m_spriteUnitImage = UnitData.m_UnitSprite;
         m_AttackBehaviors = new SOAttackBase[4];
-       
-        List<SOAttackBase> attack_Temp = GameManager.Instance.Skills.FindAll(type => type.SkillType == UnitType);
+       if(m_sUnitName != "황룡")
+       {
 
-        ChooseRandomAttack();
+            ChooseRandomAttack();
+       }
+        else
+        {
+            m_AttackBehaviors[0] = UnitData.m_AttackBehav_1;
+            m_AttackBehaviors[1] = UnitData.m_AttackBehav_2;
+            m_AttackBehaviors[2] = UnitData.m_AttackBehav_3;
+            m_AttackBehaviors[3] = UnitData.m_AttackBehav_Ult;
+        }
+
  
         m_AttackBehaviors[3] = Instantiate(UnitData.m_AttackBehav_Ult);
         for (int i = 0; i < 4; i++)
@@ -122,9 +137,6 @@ public class UnitEntity : MonoBehaviour
         m_AttackBehaviors[1] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_2]);
         m_AttackBehaviors[2] = Instantiate(GameManager.Instance.Skills[UnitSaveData.m_AttackBehav_3]);
 
-        //m_AttackBehaviors[0] = Instantiate(UnitData.m_AttackBehav_1);
-        //m_AttackBehaviors[1] = Instantiate(UnitData.m_AttackBehav_2);
-        //m_AttackBehaviors[2] = Instantiate(UnitData.m_AttackBehav_3);
         m_AttackBehaviors[3] = Instantiate(UnitData.m_AttackBehav_Ult);
         for (int i = 0; i < m_iSkillAmounts.Length; i++)
             m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;
@@ -185,17 +197,20 @@ public class UnitEntity : MonoBehaviour
     public void LevelUp()
     {
         var UnitData = GameManager.Instance.GetUnitData(m_sUnitName);
-        m_iUnitHP += UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel);
-        m_iCurrentHP += 100;
+
+
         m_iUnitAtk += 3;
         m_iUnitDef += 3;
         m_iUnitSpeed += 3;
-        m_iUnitEXP -= m_iUnitLevel * 10;
+        m_iUnitEXP -= GameManager.Instance.g_iReqExp[m_iUnitLevel];
         m_iUnitLevel += 1;
+        m_iUnitHP = UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel);
+        m_iCurrentHP += (UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel))/10;
+        GameManager.Instance.SavePlayerUnit(m_sUnitName, gameObject.transform.GetComponent<UnitEntity>());
     }
     public bool CheckLevelUP()
     {
-        if (m_iUnitLevel > 50)
+        if (m_iUnitLevel >= 50)
             return false;
         int exp_Max = GameManager.Instance.g_iReqExp[m_iUnitLevel];
         if (m_iUnitEXP > exp_Max)
@@ -207,6 +222,15 @@ public class UnitEntity : MonoBehaviour
         m_iTempAtkMod = 0;
         m_iTempDefMod = 0;
         m_iTempSpeedMod = 0;
+    }
+
+    public void ResetUnit()
+    {
+        m_iCurrentHP = m_iUnitHP;
+        for (int i = 0; i < m_iSkillAmounts.Length; i++)
+        {
+            m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;
+        }
     }
 
 }
