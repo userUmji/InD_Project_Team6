@@ -112,9 +112,14 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator LoadBattleScene()
     {
+        int waitTime = 0;
+        while(true) { 
 
+
+            yield return new WaitForEndOfFrame();
+        }
         
-        yield return new WaitForSeconds(5);
+        
     }
 
 
