@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TempAction();
         if (GameManager.Instance.g_GameState == GameManager.GameState.INPROGRESS)
         {
             Movement();
@@ -172,72 +173,18 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(m_fx, m_fy).normalized * g_frun_Speed * Time.deltaTime;
         m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지
     }
-    /* private void Movement()
-     {
-         m_fx = _instance.isAct ? 0 : Input.GetAxisRaw("Horizontal");
-         m_fy = _instance.isAct ? 0 : Input.GetAxisRaw("Vertical");
-         animator.SetFloat("InputX", m_fx);
-         animator.SetFloat("InputY", m_fy);
 
-         if (Input.GetKey(KeyCode.LeftShift))
-         {
+    private void TempAction()
+    {
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.Instance.m_DataManager.SavePlayerUnits();
+        }
 
-
-             Run();
-         }
-         else
-         {
-             Walk();
-         }
-
-     }
-
-     void Walk()
-     {
-         if (m_fx == 0 && m_fy == 0)
-         {
-
-         }
-         else
-         {
-
-         }
-
-         if (m_fx == -1 || m_fy == -1)
-         {
-             transform.localScale = new Vector3(-1, 1, 1);
-         }
-         else if (m_fx == 1 || m_fy == 1)
-         {
-             transform.localScale = new Vector3(1, 1, 1);
-         }
-         Vector2 movement = new Vector2(m_fx, m_fy) * g_fspeed * Time.deltaTime;
-         m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지 
-     }
-
-     void Run()
-     {
-         if (m_fx == 0 && m_fy == 0)
-         {
-
-         }
-         else
-         {
-
-         }
-
-         if (m_fx == -1 || m_fy == -1)
-         {
-             transform.localScale = new Vector3(-1, 1, 1);
-         }
-         else if (m_fx == 1 || m_fy == 1)
-         {
-             transform.localScale = new Vector3(1, 1, 1);
-         }
-
-         Vector2 movement = new Vector2(m_fx, m_fy).normalized * g_frun_Speed * Time.deltaTime;
-         m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + movement); // 플레이어와 오브젝트 충돌시 떨림현상 방지 
-     }*/
-
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameManager.Instance.m_DataManager.LoadPlayerUnits();
+        }
+    }
 
 }

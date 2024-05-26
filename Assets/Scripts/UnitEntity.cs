@@ -208,13 +208,15 @@ public class UnitEntity : MonoBehaviour
     public void LevelUp()
     {
         var UnitData = GameManager.Instance.GetUnitData(m_sUnitName);
-        m_iUnitHP += UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel);
-        m_iCurrentHP += 100;
+
+
         m_iUnitAtk += 3;
         m_iUnitDef += 3;
         m_iUnitSpeed += 3;
         m_iUnitEXP -= GameManager.Instance.g_iReqExp[m_iUnitLevel];
         m_iUnitLevel += 1;
+        m_iUnitHP = UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel);
+        m_iCurrentHP += (UnitData.m_iUnitHP + ((m_iUnitLevel - 5) * 2 * m_iUnitLevel))/10;
         GameManager.Instance.SavePlayerUnit(m_sUnitName, gameObject.transform.GetComponent<UnitEntity>());
     }
     public bool CheckLevelUP()
@@ -231,6 +233,15 @@ public class UnitEntity : MonoBehaviour
         m_iTempAtkMod = 0;
         m_iTempDefMod = 0;
         m_iTempSpeedMod = 0;
+    }
+
+    public void ResetUnit()
+    {
+        m_iCurrentHP = m_iUnitHP;
+        for (int i = 0; i < m_iSkillAmounts.Length; i++)
+        {
+            m_iSkillAmounts[i] = m_AttackBehaviors[i].m_iUseAmount;
+        }
     }
 
 }

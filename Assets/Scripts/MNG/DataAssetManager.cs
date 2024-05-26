@@ -139,4 +139,50 @@ public class DataAssetManager
             Debug.Log("Savefile missed. created new Savefile");
         }
     }
+    public void SavePlayerUnits()
+    {
+        string UnitNames = "";
+        for (int i = 0; i < GameManager.Instance.m_UnitManager.CheckUnitAmount(); i++)
+        {
+            UnitNames += GameManager.Instance.m_UnitManager.g_PlayerUnits[i].GetComponent<UnitEntity>().m_sUnitName;
+            UnitNames += ",";
+        }
+        string path = Application.persistentDataPath + "PlayerUnits.json";
+        if (File.Exists(path))
+            System.IO.File.Delete(path);
+        File.WriteAllText(path, UnitNames);
+        Debug.Log("PlayerUnit Save Complete " + path);
+    }
+    public void LoadPlayerUnits()
+    {
+        //GameManager.Instance.m_UnitManager.g_PlayerUnits[]
+
+        string[] splitNames;
+        string txtFileTemp;
+        string path = Application.persistentDataPath + "PlayerUnits.json";
+        if (File.Exists(path))
+        {
+            txtFileTemp = File.ReadAllText(path);
+        }
+        else
+        {
+            txtFileTemp = "해태";
+        }
+        if (txtFileTemp.Trim().Length==0)
+        {
+            txtFileTemp = "해태";
+        }
+        splitNames = txtFileTemp.Split(',');
+        Debug.Log(splitNames.Length);
+        for (int i = 0;i < splitNames.Length;i++)
+        {
+            if (splitNames[i].Trim().Length != 0)
+            {
+                Debug.Log(splitNames[i]);
+                GameManager.Instance.m_UnitManager.SetPlayerUnitEntityByName(splitNames[i], i);
+            }
+
+        }
+    }
+
 }
