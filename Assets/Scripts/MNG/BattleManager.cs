@@ -548,7 +548,7 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                dialogueText.text = "놓쳤따!";
+                dialogueText.text = "도깨비를 놓쳐버렸다!";
                 yield return new WaitForSeconds(1f);
                 g_isCapture = false;
                 Process();

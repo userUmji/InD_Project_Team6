@@ -210,7 +210,7 @@ public class UnitEntity : MonoBehaviour
     }
     public bool CheckLevelUP()
     {
-        if (m_iUnitLevel > 50)
+        if (m_iUnitLevel >= 50)
             return false;
         int exp_Max = GameManager.Instance.g_iReqExp[m_iUnitLevel];
         if (m_iUnitEXP > exp_Max)

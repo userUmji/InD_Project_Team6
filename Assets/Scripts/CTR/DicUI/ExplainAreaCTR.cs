@@ -32,6 +32,7 @@ public class ExplainAreaCTR : MonoBehaviour
 
     public void Init(string name)
     {
+        GameManager.Instance.SavePlayerUnit();
         var Unit = GameManager.Instance.GetUnitData(name);
         var SaveUnit = GameManager.Instance.GetUnitSaveData(name);
         if (SaveUnit.m_isCaptured)
@@ -41,7 +42,7 @@ public class ExplainAreaCTR : MonoBehaviour
             NameNumber.text = "NO." + Unit.m_iUnitNo + "\n" + Unit.m_sUnitName + " LV" + SaveUnit.m_iUnitLevel;
             Type.text = GameManager.Instance.TypeToString(Unit.UnitType);
             HPBar.maxValue = Unit.m_iUnitHP + ((SaveUnit.m_iUnitLevel - 5) * 2 * SaveUnit.m_iUnitLevel);
-            HPBar.value = Unit.m_iUnitHP;
+            HPBar.value = (Unit.m_iUnitHP + ((SaveUnit.m_iUnitLevel - 5) * 2 * SaveUnit.m_iUnitLevel));
             HPAmount.text = (Unit.m_iUnitHP + ((SaveUnit.m_iUnitLevel - 5) * 2 * SaveUnit.m_iUnitLevel)).ToString();
             IntimacyBar.maxValue = 10.0f;
             IntimacyBar.value = SaveUnit.m_iIntimacy;
@@ -76,6 +77,7 @@ public class ExplainAreaCTR : MonoBehaviour
             HPBar.value = Unit.m_iUnitHP;
             HPAmount.text = "???";
             IntimacyBar.maxValue = 10.0f;
+            IntimacyBar.value = 0.0f;
             IntimacyAmount.text = "???";
             Skill1.text = "???";
             Info1.Init(SaveUnit.m_AttackBehav_1, false);
@@ -95,7 +97,6 @@ public class ExplainAreaCTR : MonoBehaviour
 
     private void CheckMod_Status(int amount, TextMeshProUGUI text)
     {
-        Debug.Log(amount);
         if (amount <= 40)
             text.text = "아직 부족한것같아...";
         else if (amount > 41 && amount <= 80)
