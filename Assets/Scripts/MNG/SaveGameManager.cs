@@ -57,6 +57,23 @@ public class SaveGameManager : MonoBehaviour
     {
         //SavePlayerUnits();
     }
+
+    // 플레이어 위치와 퀘스트 ID의 저장 기록을 삭제하는 함수
+    public void DeletePlayerData()
+    {
+        PlayerPrefs.DeleteKey("PlayerX");
+        PlayerPrefs.DeleteKey("PlayerY");
+        PlayerPrefs.DeleteKey("QuestId");
+        PlayerPrefs.DeleteKey("QuestActionIndex");
+        PlayerPrefs.Save();
+        Debug.Log("Player data and quest data have been deleted.");
+    }
+
+    private void OnDestroy()
+    {
+        //SavePlayerUnits();
+    }
+
     public void GameLoad()
     {
         if (!PlayerPrefs.HasKey("PlayerX"))
@@ -75,6 +92,7 @@ public class SaveGameManager : MonoBehaviour
         LoadInventory();
 
     }
+
     #region 인벤토리 저장
     private void SaveInventory()
     {
@@ -104,7 +122,6 @@ public class SaveGameManager : MonoBehaviour
         {
             string json = File.ReadAllText(path);
 
-
             Dictionary<string, int> tempDic = JsonConvert.DeserializeObject<Dictionary<string, int>>(json);
 
             foreach (var item in tempDic)
@@ -120,7 +137,6 @@ public class SaveGameManager : MonoBehaviour
             }
         }
     }
-
     #endregion
 
     #region 플레이어 유닛 저장
